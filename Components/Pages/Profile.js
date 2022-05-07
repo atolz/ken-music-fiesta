@@ -14,7 +14,7 @@ const Profile = () => {
   return (
     <div>
       <nav className="mb-[3.2rem]">
-        <ul className="flex items-center">
+        <ul className="flex items-center overflow-auto scroll_hide">
           {navs.map((nav, i) => {
             return (
               <li
@@ -24,13 +24,13 @@ const Profile = () => {
                 className={` transition-all px-[3.2rem] py-[1.5rem] rounded-full cursor-pointer text-[#777E90] ${active == nav ? " bg-[#FCAC0D] text-[black]" : ""}`}
                 key={i}
               >
-                <span className=" font-bold text-[1.4rem] leading-[1.6rem] ">{nav}</span>
+                <span className=" font-bold text-[1.4rem] leading-[1.6rem] whitespace-nowrap ">{nav}</span>
               </li>
             );
           })}
         </ul>
       </nav>
-      <form className="profile-form pt-[6.4rem] pb-[4.3rem] pl-[8.1rem] pr-[6.3rem] rounded-[2rem] border border-[#D0CCCC] max-w-[81.2rem] min-h-[57.4rem] relative flex flex-col">
+      <form className="profile-form pt-[6.4rem] pb-[4.3rem] sidebar:pl-[8.1rem] sidebar:pr-[6.3rem] px-[2.5rem] rounded-[2rem] border border-[#D0CCCC] max-w-[81.2rem] min-h-[57.4rem] relative flex flex-col">
         {/* Profile */}
         {active == "Profile" && <MyProfile user={user}></MyProfile>}
         {active == "Security" && <Security></Security>}

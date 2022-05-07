@@ -73,7 +73,7 @@ const Profile = ({ user }) => {
     <form>
       <section className="mb-[9.6rem]">
         {/* Profile Picture */}
-        <section className="flex items-center">
+        <section className="flex items-center  flex-wrap gap-7 sidebar:gap-0">
           <div className="flex flex-col mr-[8.9rem]">
             <label>Profile Picture</label>
             <span>Choose a display picture for your account</span>
