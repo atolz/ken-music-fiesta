@@ -34,17 +34,18 @@ const LandPageLayout = ({ children }) => {
                   ARTISTS
                 </a>
               </Link>
-              <Link href={"/auth/sign-up"}>
-                <button className="btn btn--outlined text-white !px-[6rem]">Sign Up</button>
-              </Link>
+
               <button
                 onClick={() => {
                   onSignUp();
                 }}
-                className="btn btn--outlined text-white ml-[2.4rem]"
+                className="btn btn--outlined text-white "
               >
                 Self Checkout
               </button>
+              <Link href={"/auth/sign-up"}>
+                <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign Up</button>
+              </Link>
             </div>
             {/* Burger Menu */}
             <button

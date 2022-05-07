@@ -89,7 +89,7 @@ const SignIn = () => {
     };
   }, []);
   return (
-    <div className="auth-container !mb-[10rem]">
+    <div className="auth-container !mb-[3rem]">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -152,7 +152,7 @@ const SignIn = () => {
             </div>
           </div>
 
-          <button className="btn col-span-2 mt-[4.8rem]">Log In</button>
+          <button className="btn col-span-2 mt-[3.8rem]">Log In</button>
         </div>
       </form>
     </div>
