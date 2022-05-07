@@ -5,7 +5,7 @@ import PopupStatus from "../PopUps/PopUpStatus";
 import LSCountDown from "../LiveStream/CountDown";
 import Container from "../Layout/Container";
 
-const LiveStream = () => {
+const LiveStream = (props) => {
   const [accessType, setAccessType] = useState("");
   const [showLiveStream, setShowLiveStream] = useState(false);
   const [activeModal, setActiveModal] = useState("");
@@ -40,7 +40,7 @@ const LiveStream = () => {
   }
 
   return (
-    <Container>
+    <div {...props}>
       <div className="h-full">
         <Dialog open={show} onClose={toggle}>
           <div className={`transition-all ${activeModal == "Status" ? "visible" : "hidden"}`}>
@@ -89,7 +89,7 @@ const LiveStream = () => {
           </section>
         )}
       </div>
-    </Container>
+    </div>
   );
 };
 

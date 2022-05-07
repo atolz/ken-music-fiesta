@@ -71,7 +71,7 @@ const BaseLayout = ({ children }) => {
       </Head>
       <SideBar activePage={activePage} setActivePage={setActivePage} />
       <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "right" }} open={isopen} autoHideDuration={6000} onClose={handleClose} message={snbMsg} />
-      <main className={"bg-[#FBFAFA] h-full flex-grow px-[2.2rem] !pb-[11.4rem] sidebar:pb-[5.2rem] sidebar:px-[5.2rem] py-[2.9rem]  sidebar:py-[6.4rem] overflow-y-scroll scroll_hide"}>
+      <main className={"bg-[#FBFAFA] h-full flex-grow px-[2.2rem] !pb-[11.4rem] sidebar:pb-[5.2rem] sidebar:px-[5.2rem] py-[1.4rem]  sidebar:py-[6.4rem] overflow-y-scroll scroll_hide"}>
         <Container>
           {" "}
           <Header title={activePage} setActivePage={setActivePage}></Header>

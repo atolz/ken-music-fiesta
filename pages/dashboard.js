@@ -56,12 +56,15 @@ export default function Home() {
 
   return (
     <>
-      {activePage == "Dashboard" && <Dashboard></Dashboard>}
-      {activePage == "Raffle Tickets" && <RaffleTickets></RaffleTickets>}
+      <Dashboard className={` ${activePage == "Dashboard" ? "visible" : " invisible h-0"}`}></Dashboard>
+      <RaffleTickets className={` ${activePage == "Raffle Tickets" ? "visible" : " invisible h-0"}`}></RaffleTickets>
+      <Rewards className={` ${activePage == "Rewards" ? "visible" : " invisible h-0"}`}></Rewards>
+      <LiveStream className={` ${activePage == "Livestream Event" ? "visible" : " invisible h-0"}`}></LiveStream>
+      {/* {activePage == "Raffle Tickets" && <RaffleTickets></RaffleTickets>}
       {activePage == "Rewards" && <Rewards></Rewards>}
       {activePage == "Livestream Event" && <LiveStream></LiveStream>}
       {activePage == "Transactions" && <Transactions></Transactions>}
-      {activePage == "Profile" && <Profile></Profile>}
+      {activePage == "Profile" && <Profile></Profile>} */}
       {/* {activePage == "Landing" && <LandingPage></LandingPage>} */}
     </>
   );

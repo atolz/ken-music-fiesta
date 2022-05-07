@@ -76,7 +76,7 @@ const Header = ({ title, setActivePage }) => {
         {activeModal == "ReviewCheckOut" && <ReviewCheckOut onCancel={toggle} onReview={onReview}></ReviewCheckOut>}
         {/* {activeModal == "VerifyPayment" && <VerifyPayment onVerify={onVerify}></VerifyPayment>} */}
       </Dialog>
-      <div className="flex items-center mb-[4.5rem] hdr:mb-[8.4rem] w-full">
+      <div className="flex items-center mb-[2.4rem] sidebar:mb-[4.5rem] hdr:mb-[8.4rem] w-full">
         <h1 className="h1 transition-all">{title}</h1>
         <div className="flex flex-wrap ml-auto">
           {/* Buttons */}
@@ -145,7 +145,7 @@ const Header = ({ title, setActivePage }) => {
       </div>
 
       {!router.route.includes("admin") && (
-        <div className="flex items-center ml-auto hdr:hidden mb-[4.5rem] overflow-scroll scroll_hide">
+        <div className="flex items-center ml-auto hdr:hidden mb-[2.9rem] sidebar:mb-[4.5rem] overflow-scroll scroll_hide">
           <button
             onClick={() => {
               setActiveModal("SelfCheckOut");

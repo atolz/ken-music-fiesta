@@ -4,9 +4,9 @@ import "react-circular-progressbar/dist/styles.css";
 import PoweredBy from "../Cards/PoweredBy";
 import Container from "../Layout/Container";
 
-const RaffleTickets = () => {
+const RaffleTickets = (props) => {
   return (
-    <Container>
+    <div {...props}>
       {" "}
       <div className="flex flex-wrap gap-10 mb-[3.2rem]">
         {/* Section 1 */}
@@ -121,7 +121,7 @@ const RaffleTickets = () => {
 
         {/* <PoweredBy></PoweredBy> */}
       </div>
-    </Container>
+    </div>
   );
 };
 

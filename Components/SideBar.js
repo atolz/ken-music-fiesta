@@ -43,7 +43,9 @@ const SideBar = ({ activePage, setActivePage }) => {
                   ${page == "Dashboard" && activePage == "Profile" ? " !text-[#FCAC0D]" : ""}`}
                   ></i>
                   <span
-                    className={`transition-all duration-200 font-normal text-[1.6rem]  ${page == activePage ? " text-[#FCAC0D] !font-bold text-[2rem]" : "text-white"}  
+                    className={`transition-all duration-200 font-normal text-[1.6rem] text-ellipsis overflow-hidden w-[160px]  ${
+                      page == activePage ? " text-[#FCAC0D] !font-bold text-[2rem]" : "text-white"
+                    }  
                   ${page == "Dashboard" && activePage == "Profile" ? " !text-[#FCAC0D] !font-bold text-[2rem]" : ""}`}
                   >
                     {page}

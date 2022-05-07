@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { getUser } from "../../store/user";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const user = useSelector(getUser);
   const { getLocalStorage, isLoggedIn } = useLocalStorage();
   useEffect(() => {
@@ -19,9 +19,9 @@ const Dashboard = () => {
     isLoggedIn();
   }, []);
   return (
-    <Container>
+    <div {...props}>
       {/* First Section */}
-      <div className="flex flex-wrap gap-5">
+      <div className="flex flex-wrap mobile:gap-5">
         {" "}
         <Progress></Progress>
         <Activate></Activate>
@@ -82,7 +82,7 @@ const Dashboard = () => {
         {/* div-2 */}
         <PoweredBy></PoweredBy>
       </section>
-    </Container>
+    </div>
   );
 };
 

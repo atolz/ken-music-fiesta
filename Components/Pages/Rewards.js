@@ -6,7 +6,7 @@ import ClaimReward from "../PopUps/ClaimReward";
 import { Dialog } from "@mui/material";
 import Container from "../Layout/Container";
 
-const Rewards = () => {
+const Rewards = (props) => {
   const [activeModal, setActiveModal] = useState("");
   const [show, setShow] = useState(false);
   function toggle() {
@@ -22,7 +22,7 @@ const Rewards = () => {
       <Dialog open={show} onClose={toggle}>
         {activeModal == "ClaimReward" && <ClaimReward onCancel={toggle} onClaimReward={onClaimReward}></ClaimReward>}
       </Dialog>
-      <Container>
+      <div {...props}>
         <div className="flex flex-wrap gap-10">
           <section className="flex-1 flex flex-col gap-[3.2rem]">
             {/* You Won */}
@@ -86,7 +86,7 @@ const Rewards = () => {
             {/* <LatestWinnerCard /> */}
           </section>
         </div>
-      </Container>
+      </div>
     </>
   );
 };
