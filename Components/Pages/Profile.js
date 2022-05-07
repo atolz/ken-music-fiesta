@@ -6,13 +6,13 @@ import ActDetails from "../Profile/ActDetails";
 import MyProfile from "../Profile/Profile";
 import Security from "../Profile/Security";
 
-const Profile = () => {
+const Profile = (props) => {
   const [active, setActive] = useState("Profile");
   const navs = ["Profile", "Security", "Bank Details"];
   const user = useSelector(getUser);
 
   return (
-    <div>
+    <div {...props}>
       <nav className="mb-[3.2rem]">
         <ul className="flex items-center overflow-auto scroll_hide">
           {navs.map((nav, i) => {
