@@ -56,17 +56,18 @@ export default function Home() {
 
   return (
     <>
-      <Dashboard className={` transition-all ease-in ${activePage == "Dashboard" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></Dashboard>
+      {/* <Dashboard className={` transition-all ease-in ${activePage == "Dashboard" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></Dashboard>
       <RaffleTickets className={` transition-all ease-in ${activePage == "Raffle Tickets" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></RaffleTickets>
       <Rewards className={` transition-all ease-in ${activePage == "Rewards" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></Rewards>
-      <LiveStream className={` transition-all ease-in ${activePage == "Livestream Event" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></LiveStream>
+      <LiveStream className={` transition-all ease-in ${activePage == "Livestream Event" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></LiveStream> */}
       {/* <Profile className={` transition-all ease-in ${activePage == "Profile" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></Profile> */}
-      {activePage == "Profile" && <Profile></Profile>}
-      {/* {activePage == "Raffle Tickets" && <RaffleTickets></RaffleTickets>}
+      {/* {activePage == "Profile" && <Profile></Profile>} */}
+      {activePage == "Dashboard" && <Dashboard></Dashboard>}
+      {activePage == "Raffle Tickets" && <RaffleTickets></RaffleTickets>}
       {activePage == "Rewards" && <Rewards></Rewards>}
       {activePage == "Livestream Event" && <LiveStream></LiveStream>}
-      {activePage == "Transactions" && <Transactions></Transactions>}
-      {activePage == "Profile" && <Profile></Profile>} */}
+      {activePage == "Profile" && <Profile></Profile>}
+      {/* {activePage == "Transactions" && <Transactions></Transactions>} */}
       {/* {activePage == "Landing" && <LandingPage></LandingPage>} */}
     </>
   );
