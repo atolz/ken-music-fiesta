@@ -15,7 +15,7 @@ const RaffleTickets = (props) => {
             {/* Raffle Tickets */}
             <div className="flex-1 py-[3.1rem] px-[3.6rem] bg-[#F0F0F0] rounded-[20px] min-w-[30.5rem] relative max-h-[29.2rem]">
               <p className="mb-[.8rem] font-semibold text-[1.2rem] leading-[1.43rem] text-[#717171] whitespace-nowrap">Total Number of Raffle Tickets</p>
-              <h2 className="f font-bold text-[2.8rem] leading-[3.4rem] mr-[17.5rem] w-[12.6rem]">15 Raffle Tickets</h2>
+              <h2 className="f font-bold text-[2.8rem] leading-[3.4rem]  w-[12.6rem]">15 Raffle Tickets</h2>
               {/* <button className="btn btn--outlined !border-[black] mt-[5.6rem] mr-[17.5rem]">View Tickets</button> */}
               <img className="absolute bottom-0 right-[1.7rem] w-[10.7rem] xl:w-[40%] mobile:w-[14.7rem] object-cover" src="/3d-ticket.svg"></img>
             </div>
@@ -62,10 +62,12 @@ const RaffleTickets = (props) => {
             </div>
           </div>
         </section>
+
+        {/* Next Raffle Draw */}
         <section className="flex-1">
           <div className="px-[3.9rem] py-[3.56rem] bg-[#F0F0F0] rounded-[2rem] relative overflow-hidden">
-            <h3 className="h3 !text-[3.4rem] !leading-[4.1rem] !w-[20.7rem] mb-[1.9rem]">Next Raffle Draw</h3>
-            <p className="font font-normal text-[1.4rem] leading-[2rem] w-[23.1rem] mb-[17rem]">
+            <h3 className="h3 !text-[3.4rem] !leading-[4.1rem] !max-w-[20.7rem] mb-[1.9rem]">Next Raffle Draw</h3>
+            <p className="font font-normal text-[1.4rem] leading-[2rem] max-w-[23.1rem] mb-[17rem]">
               The next raffle draw will happen on <span className="text-[#717171] font-bold">20 April, 2022.</span> Do well to buy your raffle tickets or purchase from our merchants to stand a chance
               to win amazing rewards
             </p>
