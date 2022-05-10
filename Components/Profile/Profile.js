@@ -48,6 +48,7 @@ const Profile = ({ user }) => {
 
   const onUpdate = async () => {
     console.log("Details is", { ...userDetails, username: undefined });
+    setCanSubmit(false);
     try {
       const resp = await baseInstanceAPI.post(
         "/profile/update-profile",
@@ -62,10 +63,11 @@ const Profile = ({ user }) => {
       console.log("user details is ", userDetails);
       dispatch(setUser({ ...userDetails }));
       toggleAlertBar("Profile Updated Successfully!", "success", true, 4000);
-      setCanSubmit(false);
+      // setCanSubmit(false);
     } catch (error) {
       console.log("There was an error, t", error?.response);
       toggleAlertBar("Problem Updating Profile. Please Ensure all Fields are Correct and Try Again!", "error", true, 4000);
+      setCanSubmit(true);
     }
   };
 
