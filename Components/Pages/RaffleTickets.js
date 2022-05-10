@@ -13,7 +13,7 @@ const RaffleTickets = (props) => {
         <section className="min-w-[30.4rem] flex-grow">
           <div className="flex gap-10 flex-wrap mb-[3.2rem]">
             {/* Raffle Tickets */}
-            <div className="flex-1 py-[3.1rem] px-[3.6rem] bg-[#F0F0F0] rounded-[20px] min-w-[25.5rem] relative max-h-[29.2rem]">
+            <div className="flex-1 py-[3.1rem] px-[3.6rem] bg-[#F0F0F0] rounded-[20px] min-w-[20.5rem] relative max-h-[29.2rem]">
               <p className="mb-[.8rem] font-semibold text-[1.2rem] leading-[1.43rem] text-[#717171] whitespace-nowrap">Total Number of Raffle Tickets</p>
               <h2 className="f font-bold text-[2.8rem] leading-[3.4rem]  w-[12.6rem]">15 Raffle Tickets</h2>
               {/* <button className="btn btn--outlined !border-[black] mt-[5.6rem] mr-[17.5rem]">View Tickets</button> */}
