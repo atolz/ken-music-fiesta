@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?pv243k');
-  src:  url('fonts/icomoon.eot?pv243k#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?pv243k') format('truetype'),
-    url('fonts/icomoon.woff?pv243k') format('woff'),
-    url('fonts/icomoon.svg?pv243k#icomoon') format('svg');
+  src: url('fonts/icomoon.eot?iapbvj');
+  src: url('fonts/icomoon.eot?iapbvj#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?iapbvj') format('truetype'),
+    url('fonts/icomoon.woff?iapbvj') format('woff'),
+    url('fonts/icomoon.svg?iapbvj#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,48 +25,75 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-pause:before {
+  content: "\e90c";
+}
+
+.icon-next:before {
+  content: "\e90d";
+}
+
+.icon-play:before {
+  content: "\e90e";
+
+}
+
+.icon-playing:before {
+  content: "\e90f";
+}
+
 .icon-Crown:before {
   content: "\e900";
 }
+
 .icon-Dashboard:before {
   content: "\e901";
 }
+
 .icon-Graph:before {
   content: "\e902";
 }
+
 .icon-kudibar-logo:before {
+  content: "\e910";
+}
+
+.icon-Livestream-Event:before {
   content: "\e903";
 }
-.icon-Livestream-Event:before {
+
+.icon-logout:before {
+  content: "\e911";
+}
+
+.icon-notification:before {
   content: "\e904";
 }
-.icon-logout:before {
+
+.icon-Raffle-Tickets:before {
   content: "\e905";
 }
-.icon-notification:before {
+
+.icon-Rewards:before {
   content: "\e906";
 }
-.icon-Raffle-Tickets:before {
+
+.icon-Settings:before {
   content: "\e907";
 }
-.icon-Rewards:before {
+
+.icon-sidebar-wallet:before {
   content: "\e908";
 }
-.icon-Settings:before {
+
+.icon-smiley:before {
   content: "\e909";
 }
-.icon-sidebar-wallet:before {
+
+.icon-Transactions:before {
   content: "\e90a";
 }
-.icon-smiley:before {
-  content: "\e90b";
-}
-.icon-Transactions:before {
-  content: "\e90c";
-}
-.icon-Users:before {
-  content: "\e90d";
-}
+
 .icon-Wallet:before {
-  content: "\e90e";
+  content: "\e90b";
 }

@@ -18,7 +18,7 @@ const LandPageLayout = ({ children }) => {
   };
 
   return (
-    <div className=" bg-homepage bg-slate-900 flex flex-col h-screen justify-between">
+    <div className=" bg-homepage bg-black flex flex-col h-screen justify-between scroll_hide">
       <div className=" grow-0 shrink-0 ">
         <Container>
           {" "}
@@ -90,9 +90,8 @@ const LandPageLayout = ({ children }) => {
           </header>
         </Container>
       </div>
-      <div className="grow-0 shrink overflow-y-scroll scroll_hide">
-        <Container>{children}</Container>
-      </div>
+      {/* <div className="grow-0 shrink overflow-y-scroll scroll_hide">{children}</div> */}
+      <>{children}</>
 
       <footer className=" bg-black py-[3.5rem]   w-full grow-0 shrink-0 max-h-min">
         <Container>

@@ -3,6 +3,10 @@ import React from "react";
 import Link from "next/link";
 import LandPageLayout from "../../Components/Layout/LandPageLayout";
 
+const Container = ({ children }) => {
+  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem]">{children}</div>;
+};
+
 const Index = () => {
   const artists = [
     {
@@ -28,31 +32,35 @@ const Index = () => {
     },
   ];
   return (
-    <div className="text-center">
-      <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FCAC0D] mb-[5.6rem]">Meet the Artists</h3>
-      <main className="flex flex-wrap gap-36 items-center justify-center mb-40">
-        {artists.map((el, i) => {
-          return (
-            <Link href={`/artists/${el.id}`} key={i}>
-              <a>
-                <div className="flex flex-col">
-                  <div className=" -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex">
-                    {/* <div
+    <div className="grow-0 shrink overflow-y-scroll scroll_hide">
+      <Container>
+        <div className="text-center">
+          <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FCAC0D] mb-[5.6rem]">Meet the Artists</h3>
+          <main className="flex flex-wrap gap-36 items-center justify-center mb-40">
+            {artists.map((el, i) => {
+              return (
+                <Link href={`/artists/${el.id}`} key={i}>
+                  <a>
+                    <div className="flex flex-col">
+                      <div className=" -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex">
+                        {/* <div
                       style={{ backgroundImage: `url(${el.img})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "top" }}
                       className=" h-full w-full skew-y-12 scale-[1.18] "
                     > */}
-                    <Image className="object-cover overflow-hidden !skew-y-12 scale-[1.18]" layout="fixed" width={234} height={347} src={el.img} alt={el.name}></Image>
-                    {/* </div> */}
-                  </div>
-                  <span className=" font-bold text-[2.5rem] leading-[3rem] mt-[4.6rem] text-white">
-                    0{++i}. {el.name}
-                  </span>
-                </div>
-              </a>
-            </Link>
-          );
-        })}
-      </main>
+                        <Image className="object-cover overflow-hidden !skew-y-12 scale-[1.18]" layout="fixed" width={234} height={347} src={el.img} alt={el.name}></Image>
+                        {/* </div> */}
+                      </div>
+                      <span className=" font-bold text-[2.5rem] leading-[3rem] mt-[4.6rem] text-white">
+                        0{++i}. {el.name}
+                      </span>
+                    </div>
+                  </a>
+                </Link>
+              );
+            })}
+          </main>
+        </div>
+      </Container>
     </div>
   );
 };

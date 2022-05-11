@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import LandPageLayout from "../Layout/LandPageLayout";
 
+const Container = ({ children }) => {
+  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem]">{children}</div>;
+};
+
 const LandingPage = () => {
   return (
-    <main className="">
+    <Container>
       <div>
         <span className=" font-bold text-[1.6rem] mobile:text-[2.5rem] leading-[3rem] text-[#FCAC0D] mb-[1.6rem] mobile:mb-[.8rem]">22nd Edition</span>
         <h1 className=" font-bold text-[4rem] mobile:text-[9.4rem] leading-[4rem] mobile:leading-[9.1rem] text-white uppercase ">
@@ -26,7 +30,7 @@ const LandingPage = () => {
           <img className="mr-[1.1rem]" src="/play-promo.svg"></img>Play Promotional Video
         </span>
       </section>
-    </main>
+    </Container>
   );
 };
 
