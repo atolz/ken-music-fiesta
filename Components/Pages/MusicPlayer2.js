@@ -104,7 +104,7 @@ const MusicPlayer2 = () => {
                   ></i>
                 </div>
                 {/* Time */}
-                <p className={`font-medium text-[1.2rem] ml-auto text-white ${playingIndex == i ? "!text-black" : "text-white"}`}>1:30</p>
+                <p className={`font-medium text-[1.2rem]  text-white ${playingIndex == i ? "!text-black" : "text-white"}`}>1:30</p>
               </div>
             );
           })}

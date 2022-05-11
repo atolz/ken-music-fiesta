@@ -6,7 +6,7 @@ import MusicPlayer from "../../Components/Pages/MusicPlayer";
 import MusicPlayer2 from "../../Components/Pages/MusicPlayer2";
 
 const Container = ({ children, twStyles }) => {
-  return <div className={`max-w-[182rem] mx-auto w-full px-[2rem] table:px-[10rem] ${twStyles}`}>{children}</div>;
+  return <div className={`max-w-[182rem] mx-auto w-full px-[2.2rem] table:px-[10rem] ${twStyles}`}>{children}</div>;
 };
 
 const Details = () => {
