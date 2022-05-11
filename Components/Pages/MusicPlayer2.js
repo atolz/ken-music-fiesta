@@ -7,8 +7,10 @@ const MusicPlayer2 = () => {
   const [playingIndex, setPlayingIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [songs] = useState([
-    { name: "Rise of the sunset", src: "Lauv.mp3", album: "Kalakuta Republic" },
-    { name: "Don't call me back", src: "Joeboy.mp3", album: "Joeboy Republic" },
+    { name: "On the low", src: "Burna.mp3", album: "Kalakuta Republic", artist: "Burna boy" },
+    { name: "Power rangers", src: "Teni.mp3", album: "Joeboy Republic", artist: "Teni" },
+    { name: "Rise of the sunset", src: "Lauv.mp3", album: "Kalakuta Republic", artist: "Lauv (with Anne-Marie)" },
+    { name: "Don't call me back", src: "Joeboy.mp3", album: "Joeboy Republic", artist: "Joe boy" },
   ]);
 
   const play = (i) => {
@@ -73,10 +75,10 @@ const MusicPlayer2 = () => {
                 </svg>
                 {/* Details section */}
                 <div className="flex flex-col gap-[.8rem] ml-[1.8rem] text-white font-medium">
-                  <p className={`!font-medium text-[1.2rem] ${playingIndex == i ? "!text-black" : "text-white"}`}>{el.name}</p>
-                  <div className={` ${playingIndex == i ? "!text-black" : "text-[#797676]"}`}>
-                    <span className={` ${playingIndex == i ? "!text-black" : "text-white"}`}>Artist 1</span>
-                    <span className={`ml-[1.6rem] ${playingIndex == i ? "!text-black" : "text-white"}`}>{el.album}</span>
+                  <p className={`!font-medium text-[1.2rem] ${playingIndex == i ? "!text-black" : "text-white"} whitespace-nowrap`}>{el.name}</p>
+                  <div className={` ${playingIndex == i ? "!text-black" : "text-[#797676]"} flex gap-[1.4rem]`}>
+                    <span className={` ${playingIndex == i ? "!text-black" : "text-white"} block whitespace-nowrap max-w-[7.5rem] overflow-hidden text-ellipsis`}>{el.artist}</span>
+                    <span className={` ${playingIndex == i ? "!text-black" : "text-white"} block whitespace-nowrap max-w-[5.5rem] overflow-hidden text-ellipsis`}>{el.album}</span>
                   </div>
                 </div>
 
@@ -86,19 +88,19 @@ const MusicPlayer2 = () => {
                     onClick={() => {
                       onPrev(i);
                     }}
-                    className="icon-next text-black text-[1.4rem] rotate-180"
+                    className="icon-next cursor-pointer text-black text-[1.4rem] rotate-180"
                   ></i>
                   <i
                     onClick={() => {
                       play(i);
                     }}
-                    className="icon-play text-black text-[1.8rem]"
+                    className="icon-play cursor-pointer text-black text-[1.8rem]"
                   ></i>
                   <i
                     onClick={() => {
                       onNext(i);
                     }}
-                    className="icon-next text-black text-[1.4rem]"
+                    className="icon-next cursor-pointer text-black text-[1.4rem]"
                   ></i>
                 </div>
                 {/* Time */}
@@ -124,7 +126,7 @@ const MusicPlayer2 = () => {
           <div className="flex flex-col flex-wrap  ml-[1.8rem] text-white">
             <p className=" font-medium text-[1.4rem] mb-[.8rem]">{songs[playingIndex].name}</p>
             <div className="">
-              <span className="mr-auto">Artist 1</span>
+              <span className="mr-auto">{songs[playingIndex].artist}</span>
               <span className="ml-[1.6rem]">Kalakuta Republic</span>
             </div>
           </div>
@@ -135,14 +137,14 @@ const MusicPlayer2 = () => {
               onClick={() => {
                 onPrev(playingIndex);
               }}
-              className="icon-next text-white text-[1.8rem] rotate-180"
+              className="icon-next cursor-pointer text-white text-[1.8rem] rotate-180"
             ></i>
             {!playing && (
               <i
                 onClick={() => {
                   play(playingIndex);
                 }}
-                className="icon-play text-white text-[2rem]"
+                className="icon-play cursor-pointer text-white text-[2rem]"
               ></i>
             )}
             {playing && (
@@ -150,14 +152,14 @@ const MusicPlayer2 = () => {
                 onClick={() => {
                   pause(playingIndex);
                 }}
-                className="icon-pause text-white text-[2rem]"
+                className="icon-pause cursor-pointer text-white text-[2rem]"
               ></i>
             )}
             <i
               onClick={() => {
                 onNext(playingIndex);
               }}
-              className="icon-next text-white text-[1.8rem]"
+              className="icon-next cursor-pointer text-white text-[1.8rem]"
             ></i>
           </div>
         </section>

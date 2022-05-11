@@ -5,8 +5,10 @@ const MusicPlayer = () => {
   const [playingIndex, setPlayingIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [songs] = useState([
-    { name: "Rise of the sunset", src: "Lauv.mp3", album: "Kalakuta Republic" },
+    { name: "On the low", src: "Burna.mp3", album: "Kalakuta Republic" },
+    { name: "Power rangers", src: "Teni.mp3", album: "Joeboy Republic" },
     { name: "Don't call me back", src: "Joeboy.mp3", album: "Joeboy Republic" },
+    { name: "Rise of the sunset", src: "Lauv.mp3", album: "Kalakuta Republic" },
   ]);
 
   const togglePlay = (i) => {

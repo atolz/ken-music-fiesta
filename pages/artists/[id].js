@@ -6,15 +6,16 @@ import MusicPlayer from "../../Components/Pages/MusicPlayer";
 import MusicPlayer2 from "../../Components/Pages/MusicPlayer2";
 
 const Container = ({ children, twStyles }) => {
-  return <div className={`max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem] ${twStyles}`}>{children}</div>;
+  return <div className={`max-w-[182rem] mx-auto w-full px-[2rem] table:px-[10rem] ${twStyles}`}>{children}</div>;
 };
 
 const Details = () => {
   return (
     <div className="grow-0 shrink  scroll_hide mt-auto">
-      <div className="bg-black w-full overflow-scroll sidebar:overflow-visible max-h-[70vh]  rounded-tl-[3rem] rounded-tr-[3rem] pt-[7.2rem] slide-up-now-opacity scroll_hide">
+      <div className="bg-black w-full overflow-scroll  max-h-[70vh]  rounded-tl-[3rem] rounded-tr-[3rem] pt-[7.2rem] slide-up-now-opacity scroll_hide">
         <Container twStyles={"flex gap-[9.4rem] flex-wrap"}>
-          <div className=" sidebar:-translate-y-[15.4rem] -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex">
+          {/* <div className=" sidebar:-translate-y-[15.4rem] -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex"> */}
+          <div className="  -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex">
             <Image className="object-cover overflow-hidden !skew-y-12 scale-[1.18]" layout="fixed" width={234} height={347} src={"/user-grad (1).jpg"} alt={"artist-name"}></Image>
           </div>
           <section className="flex-1">
