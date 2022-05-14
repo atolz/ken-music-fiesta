@@ -2,8 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import LandPageLayout from "../../Components/Layout/LandPageLayout";
-import MusicPlayer from "../../Components/Pages/MusicPlayer";
-import MusicPlayer2 from "../../Components/Pages/MusicPlayer2";
 
 const Container = ({ children, twStyles }) => {
   return <div className={`max-w-[182rem] mx-auto w-full px-[2.2rem] table:px-[10rem] ${twStyles}`}>{children}</div>;
@@ -21,14 +19,11 @@ const Details = () => {
           <section className="flex-1">
             <div className="flex flex-wrap mb-[4.9rem] items-center justify-between">
               <h2 className="text-white font-bold text-[5rem] whitespace-nowrap mr-8">01. Artist</h2>
-              <Link href={"/catalogue/2"}>
-                <button className="btn btn--outlined text-white  !inline-flex">View Catalogue</button>
-              </Link>
             </div>
             {/* About */}
-            <div className="mb-[4.8rem]">
+            <div className="mb-[4.8rem]  max-w-[79.3rem]">
               <h1 className="mb-[1.6rem] text-[#FCAC0D] font-bold text-[2.5rem]">About Artist</h1>
-              <p className="text-[#C4C4C4] leading-[1.8rem] text-[1.2rem] font-normal pb-[4.8rem] border-b-[.3px] border-[#FCAC0D] max-w-[79.3rem]">
+              <p className="text-[#C4C4C4] leading-[1.8rem] text-[1.2rem] font-normal pb-[4.8rem] border-b-[.3px] border-[#FCAC0D]">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel et sagittis, cursus pretium aliquam pharetra amet at. Sit at integer ut ante cursus justo, volutpat imperdiet. Ut rhoncus,
                 orci nulla adipiscing pellentesque quam. Semper nec etiam viverra aliquam, purus turpis eu. Turpis lectus sit viverra feugiat. Morbi viverra senectus dictum mauris, id in velit fames
                 morbi. Adipiscing orci quam ornare augue velit. Cras erat odio non sit. Massa quisque elementum, eget nisi, ut et non. Faucibus ut amet massa praesent suspendisse donec velit sit
@@ -37,12 +32,26 @@ const Details = () => {
               </p>
             </div>
 
-            {/* Stream Artist Music */}
-            <div className=" hidden sidebar:block">
-              <MusicPlayer></MusicPlayer>
-            </div>
-            <div className=" block sidebar:hidden">
-              <MusicPlayer2></MusicPlayer2>
+            {/* Scan code / Copy */}
+            <div className="flex items-center gap-[2.5rem] text-white flex-wrap   max-w-[79.3rem] mb-[2rem]">
+              <div className="btn btn--outlined p-[2.5rem] !flex items-center justify-around gap-[1.5rem] !h-auto flex-1">
+                <p className=" font-extrabold text-[2.2rem] max-w-[13rem] leading-[2.6rem] !whitespace-normal ">Scan Code To Access Catalogue</p>
+                <div
+                  className=" grid place-items-center min-w-[10rem] max-w-[20.6rem] rounded-[.8rem] p-[.3rem] overflow-hidden"
+                  style={{ backgroundImage: "url(/bar-code-box.jpg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}
+                >
+                  <img className="h-full w-full" src="/bar-code.jpg"></img>
+                </div>
+              </div>
+              <div className="flex-1 sidebar:flex-grow-0">
+                <p className=" font-bold text-[1.4rem] mb-[2.5rem] text-center hdr:text-left">Or copy URL Code</p>
+                <button className="btn btn--outlined !flex !items-center !justify-between !py-[1.5rem] px-[2rem] gap-[2rem] !h-auto !w-full">
+                  <span className=" font-bold text-[1.7rem] overflow-hidden text-ellipsis !whitespace-normal">XW25Y5XQKBL2FUUVUEMQ</span>
+                  <div className="bg-[#FCAC0D] grid place-items-center rounded-[4px] ">
+                    <img className="m-[1rem] flex" src="/copy-2.svg"></img>
+                  </div>
+                </button>
+              </div>
             </div>
           </section>
         </Container>

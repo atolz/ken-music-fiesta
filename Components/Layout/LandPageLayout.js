@@ -34,6 +34,11 @@ const LandPageLayout = ({ children }) => {
                   ARTISTS
                 </a>
               </Link>
+              <Link href={"/catalogue"}>
+                <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
+                  CATALOGUE
+                </a>
+              </Link>
 
               <button
                 onClick={() => {
