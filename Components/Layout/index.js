@@ -35,7 +35,7 @@ const BaseLayout = ({ children }) => {
             Authorization: `Bearer ${getLocalStorage("token")}`,
           },
         });
-        console.log("user is ", userResp.data);
+        console.log("user is in layount ", userResp.data);
         dispatch(setUserRedux(userResp.data));
       } catch (error) {
         console.log("Error loadin user extra data", error);

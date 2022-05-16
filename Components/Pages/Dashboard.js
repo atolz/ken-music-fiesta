@@ -80,7 +80,9 @@ const Dashboard = (props) => {
         </div>
 
         {/* div-2 */}
-        <PoweredBy></PoweredBy>
+        <div className=" flex-1">
+          <PoweredBy></PoweredBy>
+        </div>
       </section>
     </div>
   );
