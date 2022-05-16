@@ -62,7 +62,16 @@ const Header = ({ title, setActivePage }) => {
       itemQuantity: ticketAmount,
       payment_agent: payOptType,
       ticketType: "string",
+      redirectUrl: redirectUrl,
     });
+    const env = process.env.NODE_ENV;
+    console.log("enviroment is", env);
+    let redirectUrl = "";
+    if (env == "development") {
+      redirectUrl = "http://localhost:3000/dashboard?status=success";
+    } else if (env == "production") {
+      redirectUrl = "https://ken-music-fiesta-2.vercel.app/dashboard?status=success";
+    }
     toggleLoad();
 
     const resp = await baseInstanceAPI.post(
@@ -72,6 +81,7 @@ const Header = ({ title, setActivePage }) => {
         itemQuantity: ticketAmount,
         payment_agent: payOptType,
         ticketType: "string",
+        redirectUrl: redirectUrl,
       },
       {
         headers: {

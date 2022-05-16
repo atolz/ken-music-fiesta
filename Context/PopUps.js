@@ -80,11 +80,20 @@ export const PopUpContextProvider = ({ children }) => {
   }
 
   async function onSelectPayOption(payOptType) {
+    const env = process.env.NODE_ENV;
+    console.log("enviroment is", env);
+    let redirectUrl = "";
+    if (env == "development") {
+      redirectUrl = "http://localhost:3000/dashboard?status=success";
+    } else if (env == "production") {
+      redirectUrl = "https://ken-music-fiesta-2.vercel.app/dashboard?status=success";
+    }
     console.log("payment details is", {
       purpose: "EventTicket",
       itemQuantity: ticketAmount,
       payment_agent: payOptType,
       ticketType: "string",
+      redirectUrl: redirectUrl,
     });
     toggleLoad();
     try {
@@ -95,6 +104,7 @@ export const PopUpContextProvider = ({ children }) => {
           itemQuantity: ticketAmount,
           payment_agent: payOptType,
           ticketType: "string",
+          redirectUrl: redirectUrl,
         },
         {
           headers: {
