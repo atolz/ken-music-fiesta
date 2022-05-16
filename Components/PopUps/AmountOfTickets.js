@@ -13,7 +13,9 @@ const AmountOfTickets = ({ onSelected, onCancel }) => {
       <PopupLayout cancelAction={onCancel} action={onSelected} actionText={"Buy Ticket"}>
         <div className="popup-box">
           <h3>Buy Raffle Ticket</h3>
-          <p className="!mb-[3.7rem]">Raffle tickets are sold at #500 per ticket. There is no discount for multiple ticket purchases.</p>
+          <p className="!mb-[3.7rem]">
+            Raffle tickets are sold at <span className=" font-bold !text-[#827F7F]">#500</span> per ticket. There is no discount for multiple ticket purchases.
+          </p>
 
           {/* Increament Decrement */}
           <IncDec onCange={onChange}></IncDec>
