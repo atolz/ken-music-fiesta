@@ -203,28 +203,6 @@
   max-width: max-content;
 }
 
-// Radio
-.MuiRadio-root {
-  padding: 0;
-  color: black;
-
-  &.Mui-checked {
-    .MuiSvgIcon-root {
-      &:nth-child(2) {
-        color: var(--color-primary);
-      }
-    }
-  }
-}
-
-.MuiRadio-root .MuiSvgIcon-root {
-  font-size: 2rem;
-}
-
-.MuiSvgIcon-root {
-  // color: rgba(0, 0, 0, 0.849);
-}
-
 .MuiModal-root .MuiDialog-container .MuiPaper-root {
   margin: 16px !important;
   // max-height: fit-content;

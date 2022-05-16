@@ -7,6 +7,7 @@ const PaymentOptions = ({ onSelectPayOption, onCancel }) => {
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+    console.log("pay method", event.target.value);
   };
 
   return (
@@ -30,7 +31,18 @@ const PaymentOptions = ({ onSelectPayOption, onCancel }) => {
             </div>
             <div className="rounded-[2rem] flex-grow bg-white px-[4.1rem] py-[4.7rem] flex items-center justify-between default-shadow">
               <img className="mr-[1rem] w-[19.2rem]" src="/flutterwave.svg" />
-              <Radio checked={selectedValue === "flutterwave"} onChange={handleChange} value="flutterwave" name="radio-buttons" inputProps={{ "aria-label": "flutterwave" }} />
+              <Radio
+                // sx={{
+                //   "& .MuiSvgIcon-root": {
+                //     fontSize: 20,
+                //   },
+                // }}
+                checked={selectedValue === "flutterwave"}
+                onChange={handleChange}
+                value="flutterwave"
+                name="radio-buttons"
+                inputProps={{ "aria-label": "flutterwave" }}
+              />
             </div>
           </div>
         </div>
