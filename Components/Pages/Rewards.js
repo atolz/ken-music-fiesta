@@ -58,30 +58,38 @@ const Rewards = (props) => {
                     <h3 className="font-bold text-black text-[2.1rem] leading-[2.1rem]">Rewards Won</h3>
                   </div>
                   {/* Table Body */}
-                  <div className="body px-[2.2rem] sidebar:px-[4.2rem] py-[3rem]">
-                    <div className="flex justify-between mb-[1.6rem] px-10">
-                      <span className=" font-normal text-[1.2rem] leading-[1.4rem]">Price</span>
-                      <span className=" font-normal text-[1.2rem] leading-[1.4rem]">Category</span>
-                      <span className=" font-normal text-[1.2rem] leading-[1.4rem]">Ticket Number</span>
+                  {false && (
+                    <div className="body px-[2.2rem] sidebar:px-[4.2rem] py-[3rem]">
+                      <div className="flex justify-between mb-[1.6rem] px-10">
+                        <span className=" font-normal text-[1.2rem] leading-[1.4rem]">Price</span>
+                        <span className=" font-normal text-[1.2rem] leading-[1.4rem]">Category</span>
+                        <span className=" font-normal text-[1.2rem] leading-[1.4rem]">Ticket Number</span>
+                      </div>
+                      <div className="row flex justify-between py-[2.2rem] px-[2.5rem] text-[#706C6C] bg-[rgba(255,246,228,0.31)] rounded-[2rem] leading-[2.1rem] text-[1.4rem] mobile:text-[1.8rem] mb-[.8rem]">
+                        <span className="font-semibold mr-6">N100,000</span>
+                        <span className="font-semibold mr-6">Category 1</span>
+                        <span className="font-semibold">#123456789bg</span>
+                      </div>
+                      <div className="row flex justify-between py-[2.2rem] px-[2.5rem] text-[#706C6C] bg-[rgba(240,240,240,0.31)] rounded-[2rem] leading-[2.1rem] text-[1.4rem] mobile:text-[1.8rem] mb-[.8rem]">
+                        <span className="font-semibold">N100,000</span>
+                        <span className="font-semibold">Category 1</span>
+                        <span className="font-semibold">#123456789bg</span>
+                      </div>
                     </div>
-                    <div className="row flex justify-between py-[2.2rem] px-[2.5rem] text-[#706C6C] bg-[rgba(255,246,228,0.31)] rounded-[2rem] leading-[2.1rem] text-[1.4rem] mobile:text-[1.8rem] mb-[.8rem]">
-                      <span className="font-semibold mr-6">N100,000</span>
-                      <span className="font-semibold mr-6">Category 1</span>
-                      <span className="font-semibold">#123456789bg</span>
+                  )}
+                  {/* No Rewards won yet */}
+                  {true && (
+                    <div className="grid flex-1 place-content-center place-items-center  min-h-[28.3rem]">
+                      <span className="f font-medium text-[2.5rem] text-[#F0F0F0] block">No Reward won yet</span>
                     </div>
-                    <div className="row flex justify-between py-[2.2rem] px-[2.5rem] text-[#706C6C] bg-[rgba(240,240,240,0.31)] rounded-[2rem] leading-[2.1rem] text-[1.4rem] mobile:text-[1.8rem] mb-[.8rem]">
-                      <span className="font-semibold">N100,000</span>
-                      <span className="font-semibold">Category 1</span>
-                      <span className="font-semibold">#123456789bg</span>
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
 
             {/* Top Winners */}
 
-            <TableV1 data={"data"}></TableV1>
+            <TableV1></TableV1>
 
             {/* <LatestWinnerCard /> */}
           </section>
