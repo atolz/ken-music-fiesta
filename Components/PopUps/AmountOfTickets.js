@@ -10,7 +10,13 @@ const AmountOfTickets = ({ onSelected, onCancel }) => {
   };
   return (
     <div>
-      <PopupLayout cancelAction={onCancel} action={onSelected} actionText={"Buy Ticket"}>
+      <PopupLayout
+        cancelAction={onCancel}
+        action={() => {
+          onSelected(10);
+        }}
+        actionText={"Buy Ticket"}
+      >
         <div className="popup-box">
           <h3>Buy Raffle Ticket</h3>
           <p className="!mb-[3.7rem]">

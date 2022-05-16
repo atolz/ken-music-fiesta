@@ -35,18 +35,11 @@ const Index = () => {
     <div className="grow-0 shrink overflow-y-scroll scroll_hide">
       <Container>
         <div className="text-center">
-          <div className="flex items-center justify-between mb-[9rem]">
-            <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FCAC0D] ">Artists Catalogue</h3>
-            <div>
-              <Link href={"/catalogue/create"}>
-                <button className="btn">Create Catalogue</button>
-              </Link>
-            </div>
-          </div>
+          <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FCAC0D] mb-[9rem]">Meet the Artistes</h3>
           <main className="flex flex-wrap gap-36 items-center justify-between mb-40">
             {artists.map((el, i) => {
               return (
-                <Link href={`/catalogue/${el.id}`} key={i}>
+                <Link href={`/artistes/${el.id}`} key={i}>
                   <a>
                     <div className="flex flex-col">
                       <div className=" -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex">

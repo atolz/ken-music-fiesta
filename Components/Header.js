@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
 import AmountOfTickets from "./PopUps/AmountOfTickets";
 import VerifyPayment from "./PopUps/VerifyPayment";
@@ -14,9 +14,13 @@ import { useRouter } from "next/router";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { toggleAlert } from "../store/alert";
 import { useDispatch } from "react-redux";
+import { baseInstanceAPI } from "../axios";
+import useLoading from "../hooks/useLoading";
 
 const Header = ({ title, setActivePage }) => {
   // const VerifyPaymentProcess = ["VerifyPayment", "Status"];
+  const [ticketAmount, setTicketAmount] = useState(1);
+  const [paymentMethod, setPaymentMethod] = useState("PAYSTACK");
   const [activeModal, setActiveModal] = useState("");
   const [statusTitle, setStatusTitle] = useState();
   const [linkText, setLinkText] = useState();
@@ -25,11 +29,13 @@ const Header = ({ title, setActivePage }) => {
   const [showMore, setShowMore] = useState(false);
   const { logOut } = useLocalStorage();
   const dispatch = useDispatch();
+  const { isLoggedIn, getLocalStorage } = useLocalStorage();
+  const { toggleLoad } = useLoading();
 
   const [show, setShow] = useState(false);
   function toggle() {
     console.log("toggleing...");
-    open ? setShow(false) : setShow(true);
+    show ? setShow(false) : setShow(true);
   }
 
   function onVerify() {
@@ -45,15 +51,36 @@ const Header = ({ title, setActivePage }) => {
     setText("Your purchase order is successful and your account has been credited.");
     setActiveModal("Status");
   }
-  function onSelected() {
+  function onSelected(amount) {
+    setTicketAmount(amount);
     setActiveModal("PaymentOptions");
   }
 
-  function onSelectPayOption() {
-    setLinkText("Go to dashboard");
-    setStatusTitle("Purchase Order Success");
-    setText("Your purchase order for 20 tickets was successful");
-    setActiveModal("Status");
+  async function onSelectPayOption(payOptType) {
+    console.log("payment details is", {
+      purpose: "EventTicket",
+      itemQuantity: ticketAmount,
+      payment_agent: payOptType,
+      ticketType: "string",
+    });
+    toggleLoad();
+
+    const resp = await baseInstanceAPI.post(
+      "/payment/buy",
+      {
+        purpose: "EventTicket",
+        itemQuantity: ticketAmount,
+        payment_agent: payOptType,
+        ticketType: "string",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+      }
+    );
+    console.log("response is", resp.data.redirectUrl);
+    router.push(resp.data.redirectUrl);
   }
 
   function onLogOut() {
@@ -61,6 +88,18 @@ const Header = ({ title, setActivePage }) => {
     router.replace("/auth/sign-in");
     dispatch(toggleAlert("success", "Logged Out successfully!", true));
   }
+
+  useEffect(() => {
+    console.log("Roteris", router);
+    if (router.query.status == "success" && router.pathname == "/dashboard") {
+      console.log("sucess payed");
+      setLinkText("Go to dashboard");
+      setStatusTitle("Purchase Order Success");
+      setText("Your purchase order for 20 tickets was successful");
+      setActiveModal("Status");
+      toggle();
+    }
+  }, [router.query?.status]);
 
   return (
     <>

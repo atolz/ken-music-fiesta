@@ -60,7 +60,7 @@ const MusicPlayer = () => {
   };
   return (
     <>
-      <h1 className="mb-[1.6rem] text-[#FCAC0D] font-bold text-[2.5rem]">Stream Artist Music</h1>
+      <h1 className="mb-[1.6rem] text-[#FCAC0D] font-bold text-[2.5rem]">Stream Artiste Music</h1>
       <div className="w-[100%] overflow-x-scroll scroll_hide max-w-[79.3rem]">
         <table className=" w-full border-gray-lighter border-collapse  min-w-[7.3rem]">
           <thead className="text-bl text-black-light whitespace-nowrap bg-gray-lightest-2 caption_heavy h-[48px] font-medium">
@@ -100,8 +100,8 @@ const MusicPlayer = () => {
                   </td>
                   <td className="text-white border-gray-lighter p-[16px] text-left align-text-bottom text-[1.2rem] font-medium">Artist 1</td>
                   <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.2rem] font-medium">1:30</td>
-                  <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.2rem] font-medium rounded-lg">{el.album}</td>
-                  <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.2rem] font-medium rounded-lg">
+                  <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.2rem] font-medium ">{el.album}</td>
+                  <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.2rem] font-medium ">
                     <div className="flex items-center gap-[1.4rem]">
                       <img
                         onClick={() => {

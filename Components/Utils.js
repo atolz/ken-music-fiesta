@@ -45,15 +45,16 @@ const Utils = ({ children }) => {
 
   return (
     <div>
-      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isLoading}>
+      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 300 }} open={isLoading}>
         <CircularProgress color="inherit" />
       </Backdrop>
 
       {/* Alert Global */}
       <div
-        className={`fixed transition-all duration-500  ${showAlert ? "opacity-100 top-0" : "opacity-0 -top-full"} left-0 w-screen h-[5.5rem] ${
+        style={{ "z-index": "1000000" }}
+        className={`fixed transition-all duration-500 z-50  ${showAlert ? "opacity-100 top-0" : "opacity-0 -top-full"} left-0 w-screen h-[5.5rem] ${
           alertStatus == "success" ? "bg-green-800" : "bg-red-800"
-        }  text-white text-xl z-30 grid place-items-center`}
+        }  text-white text-xl z-50 grid place-items-center`}
       >
         {alertMessage}
       </div>

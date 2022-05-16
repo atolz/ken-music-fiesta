@@ -10,7 +10,13 @@ const BuyEventTicket = ({ onBuyTicket, onCancel }) => {
   };
   return (
     <div>
-      <PopupLayout cancelAction={onCancel} action={onBuyTicket} actionText={"Buy Ticket"}>
+      <PopupLayout
+        cancelAction={onCancel}
+        action={() => {
+          onBuyTicket(10);
+        }}
+        actionText={"Buy Ticket"}
+      >
         <div className="popup-box">
           <h3>Buy Event Ticket</h3>
           <p className="!mb-[3.7rem]">

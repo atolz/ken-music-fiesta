@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 const SideBar = ({ activePage, setActivePage }) => {
   const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Livestream Event"];
@@ -22,7 +23,9 @@ const SideBar = ({ activePage, setActivePage }) => {
   return (
     <>
       <div className="w-[37rem] h-screen px-[4.7rem] py-[4.9rem] hidden flex-col bg-[#010101] text-white bg-sidebar sidebar:flex">
-        <img src="/kef-logo.svg" className="mb-[5.1rem] w-[11.3rem] mx-auto"></img>
+        <Link href={"/"}>
+          <img src="/kef-logo.svg" className="mb-[5.1rem] w-[11.3rem] mx-auto cursor-pointer"></img>
+        </Link>
         <ul className="bg-r whitespace-nowrap">
           {!admin &&
             pages.map((page, i) => {

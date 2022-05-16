@@ -37,12 +37,12 @@ const LandPageLayout = ({ children }) => {
                 {/* <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
                   BRANDS
                 </a> */}
-                <Link href={"/artists"}>
+                <Link href={"/artistes"}>
                   <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
                     ARTISTES
                   </a>
                 </Link>
-                <Link href={"/catalogue"}>
+                <Link href={"/catalogues"}>
                   <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
                     CATALOGUES
                   </a>

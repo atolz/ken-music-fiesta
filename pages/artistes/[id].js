@@ -20,14 +20,14 @@ const Details = () => {
           </div>
           <section className="flex-1">
             <div className="flex flex-wrap mb-[4.9rem] items-center justify-between">
-              <h2 className="text-white font-bold text-[5rem] whitespace-nowrap mr-8">01. Artist</h2>
-              <Link href={"/catalogue/2"}>
+              <h2 className="text-white font-bold text-[5rem] whitespace-nowrap mr-8">01. Artiste</h2>
+              <Link href={"/catalogues/2"}>
                 <button className="btn btn--outlined text-white  !inline-flex">View Catalogue</button>
               </Link>
             </div>
             {/* About */}
             <div className="mb-[4.8rem]">
-              <h1 className="mb-[1.6rem] text-[#FCAC0D] font-bold text-[2.5rem]">About Artist</h1>
+              <h1 className="mb-[1.6rem] text-[#FCAC0D] font-bold text-[2.5rem]">About Artiste</h1>
               <p className="text-[#C4C4C4] leading-[1.8rem] text-[1.2rem] font-normal pb-[4.8rem] border-b-[.3px] border-[#FCAC0D] max-w-[79.3rem]">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel et sagittis, cursus pretium aliquam pharetra amet at. Sit at integer ut ante cursus justo, volutpat imperdiet. Ut rhoncus,
                 orci nulla adipiscing pellentesque quam. Semper nec etiam viverra aliquam, purus turpis eu. Turpis lectus sit viverra feugiat. Morbi viverra senectus dictum mauris, id in velit fames
