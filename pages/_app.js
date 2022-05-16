@@ -10,20 +10,23 @@ import "../styles/animations.scss";
 import { StyledEngineProvider } from "@mui/material/styles";
 import AppProvider from "../store";
 import Utils from "../Components/Utils";
+import { PopUpContextProvider } from "../Context/PopUps";
 
 function MyApp({ Component, pageProps }) {
   return (
     <StyledEngineProvider injectFirst>
       <AppProvider>
-        <Utils>
-          {Component.Layout ? (
-            <Component.Layout>
+        <PopUpContextProvider>
+          <Utils>
+            {Component.Layout ? (
+              <Component.Layout>
+                <Component {...pageProps} />
+              </Component.Layout>
+            ) : (
               <Component {...pageProps} />
-            </Component.Layout>
-          ) : (
-            <Component {...pageProps} />
-          )}
-        </Utils>
+            )}
+          </Utils>
+        </PopUpContextProvider>
       </AppProvider>
     </StyledEngineProvider>
   );

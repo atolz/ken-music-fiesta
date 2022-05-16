@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import LandPageLayout from "../Layout/LandPageLayout";
+import { popUpContext } from "../../Context/PopUps";
 
 const Container = ({ children }) => {
   return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem]">{children}</div>;
 };
 
 const LandingPage = () => {
+  const popUpFunctions = useContext(popUpContext);
+
   return (
     <Container>
       <div>
@@ -25,7 +28,14 @@ const LandingPage = () => {
         <Link href={"/auth/sign-in"}>
           <button className="btn btn--outlined text-white !px-[6rem] mr-[3.2rem]  mb-[3.7rem] mobile:mb-0">Sign In</button>
         </Link>
-        <button className="btn mr-[4.5rem] !px-[7.2rem] mb-[3.7rem] mobile:mb-0">Mint Event Ticket</button>
+        <button
+          onClick={() => {
+            popUpFunctions.initBuyTicket();
+          }}
+          className="btn mr-[4.5rem] !px-[7.2rem] mb-[3.7rem] mobile:mb-0"
+        >
+          Mint Event Ticket
+        </button>
         <span className="flex items-center text-[1.4rem] font-semibold text-white">
           <img className="mr-[1.1rem]" src="/play-promo.svg"></img>Play Promotional Video
         </span>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Popup = ({ children, actionText, cancelAction = () => {}, action, footer = true }) => {
+const Popup = ({ children, actionText, cancelAction = () => {}, action = () => {}, footer = true }) => {
   return (
     <div className="bg-white rounded-[2rem] scroll_hide">
       {/* Body */}
