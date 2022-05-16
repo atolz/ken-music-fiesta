@@ -29,12 +29,14 @@ const LandPageLayout = ({ children }) => {
           <Container>
             {" "}
             <header className="flex items-center pt-[3rem] pb-[1.6rem]">
-              <img src="/kef-logo.svg" className="mr-auto w-[6.4rem]"></img>
+              <Link href={"/"}>
+                <img src="/kef-logo.svg" className="mr-auto w-[6.4rem] cursor-pointer"></img>
+              </Link>
               {/* Desktop Nav */}
               <div className="items-center hidden sidebar:flex ">
-                <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
+                {/* <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
                   BRANDS
-                </a>
+                </a> */}
                 <Link href={"/artists"}>
                   <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
                     ARTISTES
