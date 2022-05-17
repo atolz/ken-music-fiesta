@@ -7,15 +7,16 @@ import PopupStatus from "./PopUps/PopUpStatus";
 import CardAddress from "./PopUps/CardAddress";
 import ActivateCard from "./PopUps/ActivateCard";
 import ClaimReward from "./PopUps/ClaimReward";
-import { Tooltip } from "@mui/material";
+import { Avatar, Tooltip } from "@mui/material";
 import SelfCheckOut from "./PopUps/SelfCheckOut";
 import ReviewCheckOut from "./PopUps/ReviewCheckOut";
 import { useRouter } from "next/router";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { toggleAlert } from "../store/alert";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { baseInstanceAPI } from "../axios";
 import useLoading from "../hooks/useLoading";
+import { getUser } from "../store/user";
 
 const Header = ({ title, setActivePage }) => {
   // const VerifyPaymentProcess = ["VerifyPayment", "Status"];
@@ -31,6 +32,8 @@ const Header = ({ title, setActivePage }) => {
   const dispatch = useDispatch();
   const { isLoggedIn, getLocalStorage } = useLocalStorage();
   const { toggleLoad } = useLoading();
+  const user = useSelector(getUser);
+  const baseURL = process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
 
   const [show, setShow] = useState(false);
   function toggle() {
@@ -159,13 +162,16 @@ const Header = ({ title, setActivePage }) => {
             <div className="peer  py-4">
               <div className="b border-l ">
                 {/* <Tooltip title="Profile" leaveDelay={200}> */}
-                <img
+                {/* <img
                   onClick={() => {
                     // setShowMore((val) => !val);
                   }}
                   className="h-[4.2rem] cursor-pointer w-[4.2rem] object-cover rounded-full ml-[16px] yellow-shadow"
                   src="/user-img.jpg"
-                />
+                /> */}
+                <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "orange" }} alt={user?.name} src={`${baseURL}${user?.avatar}`}>
+                  <span className=" font-semibold"> {user?.firstName[0]}</span>
+                </Avatar>
                 {/* </Tooltip> */}
               </div>
             </div>
@@ -188,7 +194,6 @@ const Header = ({ title, setActivePage }) => {
                 <img src="/logout.svg"></img> <span className=" font-medium text-[1.4rem] ml-3">Log out</span>
               </li>
             </ul>
-            )
           </div>
         </div>
       </div>

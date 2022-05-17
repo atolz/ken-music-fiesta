@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { Avatar } from "@mui/material";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { baseInstanceAPI } from "../../axios";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -6,13 +7,19 @@ import useShowAlert from "../../hooks/useShowAlert";
 import { setUser } from "../../store/user";
 
 const Profile = ({ user }) => {
+  const baseURL = process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
+  const imageRef = useRef(null);
+  const [detailsChanged, setUserDetailsChanged] = useState(false);
+  const [uploadImgUrl, setUploadImgUrl] = useState("");
   const dispatch = useDispatch();
+  const [imageFile, setImageFile] = useState(null);
   const [userDetails, setUserDetails] = useState({
     firstName: user?.firstName,
     lastName: user?.lastName,
     email: user?.email,
     phone: user?.phone,
     username: user?.username,
+    avatar: user?.avatar,
   });
   const formEls = [
     { label: "Username", span: "View your username for your account", name: "username", value: user?.username },
@@ -46,9 +53,10 @@ const Profile = ({ user }) => {
     console.log(userDetails);
   };
 
-  const onUpdate = async () => {
+  const onUpdateUserDetails = async () => {
     console.log("Details is", { ...userDetails, username: undefined });
     setCanSubmit(false);
+    setUserDetailsChanged(true);
     try {
       const resp = await baseInstanceAPI.post(
         "/profile/update-profile",
@@ -71,6 +79,36 @@ const Profile = ({ user }) => {
     }
   };
 
+  const onFileChange = (e) => {
+    setCanSubmit(true);
+    console.log("Image ref is ", imageRef.current.firstChild);
+    const newImageUrl = URL.createObjectURL(e.target.files[0]);
+    setUploadImgUrl(newImageUrl);
+    console.log("b4 revode new image rul is", newImageUrl);
+    imageRef.current.firstChild.src = newImageUrl;
+    URL.revokeObjectURL(newImageUrl);
+    console.log("after revoke url is", newImageUrl);
+
+    setImageFile(e.target.files[0]);
+  };
+  const updateAvatar = async () => {
+    const formData = new FormData();
+    formData.append("avatar", imageFile);
+    try {
+      const resp = await baseInstanceAPI.post("/profile/upload-avatar", formData, {
+        headers: {
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+      });
+      console.log("Proife avaartar response is", resp.data);
+      // toggleAlertBar(resp.data.message, "success", true, 3000);
+      setImageFile(null);
+      setCanSubmit(false);
+    } catch (error) {
+      toggleAlertBar("Problem Updating Profile Picture. Please Ensure all Fields are Correct and Try Again!", "error", true, 8000);
+    }
+  };
+
   return (
     <form>
       <section className="mb-[9.6rem]">
@@ -81,11 +119,18 @@ const Profile = ({ user }) => {
             <span>Choose a display picture for your account</span>
           </div>
           <div className="relative">
-            <input className="hidden " id="upload" type="file"></input>
-            <label htmlFor="upload" className="absolute bottom-1 right-0 !grid h-[2.9rem] w-[2.9rem] place-items-center bg-[#FFF6E4] rounded-full cursor-pointer !mb-[0]">
+            <input onChange={onFileChange} className="hidden " id="upload" type="file" accept="image/*"></input>
+            <Avatar ref={imageRef} sx={{ width: 145, height: 145 }} alt="Remy Sharp" src={`${baseURL}${user?.avatar}`} />
+
+            <label htmlFor="upload" className="absolute bottom-8 right-0 !grid h-[2.9rem] w-[2.9rem] place-items-center bg-[#FFF6E4] rounded-full cursor-pointer !mb-[0]">
               <img src="/edit-pen.svg"></img>
             </label>
-            <img src="/profile-pic.jpg" className="w-[14.5rem] h-[14.5rem]" alt="userImage"></img>
+            {imageFile && (
+              <span onClick={() => {}} className=" !text-red-500  underline-offset-1 block !text-right translate-y-2 text-[2rem]">
+                *Save changes
+              </span>
+            )}
+            {/* <img src={`${baseURL}${user?.avatar}`} className="w-[14.5rem] h-[14.5rem]" alt="userImage"></img> */}
           </div>
         </section>
         {/* Input Form */}
@@ -117,7 +162,12 @@ const Profile = ({ user }) => {
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
-          onUpdate();
+          if (imageFile) {
+            onUpdateUserDetails();
+            updateAvatar();
+          } else {
+            onUpdateUserDetails();
+          }
         }}
         type="submit"
         disabled={canSubmit ? false : true}
