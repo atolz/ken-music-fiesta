@@ -86,7 +86,7 @@ const Profile = ({ user }) => {
     setUploadImgUrl(newImageUrl);
     console.log("b4 revode new image rul is", newImageUrl);
     imageRef.current.firstChild.src = newImageUrl;
-    URL.revokeObjectURL(newImageUrl);
+    // URL.revokeObjectURL(newImageUrl);
     console.log("after revoke url is", newImageUrl);
 
     setImageFile(e.target.files[0]);
@@ -104,6 +104,7 @@ const Profile = ({ user }) => {
       // toggleAlertBar(resp.data.message, "success", true, 3000);
       setImageFile(null);
       setCanSubmit(false);
+      URL.revokeObjectURL(uploadImgUrl);
     } catch (error) {
       toggleAlertBar("Problem Updating Profile Picture. Please Ensure all Fields are Correct and Try Again!", "error", true, 8000);
     }
@@ -120,7 +121,9 @@ const Profile = ({ user }) => {
           </div>
           <div className="relative">
             <input onChange={onFileChange} className="hidden " id="upload" type="file" accept="image/*"></input>
-            <Avatar ref={imageRef} sx={{ width: 145, height: 145 }} alt="Remy Sharp" src={`${baseURL}${user?.avatar}`} />
+            <Avatar ref={imageRef} sx={{ width: 145, height: 145, bgcolor: "orange" }} alt="Remy Sharp" src={`${baseURL}${user?.avatar}`}>
+              <span className=" !text-[3rem] font-semibold"> {user?.firstName[0]}</span>
+            </Avatar>
 
             <label htmlFor="upload" className="absolute bottom-8 right-0 !grid h-[2.9rem] w-[2.9rem] place-items-center bg-[#FFF6E4] rounded-full cursor-pointer !mb-[0]">
               <img src="/edit-pen.svg"></img>
