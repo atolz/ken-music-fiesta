@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CountDown from "../Dashboard/CountDown";
 
 import Dialog from "@mui/material/Dialog";
-import AmountOfTickets from "../PopUps/AmountOfTickets";
+// import AmountOfTickets from "../PopUps/AmountOfTickets";
 import VerifyPayment from "../PopUps/VerifyPayment";
 import PaymentOptions from "../PopUps/PaymentOptions";
 import PopupStatus from "../PopUps/PopUpStatus";

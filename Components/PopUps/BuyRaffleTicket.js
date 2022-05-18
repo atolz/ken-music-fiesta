@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import IncDec from "../IncDec";
 import PopupLayout from "../Layout/Popup";
 
-const AmountOfTickets = ({ onSelected, onCancel }) => {
+const BuyRaffleTicket = ({ onBuyRaffleTicket, onCancel }) => {
   const [total, setTotal] = useState(500);
+  const [quantity, setQuantity] = useState(1);
   const onChange = (type, value) => {
     console.log("Change event occured: type: value", type, value);
     setTotal(500 * value);
+    setQuantity(value);
   };
   return (
     <div>
       <PopupLayout
         cancelAction={onCancel}
         action={() => {
-          onSelected(10);
+          onBuyRaffleTicket(quantity);
         }}
         actionText={"Buy Ticket"}
       >
@@ -35,4 +37,4 @@ const AmountOfTickets = ({ onSelected, onCancel }) => {
   );
 };
 
-export default AmountOfTickets;
+export default BuyRaffleTicket;

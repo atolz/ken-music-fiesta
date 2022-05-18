@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Dialog from "@mui/material/Dialog";
-import AmountOfTickets from "./PopUps/AmountOfTickets";
 import VerifyPayment from "./PopUps/VerifyPayment";
 import PaymentOptions from "./PopUps/PaymentOptions";
 import PopupStatus from "./PopUps/PopUpStatus";
@@ -17,15 +16,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { baseInstanceAPI } from "../axios";
 import useLoading from "../hooks/useLoading";
 import { getUser } from "../store/user";
+import BuyRaffleTicket from "./PopUps/BuyRaffleTicket";
+import { popUpContext } from "../Context/PopUps";
 
 const Header = ({ title, setActivePage }) => {
   // const VerifyPaymentProcess = ["VerifyPayment", "Status"];
-  const [ticketAmount, setTicketAmount] = useState(1);
-  const [paymentMethod, setPaymentMethod] = useState("PAYSTACK");
-  const [activeModal, setActiveModal] = useState("");
-  const [statusTitle, setStatusTitle] = useState();
-  const [linkText, setLinkText] = useState();
-  const [text, setText] = useState();
+
   const router = useRouter();
   const [showMore, setShowMore] = useState(false);
   const { logOut } = useLocalStorage();
@@ -34,67 +30,7 @@ const Header = ({ title, setActivePage }) => {
   const { toggleLoad } = useLoading();
   const user = useSelector(getUser);
   const baseURL = process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
-
-  const [show, setShow] = useState(false);
-  function toggle() {
-    console.log("toggleing...");
-    show ? setShow(false) : setShow(true);
-  }
-
-  function onVerify() {
-    setActiveModal("Status");
-  }
-  function onCheckOut() {
-    setActiveModal("ReviewCheckOut");
-  }
-
-  function onReview() {
-    setLinkText("View Receipt");
-    setStatusTitle("Purchase Successful");
-    setText("Your purchase order is successful and your account has been credited.");
-    setActiveModal("Status");
-  }
-  function onSelected(amount) {
-    setTicketAmount(amount);
-    setActiveModal("PaymentOptions");
-  }
-
-  async function onSelectPayOption(payOptType) {
-    console.log("payment details is", {
-      purpose: "EventTicket",
-      itemQuantity: ticketAmount,
-      payment_agent: payOptType,
-      ticketType: "string",
-      redirectUrl: redirectUrl,
-    });
-    const env = process.env.NODE_ENV;
-    console.log("enviroment is", env);
-    let redirectUrl = "";
-    if (env == "development") {
-      redirectUrl = "http://localhost:3000/dashboard?status=success";
-    } else if (env == "production") {
-      redirectUrl = "https://ken-music-fiesta-2.vercel.app/dashboard?status=success";
-    }
-    toggleLoad();
-
-    const resp = await baseInstanceAPI.post(
-      "/payment/buy",
-      {
-        purpose: "EventTicket",
-        itemQuantity: ticketAmount,
-        payment_agent: payOptType,
-        ticketType: "string",
-        redirectUrl: redirectUrl,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${getLocalStorage("token")}`,
-        },
-      }
-    );
-    console.log("response is", resp.data.redirectUrl);
-    router.push(resp.data.redirectUrl);
-  }
+  const popUpFunctions = useContext(popUpContext);
 
   function onLogOut() {
     logOut();
@@ -102,32 +38,21 @@ const Header = ({ title, setActivePage }) => {
     dispatch(toggleAlert("success", "Logged Out successfully!", true));
   }
 
-  useEffect(() => {
-    console.log("Roteris", router);
-    if (router.query.status == "success" && router.pathname == "/dashboard") {
-      console.log("sucess payed");
-      setLinkText("Go to dashboard");
-      setStatusTitle("Purchase Order Success");
-      setText("Your purchase order for 20 tickets was successful");
-      setActiveModal("Status");
-      toggle();
-    }
-  }, [router.query?.status]);
-
   return (
     <>
-      <Dialog open={show} onClose={toggle}>
+      {/* <Dialog open={show} onClose={toggle}>
         {activeModal == "Status" && <PopupStatus action={toggle} title={statusTitle} link={`/dashboard`} linkText={linkText} text={text} status={"success"}></PopupStatus>}
-        {/* <CardAddress></CardAddress> */}
-        {/* <ActivateCard></ActivateCard> */}
-        {/* <ClaimReward></ClaimReward> */}
+        <CardAddress></CardAddress>
+        <ActivateCard></ActivateCard>
+        <ClaimReward></ClaimReward>
+
         {activeModal == "PaymentOptions" && <PaymentOptions onCancel={toggle} onSelectPayOption={onSelectPayOption}></PaymentOptions>}
-        {activeModal == "AmountOfTickets" && <AmountOfTickets onCancel={toggle} onSelected={onSelected}></AmountOfTickets>}
+        {activeModal == "AmountOfTickets" && <BuyRaffleTicket onCancel={toggle} onSelected={onSelected}></BuyRaffleTicket>}
         {activeModal == "VerifyPayment" && <VerifyPayment onCancel={toggle} onVerify={onVerify}></VerifyPayment>}
         {activeModal == "SelfCheckOut" && <SelfCheckOut onCancel={toggle} onCheckOut={onCheckOut}></SelfCheckOut>}
         {activeModal == "ReviewCheckOut" && <ReviewCheckOut onCancel={toggle} onReview={onReview}></ReviewCheckOut>}
-        {/* {activeModal == "VerifyPayment" && <VerifyPayment onVerify={onVerify}></VerifyPayment>} */}
-      </Dialog>
+        {activeModal == "VerifyPayment" && <VerifyPayment onVerify={onVerify}></VerifyPayment>}
+      </Dialog> */}
       <div className="flex items-center mb-[2.4rem] sidebar:mb-[4.5rem] hdr:mb-[8.4rem] w-full">
         <h1 className="h1 transition-all">{title}</h1>
         <div className="flex flex-wrap ml-auto">
@@ -136,8 +61,7 @@ const Header = ({ title, setActivePage }) => {
             <div className="flex-none hidden items-center ml-auto hdr:flex ">
               <button
                 onClick={() => {
-                  setActiveModal("SelfCheckOut");
-                  setShow(true);
+                  popUpFunctions.initSelfCheckOut();
                 }}
                 className="btn ml-auto !bg-[#F0F0F0]"
               >
@@ -145,8 +69,7 @@ const Header = ({ title, setActivePage }) => {
               </button>
               <button
                 onClick={() => {
-                  setActiveModal("AmountOfTickets");
-                  setShow(true);
+                  popUpFunctions.initBuyRaffleTicket();
                 }}
                 className="btn ml-[1.6rem]"
               >
@@ -202,8 +125,7 @@ const Header = ({ title, setActivePage }) => {
         <div className="flex items-center ml-auto hdr:hidden mb-[2.9rem] sidebar:mb-[4.5rem] overflow-scroll scroll_hide">
           <button
             onClick={() => {
-              setActiveModal("SelfCheckOut");
-              setShow(true);
+              popUpFunctions.initSelfCheckOut();
             }}
             className="btn flex-1 sm:flex-grow-0 ml-auto !bg-[#F0F0F0]"
           >
@@ -211,8 +133,7 @@ const Header = ({ title, setActivePage }) => {
           </button>
           <button
             onClick={() => {
-              setActiveModal("AmountOfTickets");
-              setShow(true);
+              popUpFunctions.initBuyRaffleTicket();
             }}
             className="btn ml-[1.6rem] flex-1 sm:flex-grow-0"
           >

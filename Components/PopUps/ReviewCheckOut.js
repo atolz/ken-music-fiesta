@@ -2,7 +2,7 @@ import React from "react";
 
 import PopupLayout from "../Layout/Popup";
 
-const ReviewCheckOut = ({ onReview, onCancel }) => {
+const ReviewCheckOut = ({ onReview, onCancel, vendor, amount }) => {
   return (
     <PopupLayout cancelAction={onCancel} actionText={"Continue"} action={onReview}>
       <div className="popup-box ">
@@ -15,11 +15,12 @@ const ReviewCheckOut = ({ onReview, onCancel }) => {
           </div>
           <div className=" text-center mb-[2.4rem] flex">
             <span className="f font-semibold text-[1.4rem] text-[#CECECE] leading-[1.7rem] mb-[.4rem] mr-[2.4rem] min-w-[13.8rem] text-left">Vendor Details</span>
-            <h2 className="text-[2.2rem] font-semibold leading-[2.6rem]">The Place, Lekki</h2>
+            <h2 className="text-[2.2rem] font-semibold leading-[2.6rem]">{vendor}</h2>
+            {/* <h2 className="text-[2.2rem] font-semibold leading-[2.6rem]">The Place, Lekki</h2> */}
           </div>
           <div className=" text-center  flex">
             <span className="f font-semibold text-[1.4rem] text-[#CECECE] leading-[1.7rem] mb-[.4rem] mr-[2.4rem] min-w-[13.8rem] text-left">Amount</span>
-            <h2 className="text-[2.2rem] font-semibold leading-[2.6rem]">N5,000</h2>
+            <h2 className="text-[2.2rem] font-semibold leading-[2.6rem]">{amount || "5,000"}</h2>
           </div>
         </div>
       </div>

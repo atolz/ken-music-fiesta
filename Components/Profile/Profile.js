@@ -121,9 +121,10 @@ const Profile = ({ user }) => {
           </div>
           <div className="relative">
             <input onChange={onFileChange} className="hidden " id="upload" type="file" accept="image/*"></input>
-            <Avatar ref={imageRef} sx={{ width: 145, height: 145, bgcolor: "orange" }} alt="Remy Sharp" src={`${baseURL}${user?.avatar}`}>
+            <Avatar ref={imageRef} sx={{ width: 145, height: 145, bgcolor: "orange" }} alt="Remy Sharp" src={`${user?.avatar}`}>
               <span className=" !text-[3rem] font-semibold"> {user?.firstName[0]}</span>
             </Avatar>
+            {/* <img src={`${user?.avatar}`}></img> */}
 
             <label htmlFor="upload" className="absolute bottom-8 right-0 !grid h-[2.9rem] w-[2.9rem] place-items-center bg-[#FFF6E4] rounded-full cursor-pointer !mb-[0]">
               <img src="/edit-pen.svg"></img>

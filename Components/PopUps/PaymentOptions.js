@@ -39,7 +39,7 @@ const PaymentOptions = ({ onSelectPayOption, onCancel }) => {
                   fill="#011B33"
                 />
               </svg>
-              <Radio checked={selectedValue === "paystack"} onChange={handleChange} value="paystack" name="radio-buttons" inputProps={{ "aria-label": "paystack" }} />
+              <Radio checked={selectedValue === "PAYSTACK"} onChange={handleChange} value="PAYSTACK" name="radio-buttons" inputProps={{ "aria-label": "paystack" }} />
             </div>
             <div className="rounded-[2rem] flex-grow bg-white px-[4.1rem] py-[4.7rem] flex items-center justify-between default-shadow">
               {/* <img className="mr-[1rem] w-[19.2rem]" src="/flutterwave.svg" /> */}
