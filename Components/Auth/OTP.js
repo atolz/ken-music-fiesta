@@ -14,6 +14,7 @@ const OTP = ({ action }) => {
   const [otpVal, setOtpVal] = useState("");
   const [otp, setOtp] = useState([]);
   const [uuid, setUuid] = useState("");
+  const [verificationType, setVerificationType] = useState("");
   const [showStatus, setShowStatus] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -27,7 +28,9 @@ const OTP = ({ action }) => {
   useEffect(() => {
     if (!router.isReady) return;
     console.log(router.query.uuid);
+    console.log(router.query.type);
     setUuid(router.query.uuid);
+    setVerificationType(router.query.type);
   }, [router.isReady]);
 
   const onVerify = async () => {
@@ -38,7 +41,12 @@ const OTP = ({ action }) => {
       const response = await baseInstanceAPI.post("account/verify-otp", JSON.stringify(data));
       console.log(response);
       toggleAlertBar("OTP verified successfully!", "success", true);
-      router.push(`/auth/create-account/${response.data.verifiedToken}`);
+      if (verificationType == "registration") {
+        router.push(`/auth/create-account/${response.data.verifiedToken}`);
+      }
+      if (verificationType == "reset-password") {
+        router.push(`/auth/reset-password/${response.data.verifiedToken}`);
+      }
     } catch (error) {
       if (!error.response) {
         console.log("No response from the servver");

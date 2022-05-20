@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import GotMail from "../../Components/Auth/GotMail";
+import { baseInstanceAPI } from "../../axios";
+import useLoading from "../../hooks/useLoading";
 
-const forgotPassword = () => {
+const ForgotPassword = () => {
+  const [gotMail, setGotMail] = useState(false);
+  const emailRef = useRef(null);
+  const [emailError, setEmailError] = useState("");
+  const { toggleLoad } = useLoading();
+
+  const onRequestResetPassword = async () => {
+    toggleLoad();
+    try {
+      const response = await baseInstanceAPI.post("/account/request-password-reset", {
+        email: emailRef.current.value,
+      });
+      console.log("response is", response);
+      setGotMail(true);
+    } catch (error) {
+      setEmailError("Pls enter a valid email");
+    }
+    toggleLoad();
+  };
   return (
     <div className=" w-full h-screen bg-flare bg-no-repeat bg-cover overflow-y-auto">
       <header className="flex items-center px-[12.5rem] py-[5.6rem]">
@@ -11,24 +31,41 @@ const forgotPassword = () => {
         <button className="btn btn--outlined text-white ml-[2.4rem]">Verify Ticket</button>
       </header>
       <main>
-        <div className="auth-container !mb-[10rem]">
-          <form className="auth-form">
-            <h3>Forgot Password</h3>
-            <p className="mb-[7.4rem]">Hey there! Having issues with your account? Don’t worry we have the spare key for you.</p>
+        {!gotMail && (
+          <div className="auth-container !mb-[10rem]">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                onRequestResetPassword();
+              }}
+              className="auth-form"
+            >
+              <h3>Forgot Password</h3>
+              <p className="mb-[3.4rem]">Hey there! Having issues with your account? Don’t worry we have the spare key for you.</p>
 
-            <div className="grid grid-cols-2 gap-5 gap-y-[2.4rem]">
-              <div className="form-group col-span-2">
-                <label>Username or Phone Number</label>
-                <input placeholder="Ex. Jonathan" />
+              {emailError && <p className=" !text-[1.4rem] !text-red-500">*{emailError}</p>}
+              <div className="grid grid-cols-2 gap-5 gap-y-[2.4rem]">
+                <div className="form-group col-span-2">
+                  <label>Email</label>
+                  <input
+                    onChange={() => {
+                      setEmailError("");
+                    }}
+                    ref={emailRef}
+                    required
+                    type="email"
+                    placeholder="Ex. Jonathan@gmail.com"
+                  />
+                </div>
+                <button className="btn col-span-2 mt-[3.4rem]">Continue</button>
               </div>
-              <button className="btn col-span-2 mt-[6.8rem]">Continue</button>
-            </div>
-          </form>
-        </div>
-        {/* <GotMail></GotMail> */}
+            </form>
+          </div>
+        )}
+        {gotMail && <GotMail></GotMail>}
       </main>
     </div>
   );
 };
 
-export default forgotPassword;
+export default ForgotPassword;

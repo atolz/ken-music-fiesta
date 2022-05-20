@@ -150,9 +150,13 @@ const SignIn = () => {
                 />
               </svg>
             </div>
+
+            <Link href="/auth/forgot-password">
+              <p className=" mt-[1.6rem] font-medium text-[1.6rem] cursor-pointer">Forgot Password?</p>
+            </Link>
           </div>
 
-          <button className="btn col-span-2 mt-[3.8rem]">Log In</button>
+          <button className="btn col-span-2 mt-[1.8rem]">Log In</button>
         </div>
       </form>
     </div>
