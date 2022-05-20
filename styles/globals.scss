@@ -31,6 +31,12 @@ html {
 
 @media (min-width: 940px) {
   html {
+    font-size: 49%;
+  }
+}
+
+@media (min-width: 1600px) {
+  html {
     font-size: 58%;
   }
 }
