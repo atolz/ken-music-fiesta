@@ -149,6 +149,7 @@ export const PopUpContextProvider = ({ children }) => {
       );
       console.log("response is", resp.data.redirectUrl);
       router.push(resp.data.redirectUrl);
+      toggleLoad();
     } catch (error) {
       console.log("AN error has occured pls try again laters", error);
       toggleLoad();
@@ -193,6 +194,7 @@ export const PopUpContextProvider = ({ children }) => {
       );
       console.log("response is", resp.data.redirectUrl);
       router.push(resp.data.redirectUrl);
+      toggleLoad();
     } catch (error) {
       console.log("AN error has occured pls try again laters", error.response);
       toggleLoad();
