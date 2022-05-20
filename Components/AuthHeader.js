@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
+import { popUpContext } from "../Context/PopUps";
 
 const Container = ({ children }) => {
   return <div className="max-w-[182rem] mx-auto w-full px-[2rem] sidebar:px-[10rem] flex items-center">{children}</div>;
@@ -7,6 +8,7 @@ const Container = ({ children }) => {
 
 const AuthHeader = () => {
   const [show, setShow] = useState(false);
+  const popUpFunctions = useContext(popUpContext);
   return (
     // <header className="flex items-center px-[12.5rem] py-[2.6rem] fixed top-0 left-0 w-full z-10">
     //   <Link href={"/"}>
@@ -26,7 +28,14 @@ const AuthHeader = () => {
         </Link>
         {/* Desktop Nav */}
         <div className="items-center hidden sidebar:flex ">
-          <button className="btn ml-auto">Buy Event Ticket</button>
+          <button
+            onClick={() => {
+              popUpFunctions.initBuyTicket();
+            }}
+            className="btn ml-auto"
+          >
+            Buy Event Ticket
+          </button>
           <Link href={"/auth/sign-up"}>
             <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign Up</button>
           </Link>
@@ -62,7 +71,14 @@ const AuthHeader = () => {
           <Link href={"/auth/sign-up"}>
             <button className="btn btn--outlined text-white !px-[6rem] mb-[2.4rem]">Sign Up</button>
           </Link>
-          <button className="btn ">Buy Event Ticket</button>
+          <button
+            onClick={() => {
+              popUpFunctions.initBuyTicket();
+            }}
+            className="btn "
+          >
+            Buy Event Ticket
+          </button>
         </div>
       </Container>
     </header>
