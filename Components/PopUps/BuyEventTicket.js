@@ -29,7 +29,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel }) => {
       >
         <div className="popup-box">
           <h3>Buy Event Ticket</h3>
-          <p className="!mb-[3.7rem]">
+          <p className="!mb-[2.3rem]">
             Event tickets are sold at <span className=" font-bold !text-[#827F7F]">#500</span> per ticket. There is no discount for multiple ticket purchases.
           </p>
 
