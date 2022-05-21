@@ -34,9 +34,11 @@ const LandPageLayout = ({ children }) => {
               </Link>
               {/* Desktop Nav */}
               <div className="items-center hidden sidebar:flex ">
-                {/* <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
-                  BRANDS
-                </a> */}
+                <Link href={"/brands"}>
+                  <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
+                    BRANDS
+                  </a>
+                </Link>
                 <Link href={"/artistes"}>
                   <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
                     ARTISTES
@@ -88,15 +90,17 @@ const LandPageLayout = ({ children }) => {
                   <span className="w-[2.5rem] bg-black h-[.5rem] flex rotate-45 relative top-1/2"></span>
                   <span className="w-[2.5rem] bg-black h-[.5rem] flex -rotate-45 relative bottom-1/2"></span>
                 </button>
-                <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mb-[6.4rem]">
-                  BRANDS
-                </a>
-                <Link href={"/artists"}>
+                <Link href={"/brands"}>
                   <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mb-[6.4rem]">
-                    ARTISTS
+                    BRANDS
                   </a>
                 </Link>
-                <Link href={"/catalogue"}>
+                <Link href={"/artistes"}>
+                  <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mb-[6.4rem]">
+                    ARTISTES
+                  </a>
+                </Link>
+                <Link href={"/catalogues"}>
                   <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mb-[6.4rem]">
                     CATALOGUES
                   </a>
