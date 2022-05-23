@@ -82,7 +82,7 @@ const Activate = () => {
           )}
           {visible && <CountDown completed={<h2 className="text-[2.8rem] font-bold leading-[3.4rem] mb-[1.2rem] mr-[18rem] mt-[2rem]">Timer completed</h2>}></CountDown>} */}
 
-          <img src="/3d-hand-card.png" className="absolute bottom-0 right-0 2xl:h-[311px] mobile:h-[25rem] h-[19rem]"></img>
+          <img src="/3d-hand-card.png" className="absolute bottom-0 right-0 2xl:h-[311px] mobile:h-[25rem] h-[19rem] slide-up-now-opacity"></img>
         </div>
       </div>
     </>

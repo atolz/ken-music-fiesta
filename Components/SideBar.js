@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Link from "next/link";
+import { popUpContext } from "../Context/PopUps";
 
 const SideBar = ({ activePage, setActivePage }) => {
   const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Livestream Event"];
@@ -8,6 +9,7 @@ const SideBar = ({ activePage, setActivePage }) => {
   const icons = ["Dashboard", "Raffle-Tickets", "Rewards", "Livestream-Event"];
   const adminIcons = ["Wallet", "Wallet", "Crown", "Graph", "Users", "Settings"];
   const [admin, setIsAdmin] = useState(false);
+  const popUpFunctions = useContext(popUpContext);
   // const [active, setActive] = useState("Dashboard");
 
   const router = useRouter();
@@ -84,7 +86,16 @@ const SideBar = ({ activePage, setActivePage }) => {
               );
             })}
         </ul>
-        {!router.route.includes("admin") && <button className="btn btn--outlined mt-auto mb-[57px]">Buy Reward Ticket</button>}
+        {!router.route.includes("admin") && (
+          <button
+            onClick={() => {
+              popUpFunctions.initBuyRaffleTicket();
+            }}
+            className="btn btn--outlined mt-auto mb-[57px]"
+          >
+            Buy Raffle Ticket
+          </button>
+        )}
       </div>
 
       {/* Mobile Nav */}

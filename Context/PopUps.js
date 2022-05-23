@@ -13,19 +13,20 @@ import useShowAlert from "../hooks/useShowAlert";
 import BuyRaffleTicket from "../Components/PopUps/BuyRaffleTicket";
 import VerifyPayment from "../Components/PopUps/VerifyPayment";
 import SelectCardType from "../Components/PopUps/SelectCardType";
+import ChangePassword from "../Components/PopUps/ChangePassword";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
   initBuyRaffleTicket: () => {},
+  initChangePassword: () => {},
   initBuyTicket: () => {},
   onBuyTicket: () => {},
   onCheckOut: () => {},
   onReview: () => {},
   onSelectPayOption: () => {},
-  toggle: function toggle() {
-    console.log("toggleing...");
-    showPopUp ? setShowPopUp(false) : setShowPopUp(true);
-  },
+  toggle: () => {},
+  closeModal: () => {},
+  // test: "",
 };
 export const popUpContext = createContext(pouUpContextFunctions);
 
@@ -51,6 +52,7 @@ export const PopUpContextProvider = ({ children }) => {
     initBuyRaffleTicket: initBuyRaffleTicket,
     onBuyTicket: onBuyTicket,
     initSelfCheckOut: initSelfCheckOut,
+    initChangePassword: initChangePassword,
     initBuyTicket: initBuyTicket,
     onCheckOut: onCheckOut,
 
@@ -58,6 +60,8 @@ export const PopUpContextProvider = ({ children }) => {
 
     onSelectPayOption: onSelectPayOption,
     toggle: toggle,
+    closeModal: closeModal,
+    test: "activeModal",
   };
 
   function initBuyTicket() {
@@ -82,6 +86,12 @@ export const PopUpContextProvider = ({ children }) => {
     setPurpose("SelfCheckout");
     toggle();
     setActiveModal("SelfCheckOut");
+  }
+
+  function initChangePassword() {
+    setActiveModal("ChangePassword");
+    toggle();
+    console.log("change pass called");
   }
 
   function onBuyTicket(quantity, type) {
@@ -204,8 +214,13 @@ export const PopUpContextProvider = ({ children }) => {
   }
 
   function toggle() {
-    console.log("toggleing...");
+    console.log("toggleing...", showPopUp);
     showPopUp ? setShowPopUp(false) : setShowPopUp(true);
+  }
+
+  function closeModal() {
+    console.log("closing popup...", showPopUp);
+    setShowPopUp(false);
   }
 
   useEffect(() => {
@@ -231,6 +246,15 @@ export const PopUpContextProvider = ({ children }) => {
         {activeModal == "ReviewCheckOut" && <ReviewCheckOut amount={checkAmount} vendor={vendor} onCancel={toggle} onReview={onReview}></ReviewCheckOut>}
         {activeModal == "SelectCardType" && <SelectCardType onCancel={toggle} onSelectCardType={onSelectCardType}></SelectCardType>}
         {activeModal == "VerifyPayment" && <VerifyPayment onCancel={toggle} onVerify={onVerify}></VerifyPayment>}
+        {activeModal == "ChangePassword" && (
+          <ChangePassword
+            toggleModal={toggle}
+            // onCancel={() => {
+            //   // console.log("should toggleChange password");
+            //   toggle();
+            // }}
+          ></ChangePassword>
+        )}
       </Dialog>
       <popUpContext.Provider value={pouUpContextFunctions}>{children}</popUpContext.Provider>
     </>

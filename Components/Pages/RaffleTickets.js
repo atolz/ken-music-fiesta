@@ -17,7 +17,7 @@ const RaffleTickets = (props) => {
               <p className="mb-[.8rem] font-semibold text-[1.2rem] leading-[1.43rem] text-[#717171] whitespace-nowrap">Total Number of Raffle Tickets</p>
               <h2 className="f font-bold text-[2.8rem] leading-[3.4rem]  w-[12.6rem]">15 Raffle Tickets</h2>
               {/* <button className="btn btn--outlined !border-[black] mt-[5.6rem] mr-[17.5rem]">View Tickets</button> */}
-              <img className="absolute bottom-0 right-[1.7rem] w-[10.7rem] xl:w-[40%] mobile:w-[14.7rem] object-cover" src="/3d-ticket.svg"></img>
+              <img style={{ animationDelay: "1s" }} className="absolute bottom-0 right-[1.7rem] w-[10.7rem] xl:w-[40%] mobile:w-[14.7rem] object-cover slide-up-now-opacity" src="/3d-ticket.svg"></img>
             </div>
 
             {/* Merchannt Ticket Purchase */}
@@ -51,12 +51,12 @@ const RaffleTickets = (props) => {
           </div>
           <div className="flex gap-10 flex-wrap">
             <div className={`flex-1 px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-white relative min-w-[30.5rem] border-[#CECCCC] border`}>
-              <img className="absolute right-[2.6rem] bottom-0 w-[93px]" src="/3d-tickets-used.svg"></img>
+              <img style={{ animationDelay: ".8s" }} className="absolute right-[2.6rem] bottom-0 w-[93px] slide-up-now-opacity" src="/3d-tickets-used.svg"></img>
               <h3 className="h3 mb-[.4rem] mr-[11.0rem]">5 Used</h3>
               <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold relative">Total Number of Tickets Used</p>
             </div>
             <div className={`flex-1 px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-white relative min-w-[30.5rem] border-[#CECCCC] border`}>
-              <img className="absolute right-[.8rem] bottom-0 w-[93px] w-[12.9rem]" src="/3d-trophy.svg"></img>
+              <img className="absolute right-[.8rem] bottom-0 w-[93px] w-[12.9rem] slide-up-now-opacity" src="/3d-trophy.svg"></img>
               <h3 className="h3 mb-[.4rem] mr-[11.0rem] !text-[#FCAC0D] whitespace-nowrap">2 Tickets Won</h3>
               <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold relative">Total Number of Tickets Used</p>
             </div>
@@ -71,7 +71,7 @@ const RaffleTickets = (props) => {
               The next raffle draw will happen on <span className="text-[#717171] font-bold">20 April, 2022.</span> Do well to buy your raffle tickets or purchase from our merchants to stand a chance
               to win amazing rewards
             </p>
-            <img src="/3d-hand-point.svg" className="absolute bottom-0 right-0"></img>
+            <img src="/3d-hand-point.svg" className="absolute bottom-0 right-0 slide-up-now-opacity"></img>
           </div>
         </section>
         {/* Section 2 */}
