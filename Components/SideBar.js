@@ -6,9 +6,11 @@ import { popUpContext } from "../Context/PopUps";
 const SideBar = ({ activePage, setActivePage }) => {
   const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Livestream Event"];
   const adminPages = ["Raffle Draws", "Cards", "Events", "Transactions", "Users", "Settings"];
+  const cataloguePages = ["Dashboard", "Catalogue"];
   const icons = ["Dashboard", "Raffle-Tickets", "Rewards", "Livestream-Event"];
   const adminIcons = ["Wallet", "Wallet", "Crown", "Graph", "Users", "Settings"];
   const [admin, setIsAdmin] = useState(false);
+  const [section, setSection] = useState("");
   const popUpFunctions = useContext(popUpContext);
   // const [active, setActive] = useState("Dashboard");
 
@@ -16,8 +18,14 @@ const SideBar = ({ activePage, setActivePage }) => {
   useEffect(() => {
     if (router.route.includes("admin")) {
       setIsAdmin(true);
+      setSection("admin");
       setActivePage("Cards");
+      console.log("settign ad moin and card");
+    } else if (router.route.includes("catalogue")) {
+      setSection("catalogue");
+      setActivePage("Dashboard");
     } else {
+      setSection("base");
       setActivePage("Dashboard");
     }
     console.log("router query is", router);
@@ -29,7 +37,9 @@ const SideBar = ({ activePage, setActivePage }) => {
           <img src="/kef-logo.svg" className="mb-[5.1rem] w-[11.3rem] mx-auto cursor-pointer"></img>
         </Link>
         <ul className="bg-r whitespace-nowrap">
+          {/* Base Page Sidebar Items */}
           {!admin &&
+            section == "base" &&
             pages.map((page, i) => {
               return (
                 <li
@@ -58,7 +68,10 @@ const SideBar = ({ activePage, setActivePage }) => {
                 </li>
               );
             })}
+
+          {/* Admin Sidebar Items */}
           {admin &&
+            section == "admin" &&
             adminPages.map((page, i) => {
               return (
                 <li
@@ -85,7 +98,46 @@ const SideBar = ({ activePage, setActivePage }) => {
                 </li>
               );
             })}
+
+          {/* Cataglogue Sidbar Items */}
+          {!admin &&
+            section == "catalogue" &&
+            cataloguePages.map((page, i) => {
+              return (
+                <li
+                  className="flex items-center mb-[4.2rem] cursor-pointer"
+                  key={i}
+                  onClick={() => {
+                    setActivePage(page);
+                  }}
+                >
+                  {/* Dot */}
+                  <div
+                    className={`transition-all duration-200 w-[1rem] h-[1rem] rounded-full bg-[#FCAC0D] mr-[2.6rem] opacity-0 ${page == activePage ? " opacity-100" : ""} 
+                 ${page == "Dashboard" && activePage == "Profile" ? " opacity-100" : ""}`}
+                  ></div>
+
+                  {/* Icon */}
+                  <i
+                    className={`icon icon-${icons[i]} mr-[1.7rem] text-[1.8rem] ${icons[i] == "Dashboard" ? " text-[2.8rem]" : ""}  ${page == activePage ? "  text-[#FCAC0D]" : ""}
+                  ${page == "Dashboard" && activePage == "Profile" ? " !text-[#FCAC0D]" : ""}`}
+                  ></i>
+
+                  {/* Page text */}
+                  <span
+                    className={`transition-all duration-200 font-normal text-[1.6rem] text-ellipsis overflow-hidden w-[160px]  ${
+                      page == activePage ? " text-[#FCAC0D] !font-bold text-[2rem]" : "text-white"
+                    }  
+                  ${page == "Dashboard" && activePage == "Profile" ? " !text-[#FCAC0D] !font-bold text-[2rem]" : ""}`}
+                  >
+                    {page}
+                  </span>
+                </li>
+              );
+            })}
         </ul>
+
+        {/* Buy Raffle Ticket */}
         {!router.route.includes("admin") && (
           <button
             onClick={() => {

@@ -7,7 +7,7 @@ import SideBar from "../SideBar";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getMessage, getStatus, toggleSnackbar } from "../../store/snackbar";
-import { getUser, login } from "../../store/user";
+import { getUser, login, setDashboardHistory } from "../../store/user";
 import { getPage } from "../../store/pages";
 import { setActivePage as setGlobalPage } from "../../store/pages";
 import { setUser as setUserRedux } from "../../store/user";
@@ -50,9 +50,9 @@ const BaseLayout = ({ children }) => {
           },
         });
         console.log("Raffle history data is... ", historyData.data);
-        // dispatch(setUserRedux(userResp.data));
+        dispatch(setDashboardHistory(historyData.data));
       } catch (error) {
-        console.log("Error loadin user extra data", error);
+        console.log("Error loadin user extra data: History Data", error);
       }
     };
     console.log("is logged in useEffect", isLoggedIn());

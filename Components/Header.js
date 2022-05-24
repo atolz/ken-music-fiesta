@@ -31,12 +31,25 @@ const Header = ({ title, setActivePage }) => {
   const user = useSelector(getUser);
   const baseURL = process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
   const popUpFunctions = useContext(popUpContext);
+  const [section, setSection] = useState("");
 
   function onLogOut() {
     logOut();
     router.replace("/auth/sign-in");
     dispatch(toggleAlert("success", "Logged Out successfully!", true));
   }
+
+  useEffect(() => {
+    if (router.route.includes("admin")) {
+      // setIsAdmin(true);
+      setSection("admin");
+    } else if (router.route.includes("catalogues")) {
+      setSection("catalogue");
+    } else {
+      setSection("base");
+    }
+    console.log("router query is", router);
+  }, [router.route]);
 
   return (
     <>
@@ -57,7 +70,7 @@ const Header = ({ title, setActivePage }) => {
         <h1 className="h1 transition-all">{title}</h1>
         <div className="flex flex-wrap ml-auto">
           {/* Buttons */}
-          {!router.route.includes("admin") && (
+          {section == "base" && (
             <div className="flex-none hidden items-center ml-auto hdr:flex ">
               <button
                 onClick={() => {
@@ -74,6 +87,15 @@ const Header = ({ title, setActivePage }) => {
                 className="btn ml-[1.6rem]"
               >
                 Buy Raffle Ticket
+              </button>
+            </div>
+          )}
+
+          {/* Catalogue Header Buttons */}
+          {section == "catalogue" && (
+            <div className="flex-none hidden items-center ml-auto hdr:flex ">
+              <button onClick={() => {}} className="btn ml-[1.6rem] ml-auto">
+                Create Cataglogue
               </button>
             </div>
           )}
@@ -121,7 +143,8 @@ const Header = ({ title, setActivePage }) => {
         </div>
       </div>
 
-      {!router.route.includes("admin") && (
+      {/* Base Break point */}
+      {section == "base" && (
         <div className="flex items-center ml-auto hdr:hidden mb-[2.9rem] sidebar:mb-[4.5rem] overflow-scroll scroll_hide">
           <button
             onClick={() => {
@@ -137,7 +160,16 @@ const Header = ({ title, setActivePage }) => {
             }}
             className="btn ml-[1.6rem] flex-1 sm:flex-grow-0"
           >
-            Buy Raffle Ticket
+            Buy Raffle Ticket...
+          </button>
+        </div>
+      )}
+
+      {/* Catalogue Section Header buttons::: Break point */}
+      {section == "catalogue" && (
+        <div className="flex items-center ml-auto hdr:hidden mb-[2.9rem] sidebar:mb-[4.5rem] overflow-scroll scroll_hide">
+          <button onClick={() => {}} className="btn ml-[auto] flex-1 sm:flex-grow-0">
+            Create Cataglogue
           </button>
         </div>
       )}
