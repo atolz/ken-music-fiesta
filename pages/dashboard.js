@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -14,45 +14,31 @@ import LiveStream from "../Components/Pages/LiveStream";
 import Profile from "../Components/Pages/Profile";
 import BaseLayout from "../Components/Layout";
 
-// import Button from "@mui/material/Button";
-// import Snackbar from "@mui/material/Snackbar";
-// import IconButton from "@mui/material/IconButton";
-// import CloseIcon from "@mui/icons-material/Close";
-
 import { useSelector } from "react-redux";
 // import { getMessage, getStatus, toggleSnackbar } from "../store/snackbar";
 // import { login } from "../store/user";
 import { getPage } from "../store/pages";
 import LandingPage from "../Components/Pages/LandingPage";
+import useLocalStorage from "../hooks/useLocalStorage";
+import { DataContext } from "../Context/fetchData";
+import App from "next/app";
 // import { setActivePage as setGlobalPage } from "../store/pages";
 // import UseIsLoggedIn from "../hooks/useIsLoggedIn";
 
 export default function Home() {
-  // const [activePage, setActivePage] = useState("Dashboard");
   const activePage = useSelector(getPage);
-  // const isLoggedIn = UseIsLoggedIn();
-  // const open = useSelector(getStatus);
-  // const snbMsg = useSelector(getMessage);
-  // const dispatch = useDispatch();
-  // const router = useRouter();
+  const { getLocalStorage } = useLocalStorage();
+  const router = useRouter();
+  const AppData = useContext(DataContext);
+  // const user = AppData.user.data;
+  // const dashboardHistory = AppData.user.dashboardHistory;
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     router.push("/auth/sign-up");
-  //   }
-  // }, []);
-
-  // const setActivePage = (page) => {
-  //   dispatch(setGlobalPage(page));
-  // };
-
-  // const handleClose = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   dispatch(toggleSnackbar({ open: false }));
-  //   // setOpen(false);
-  // };
+  useEffect(() => {
+    router.prefetch("/auth/sign-in");
+    if (getLocalStorage("section") != "User") {
+      router.replace("/auth/sign-in");
+    }
+  }, []);
 
   return (
     <>
@@ -62,11 +48,11 @@ export default function Home() {
       <LiveStream className={` transition-all ease-in ${activePage == "Livestream Event" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></LiveStream> */}
       {/* <Profile className={` transition-all ease-in ${activePage == "Profile" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></Profile> */}
       {/* {activePage == "Profile" && <Profile></Profile>} */}
-      {activePage == "Dashboard" && <Dashboard></Dashboard>}
-      {activePage == "Raffle Tickets" && <RaffleTickets></RaffleTickets>}
-      {activePage == "Rewards" && <Rewards></Rewards>}
-      {activePage == "Livestream Event" && <LiveStream></LiveStream>}
-      {activePage == "Profile" && <Profile></Profile>}
+      {activePage == "Dashboard" && <Dashboard appData={AppData}></Dashboard>}
+      {activePage == "Raffle Tickets" && <RaffleTickets appData={AppData}></RaffleTickets>}
+      {activePage == "Rewards" && <Rewards appData={AppData}></Rewards>}
+      {activePage == "Livestream Event" && <LiveStream AppData={AppData}></LiveStream>}
+      {activePage == "Profile" && <Profile appData={AppData}></Profile>}
       {/* {activePage == "Transactions" && <Transactions></Transactions>} */}
       {/* {activePage == "Landing" && <LandingPage></LandingPage>} */}
     </>

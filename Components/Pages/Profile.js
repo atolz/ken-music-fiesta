@@ -9,7 +9,6 @@ import Security from "../Profile/Security";
 const Profile = (props) => {
   const [active, setActive] = useState("Profile");
   const navs = ["Profile", "Security", "Bank Details"];
-  const user = useSelector(getUser);
 
   return (
     <div {...props}>
@@ -32,7 +31,7 @@ const Profile = (props) => {
       </nav>
       <form className="profile-form pt-[6.4rem] pb-[4.3rem] sidebar:pl-[8.1rem] sidebar:pr-[6.3rem] px-[2.5rem] rounded-[2rem] border border-[#D0CCCC] max-w-[81.2rem] min-h-[57.4rem] relative flex flex-col">
         {/* Profile */}
-        {active == "Profile" && <MyProfile user={user}></MyProfile>}
+        {active == "Profile" && <MyProfile user={props.appData.user.data}></MyProfile>}
         {active == "Security" && <Security></Security>}
         {active == "Bank Details" && <ActDetails></ActDetails>}
         {/* <button className="btn ml-auto !bg-[#F0F0F0] relative mt-auto">Save Changes</button> */}

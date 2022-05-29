@@ -41,13 +41,13 @@
 
 // Utils
 .scroll_hide::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
 
 .scroll_hide {
-  -ms-overflow-style: none;
+  -ms-overflow-style: none !important;
   /* IE and Edge */
-  scrollbar-width: none;
+  scrollbar-width: none !important;
   /* Firefox */
 }
 
@@ -206,7 +206,7 @@
 .MuiModal-root .MuiDialog-container .MuiPaper-root {
   margin: 16px !important;
   // max-height: fit-content;
-  max-height: 88vh;
+  // max-height: 88vh;
 
   -ms-overflow-style: none;
   /* IE and Edge */

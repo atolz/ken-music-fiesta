@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import LandPageLayout from "../../Components/Layout/LandPageLayout";
 import MusicPlayer from "../../Components/Pages/MusicPlayer";
 import MusicPlayer2 from "../../Components/Pages/MusicPlayer2";
+import { DataContext } from "../../Context/fetchData";
+import MusicPlayerV2 from "../../Components/Pages/MusicPlayer-v2";
 
 const Container = ({ children, twStyles }) => {
   return <div className={`max-w-[182rem] mx-auto w-full px-[2.2rem] table:px-[10rem] ${twStyles}`}>{children}</div>;
 };
 
 const Details = () => {
+  const { artistes } = useContext(DataContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log("object hash is in ID...", artistes.hash);
+  }, [router, artistes.hash]);
   return (
     <div className="grow-0 shrink  scroll_hide mt-auto">
       <div className="bg-black w-full overflow-scroll  max-h-[70vh]  rounded-tl-[3rem] rounded-tr-[3rem] pt-[7.2rem] slide-up-now-opacity scroll_hide">
@@ -20,7 +29,9 @@ const Details = () => {
           </div>
           <section className="flex-1">
             <div className="flex flex-wrap mb-[4.9rem] items-center justify-between">
-              <h2 className="text-white font-bold text-[5rem] whitespace-nowrap mr-8">01. Artiste</h2>
+              <h2 className="text-white font-bold text-[5rem] whitespace-nowrap mr-8">
+                0{parseInt(router?.query?.id)}. {artistes?.hash[router?.query?.id]?.artistName}
+              </h2>
               <Link href={"/catalogues/2"}>
                 <button className="btn btn--outlined text-white  !inline-flex">View Catalogue</button>
               </Link>
@@ -40,6 +51,7 @@ const Details = () => {
             {/* Stream Artist Music */}
             <div className=" hidden sidebar:block">
               <MusicPlayer></MusicPlayer>
+              {/* <MusicPlayerV2 title={"Stream Artiste Music"}></MusicPlayerV2> */}
             </div>
             <div className=" block sidebar:hidden">
               <MusicPlayer2></MusicPlayer2>

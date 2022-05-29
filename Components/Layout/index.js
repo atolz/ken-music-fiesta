@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Snackbar from "@mui/material/Snackbar";
@@ -16,8 +16,16 @@ import useIsLoggedIn from "../../hooks/useIsLoggedIn";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import Container from "./Container";
 import { baseInstanceAPI } from "../../axios";
+import { DataContext } from "../../Context/fetchData";
+import UserSideBar from "../SideBars/User";
+import AdminSideBar from "../SideBars/Admin";
+import ArtisteSideBar from "../SideBars/Artiste";
+import UserHeader from "../Headers/User";
+import ArtisteHeader from "../Headers/Artiste";
+import AdminHeader from "../Headers/Admin";
 
 const BaseLayout = ({ children }) => {
+  const AppData = useContext(DataContext);
   const activePage = useSelector(getPage);
   const { isLoggedIn, getLocalStorage } = useLocalStorage();
   const user = useSelector(getUser);
@@ -27,41 +35,41 @@ const BaseLayout = ({ children }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // User profile details
-      try {
-        const userResp = await baseInstanceAPI.get("/profile/dashboard", {
-          headers: {
-            Authorization: `Bearer ${getLocalStorage("token")}`,
-          },
-        });
-        console.log("user is in layount ", userResp.data);
-        dispatch(setUserRedux(userResp.data));
-      } catch (error) {
-        console.log("Error loadin user extra data", error);
-      }
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     // User profile details
+  //     try {
+  //       const userResp = await baseInstanceAPI.get("/profile/dashboard", {
+  //         headers: {
+  //           Authorization: `Bearer ${getLocalStorage("token")}`,
+  //         },
+  //       });
+  //       console.log("user is in layount ", userResp.data);
+  //       dispatch(setUserRedux(userResp.data));
+  //     } catch (error) {
+  //       console.log("Error loadin user extra data", error);
+  //     }
 
-      // Raffle History
-      try {
-        const historyData = await baseInstanceAPI.get("/ticket/get-raffle-history", {
-          headers: {
-            Authorization: `Bearer ${getLocalStorage("token")}`,
-          },
-        });
-        console.log("Raffle history data is... ", historyData.data);
-        dispatch(setDashboardHistory(historyData.data));
-      } catch (error) {
-        console.log("Error loadin user extra data: History Data", error);
-      }
-    };
-    console.log("is logged in useEffect", isLoggedIn());
-    if (!isLoggedIn()) {
-      router.push("/auth/sign-up");
-    } else if (!user) {
-      fetchData();
-    }
-  }, []);
+  //     // Raffle History
+  //     try {
+  //       const historyData = await baseInstanceAPI.get("/ticket/get-raffle-history", {
+  //         headers: {
+  //           Authorization: `Bearer ${getLocalStorage("token")}`,
+  //         },
+  //       });
+  //       console.log("Raffle history data is... ", historyData.data);
+  //       dispatch(setDashboardHistory(historyData.data));
+  //     } catch (error) {
+  //       console.log("Error loadin user extra data: History Data", error);
+  //     }
+  //   };
+  //   console.log("is logged in useEffect", isLoggedIn());
+  //   if (!isLoggedIn()) {
+  //     router.push("/auth/sign-up");
+  //   } else if (!user) {
+  //     fetchData();
+  //   }
+  // }, []);
 
   const setActivePage = (page) => {
     dispatch(setGlobalPage(page));
@@ -83,12 +91,18 @@ const BaseLayout = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       </Head>
-      <SideBar activePage={activePage} setActivePage={setActivePage} />
+      {AppData.section == "User" && <UserSideBar activePage={activePage} setActivePage={setActivePage}></UserSideBar>}
+      {AppData.section == "Artiste" && <ArtisteSideBar activePage={activePage} setActivePage={setActivePage}></ArtisteSideBar>}
+      {AppData.section == "Admin" && <AdminSideBar activePage={activePage} setActivePage={setActivePage}></AdminSideBar>}
+      {/* <SideBar activePage={activePage} setActivePage={setActivePage} /> */}
       <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "right" }} open={isopen} autoHideDuration={6000} onClose={handleClose} message={snbMsg} />
       <main className={"bg-[#FBFAFA] h-full flex-grow px-[2.2rem] !pb-[11.4rem] sidebar:pb-[5.2rem] sidebar:px-[5.2rem] py-[1.4rem]  sidebar:py-[4.4rem] overflow-y-scroll scroll_hide"}>
         <Container>
           {" "}
-          <Header title={activePage} setActivePage={setActivePage}></Header>
+          {AppData.section == "User" && <UserHeader title={activePage} setActivePage={setActivePage}></UserHeader>}
+          {AppData.section == "Artiste" && <ArtisteHeader title={activePage} setActivePage={setActivePage}></ArtisteHeader>}
+          {AppData.section == "Admin" && <AdminHeader title={activePage} setActivePage={setActivePage}></AdminHeader>}
+          {/* <Header title={activePage} setActivePage={setActivePage}></Header> */}
           {children}
         </Container>
         {/* <div className="w-full h-full grid place-items-center text-3xl">🚧 Under Construction...</div> */}

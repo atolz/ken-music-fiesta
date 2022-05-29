@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Progress from "../Cards/Progress";
 import Activate from "../Cards/Activate";
 import Stats from "../Cards/Stats";
@@ -9,10 +9,14 @@ import Container from "../Layout/Container";
 import { useSelector } from "react-redux";
 import { getDashHistory, getUser } from "../../store/user";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { DataContext } from "../../Context/fetchData";
 
 const Dashboard = (props) => {
-  const user = useSelector(getUser);
-  const dashboardHistory = useSelector(getDashHistory);
+  // const user = useSelector(getUser);
+  // const dashboardHistory = useSelector(getDashHistory);
+  const AppData = useContext(DataContext);
+  const user = AppData.user.data;
+  const dashboardHistory = AppData.user.dashboardHistory;
   const { getLocalStorage, isLoggedIn } = useLocalStorage();
   useEffect(() => {
     console.log("user is ...", user);
@@ -24,7 +28,7 @@ const Dashboard = (props) => {
       {/* First Section */}
       <div className="flex flex-wrap mobile:gap-5">
         {" "}
-        <Progress></Progress>
+        <Progress user={user}></Progress>
         <Activate></Activate>
       </div>
 

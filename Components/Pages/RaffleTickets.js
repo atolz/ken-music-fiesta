@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useSelector } from "react-redux";
+import { DataContext } from "../../Context/fetchData";
 import { getDashHistory } from "../../store/user";
 import PoweredBy from "../Cards/PoweredBy";
 import Container from "../Layout/Container";
 
 const RaffleTickets = (props) => {
-  const dashboardHistory = useSelector(getDashHistory);
   return (
     <div {...props}>
       {" "}
@@ -18,7 +18,7 @@ const RaffleTickets = (props) => {
             {/* Raffle Tickets */}
             <div className="flex-1 py-[3.1rem] px-[3.6rem] bg-[#F0F0F0] rounded-[20px] min-w-[20.5rem] relative max-h-[29.2rem]">
               <p className="mb-[.8rem] font-semibold text-[1.2rem] leading-[1.43rem] text-[#717171] ">Total Number of Raffle Tickets</p>
-              <h2 className="f font-bold text-[2.8rem] leading-[3.4rem]  flex flex-wrap max-w-[25rem] min-w-min">{dashboardHistory.raffleTickets} Raffle Tickets</h2>
+              <h2 className="f font-bold text-[2.8rem] leading-[3.4rem]  flex flex-wrap max-w-[25rem] min-w-min">{props.appData.user.dashboardHistory.raffleTickets} Raffle Tickets</h2>
               {/* <button className="btn btn--outlined !border-[black] mt-[5.6rem] mr-[17.5rem]">View Tickets</button> */}
               <img style={{ animationDelay: "1s" }} className="absolute bottom-0 right-[1.7rem] w-[10.7rem] xl:w-[40%] mobile:w-[14.7rem] object-cover slide-up-now-opacity" src="/3d-ticket.svg"></img>
             </div>

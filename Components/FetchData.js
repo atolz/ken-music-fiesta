@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 
 const FetchData = ({ children }) => {
-  useEffect(() => {}, [third]);
+  useEffect(() => {}, []);
 
-  return <div>{children}</div>;
+  return <>{children}</>;
 };
 
 export default FetchData;

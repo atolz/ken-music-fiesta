@@ -5,10 +5,10 @@ const MusicPlayer = () => {
   const [playingIndex, setPlayingIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [songs] = useState([
-    { name: "On the low", src: "Burna.mp3", album: "Kalakuta Republic" },
-    { name: "Power rangers", src: "Teni.mp3", album: "Joeboy Republic" },
-    { name: "Don't call me back", src: "Joeboy.mp3", album: "Joeboy Republic" },
-    { name: "Rise of the sunset", src: "Lauv.mp3", album: "Kalakuta Republic" },
+    { name: "On the low", src: "/Burna.mp3", album: "Kalakuta Republic" },
+    { name: "Power rangers", src: "/Teni.mp3", album: "Joeboy Republic" },
+    { name: "Don't call me back", src: "/Joeboy.mp3", album: "Joeboy Republic" },
+    { name: "Rise of the sunset", src: "https://kennis-bucket.s3.amazonaws.com/99c9161f-a6a9-46d2-8b2a-051e2bfb8b57.mp3", album: "Kalakuta Republic" },
   ]);
 
   const togglePlay = (i) => {
@@ -27,12 +27,12 @@ const MusicPlayer = () => {
     setPlayingIndex(i);
     setPlaying(true);
     if (!audioRef.current.src) {
-      audioRef.current.src = `/${songs[i].src}`;
+      audioRef.current.src = `${songs[i].src}`;
     }
     console.log("playing inde xand  i is", playingIndex, i);
     if (audioRef.current.src && playingIndex !== i) {
       console.log("should start new");
-      audioRef.current.src = `/${songs[i].src}`;
+      audioRef.current.src = `${songs[i].src}`;
     }
     audioRef.current.play();
   };
@@ -46,7 +46,7 @@ const MusicPlayer = () => {
     if (playingIndex == songs.length - 1) {
     } else {
       setPlayingIndex((val) => ++val);
-      audioRef.current.src = `/${songs[++playingIndex].src}`;
+      audioRef.current.src = `${songs[++playingIndex].src}`;
       audioRef.current.play();
     }
   };
@@ -54,7 +54,7 @@ const MusicPlayer = () => {
     if (playingIndex == 0) {
     } else {
       setPlayingIndex((val) => --val);
-      audioRef.current.src = `/${songs[--playingIndex].src}`;
+      audioRef.current.src = `${songs[--playingIndex].src}`;
       audioRef.current.play();
     }
   };

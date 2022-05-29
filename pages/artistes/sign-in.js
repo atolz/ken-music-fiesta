@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import AuthLayout from "../../Components/Layout/AuthLayout";
@@ -11,7 +11,6 @@ import useShowAlert from "../../hooks/useShowAlert";
 import { DataContext } from "../../Context/fetchData";
 
 const SignIn = () => {
-  const AppData = useContext(DataContext);
   const router = useRouter();
   const passRef = useRef();
   const { toggleLoad } = useLoading();
@@ -23,6 +22,7 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const toggleAlertBar = useShowAlert();
   const { setLocalStorage } = useLocalStorage();
+  const AppData = useContext(DataContext);
 
   const showPassword = (ref) => {
     ref.current.type = ref.current.type == "text" ? "password" : "text";
@@ -33,43 +33,14 @@ const SignIn = () => {
     toggleLoad();
     setLocalStorage("user", JSON.stringify(user));
     try {
-      const response = await baseInstanceAPI.post("account/login", JSON.stringify(user));
+      const response = await baseInstanceAPI.post("/artist/login", JSON.stringify(user));
       console.log(response);
       toggleAlertBar("Login Successful!", "success", true);
-      // dispatch(setLoginStatus(true));
-      // dispatch(setUserRedux({ username: user.email }));
       setLocalStorage("token", response.data.access_token);
-      setLocalStorage("section", "User");
-      AppData.setUserOnLogin("User", { username: user.email });
-
-      // // Profiel INfo
-      // try {
-      //   const userResp = await baseInstanceAPI.get("/profile/dashboard", {
-      //     headers: {
-      //       Authorization: `Bearer ${response.data.access_token}`,
-      //     },
-      //   });
-      //   console.log("user is ", userResp.data);
-      //   dispatch(setUserRedux(userResp.data));
-      // } catch (error) {
-      //   console.log("Error loadin user extra data", error);
-      // }
-
-      // //user dashboard history
-      // try {
-      //   const historyResp = await baseInstanceAPI.get("/dashboard/user-dashboard-history", {
-      //     headers: {
-      //       Authorization: `Bearer ${response.data.access_token}`,
-      //     },
-      //   });
-      //   console.log("user is ", historyResp.data);
-      //   dispatch(setDashboardHistory(historyResp.data));
-      // } catch (error) {
-      //   console.log("Error loadin dashboard history", error);
-      // }
-
+      setLocalStorage("section", "Artiste");
+      AppData.setUserOnLogin("Artiste", { username: user.email });
       toggleLoad();
-      router.replace("/dashboard");
+      router.replace("/catalogues/dashboard");
     } catch (error) {
       toggleLoad();
       if (!error.response) {
@@ -88,7 +59,7 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    router.prefetch("/dashboard");
+    router.prefetch("/catalogues/dashboard");
     return () => {
       // toggleAlertBar();
     };
@@ -106,7 +77,7 @@ const SignIn = () => {
         <h3>Sign In</h3>
         <p className="mb-[4.4rem]">
           Hey there! Welcome back. Not yet a member?{" "}
-          <Link href="/auth/sign-up">
+          <Link href="/artistes/sign-up">
             <a className="text-[#FCAC0D]">Sign Up</a>
           </Link>
         </p>

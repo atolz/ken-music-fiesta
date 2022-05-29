@@ -14,6 +14,8 @@ import BuyRaffleTicket from "../Components/PopUps/BuyRaffleTicket";
 import VerifyPayment from "../Components/PopUps/VerifyPayment";
 import SelectCardType from "../Components/PopUps/SelectCardType";
 import ChangePassword from "../Components/PopUps/ChangePassword";
+import EditCatalogue from "../Components/PopUps/EditCatalogue";
+import CreateCatalogue from "../Components/PopUps/CreateCatalogue";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
@@ -26,6 +28,8 @@ const pouUpContextFunctions = {
   onSelectPayOption: () => {},
   toggle: () => {},
   closeModal: () => {},
+  initEditCatalogue: () => {},
+  initCreateCatalogue: () => {},
   // test: "",
 };
 export const popUpContext = createContext(pouUpContextFunctions);
@@ -55,6 +59,8 @@ export const PopUpContextProvider = ({ children }) => {
     initChangePassword: initChangePassword,
     initBuyTicket: initBuyTicket,
     onCheckOut: onCheckOut,
+    initEditCatalogue: initEditCatalogue,
+    initCreateCatalogue: initCreateCatalogue,
 
     onReview: onReview,
 
@@ -92,6 +98,14 @@ export const PopUpContextProvider = ({ children }) => {
     setActiveModal("ChangePassword");
     toggle();
     console.log("change pass called");
+  }
+  function initEditCatalogue() {
+    setActiveModal("EditCatalogue");
+    toggle();
+  }
+  function initCreateCatalogue() {
+    setActiveModal("CreateCatalogue");
+    toggle();
   }
 
   function onBuyTicket(quantity, type) {
@@ -237,7 +251,7 @@ export const PopUpContextProvider = ({ children }) => {
 
   return (
     <>
-      <Dialog open={showPopUp} onClose={pouUpContextFunctions.toggle}>
+      <Dialog scroll="body" open={showPopUp} onClose={pouUpContextFunctions.toggle}>
         {activeModal == "Status" && <PopupStatus action={toggle} title={statusTitle} link={`/dashboard`} linkText={linkText} text={text} status={"success"}></PopupStatus>}
         {activeModal == "BuyEventTicket" && <BuyEventTicket onCancel={toggle} onBuyTicket={onBuyTicket}></BuyEventTicket>}
         {activeModal == "BuyRaffleTicket" && <BuyRaffleTicket onCancel={toggle} onBuyRaffleTicket={onBuyRaffleTicket}></BuyRaffleTicket>}
@@ -246,6 +260,8 @@ export const PopUpContextProvider = ({ children }) => {
         {activeModal == "ReviewCheckOut" && <ReviewCheckOut amount={checkAmount} vendor={vendor} onCancel={toggle} onReview={onReview}></ReviewCheckOut>}
         {activeModal == "SelectCardType" && <SelectCardType onCancel={toggle} onSelectCardType={onSelectCardType}></SelectCardType>}
         {activeModal == "VerifyPayment" && <VerifyPayment onCancel={toggle} onVerify={onVerify}></VerifyPayment>}
+        {activeModal == "EditCatalogue" && <EditCatalogue onCancel={toggle}></EditCatalogue>}
+        {activeModal == "CreateCatalogue" && <CreateCatalogue onCancel={toggle} toggleModal={toggle}></CreateCatalogue>}
         {activeModal == "ChangePassword" && (
           <ChangePassword
             toggleModal={toggle}

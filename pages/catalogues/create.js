@@ -1,145 +1,85 @@
-import React, { useState, useRef, useEffect } from "react";
-import Link from "next/link";
-import AuthLayout from "../../Components/Layout/AuthLayout";
-import { useRouter } from "next/router";
-import Alert from "@mui/material/Alert";
-import useLoading from "../../hooks/useLoading";
-import { baseInstanceAPI } from "../../axios";
-import CircularProgress from "@mui/material/CircularProgress";
-import useShowAlert from "../../hooks/useShowAlert";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { baseInstanceAPI } from "../../axios";
+import { DataContext } from "../../Context/fetchData";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import useShowAlert from "../../hooks/useShowAlert";
+import { setActivePage as setGlobalPage } from "../../store/pages";
+import useLoading from "../../hooks/useLoading";
 import Upload from "../../Components/Upload";
+import AuthLayout from "../../Components/Layout/AuthLayout";
 
 const CreateAccount = () => {
-  const passRef = useRef();
-  const passConfRef = useRef();
-  const usernameRef = useRef();
-  const dateRef = useRef();
-  const bvnRef = useRef();
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-    confirmPassword: "",
-    uuid: "",
-    dob: "",
-    bvn: "",
-    isDiaspora: false,
-  });
-  const [error, setError] = useState("");
-  const [confError, setConfError] = useState("");
   const [userValid, setUserValid] = useState(true);
-  const [passError, setPassError] = useState("");
-  // const [dateError, setDateError] = useState(false);
-  const router = useRouter();
-  const { isLoading, toggleLoad } = useLoading();
+  const recordLabelRef = useRef();
+  const AppData = useContext(DataContext);
+  const fetchArtisteUserCatalogues = AppData.fetchArtisteUserCatalogues;
+  const yearRef = useRef();
+  const albumTitleRef = useRef();
   const toggleAlertBar = useShowAlert();
-  const [verifying, setVerifying] = useState(false);
-  const [canSubmit, setCanSubmit] = useState(false);
+  const { getLocalStorage, isLoggedIn } = useLocalStorage();
+  const { toggleLoad } = useLoading();
+  const [catalogue, setCatalogue] = useState({
+    recordLabel: "",
+    yearOfRelease: "",
+    albumTitle: "",
+    isMusicArtist: true,
+    coverImage: "",
+    songTracks: [],
+  });
+  const router = useRouter();
   const [selectedValue, setSelectedValue] = useState("Music Artist");
-
-  useEffect(() => {
-    // usernameRef.current.value = "";
-    // passRef.current.value = "";
-    if (!router.isReady) return;
-    console.log(router.query.uuid);
-    setUser({ ...user, uuid: router.query.uuid });
-    return () => {
-      toggleAlertBar();
-    };
-  }, [router.isReady]);
-
-  const onCreate = async (user) => {
-    if (user.password !== user.confirmPassword) {
-      console.log("Password does not match");
-      setError("Password Must Match");
-      console.log("submited user is", user);
-      console.log("base url is", process.env.NEXT_PUBLIC_DEVELOPMENT_URL);
-      setConfError("Password and Password Confirm must match!");
-      return;
-    }
-    if (!userValid) {
-      return;
-    }
-    try {
-      toggleLoad();
-      const response = await baseInstanceAPI.post("account/complete-signup", JSON.stringify(user));
-      toggleLoad();
-      console.log(response);
-      toggleAlertBar("Account created successfully!", "success", true);
-      router.replace("/auth/sign-in");
-    } catch (error) {
-      toggleLoad();
-      if (!error.response) {
-        console.log("No response from the server");
-        toggleAlertBar("No response from the server. Pls check your network", "failed", true);
-        // setError("Network Error");
-        return;
-      }
-
-      if (error.response.data.message[0].includes("password")) {
-        return setPassError("Password must contain at least special a character, number and capital letter");
-      }
-      if (error.response.data.message.includes("Sorry")) {
-        console.log("response error", error.response);
-        toggleAlertBar(error.response.data.message, "failed", true);
-        return;
-      } else {
-        toggleAlertBar("Something's not right", "failed", true, 10000);
-      }
-      console.log("there was an error", error?.response);
-    }
-  };
-
-  // To reduce the amount of API calls
-  const debounce = (callback, wait) => {
-    console.log("in debounce");
-    let timeoutId = null;
-    return (...args) => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        console.log("befor make call");
-        callback.apply(null, args);
-      }, wait);
-    };
-  };
-
-  const verifyUserName = async () => {
-    console.log("in verify user");
-    setUserValid(true);
-    setVerifying(true);
-    setUser({ ...user, username: usernameRef.current.value });
-    try {
-      const response = await baseInstanceAPI.post("account/verify-username", JSON.stringify({ username: usernameRef.current.value }));
-      console.log(response);
-      toggleAlertBar();
-      setCanSubmit(true);
-      setVerifying(false);
-    } catch (error) {
-      if (!error.response) {
-        setVerifying(false);
-        toggleAlertBar("No response from the server. Pls check your network", "failed", true);
-        return console.log("no response from the server");
-      }
-      if (error.response) {
-        setUserValid(false);
-        setVerifying(false);
-        setCanSubmit(false);
-      }
-      console.log("there was an error", error);
-    }
-  };
-  const handleTyping = debounce(verifyUserName, 900);
-
-  const showPassword = (ref) => {
-    ref.current.type = ref.current.type == "text" ? "password" : "text";
-  };
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+    if (event.target.value == "Music Producer") {
+      setCatalogue((val) => ({ ...val, isMusicArtist: false }));
+    } else {
+      setCatalogue((val) => ({ ...val, isMusicArtist: true }));
+    }
 
     console.log("selected value is", event.target.value);
   };
 
+  const onUploadCoverImage = (fileUrl) => {
+    setCatalogue((val) => ({ ...val, coverImage: fileUrl }));
+  };
+
+  const onUploadTracks = (filesObj) => {
+    setCatalogue((val) => ({ ...val, songTracks: filesObj }));
+  };
+
+  const onCreateCatalogue = async () => {
+    if (!catalogue.albumTitle || !catalogue.recordLabel || !catalogue.coverImage || !catalogue.songTracks || !catalogue.yearOfRelease) {
+      return toggleAlertBar("Please fill out all fields, or Upload your files!", "error", true, 6000);
+    }
+    toggleLoad();
+    try {
+      const resp = await baseInstanceAPI.post("/artist-catalogue/create", catalogue, {
+        headers: {
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+      });
+      console.log("Response catalogue is", resp.data);
+      fetchArtisteUserCatalogues();
+      toggleAlertBar("Catalogue created successfully!!", "success", true, 6000);
+      toggleLoad();
+      router.replace("/catalogues/dashboard");
+    } catch (error) {
+      if (error.response) {
+        console.log("An error has occured", error.response.data.message);
+      } else {
+        console.log("An error has occured", error);
+      }
+      toggleAlertBar("Error creating catalogue. Try again later!", "error", true, 6000);
+      toggleLoad();
+    }
+  };
+
+  useEffect(() => {
+    router.prefetch("/catalogues/dashboard");
+  }, []);
   return (
     <div className="auth-container !mb-[5rem]">
       <form
@@ -147,7 +87,7 @@ const CreateAccount = () => {
         className="auth-form"
         onSubmit={(e) => {
           e.preventDefault();
-          onCreate(user);
+          onCreateCatalogue();
         }}
       >
         <h3>Create first catalogue</h3>
@@ -161,12 +101,12 @@ const CreateAccount = () => {
                 <FormControlLabel
                   value="Music Artist"
                   control={<Radio sx={{ "& span .MuiSvgIcon-root": { fontSize: "25px !important" } }} className="ml-[1rem] !text-white" />}
-                  label={<p className="ml-[1.6rem]">Music Artist</p>}
+                  label={<p className="ml-[.6rem] !mb-0">Music Artist</p>}
                 />
                 <FormControlLabel
                   value="Music Producer"
-                  control={<Radio sx={{ "& span .MuiSvgIcon-root": { fontSize: "25px !important" } }} className="ml-[2.8rem] !text-white" />}
-                  label={<p className="ml-[1.6rem]">Music Producer</p>}
+                  control={<Radio sx={{ "& span .MuiSvgIcon-root": { fontSize: "25px !important" } }} className="ml-[.8rem] !text-white" />}
+                  label={<p className="ml-[.6rem] !mb-0">Music Producer</p>}
                 />
               </RadioGroup>
             </FormControl>
@@ -177,12 +117,12 @@ const CreateAccount = () => {
             <input
               className={`w-full ${!userValid ? " !border-red-500 !border-[2px]" : ""}`}
               name="username"
-              ref={bvnRef}
+              ref={albumTitleRef}
               onChange={(e) => {
-                setUser({ ...user, bvn: e.target.value });
+                setCatalogue({ ...catalogue, albumTitle: e.target.value });
               }}
               required
-              placeholder="Enter Label Name"
+              placeholder="Enter Album Name"
             />
           </div>
 
@@ -193,9 +133,9 @@ const CreateAccount = () => {
               max="2022-12-31"
               onChange={(e) => {
                 console.log("date is ", e.target.value);
-                setUser({ ...user, dob: e.target.value });
+                setCatalogue({ ...catalogue, yearOfRelease: new Date(e.target.value).toISOString() });
               }}
-              ref={dateRef}
+              ref={yearRef}
               className={`w-full !pr-[2rem] date`}
               type="date"
               required
@@ -207,36 +147,29 @@ const CreateAccount = () => {
             <label>Record Label</label>
             <input
               className={`w-full ${!userValid ? " !border-red-500 !border-[2px]" : ""}`}
-              autoComplete="off"
-              autofill="off"
               name="username"
-              ref={usernameRef}
-              onChange={handleTyping}
+              ref={recordLabelRef}
+              onChange={(e) => {
+                setCatalogue({ ...catalogue, recordLabel: e.target.value });
+              }}
               required
               placeholder="Enter Label Name"
             />
-            {verifying && (
-              <span className="mt-3">
-                <CircularProgress color="warning" size={20} />
-              </span>
-            )}
             {!userValid && <p className=" !text-[1.2rem] !font-normal !text-red-500">*Username is taken</p>}
           </div>
 
           {/* Upload Song/Album Cover */}
           <div className="form-group">
             <label>Upload Song/Album Cover</label>
-            <Upload type={"image"} htmlFor={"cover-image"} caption={"Upload Image (Max. Size 10mb)"}></Upload>
+            <Upload onUploaded={onUploadCoverImage} type={"image"} htmlFor={"cover-image"} caption={"Upload Image (Max. Size 10mb)"}></Upload>
           </div>
           {/* Upload Song/Album Cover */}
           <div className="form-group">
             <label>Upload Song/Album Track(s)</label>
-            <Upload type={"audio"} htmlFor={"tracks"} caption={"Upload Single or Multiple Audio File"}></Upload>
+            <Upload onUploaded={onUploadTracks} type={"audio"} htmlFor={"tracks"} caption={"Upload Single or Multiple Audio File"}></Upload>
           </div>
 
-          <button hidden={canSubmit} className={`btn mt-[3.8rem] ${canSubmit ? "" : "cursor-not-allowed"}`}>
-            Submit
-          </button>
+          <button className="btn !w-full">Create</button>
         </div>
       </form>
     </div>

@@ -94,7 +94,12 @@ const Header = ({ title, setActivePage }) => {
           {/* Catalogue Header Buttons */}
           {section == "catalogue" && (
             <div className="flex-none hidden items-center ml-auto hdr:flex ">
-              <button onClick={() => {}} className="btn ml-[1.6rem] ml-auto">
+              <button
+                onClick={() => {
+                  popUpFunctions.initCreateCatalogue();
+                }}
+                className="btn ml-[1.6rem] ml-auto"
+              >
                 Create Cataglogue
               </button>
             </div>
@@ -115,7 +120,7 @@ const Header = ({ title, setActivePage }) => {
                   src="/user-img.jpg"
                 /> */}
                 <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "orange" }} alt={user?.name} src={`${baseURL}${user?.avatar}`}>
-                  <span className=" font-semibold"> {user?.firstName[0]}</span>
+                  <span className=" font-semibold"> {user?.firstName ? user?.firstName[0] : "Name"}</span>
                 </Avatar>
                 {/* </Tooltip> */}
               </div>
@@ -168,7 +173,12 @@ const Header = ({ title, setActivePage }) => {
       {/* Catalogue Section Header buttons::: Break point */}
       {section == "catalogue" && (
         <div className="flex items-center ml-auto hdr:hidden mb-[2.9rem] sidebar:mb-[4.5rem] overflow-scroll scroll_hide">
-          <button onClick={() => {}} className="btn ml-[auto] flex-1 sm:flex-grow-0">
+          <button
+            onClick={() => {
+              popUpFunctions.initCreateCatalogue();
+            }}
+            className="btn ml-[auto] flex-1 sm:flex-grow-0"
+          >
             Create Cataglogue
           </button>
         </div>

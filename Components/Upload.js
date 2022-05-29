@@ -1,17 +1,33 @@
+import axios from "axios";
 import React, { useState, useRef } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
+import useShowAlert from "../hooks/useShowAlert";
 
-const Upload = ({ type, caption, htmlFor, onChange }) => {
+const Upload = ({ type, caption, htmlFor, onChange, onUploaded }) => {
   const [playingIndex, setPlayingIndex] = useState(0);
+  const [inProgressIndex, setInProgressIndex] = useState();
+  const [uploadPercentage, setUploadPercentage] = useState(0);
+  const [uploading, setUploading] = useState(false);
   const audioRef = useRef(null);
+  const imgRef = useRef(null);
   const [files, setFiles] = useState([]);
   const [playing, setPlaying] = useState(false);
+  const { getLocalStorage, isLoggedIn } = useLocalStorage();
+  const toggleAlertBar = useShowAlert();
 
   const onSelectFles = (e) => {
     console.log("files are ", e.target.files);
     if (files) {
-      return setFiles([...e.target.files, ...files]);
+      setFiles([...e.target.files, ...files]);
+    } else {
+      setFiles([...e.target.files]);
     }
-    setFiles([...e.target.files]);
+    if (type == "image") {
+      setFiles([e.target.files[0]]);
+      const url = URL.createObjectURL(e.target.files[0]);
+      console.log("Type is file", url);
+      imgRef.current.src = url;
+    }
   };
 
   const onPlay = (file, i) => {
@@ -25,6 +41,54 @@ const Upload = ({ type, caption, htmlFor, onChange }) => {
   const pause = () => {
     setPlaying(false);
     audioRef.current.pause();
+  };
+
+  const onUpload = async (files) => {
+    console.log("in onUPload");
+    const filesPromises = files.map((file, i) => {
+      const formData = new FormData();
+      formData.append("music", file);
+
+      return axios.post("https://api.kennismusic.app/artist-catalogue/upload-music", formData, {
+        // const res = await axios.post("http://a805df5bc8dc349ea81228a62f357233-654010950.eu-west-3.elb.amazonaws.com/v1/file/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+        onUploadProgress: (progressEvent) => {
+          // console.log(progressEvent);
+          console.log("uploadPercentage", uploadPercentage);
+          console.log("Progress is", i, parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
+          setInProgressIndex(i);
+          // setUploadPercentage((val) => ({ ...val, i: parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)) }));
+          setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
+        },
+      });
+    });
+
+    console.log("Files promisise are ", filesPromises);
+    setUploading(true);
+    try {
+      const fileResp = (await Promise.all(filesPromises)).map((resp) => {
+        return resp.data;
+      });
+      setUploading(false);
+      toggleAlertBar("Uploaded Successfully!", "success", true);
+      console.log("Uploaded Files are:", fileResp);
+      if (type == "image") {
+        onUploaded(fileResp[0].fileUrl);
+      } else {
+        onUploaded(fileResp);
+      }
+    } catch (error) {
+      toggleAlertBar("Problem uploading. Pls check your internet or try again later!", "error", true);
+      setUploading(false);
+      if (error.response) {
+        console.log("there was an error upload the file", error.response);
+      } else {
+        console.log("AN unknown error has occured", error);
+      }
+    }
   };
 
   const removeFile = (i) => {
@@ -56,13 +120,37 @@ const Upload = ({ type, caption, htmlFor, onChange }) => {
         </p>
       </label>
 
+      {type == "image" && (
+        <div>
+          <div className="relative">
+            <div className="  absolute bottom-0 left-0 w-full h-[.5rem] bg-green-400 " style={{ width: `${uploadPercentage}%` }}></div>
+            <img className="w-full h-[30rem] object-cover" ref={imgRef}></img>
+          </div>
+          {files[0] && (
+            <>
+              <span>{files[0]?.name}</span>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  onUpload([files[0]]);
+                }}
+                className="btn !w-full"
+              >
+                {uploading ? "Uploading..." : "Upload"}
+              </button>
+            </>
+          )}
+        </div>
+      )}
+
       {/* Audio Display */}
       {type == "audio" && (
         <div>
-          <p className="text-white font-medium text-[1.4rem] mb-[1.6rem] mt-[4.7rem]">Uploaded Tracks</p>
+          {files[0] && <p className="text-white font-medium text-[1.4rem] mb-[1.6rem] mt-[4.7rem]">Uploaded Tracks</p>}
           {files.map((el, i) => {
             return (
-              <div key={i} className="flex items-center px-[2.9rem] py-[1.5rem] rounded-[2rem] border-[#606060] border mb-[1.6rem]">
+              <div key={i} className="flex items-center px-[2.9rem] py-[1.5rem] rounded-[2rem] border-[#606060] border mb-[1.6rem] relative overflow-hidden">
+                <div className="  absolute bottom-0 left-0 w-full h-[.5rem] bg-green-400 " style={{ width: `${uploadPercentage}%` }}></div>
                 {(function () {
                   if (!playing || (playing && playingIndex !== i)) {
                     return (
@@ -83,7 +171,7 @@ const Upload = ({ type, caption, htmlFor, onChange }) => {
                     className="icon-pause cursor-pointer text-[#FCAC0D] text-[2rem] flex-shrink-0"
                   ></i>
                 )}
-                <span className="ml-[2.6rem] font-medium text-[1.4rem] text-white max-w-[10rem] mobile:max-w-[20rem] sidebar:max-w-[30rem] whitespace-nowrap overflow-hidden text-ellipsis shrink block">
+                <span className="ml-[2.6rem] font-medium text-[1.4rem] text-slate-800 max-w-[10rem] mobile:max-w-[20rem] sidebar:max-w-[30rem] whitespace-nowrap overflow-hidden text-ellipsis shrink block">
                   {el.name}
                 </span>
                 <div
@@ -97,6 +185,19 @@ const Upload = ({ type, caption, htmlFor, onChange }) => {
               </div>
             );
           })}
+          {files[0] && (
+            <button
+              disabled={uploading}
+              onClick={(e) => {
+                e.preventDefault();
+                console.log("should upload");
+                onUpload(files);
+              }}
+              className="btn !w-full"
+            >
+              {uploading ? "Uploading..." : "Upload"}
+            </button>
+          )}
           {/* Audio Element */}
           <audio ref={audioRef}>
             Your browser does not support the

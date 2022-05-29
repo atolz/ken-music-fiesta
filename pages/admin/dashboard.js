@@ -10,6 +10,13 @@ import { getPage } from "../../store/pages";
 
 const Dashboard = () => {
   const activePage = useSelector(getPage);
+
+  // useEffect(() => {
+  //   router.prefetch("/admin/sign-in");
+  //   if (getLocalStorage("section") != "Admin") {
+  //     router.replace("/admin/sign-in");
+  //   }
+  // }, []);
   return (
     <>
       {activePage == "Users" && <Users></Users>}
