@@ -78,7 +78,7 @@ const SignIn = () => {
         <p className="mb-[4.4rem]">
           Hey there! Welcome back. Not yet a member?{" "}
           <Link href="/artistes/sign-up">
-            <a className="text-[#FCAC0D]">Sign Up</a>
+            <a className="text-[#FCAC0D]">Artiste Sign Up</a>
           </Link>
         </p>
         {passError && <p className=" !text-[1.4rem] !text-red-500">*{passError}</p>}

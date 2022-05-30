@@ -125,12 +125,14 @@ const AppDataProvider = ({ children }) => {
   };
 
   const setAppSection = () => {
+    if (router.route.includes("/dashboard")) {
+      setSection("User");
+    }
     if (router.route.includes("admin")) {
       setSection("Admin");
-    } else if (router.route.includes("catalogue") || router.route.includes("artistes")) {
+    }
+    if (router.route.includes("/catalogues/dashboard")) {
       setSection("Artiste");
-    } else {
-      setSection("User");
     }
   };
 
@@ -167,7 +169,7 @@ const AppDataProvider = ({ children }) => {
   // Check section and redirect to appropraite Section Login Page i.e Artiste: User: Admin sigin Page
   const redirectLoginSection = () => {
     if (section == "User") {
-      return router.push("/");
+      return router.push("/auth/sign-in");
     } else if (section == "Admin") {
       return; // router.replace("/auth/sign-up");
     } else if (section == "Artiste") {
