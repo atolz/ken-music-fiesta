@@ -17,17 +17,17 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded }) => {
 
   const onSelectFles = (e) => {
     console.log("files are ", e.target.files);
-    if (files) {
-      setFiles([...e.target.files, ...files]);
-    } else {
-      setFiles([...e.target.files]);
-    }
+    setUploadPercentage(0);
+    setFiles([...e.target.files]);
+
     if (type == "image") {
       setFiles([e.target.files[0]]);
       const url = URL.createObjectURL(e.target.files[0]);
       console.log("Type is file", url);
       imgRef.current.src = url;
     }
+
+    e.target.value = null;
   };
 
   const onPlay = (file, i) => {
