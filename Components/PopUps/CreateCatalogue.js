@@ -62,7 +62,7 @@ const CreateCatalogue = ({ toggleModal, onCancel }) => {
   };
 
   const onCreateCatalogue = async () => {
-    if (!catalogue.albumTitle || !catalogue.recordLabel || !catalogue.coverImage || !catalogue.songTracks || !catalogue.yearOfRelease) {
+    if (!catalogue.albumTitle || !catalogue.recordLabel || !catalogue.coverImage || !catalogue.songTracks[0] || !catalogue.yearOfRelease) {
       return toggleAlertBar("Please fill out all fields, or Upload your files!", "error", true, 6000);
     }
     toggleLoad();
