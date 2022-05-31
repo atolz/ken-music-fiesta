@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["https://kennis-bucket.s3.eu-central-1.amazonaws.com/"],
+    domains: ["kennis-bucket.s3.eu-central-1.amazonaws.com", "cdn.kennismusic.app"],
   },
 };
 

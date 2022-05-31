@@ -1,40 +1,113 @@
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { baseInstanceAPI } from "../../axios";
+import { DataContext } from "../../Context/fetchData";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import useShowAlert from "../../hooks/useShowAlert";
 import PopupLayout from "../Layout/Popup";
 import Upload from "../Upload";
+import { setActivePage as setGlobalPage } from "../../store/pages";
+import useLoading from "../../hooks/useLoading";
+// import { setActivePage as setGlobalPage } from "../../store/pages";
 
-const EditCatalogue = ({ onCheckOut, onCancel }) => {
+const EditCatalogue = ({ toggleModal, onCancel, catalogueObj }) => {
   const [userValid, setUserValid] = useState(true);
   const recordLabelRef = useRef();
+  const AppData = useContext(DataContext);
+  const fetchArtisteUserCatalogues = AppData.fetchArtisteUserCatalogues;
   const yearRef = useRef();
   const albumTitleRef = useRef();
-  const [user, setUser] = useState({
-    recordLabel: "",
-    year: "",
-    albumTitle: "",
-    isArtist: true,
+  const toggleAlertBar = useShowAlert();
+  const dispatch = useDispatch();
+  const { getLocalStorage, isLoggedIn } = useLocalStorage();
+  const { toggleLoad } = useLoading();
+  const [catalogue, setCatalogue] = useState({
+    recordLabel: "Unknown",
+    yearOfRelease: catalogueObj.yearOfRelease,
+    albumTitle: catalogueObj.albumTitle,
+    // isMusicArtist: catalogueObj.isMusicArtist,
+    isMusicArtist: true,
+    coverImage: catalogueObj.coverImage,
+    songTracks: catalogueObj.songTracks,
+    // songTracks: [
+    //   {
+    //     name: "string",
+    //     fileUrl: "string",
+    //   },
+    // ],
   });
   const [selectedValue, setSelectedValue] = useState("Music Artist");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+    if (event.target.value == "Music Producer") {
+      setCatalogue((val) => ({ ...val, isMusicArtist: false }));
+    } else {
+      setCatalogue((val) => ({ ...val, isMusicArtist: true }));
+    }
 
     console.log("selected value is", event.target.value);
   };
+
+  const onUploadCoverImage = (fileUrl) => {
+    setCatalogue((val) => ({ ...val, coverImage: fileUrl }));
+  };
+
+  const onUploadTracks = (filesObj) => {
+    setCatalogue((val) => ({ ...val, songTracks: filesObj }));
+  };
+
+  const setActivePage = (page) => {
+    dispatch(setGlobalPage(page));
+  };
+
+  const onEditCatalogue = async () => {
+    if (!catalogue.albumTitle || !catalogue.recordLabel || !catalogue.coverImage || !catalogue.songTracks[0] || !catalogue.yearOfRelease) {
+      return toggleAlertBar("Please fill out all fields, or Upload your files!", "error", true, 6000);
+    }
+    console.log("catalogue is", catalogue);
+    toggleLoad();
+    try {
+      const resp = await baseInstanceAPI.post(`/artist-catalogue/${catalogueObj.uuid}/edit`, catalogue, {
+        headers: {
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+      });
+      console.log("Response catalogue is", resp.data);
+      fetchArtisteUserCatalogues();
+      toggleAlertBar("Catalogue updated successfully!!", "success", true, 6000);
+      toggleModal();
+      setActivePage("Catalogue");
+      toggleLoad();
+    } catch (error) {
+      if (error.response) {
+        console.log("An error has occured", error.response.data);
+      }
+      console.log("An error has occured", error);
+      toggleAlertBar("Error updating catalogue. Try again later!", "error", true, 6000);
+      toggleLoad();
+    }
+  };
+
+  useEffect(() => {
+    console.log("uuid is catalgoeu is", catalogueObj);
+  }, [catalogueObj]);
 
   return (
     <div>
       <PopupLayout
         cancelAction={onCancel}
         action={() => {
-          onCheckOut(checkAmount, vendor);
+          console.log("Catalgoue Details are:", catalogue);
+          onEditCatalogue();
         }}
-        actionText={"Continue"}
+        actionText={"Update"}
       >
         <div className="popup-box">
           <form className="popup-form">
             <h3>Edit catalogue</h3>
-            <p className="mb-[4.4rem]">Edit your contents and get it published on Kennis Bites</p>
+            <p className="mb-[4.4rem]">Upload your contents and get it published on Kennis Bites</p>
             {/* {error && <p className=" !text-red-500">*{error}</p>} */}
             <div className="grid gap-5 gap-y-[2.4rem]">
               <div className="form-group">
@@ -44,12 +117,12 @@ const EditCatalogue = ({ onCheckOut, onCancel }) => {
                     <FormControlLabel
                       value="Music Artist"
                       control={<Radio sx={{ "& span .MuiSvgIcon-root": { fontSize: "25px !important" } }} className="ml-[1rem] !text-white" />}
-                      label={<p className="ml-[1.6rem]">Music Artist</p>}
+                      label={<p className="ml-[.6rem] !mb-0">Music Artist</p>}
                     />
                     <FormControlLabel
                       value="Music Producer"
-                      control={<Radio sx={{ "& span .MuiSvgIcon-root": { fontSize: "25px !important" } }} className="ml-[2.8rem] !text-white" />}
-                      label={<p className="ml-[1.6rem]">Music Producer</p>}
+                      control={<Radio sx={{ "& span .MuiSvgIcon-root": { fontSize: "25px !important" } }} className="ml-[.8rem] !text-white" />}
+                      label={<p className="ml-[.6rem] !mb-0">Music Producer</p>}
                     />
                   </RadioGroup>
                 </FormControl>
@@ -62,9 +135,10 @@ const EditCatalogue = ({ onCheckOut, onCancel }) => {
                   name="username"
                   ref={albumTitleRef}
                   onChange={(e) => {
-                    setUser({ ...user, albumTitle: e.target.value });
+                    setCatalogue({ ...catalogue, albumTitle: e.target.value });
                   }}
                   required
+                  value={catalogue.albumTitle}
                   placeholder="Enter Album Name"
                 />
               </div>
@@ -74,9 +148,10 @@ const EditCatalogue = ({ onCheckOut, onCancel }) => {
                 <label>Year Of Release</label>
                 <input
                   max="2022-12-31"
+                  value={new Date(catalogue.yearOfRelease).toISOString().substring(0, 10)}
                   onChange={(e) => {
                     console.log("date is ", e.target.value);
-                    setUser({ ...user, year: e.target.value });
+                    setCatalogue({ ...catalogue, yearOfRelease: new Date(e.target.value).toISOString() });
                   }}
                   ref={yearRef}
                   className={`w-full !pr-[2rem] date`}
@@ -92,8 +167,9 @@ const EditCatalogue = ({ onCheckOut, onCancel }) => {
                   className={`w-full ${!userValid ? " !border-red-500 !border-[2px]" : ""}`}
                   name="username"
                   ref={recordLabelRef}
+                  value={catalogue.recordLabel}
                   onChange={(e) => {
-                    setUser({ ...user, recordLabel: e.target.value });
+                    setCatalogue({ ...catalogue, recordLabel: e.target.value });
                   }}
                   required
                   placeholder="Enter Label Name"
@@ -104,12 +180,19 @@ const EditCatalogue = ({ onCheckOut, onCancel }) => {
               {/* Upload Song/Album Cover */}
               <div className="form-group">
                 <label>Upload Song/Album Cover</label>
-                <Upload type={"image"} htmlFor={"cover-image"} caption={"Upload Image (Max. Size 10mb)"}></Upload>
+                <Upload onUploaded={onUploadCoverImage} type={"image"} htmlFor={"cover-image"} caption={"Upload Image (Max. Size 10mb)"}></Upload>
               </div>
               {/* Upload Song/Album Cover */}
               <div className="form-group">
                 <label>Upload Song/Album Track(s)</label>
-                <Upload type={"audio"} htmlFor={"tracks"} caption={"Upload Single or Multiple Audio File"}></Upload>
+                <Upload
+                  catId={catalogueObj.uuid}
+                  uploaded={catalogue.songTracks}
+                  onUploaded={onUploadTracks}
+                  type={"audio"}
+                  htmlFor={"tracks"}
+                  caption={"Upload Single or Multiple Audio File"}
+                ></Upload>
               </div>
             </div>
           </form>

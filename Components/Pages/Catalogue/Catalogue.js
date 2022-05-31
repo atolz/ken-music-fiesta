@@ -64,8 +64,8 @@ const Catalogue = () => {
                 }}
                 key={i}
               >
-                {/* <Image width={194} height={185} src={el.image}></Image> */}
-                <img className="w-full" src={el.coverImage}></img>
+                {/* <Image objectFit="cover" width={194} height={185} src={`${el.coverImage.includes("cdn") ? `https://${el.coverImage}` : el.coverImage} `}></Image> */}
+                <img className="w-full h-[18.5rem] object-cover bg-slate-800 rounded-[2rem]" src={`${el.coverImage}`}></img>
                 <p className="mt-[2.4rem] font-bold text-[2rem] mb-[5px]">{el.albumTitle}</p>
                 <p className=" font-semibold text-[1.6rem] text-[#BDBCBC]">{el.yearOfRelease}</p>
               </div>
@@ -88,7 +88,7 @@ const Catalogue = () => {
                 key={i}
               >
                 {/* <Image width={194} height={185} src={el.image}></Image> */}
-                <img className="w-full" src={el.coverImage}></img>
+                <img className="w-full bg-slate-800 rounded-[2rem]" src={`${el.coverImage}`}></img>
                 <p className="mt-[2.4rem] font-bold text-[2rem] mb-[5px]">{el.albumTitle}</p>
                 <p className=" font-semibold text-[1.6rem] text-[#BDBCBC]">{el.yearOfRelease}</p>
               </div>
@@ -102,7 +102,7 @@ const Catalogue = () => {
           <Container twStyles={"flex gap-[9.4rem] flex-wrap"}>
             {/* <div className=" sidebar:-translate-y-[15.4rem] -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex"> */}
             <div className=" relative  rounded-2xl h-[26.7rem] w-[25.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex yellow-shadow">
-              <Image className="object-cover overflow-hidden  scale-[1.18]" layout="fill" src={"/user-grad (1).jpg"} alt={"artist-name"}></Image>
+              <Image className="object-cover overflow-hidden bg-slate-800  scale-[1.18]" layout="fill" src={`${activeCatalogue.coverImage}`} alt={"artist-name"}></Image>
             </div>
             <section className="flex-1 max-w-[80rem]">
               <div className="flex flex-wrap mb-[4.9rem] items-center justify-between border-b pb-[2.7rem]">
@@ -123,7 +123,7 @@ const Catalogue = () => {
 
                 <button
                   onClick={() => {
-                    popUpFunctions.initEditCatalogue();
+                    popUpFunctions.initEditCatalogue(activeCatalogue);
                   }}
                   className="btn btn--outlined text-[#252626]  !inline-flex"
                 >
@@ -134,7 +134,7 @@ const Catalogue = () => {
               {/* Stream Artist Music */}
               <div className=" hidden sidebar:block">
                 {/* <MusicPlayer></MusicPlayer> */}
-                <MusicPlayerV2></MusicPlayerV2>
+                <MusicPlayerV2 songList={activeCatalogue.songTracks} albumTitle={activeCatalogue.albumTitle}></MusicPlayerV2>
               </div>
               <div className=" block sidebar:hidden">
                 <MusicPlayer2></MusicPlayer2>

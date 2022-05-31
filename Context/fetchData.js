@@ -131,7 +131,7 @@ const AppDataProvider = ({ children }) => {
     if (router.route.includes("admin")) {
       setSection("Admin");
     }
-    if (router.route.includes("/catalogues/dashboard")) {
+    if (router.route.includes("/catalogues/dashboard") || router.route.includes("/catalogues/create")) {
       setSection("Artiste");
     }
   };

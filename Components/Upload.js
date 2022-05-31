@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useShowAlert from "../hooks/useShowAlert";
+import Uploaded from "./Uploaded";
 
-const Upload = ({ type, caption, htmlFor, onChange, onUploaded }) => {
+const Upload = ({ type, caption, htmlFor, onChange, onUploaded, uploaded, catId }) => {
   const [playingIndex, setPlayingIndex] = useState(0);
   const [inProgressIndex, setInProgressIndex] = useState();
   const [uploadPercentage, setUploadPercentage] = useState(0);
@@ -16,7 +17,7 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded }) => {
   const toggleAlertBar = useShowAlert();
 
   const onSelectFles = (e) => {
-    console.log("files are ", e.target.files);
+    console.log("files are ", e.target.files[0]);
     setUploadPercentage(0);
     setFiles([...e.target.files]);
 
@@ -98,6 +99,10 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded }) => {
     });
     setFiles(newFiles);
   };
+
+  useEffect(() => {
+    console.log("Cat Id is........", catId);
+  }, [catId]);
   return (
     <>
       <label
@@ -146,7 +151,7 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded }) => {
       {/* Audio Display */}
       {type == "audio" && (
         <div>
-          {files[0] && <p className="text-white font-medium text-[1.4rem] mb-[1.6rem] mt-[4.7rem]">Uploaded Tracks</p>}
+          {files[0] && <p className="text-white font-medium text-[1.4rem] !mb-[1.6rem] mt-[4.7rem]">Selected Tracks</p>}
           {files.map((el, i) => {
             return (
               <div key={i} className="flex items-center px-[2.9rem] py-[1.5rem] rounded-[2rem] border-[#606060] border mb-[1.6rem] relative overflow-hidden">
@@ -205,6 +210,8 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded }) => {
           </audio>
         </div>
       )}
+      {/* Uploaded Tracks */}
+      <Uploaded catId={catId} type="audio" uploaded={uploaded}></Uploaded>
     </>
   );
 };

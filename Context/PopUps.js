@@ -28,7 +28,7 @@ const pouUpContextFunctions = {
   onSelectPayOption: () => {},
   toggle: () => {},
   closeModal: () => {},
-  initEditCatalogue: () => {},
+  initEditCatalogue: (catalogue) => {},
   initCreateCatalogue: () => {},
   // test: "",
 };
@@ -47,6 +47,7 @@ export const PopUpContextProvider = ({ children }) => {
   const [vendor, setVendor] = useState("");
   const [itemQuantity, setItemQuantity] = useState(1);
   const router = useRouter();
+  const [editCatalogueObj, setEditCatalougueObj] = useState({});
 
   const { isLoggedIn, getLocalStorage } = useLocalStorage();
   const { toggleLoad } = useLoading();
@@ -71,7 +72,7 @@ export const PopUpContextProvider = ({ children }) => {
   };
 
   function initBuyTicket() {
-    if (!isLoggedIn()) {
+    if (!isLoggedIn() || getLocalStorage("section") !== "User") {
       return router.push("/auth/sign-in");
     }
     setPurpose("EventTicket");
@@ -99,8 +100,10 @@ export const PopUpContextProvider = ({ children }) => {
     toggle();
     console.log("change pass called");
   }
-  function initEditCatalogue() {
+  function initEditCatalogue(catalogue) {
     setActiveModal("EditCatalogue");
+    setEditCatalougueObj(catalogue);
+    console.log("Edit catalogue obj is", catalogue);
     toggle();
   }
   function initCreateCatalogue() {
@@ -175,6 +178,9 @@ export const PopUpContextProvider = ({ children }) => {
       router.push(resp.data.redirectUrl);
       toggleLoad();
     } catch (error) {
+      if (error.response) {
+        console.log("AN error has occured... try agina later", error.response.data);
+      }
       console.log("AN error has occured pls try again laters", error);
       toggleLoad();
       toggleAlertBar("An error occured. Pls try again later!", "error", true, 20000);
@@ -260,7 +266,7 @@ export const PopUpContextProvider = ({ children }) => {
         {activeModal == "ReviewCheckOut" && <ReviewCheckOut amount={checkAmount} vendor={vendor} onCancel={toggle} onReview={onReview}></ReviewCheckOut>}
         {activeModal == "SelectCardType" && <SelectCardType onCancel={toggle} onSelectCardType={onSelectCardType}></SelectCardType>}
         {activeModal == "VerifyPayment" && <VerifyPayment onCancel={toggle} onVerify={onVerify}></VerifyPayment>}
-        {activeModal == "EditCatalogue" && <EditCatalogue onCancel={toggle}></EditCatalogue>}
+        {activeModal == "EditCatalogue" && <EditCatalogue catalogueObj={editCatalogueObj} onCancel={toggle} toggleModal={toggle}></EditCatalogue>}
         {activeModal == "CreateCatalogue" && <CreateCatalogue onCancel={toggle} toggleModal={toggle}></CreateCatalogue>}
         {activeModal == "ChangePassword" && (
           <ChangePassword

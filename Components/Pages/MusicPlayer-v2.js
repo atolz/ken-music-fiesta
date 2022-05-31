@@ -1,15 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-const MusicPlayerV2 = ({ title }) => {
+const MusicPlayerV2 = ({ title, songList, albumTitle }) => {
   const audioRef = useRef(null);
   const [playingIndex, setPlayingIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
-  const [songs] = useState([
-    { name: "On the low", src: "Burna.mp3", album: "Kalakuta Republic" },
-    { name: "Power rangers", src: "Teni.mp3", album: "Joeboy Republic" },
-    { name: "Don't call me back", src: "Joeboy.mp3", album: "Joeboy Republic" },
-    { name: "Rise of the sunset", src: "Lauv.mp3", album: "Kalakuta Republic" },
-  ]);
+  const [songs] = useState(songList);
+  // const [songs] = useState([
+  //   { name: "On the low", src: "https://cdn.kennismusic.app/38a89545-40a8-4f69-bdde-34de37cf4a9d.mp3", album: "Kalakuta Republic" },
+  //   { name: "Power rangers", src: "/Teni.mp3", album: "Joeboy Republic" },
+  //   { name: "Don't call me back", src: "/Joeboy.mp3", album: "Joeboy Republic" },
+  //   { name: "Rise of the sunset", src: "/Lauv.mp3", album: "Kalakuta Republic" },
+  // ]);
+
+  useEffect(() => {
+    console.log("In Music player...:", songs);
+  }, [songs]);
 
   const togglePlay = (i) => {
     console.log("playing song is", songs[i].src);
@@ -27,12 +32,12 @@ const MusicPlayerV2 = ({ title }) => {
     setPlayingIndex(i);
     setPlaying(true);
     if (!audioRef.current.src) {
-      audioRef.current.src = `/${songs[i].src}`;
+      audioRef.current.src = `${songs[i].fileUrl}`;
     }
     console.log("playing inde xand  i is", playingIndex, i);
     if (audioRef.current.src && playingIndex !== i) {
       console.log("should start new");
-      audioRef.current.src = `/${songs[i].src}`;
+      audioRef.current.src = `${songs[i].fileUrl}`;
     }
     audioRef.current.play();
   };
@@ -46,7 +51,7 @@ const MusicPlayerV2 = ({ title }) => {
     if (playingIndex == songs.length - 1) {
     } else {
       setPlayingIndex((val) => ++val);
-      audioRef.current.src = `/${songs[++playingIndex].src}`;
+      audioRef.current.src = `${songs[++playingIndex].fileUrl}`;
       audioRef.current.play();
     }
   };
@@ -54,7 +59,7 @@ const MusicPlayerV2 = ({ title }) => {
     if (playingIndex == 0) {
     } else {
       setPlayingIndex((val) => --val);
-      audioRef.current.src = `/${songs[--playingIndex].src}`;
+      audioRef.current.src = `${songs[--playingIndex].fileUrl}`;
       audioRef.current.play();
     }
   };
@@ -89,12 +94,12 @@ const MusicPlayerV2 = ({ title }) => {
                         <path d="M4 5H6V15H4V5ZM0 8H2V12H0V8ZM8 0H10V18H8V0ZM12 2H14V20H12V2ZM16 5H18V15H16V5ZM20 8H22V12H20V8Z" fill="current-color" />
                       </svg>
                     )}
-                    <span className=" ml-4">{el.name}</span>
+                    <span className=" ml-4 text-ellipsis overflow-hidden max-w-[12rem]">{el.name}</span>
                   </div>
                 </span>
-                <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.2rem] font-medium">Artist 1</span>
+                <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">Artist 1</span>
                 <span className=" border-gray-lighter p-[16px] !py-[14px] text-right align-text-bottom text-[1.2rem] font-medium">1:30</span>
-                <span className=" border-gray-lighter p-[16px] !py-[14px]  align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">{el.album}</span>
+                <span className=" border-gray-lighter p-[16px] !py-[14px]  align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">{albumTitle}</span>
                 <span className=" border-gray-lighter p-[16px] !py-[14px] text-right align-text-bottom text-[1.2rem] font-medium ">
                   <div className="flex items-center gap-[1.4rem] place-self-start">
                     <img
