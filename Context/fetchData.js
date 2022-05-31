@@ -77,7 +77,7 @@ const AppDataProvider = ({ children }) => {
 
   const fetchArtisteUserCatalogues = async () => {
     try {
-      const resp = await baseInstanceAPI.get("/artist-catalogue/dashboard/catalogue", {
+      const resp = await baseInstanceAPI.get("/artist-catalogue/dashboard/catalogue?tracks=true", {
         headers: {
           Authorization: `Bearer ${getLocalStorage("token")}`,
         },
