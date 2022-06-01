@@ -30,8 +30,8 @@ const RaffleTickets = (props) => {
               <div className="flex flex-wrap justify-center mobile:flex-nowrap mobile:justify-start  items-center">
                 <div className="w-[95px] h-[95px]  mr-[2.4rem]">
                   <CircularProgressbar
-                    value={77}
-                    text={"N3,000"}
+                    value={0}
+                    text={"0"}
                     styles={buildStyles({
                       pathColor: "#FCAC0D",
                       strokeLinecap: "butt",
@@ -46,7 +46,7 @@ const RaffleTickets = (props) => {
                 <div className="text-center mobile:text-left">
                   <span className="text-[#BFBDBD] font-medium text-[1rem] mb-[1rem] leading-[1.2rem]">Your Progress</span>
                   <p className="font font-bold text-[1.8rem] leading-[2.1rem] w-[18.5rem]">
-                    <span className="!text-[#FCAC0D]">N1,000</span> more to get a raffle ticket
+                    <span className="!text-[#FCAC0D]">N4,000</span> more to get a raffle ticket
                   </p>
                 </div>
               </div>
@@ -55,12 +55,12 @@ const RaffleTickets = (props) => {
           <div className="flex gap-10 flex-wrap">
             <div className={`flex-1 px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-white relative min-w-[30.5rem] border-[#CECCCC] border`}>
               <img style={{ animationDelay: ".8s" }} className="absolute right-[2.6rem] bottom-0 w-[93px] slide-up-now-opacity" src="/3d-tickets-used.svg"></img>
-              <h3 className="h3 mb-[.4rem] mr-[11.0rem]">5 Used</h3>
+              <h3 className="h3 mb-[.4rem] mr-[11.0rem]">0 Used</h3>
               <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold relative">Total Number of Tickets Used</p>
             </div>
             <div className={`flex-1 px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-white relative min-w-[30.5rem] border-[#CECCCC] border`}>
               <img className="absolute right-[.8rem] bottom-0 w-[93px] w-[12.9rem] slide-up-now-opacity" src="/3d-trophy.svg"></img>
-              <h3 className="h3 mb-[.4rem] mr-[11.0rem] !text-[#FCAC0D] whitespace-nowrap">2 Tickets Won</h3>
+              <h3 className="h3 mb-[.4rem] mr-[11.0rem] !text-[#FCAC0D] whitespace-nowrap">{props.appData.user.dashboardHistory.rewardWon} Tickets Won</h3>
               <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold relative">Total Number of Tickets Used</p>
             </div>
           </div>

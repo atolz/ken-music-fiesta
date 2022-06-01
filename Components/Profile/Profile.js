@@ -122,7 +122,7 @@ const Profile = ({ user }) => {
           <div className="relative">
             <input onChange={onFileChange} className="hidden " id="upload" type="file" accept="image/*"></input>
             <Avatar ref={imageRef} sx={{ width: 145, height: 145, bgcolor: "orange" }} alt="Remy Sharp" src={`${user?.avatar}`}>
-              <span className=" !text-white !text-[5rem] font-semibold"> {user?.firstName[0]}</span>
+              <span className=" !text-white !text-[5rem] font-semibold"> {user?.firstName ? user?.firstName[0] : "N"}</span>
             </Avatar>
             {/* <img src={`${user?.avatar}`}></img> */}
 
