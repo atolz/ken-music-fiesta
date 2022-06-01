@@ -70,7 +70,7 @@ const UserHeader = ({ title, setActivePage }) => {
                   className="h-[4.2rem] cursor-pointer w-[4.2rem] object-cover rounded-full ml-[16px] yellow-shadow"
                   src="/user-img.jpg"
                 /> */}
-                <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "orange" }} alt={user?.name} src={`${baseURL}${user?.avatar}`}>
+                <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "orange" }} alt={user?.name} src={`${user?.avatar}`}>
                   <span className=" font-semibold"> {user?.firstName ? user?.firstName[0] : "Name"}</span>
                 </Avatar>
                 {/* </Tooltip> */}

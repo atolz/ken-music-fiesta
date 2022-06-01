@@ -111,7 +111,7 @@ const Profile = ({ user }) => {
   };
 
   return (
-    <form>
+    <form className="profile-form">
       <section className="mb-[9.6rem]">
         {/* Profile Picture */}
         <section className="flex items-center  flex-wrap gap-7 sidebar:gap-0">
