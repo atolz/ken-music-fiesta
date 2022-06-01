@@ -88,7 +88,7 @@ const Catalogue = () => {
                 key={i}
               >
                 {/* <Image width={194} height={185} src={el.image}></Image> */}
-                <img className="w-full bg-slate-800 rounded-[2rem]" src={`${el.coverImage}`}></img>
+                <img className="w-full h-[24rem] object-cover bg-slate-800 rounded-[2rem]" src={`${el.coverImage}`}></img>
                 <p className="mt-[2.4rem] font-bold text-[2rem] mb-[5px]">{el.albumTitle}</p>
                 <p className=" font-semibold text-[1.6rem] text-[#BDBCBC]">{el.yearOfRelease}</p>
               </div>

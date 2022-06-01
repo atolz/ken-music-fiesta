@@ -146,9 +146,9 @@ export const PopUpContextProvider = ({ children }) => {
     console.log("enviroment is", env);
     let redirectUrl = "";
     if (env == "development") {
-      redirectUrl = "http://localhost:3000/dashboard?status=success";
+      redirectUrl = `http://localhost:3000/dashboard?amount=${itemQuantity}&status=success`;
     } else if (env == "production") {
-      redirectUrl = "https://ken-music-fiesta-2.vercel.app/dashboard?status=success";
+      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?amount=${itemQuantity}&status=success`;
     }
     console.log("payment details is", {
       purpose: purpose,
@@ -244,15 +244,20 @@ export const PopUpContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    console.log("Roteris", router.query?.status);
-    if (router.query.status == "success") {
+    console.log("Roter is ////////", router.query?.status);
+    if (router.query?.status?.includes("success")) {
       console.log("sucess payed");
       setLinkText("Go to dashboard");
       setStatusTitle("Purchase Order Success");
-      setText("Your purchase order for 20 tickets was successful");
+      setText(`Your purchase order for ${router.query.amount} tickets was successful`);
       setActiveModal("Status");
       toggle();
+      router.push("/dashboard");
     }
+
+    // setTimeout(() => {
+    //   router.push("/dashboard");
+    // }, 5000);
   }, [router.query?.status]);
 
   return (
