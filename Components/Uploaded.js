@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { baseInstanceAPI } from "../axios";
+import { DataContext } from "../Context/fetchData";
 import useLoading from "../hooks/useLoading";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useShowAlert from "../hooks/useShowAlert";
@@ -17,6 +18,8 @@ const Uploaded = ({ type, caption, uploaded, catId }) => {
   const { getLocalStorage, isLoggedIn } = useLocalStorage();
   const toggleAlertBar = useShowAlert();
   const { toggleLoad } = useLoading();
+  const AppData = useContext(DataContext);
+  const fetchArtisteUserCatalogues = AppData.fetchArtisteUserCatalogues;
 
   const onSelectFles = (e) => {
     console.log("files are ", e.target.files[0]);
@@ -45,14 +48,14 @@ const Uploaded = ({ type, caption, uploaded, catId }) => {
     audioRef.current.pause();
   };
 
-  const removeTrack = async (i, fileUrl, catalogue_id) => {
+  const removeTrack = async (i, fileUrl, catalogue_id, fileId) => {
     audioRef.current.src = null;
     console.log("uuid and cat id is", fileUrl, catalogue_id);
     console.log("track info", { fileUrl: fileUrl });
     toggleLoad();
     try {
       const resp = await baseInstanceAPI.delete(`/artist-catalogue/${catalogue_id}/song-delete`, {
-        data: { fileUrl: fileUrl },
+        data: { fileUrl: fileUrl, fileUUID: fileId },
         headers: {
           Authorization: `Bearer ${getLocalStorage("token")}`,
         },
@@ -64,6 +67,7 @@ const Uploaded = ({ type, caption, uploaded, catId }) => {
       setFiles(newFiles);
       toggleLoad();
       toggleAlertBar("Track deleted successfully!!", "success", true, 6000);
+      fetchArtisteUserCatalogues();
     } catch (error) {
       toggleLoad();
       toggleAlertBar("Error deleting track!!", "error", true, 6000);
@@ -109,7 +113,7 @@ const Uploaded = ({ type, caption, uploaded, catId }) => {
                 </span>
                 <div
                   onClick={() => {
-                    removeTrack(i, el.fileUrl, catId);
+                    removeTrack(i, el.fileUrl, catId, el.uuid);
                   }}
                   className="ml-auto cursor-pointer p-[1rem] rounded-full bg-[#FFE7E7] flex-shrink-0"
                 >

@@ -25,6 +25,7 @@ const Catalogue = () => {
   const [showDetails, setShowDetails] = useState(false);
   const popUpFunctions = useContext(popUpContext);
   const [activeCatalogue, setActiveCatalogue] = useState({});
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -36,6 +37,8 @@ const Catalogue = () => {
 
   useEffect(() => {
     console.log("artiste catalogue is...,,,,,>>>", artisteCatalogues);
+    // setActiveCatalogue(artisteCatalogues[activeIndex]);
+    setShowDetails(false);
   }, [artisteCatalogues]);
 
   return (
@@ -61,6 +64,7 @@ const Catalogue = () => {
                 onClick={() => {
                   setShowDetails(true);
                   setActiveCatalogue(artisteCatalogues[i]);
+                  // setActiveIndex(i)
                 }}
                 key={i}
               >
@@ -84,6 +88,7 @@ const Catalogue = () => {
                 onClick={() => {
                   setShowDetails(true);
                   setActiveCatalogue(artisteCatalogues[i]);
+                  // setActiveIndex(i);
                 }}
                 key={i}
               >
