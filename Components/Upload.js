@@ -49,6 +49,7 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded, uploaded, catId 
     const filesPromises = files.map((file, i) => {
       const formData = new FormData();
       formData.append("music", file);
+      formData.append("musicTitle", file.name);
 
       return axios.post("https://api.kennismusic.app/artist-catalogue/upload-music", formData, {
         // const res = await axios.post("http://a805df5bc8dc349ea81228a62f357233-654010950.eu-west-3.elb.amazonaws.com/v1/file/upload", formData, {

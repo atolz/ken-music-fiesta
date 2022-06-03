@@ -80,6 +80,13 @@ const CreateAccount = () => {
   useEffect(() => {
     router.prefetch("/catalogues/dashboard");
   }, []);
+
+  useEffect(() => {
+    router.prefetch("/artistes/sign-in");
+    if (!isLoggedIn() || getLocalStorage("section") != "Artiste") {
+      router.replace("/artistes/sign-in");
+    }
+  }, []);
   return (
     <div className="auth-container !mb-[5rem]">
       <form
