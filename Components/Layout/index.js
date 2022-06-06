@@ -92,7 +92,7 @@ const BaseLayout = ({ children }) => {
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       </Head>
       {AppData.section == "User" && <UserSideBar activePage={activePage} setActivePage={setActivePage}></UserSideBar>}
-      {AppData.section == "Artiste" && <ArtisteSideBar activePage={activePage} setActivePage={setActivePage}></ArtisteSideBar>}
+      {localStorage.getItem("section") == "Artiste" && <ArtisteSideBar activePage={activePage} setActivePage={setActivePage}></ArtisteSideBar>}
       {AppData.section == "Admin" && <AdminSideBar activePage={activePage} setActivePage={setActivePage}></AdminSideBar>}
       {/* <SideBar activePage={activePage} setActivePage={setActivePage} /> */}
       <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "right" }} open={isopen} autoHideDuration={6000} onClose={handleClose} message={snbMsg} />
@@ -100,7 +100,7 @@ const BaseLayout = ({ children }) => {
         <Container>
           {" "}
           {AppData.section == "User" && <UserHeader title={activePage} setActivePage={setActivePage}></UserHeader>}
-          {AppData.section == "Artiste" && <ArtisteHeader title={activePage} setActivePage={setActivePage}></ArtisteHeader>}
+          {localStorage.getItem("section") == "Artiste" && <ArtisteHeader title={activePage} setActivePage={setActivePage}></ArtisteHeader>}
           {AppData.section == "Admin" && <AdminHeader title={activePage} setActivePage={setActivePage}></AdminHeader>}
           {/* <Header title={activePage} setActivePage={setActivePage}></Header> */}
           {children}

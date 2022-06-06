@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -15,9 +15,11 @@ const Container = ({ children, twStyles }) => {
 const Details = () => {
   const { artistes } = useContext(DataContext);
   const router = useRouter();
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
-    console.log("object hash is in ID...", artistes.hash);
+    console.log("object hash is in ID...", artistes.hash, artistes.data);
+    // const allTracks = artistes.data.catalogues
   }, [router, artistes.hash]);
   return (
     <div className="grow-0 shrink  scroll_hide mt-auto">
@@ -50,8 +52,8 @@ const Details = () => {
 
             {/* Stream Artist Music */}
             <div className=" hidden sidebar:block">
-              <MusicPlayer></MusicPlayer>
-              {/* <MusicPlayerV2 title={"Stream Artiste Music"}></MusicPlayerV2> */}
+              {/* <MusicPlayer></MusicPlayer> */}
+              <MusicPlayerV2 songList={[]} title={"Stream Artiste Music"}></MusicPlayerV2>
             </div>
             <div className=" block sidebar:hidden">
               <MusicPlayer2></MusicPlayer2>

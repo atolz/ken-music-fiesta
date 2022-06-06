@@ -56,6 +56,35 @@ const EditCatalogue = ({ toggleModal, onCancel, catalogueObj }) => {
 
   const onUploadTracks = (filesObj) => {
     setCatalogue((val) => ({ ...val, songTracks: filesObj }));
+    console.log("songtracs are", filesObj);
+    addTrack(filesObj, catalogueObj.uuid);
+  };
+
+  const addTrack = async (filesObj, catalogue_id) => {
+    console.log("fileObj and cat id is", filesObj, catalogue_id);
+    toggleLoad();
+    const data = { songTracks: filesObj };
+
+    try {
+      const resp = await baseInstanceAPI.post(`/artist-catalogue/${catalogue_id}/song-add`, data, {
+        headers: {
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+      });
+      console.log("File deleted successfulllY!!!", resp.data);
+      toggleLoad();
+      toggleAlertBar("Track added successfully!!", "success", true, 6000);
+      fetchArtisteUserCatalogues();
+    } catch (error) {
+      toggleLoad();
+      toggleAlertBar("Error adding track!!", "error", true, 6000);
+
+      if (error.response) {
+        console.log("An error has occured while trying to add track", error.response.data);
+      } else {
+        console.log(error);
+      }
+    }
   };
 
   const setActivePage = (page) => {

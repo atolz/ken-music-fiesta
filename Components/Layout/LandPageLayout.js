@@ -50,7 +50,7 @@ const LandPageLayout = ({ children }) => {
                   </a>
                 </Link>
 
-                <button
+                {/* <button
                   onClick={() => {
                     console.log("clicking btn", popUpFunctions.initSelfCheckOut());
                     popUpFunctions.initSelfCheckOut();
@@ -58,7 +58,7 @@ const LandPageLayout = ({ children }) => {
                   className="btn btn--outlined text-white "
                 >
                   Self Checkout
-                </button>
+                </button> */}
                 <Link href={"/auth/sign-up"}>
                   <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign Up</button>
                 </Link>

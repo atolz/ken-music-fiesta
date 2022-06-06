@@ -49,12 +49,13 @@ const Index = () => {
                 <Link href={`/artistes/${++i}`} key={i}>
                   <a className=" last:mr-auto">
                     <div className="flex flex-col">
-                      <div className=" -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex">
+                      <div className="bg-[#1B1B1B] -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer grid place-items-center">
                         {/* <div
                       style={{ backgroundImage: `url(${el.img})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "top" }}
                       className=" h-full w-full skew-y-12 scale-[1.18] "
                     > */}
-                        <Image className="object-cover overflow-hidden !skew-y-12 scale-[1.18]" layout="fixed" width={234} height={347} src={"/user-grad (1).jpg"} alt={el.artistName}></Image>
+                        {/* <Image className="object-contain  !skew-y-12 scale-[1.18]" layout="fixed" width={53} height={110} src={"/empty.png"} alt={el.artistName}></Image> */}
+                        <img className="object-contain !skew-y-12 scale-[1.18]" layout="fixed" width={53} height={110} src={"/empty.png"} alt={el.artistName}></img>
                         {/* </div> */}
                       </div>
                       <span className=" font-bold text-[2.5rem] leading-[3rem] mt-[4.6rem] text-white">

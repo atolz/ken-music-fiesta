@@ -1,13 +1,16 @@
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import LandPageLayout from "../../Components/Layout/LandPageLayout";
+import { DataContext } from "../../Context/fetchData";
 
 const Container = ({ children }) => {
   return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem]">{children}</div>;
 };
 
 const Index = () => {
+  const AppData = useContext(DataContext);
+  let allCatalogues = AppData.allArtisteCatalogues.data;
   const artists = [
     {
       name: "Artist",
@@ -35,7 +38,7 @@ const Index = () => {
     <div className="grow-0 shrink overflow-y-scroll scroll_hide">
       <Container>
         <div className="text-center">
-          <div className="flex items-center justify-between mb-[9rem]">
+          <div className="flex items-center justify-between mb-[9rem] mt-[6rem]">
             <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FCAC0D] ">Artistes Catalogue</h3>
             <div>
               <Link href={"/catalogues/create"}>
@@ -43,22 +46,20 @@ const Index = () => {
               </Link>
             </div>
           </div>
-          <main className="flex flex-wrap gap-36 items-center justify-between mb-40">
-            {artists.map((el, i) => {
+
+          <main className={`flex flex-wrap  items-center ${allCatalogues.length > 3 ? " justify-between gap-[16rem]" : " justify-center gap-96"}   mb-40`}>
+            {allCatalogues.map((el, i) => {
               return (
-                <Link href={`/catalogues/${el.id}`} key={i}>
-                  <a>
+                <Link href={`/catalogues/${el.uuid}`} key={i}>
+                  <a className=" last:mr-auto">
                     <div className="flex flex-col">
                       <div className=" -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex">
-                        {/* <div
-                      style={{ backgroundImage: `url(${el.img})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "top" }}
-                      className=" h-full w-full skew-y-12 scale-[1.18] "
-                    > */}
-                        <Image className="object-cover overflow-hidden !skew-y-12 scale-[1.18]" layout="fixed" width={234} height={347} src={el.img} alt={el.name}></Image>
+                        {/* <Image className="object-cover overflow-hidden !skew-y-12 scale-[1.18]" layout="fixed" width={234} height={347} src={el.coverImage} alt={el.albumTitle}></Image> */}
+                        <img className="object-cover bg-slate-800 overflow-hidden !skew-y-12 scale-[1.18]" layout="fixed" width={234} height={347} src={el.coverImage} alt={el.albumTitle}></img>
                         {/* </div> */}
                       </div>
-                      <span className=" font-bold text-[2.5rem] leading-[3rem] mt-[4.6rem] text-white">
-                        0{++i}. {el.name}
+                      <span className=" font-bold text-[2.5rem] leading-[3rem] mt-[4.6rem] text-white max-w-[20rem] text-ellipsis overflow-hidden">
+                        0{++i}. {el.albumTitle}
                       </span>
                     </div>
                   </a>

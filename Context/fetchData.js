@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export const DataContext = createContext({
-  artisteCatalogues: {},
+  allArtisteCatalogues: {},
   artistes: {},
   user: {},
   artistesUser: {},
@@ -24,7 +24,7 @@ const AppDataProvider = ({ children }) => {
     loading: true,
     hash: {},
   });
-  const [artisteCatalogues, setArtisteCatalogue] = useState({
+  const [allArtisteCatalogues, setAllArtisteCatalogue] = useState({
     data: [],
     error: false,
     loading: true,
@@ -53,6 +53,7 @@ const AppDataProvider = ({ children }) => {
     setArtistes((val) => ({ ...val, error: false, loading: true }));
     try {
       const resp = await baseInstanceAPI.get("/artist");
+      // console.log("artiste are")
       let artistePromises = resp.data.artists.map(async (el) => {
         return baseInstanceAPI.get(`/artist/${el.uuid}`);
       });
@@ -63,7 +64,7 @@ const AppDataProvider = ({ children }) => {
       let artObjHashMap = {};
       let i = 1;
       for (let value of artistes) {
-        console.log("Values is ", value);
+        // console.log("Values is ", value);
         artObjHashMap[i] = value;
         i += 1;
       }
@@ -72,6 +73,25 @@ const AppDataProvider = ({ children }) => {
     } catch (error) {
       console.log("THere was an error loading all artistes");
       setArtistes((val) => ({ ...val, error: true, loading: false }));
+    }
+  };
+  const fetchAllCatalogues = async () => {
+    let catalogues = [];
+    setAllArtisteCatalogue((val) => ({ ...val, error: false, loading: true }));
+    try {
+      const resp = await baseInstanceAPI.get("/artist-catalogue");
+      console.log("resp catalogue", resp.data);
+      let allCatalogues = resp.data.catalogue;
+      let catObjHashMap = {};
+      for (let value of allCatalogues) {
+        // console.log("Values is ", value);
+        catObjHashMap[value.albumTitle] = value;
+      }
+      setAllArtisteCatalogue((val) => ({ ...val, data: allCatalogues, hash: catObjHashMap, error: false, loading: false }));
+      console.log("Catalogeus.... hash is", catObjHashMap);
+    } catch (error) {
+      console.log("THere was an error loading all cataloges");
+      setAllArtisteCatalogue((val) => ({ ...val, error: true, loading: false }));
     }
   };
 
@@ -179,6 +199,7 @@ const AppDataProvider = ({ children }) => {
 
   useEffect(() => {
     fetchArtistes();
+    fetchAllCatalogues();
     setAppSection();
     if (!isLoggedIn()) {
       return redirectLoginSection();
@@ -187,7 +208,9 @@ const AppDataProvider = ({ children }) => {
       loadAppSectionData();
     }
   }, [section]);
-  return <DataContext.Provider value={{ artisteCatalogues, artistes, user, artistesUser, adminUser, setUserOnLogin, section: section, fetchArtisteUserCatalogues }}>{children}</DataContext.Provider>;
+  return (
+    <DataContext.Provider value={{ allArtisteCatalogues, artistes, user, artistesUser, adminUser, setUserOnLogin, section: section, fetchArtisteUserCatalogues }}>{children}</DataContext.Provider>
+  );
 };
 
 export default AppDataProvider;
