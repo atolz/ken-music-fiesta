@@ -11,6 +11,7 @@ export const DataContext = createContext({
   adminUser: {},
   setUserOnLogin: (type, data) => {},
   section: "",
+  setSection: () => {},
   fetchArtisteUserCatalogues: () => {},
 });
 
@@ -209,7 +210,9 @@ const AppDataProvider = ({ children }) => {
     }
   }, [section]);
   return (
-    <DataContext.Provider value={{ allArtisteCatalogues, artistes, user, artistesUser, adminUser, setUserOnLogin, section: section, fetchArtisteUserCatalogues }}>{children}</DataContext.Provider>
+    <DataContext.Provider value={{ allArtisteCatalogues, artistes, user, artistesUser, adminUser, setUserOnLogin, section: section, setSection: setSection, fetchArtisteUserCatalogues }}>
+      {children}
+    </DataContext.Provider>
   );
 };
 

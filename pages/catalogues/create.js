@@ -65,7 +65,8 @@ const CreateAccount = () => {
       fetchArtisteUserCatalogues();
       toggleAlertBar("Catalogue created successfully!!", "success", true, 6000);
       toggleLoad();
-      localStorage.setItem("section", "Artiste");
+      // localStorage.setItem("section", "Artiste");
+      AppData.setSection("Artiste");
       router.replace("/catalogues/dashboard");
     } catch (error) {
       if (error.response) {
