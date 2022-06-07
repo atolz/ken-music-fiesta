@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const MusicPlayerV2 = ({ title, songList, albumTitle }) => {
+const MusicPlayerV2 = ({ title, songList, albumTitle, theme = "dark" }) => {
   const audioRef = useRef(null);
   const [playingIndex, setPlayingIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
-  const [songs] = useState(songList);
+  const [songs, setSongs] = useState(songList);
   // const [songs] = useState([
   //   { name: "On the low", src: "https://cdn.kennismusic.app/38a89545-40a8-4f69-bdde-34de37cf4a9d.mp3", album: "Kalakuta Republic" },
   //   { name: "Power rangers", src: "/Teni.mp3", album: "Joeboy Republic" },
@@ -13,8 +13,9 @@ const MusicPlayerV2 = ({ title, songList, albumTitle }) => {
   // ]);
 
   useEffect(() => {
-    console.log("In Music player...:", songs);
-  }, [songs]);
+    console.log("In Music player...:", songList);
+    setSongs(songList);
+  }, [songList]);
 
   const togglePlay = (i) => {
     console.log("playing song is", songs[i].src);
@@ -79,13 +80,17 @@ const MusicPlayerV2 = ({ title, songList, albumTitle }) => {
             <span className=" align-text-bottom border-gray-lighter font-medium text-left pt-[10px] px-[16px] ">Time</span>
 
             <span className=" align-text-bottom border-gray-lighter font-medium text-left pt-[10px] px-[16px] ">Album</span>
-            <span className=" align-text-bottom border-gray-lighter font-medium text-left pt-[10px] px-[16px]">Album</span>
+            <span className=" align-text-bottom border-gray-lighter font-medium text-left pt-[10px] px-[16px]"></span>
           </div>
           {/* Body */}
 
-          {songs.map((el, i) => {
+          {songs?.map((el, i) => {
             return (
-              <div key={i} className=" text-black hover:bg-[#FCAC0D] rounded-full cursor-pointer grid grid-cols-[1fr_16.2rem_2fr_1fr_3fr_16.2rem] place-items-start items-center justify-start ">
+              <div
+                style={{ color: `${theme == "light" ? "white" : "black"}` }}
+                key={i}
+                className=" hover:bg-[#FCAC0D] rounded-full cursor-pointer grid grid-cols-[1fr_16.2rem_2fr_1fr_3fr_16.2rem] place-items-start items-center justify-start "
+              >
                 <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.2rem] font-medium">{i + 1}</span>
                 <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">
                   <div className="flex items-center">
@@ -99,7 +104,7 @@ const MusicPlayerV2 = ({ title, songList, albumTitle }) => {
                 </span>
                 <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">Artist 1</span>
                 <span className=" border-gray-lighter p-[16px] !py-[14px] text-right align-text-bottom text-[1.2rem] font-medium">1:30</span>
-                <span className=" border-gray-lighter p-[16px] !py-[14px]  align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">{albumTitle}</span>
+                <span className=" border-gray-lighter p-[16px] !py-[14px]  align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">{albumTitle || el.albumTitle}</span>
                 <span className=" border-gray-lighter p-[16px] !py-[14px] text-right align-text-bottom text-[1.2rem] font-medium ">
                   <div className="flex items-center gap-[1.4rem] place-self-start">
                     <img

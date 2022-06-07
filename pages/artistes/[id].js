@@ -17,10 +17,33 @@ const Details = () => {
   const router = useRouter();
   const [tracks, setTracks] = useState([]);
 
+  const buildAllTracksFromCatalogues = (catalogues) => {
+    const tracksArrays = catalogues?.map((cat) => {
+      // Add album Title to all tracks
+      const modified = cat.songTracks.map((track) => {
+        let newTrack = { ...track, albumTitle: cat.albumTitle };
+        return newTrack;
+      });
+
+      return modified;
+    });
+
+    let allTracks = [];
+
+    // combine all tracks array into a single track obj array
+    tracksArrays?.forEach((element) => {
+      allTracks = [...allTracks, ...element];
+    });
+    console.log("processed tracks are", allTracks);
+    return allTracks;
+  };
+
   useEffect(() => {
-    console.log("object hash is in ID...", artistes.hash, artistes.data);
-    // const allTracks = artistes.data.catalogues
-  }, [router, artistes.hash]);
+    console.log("Catalogys is...", artistes?.hash[router?.query?.id]?.catalogues);
+    const allTracks = buildAllTracksFromCatalogues(artistes?.hash[router?.query?.id]?.catalogues);
+    console.log("All tracks is:", allTracks);
+    setTracks(allTracks);
+  }, [router, artistes]);
   return (
     <div className="grow-0 shrink  scroll_hide mt-auto">
       <div className="bg-black w-full overflow-scroll  max-h-[70vh]  rounded-tl-[3rem] rounded-tr-[3rem] pt-[7.2rem] slide-up-now-opacity scroll_hide">
@@ -53,7 +76,7 @@ const Details = () => {
             {/* Stream Artist Music */}
             <div className=" hidden sidebar:block">
               {/* <MusicPlayer></MusicPlayer> */}
-              <MusicPlayerV2 songList={[]} title={"Stream Artiste Music"}></MusicPlayerV2>
+              <MusicPlayerV2 theme="light" songList={tracks} title={"Stream Artiste Music"}></MusicPlayerV2>
             </div>
             <div className=" block sidebar:hidden">
               <MusicPlayer2></MusicPlayer2>
