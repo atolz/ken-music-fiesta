@@ -1,11 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TableV1 from "../../Tables/TableV1";
 import PoweredBy from "../../Cards/PoweredBy";
 import { DataContext } from "../../../Context/fetchData";
+import TracksUploadedTable from "../../Tables/TracksUploaded";
 
 const CatalogueDashboard = () => {
   const AppData = useContext(DataContext);
+  const artisteCatalogues = AppData.artistesUser.catalogues;
   const artiste = AppData.artistesUser.dashboardHistory;
+  const [tracks, setTracks] = useState([]);
+
+  const buildAllTracksFromCatalogues = (catalogues) => {
+    const tracksArrays = catalogues?.map((cat) => {
+      // Add album Title to all tracks
+      const modified = cat.songTracks.map((track) => {
+        let newTrack = { ...track, albumTitle: cat.albumTitle };
+        return newTrack;
+      });
+
+      return modified;
+    });
+
+    let allTracks = [];
+
+    // combine all tracks array into a single track obj array
+    tracksArrays?.forEach((element) => {
+      allTracks = [...allTracks, ...element];
+    });
+    console.log("processed tracks are", allTracks);
+    return allTracks;
+  };
+
+  useEffect(() => {
+    console.log("Catalogys is.//////..", artisteCatalogues);
+    const allTracks = buildAllTracksFromCatalogues(artisteCatalogues);
+    console.log("All tracks is:", allTracks);
+    setTracks(allTracks);
+  }, [artisteCatalogues]);
+
   return (
     <div>
       <div className="flex flex-wrap mobile:gap-5 mb-[3.2rem]">
@@ -25,7 +57,7 @@ const CatalogueDashboard = () => {
       <section className="flex flex-wrap gap-10">
         {/* div-1 */}
         <div className=" flex-1">
-          <TableV1></TableV1>
+          <TracksUploadedTable data={tracks}></TracksUploadedTable>
         </div>
 
         {/* div-2 */}

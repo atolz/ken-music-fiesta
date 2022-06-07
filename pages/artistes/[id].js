@@ -44,6 +44,7 @@ const Details = () => {
     console.log("All tracks is:", allTracks);
     setTracks(allTracks);
   }, [router, artistes]);
+
   return (
     <div className="grow-0 shrink  scroll_hide mt-auto">
       <div className="bg-black w-full overflow-scroll  max-h-[70vh]  rounded-tl-[3rem] rounded-tr-[3rem] pt-[7.2rem] slide-up-now-opacity scroll_hide">
