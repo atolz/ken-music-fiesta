@@ -35,42 +35,6 @@ const BaseLayout = ({ children }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     // User profile details
-  //     try {
-  //       const userResp = await baseInstanceAPI.get("/profile/dashboard", {
-  //         headers: {
-  //           Authorization: `Bearer ${getLocalStorage("token")}`,
-  //         },
-  //       });
-  //       console.log("user is in layount ", userResp.data);
-  //       dispatch(setUserRedux(userResp.data));
-  //     } catch (error) {
-  //       console.log("Error loadin user extra data", error);
-  //     }
-
-  //     // Raffle History
-  //     try {
-  //       const historyData = await baseInstanceAPI.get("/ticket/get-raffle-history", {
-  //         headers: {
-  //           Authorization: `Bearer ${getLocalStorage("token")}`,
-  //         },
-  //       });
-  //       console.log("Raffle history data is... ", historyData.data);
-  //       dispatch(setDashboardHistory(historyData.data));
-  //     } catch (error) {
-  //       console.log("Error loadin user extra data: History Data", error);
-  //     }
-  //   };
-  //   console.log("is logged in useEffect", isLoggedIn());
-  //   if (!isLoggedIn()) {
-  //     router.push("/auth/sign-up");
-  //   } else if (!user) {
-  //     fetchData();
-  //   }
-  // }, []);
-
   const setActivePage = (page) => {
     dispatch(setGlobalPage(page));
   };

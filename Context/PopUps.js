@@ -17,11 +17,14 @@ import ChangePassword from "../Components/PopUps/ChangePassword";
 import EditCatalogue from "../Components/PopUps/EditCatalogue";
 import CreateCatalogue from "../Components/PopUps/CreateCatalogue";
 import BuyToken from "../Components/PopUps/BuyToken";
+import { setActivePage } from "../store/pages";
+import { useDispatch } from "react-redux";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
   initBuyRaffleTicket: () => {},
   initBuyToken: () => {},
+  initPayPerView: () => {},
   initChangePassword: () => {},
   initBuyTicket: () => {},
   onBuyTicket: () => {},
@@ -54,11 +57,14 @@ export const PopUpContextProvider = ({ children }) => {
   const { isLoggedIn, getLocalStorage } = useLocalStorage();
   const { toggleLoad } = useLoading();
   const toggleAlertBar = useShowAlert();
+  const dispatch = useDispatch();
+  const [page, setGlobalPage] = useState("Dashboard");
 
   const pouUpContextFunctions = {
     initBuyRaffleTicket: initBuyRaffleTicket,
     onBuyTicket: onBuyTicket,
     initBuyToken: initBuyToken,
+    initPayPerView: initPayPerView,
     initSelfCheckOut: initSelfCheckOut,
     initChangePassword: initChangePassword,
     initBuyTicket: initBuyTicket,
@@ -98,6 +104,15 @@ export const PopUpContextProvider = ({ children }) => {
     setPurpose("ProgressiveToken");
     toggle();
     setActiveModal("BuyToken");
+  }
+
+  function initPayPerView() {
+    if (!isLoggedIn()) {
+      return router.push("/auth/sign-in");
+    }
+    setPurpose("LiveStream");
+    setActiveModal("PaymentOptions");
+    toggle();
   }
 
   function initSelfCheckOut() {
@@ -162,9 +177,9 @@ export const PopUpContextProvider = ({ children }) => {
     console.log("enviroment is", env);
     let redirectUrl = "";
     if (env == "development") {
-      redirectUrl = `http://localhost:3000/dashboard?amount=${itemQuantity}&status=success`;
+      redirectUrl = `http://localhost:3000/dashboard?amount=${itemQuantity}&status=success&purpose=${purpose}`;
     } else if (env == "production") {
-      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?amount=${itemQuantity}&status=success`;
+      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?amount=${itemQuantity}&status=success&purpose=${purpose}`;
     }
     console.log("payment details is", {
       purpose: purpose,
@@ -261,16 +276,31 @@ export const PopUpContextProvider = ({ children }) => {
     setShowPopUp(false);
   }
 
+  const setPage = (page) => {
+    dispatch(setActivePage(page));
+  };
+
   useEffect(() => {
     console.log("Roter is ////////", router.query?.status);
-    if (router.query?.status?.includes("success")) {
+    console.log("Roter is ////////", router.query);
+    if (router.query?.status?.includes("success") && !router.query?.purpose?.includes("LiveStream")) {
       console.log("sucess payed");
       setLinkText("Go to dashboard");
+      // if
       setStatusTitle("Purchase Order Success");
       setText(`Your purchase order for ${router?.query?.amount} tickets was successful`);
       setActiveModal("Status");
       toggle();
-      router.push("/dashboard");
+      // router.push("/dashboard");
+    }
+
+    if (router.query?.status?.includes("success") && router.query?.purpose?.includes("LiveStream")) {
+      setLinkText("Go to livestream");
+      setText("Your purchase order for pay-per-view access was successful");
+      setStatusTitle("Pay-Per-View Access Successful");
+      setActiveModal("Status");
+      toggle();
+      setGlobalPage("Livestream Event");
     }
 
     // setTimeout(() => {
@@ -281,7 +311,19 @@ export const PopUpContextProvider = ({ children }) => {
   return (
     <>
       <Dialog scroll="body" open={showPopUp} onClose={pouUpContextFunctions.toggle}>
-        {activeModal == "Status" && <PopupStatus action={toggle} title={statusTitle} link={`/dashboard`} linkText={linkText} text={text} status={"success"}></PopupStatus>}
+        {activeModal == "Status" && (
+          <PopupStatus
+            action={() => {
+              toggle();
+              setPage(page);
+            }}
+            title={statusTitle}
+            link={`/dashboard`}
+            linkText={linkText}
+            text={text}
+            status={"success"}
+          ></PopupStatus>
+        )}
         {activeModal == "BuyEventTicket" && <BuyEventTicket onCancel={toggle} onBuyTicket={onBuyTicket}></BuyEventTicket>}
         {activeModal == "BuyRaffleTicket" && <BuyRaffleTicket onCancel={toggle} onBuyRaffleTicket={onBuyRaffleTicket}></BuyRaffleTicket>}
         {activeModal == "BuyToken" && <BuyToken onCancel={toggle} onBuyToken={onBuyToken}></BuyToken>}

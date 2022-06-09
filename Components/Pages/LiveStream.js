@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import PaymentOptions from "../PopUps/PaymentOptions";
 import PopupStatus from "../PopUps/PopUpStatus";
 import LSCountDown from "../LiveStream/CountDown";
 import Container from "../Layout/Container";
+import { popUpContext } from "../../Context/PopUps";
 
 const LiveStream = (props) => {
   const [accessType, setAccessType] = useState("");
@@ -13,6 +14,7 @@ const LiveStream = (props) => {
   const [statusText, setStatusText] = useState("");
   const [statusTitle, setStatusTitle] = useState("");
   const [statusLinkText, setStatusLinkText] = useState("");
+  const popUpFunctions = useContext(popUpContext);
 
   const [show, setShow] = useState(false);
   function toggle() {
@@ -56,9 +58,10 @@ const LiveStream = (props) => {
           <div className="flex flex-wrap gap-16">
             <div
               onClick={() => {
-                setShow(true);
-                setActiveModal("PaymentOptions");
-                setAccessType("Pay-Per-View");
+                // setShow(true);
+                // setActiveModal("PaymentOptions");
+                // setAccessType("Pay-Per-View");
+                popUpFunctions.initPayPerView();
               }}
               className="relative bg-[#F0F0F0] rounded-[2rem] max-w-[59.1rem] py-[3.9rem] px-[3.5rem] text-[1rem] min-w-[27rem] flex-1 hover:scale-[1.01] hover:shadow-sm cursor-pointer"
             >
