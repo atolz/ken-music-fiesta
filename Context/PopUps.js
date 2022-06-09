@@ -16,10 +16,12 @@ import SelectCardType from "../Components/PopUps/SelectCardType";
 import ChangePassword from "../Components/PopUps/ChangePassword";
 import EditCatalogue from "../Components/PopUps/EditCatalogue";
 import CreateCatalogue from "../Components/PopUps/CreateCatalogue";
+import BuyToken from "../Components/PopUps/BuyToken";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
   initBuyRaffleTicket: () => {},
+  initBuyToken: () => {},
   initChangePassword: () => {},
   initBuyTicket: () => {},
   onBuyTicket: () => {},
@@ -56,6 +58,7 @@ export const PopUpContextProvider = ({ children }) => {
   const pouUpContextFunctions = {
     initBuyRaffleTicket: initBuyRaffleTicket,
     onBuyTicket: onBuyTicket,
+    initBuyToken: initBuyToken,
     initSelfCheckOut: initSelfCheckOut,
     initChangePassword: initChangePassword,
     initBuyTicket: initBuyTicket,
@@ -88,6 +91,14 @@ export const PopUpContextProvider = ({ children }) => {
     toggle();
     setActiveModal("BuyRaffleTicket");
   }
+  function initBuyToken() {
+    if (!isLoggedIn()) {
+      return router.push("/auth/sign-in");
+    }
+    setPurpose("ProgressiveToken");
+    toggle();
+    setActiveModal("BuyToken");
+  }
 
   function initSelfCheckOut() {
     setPurpose("SelfCheckout");
@@ -118,6 +129,11 @@ export const PopUpContextProvider = ({ children }) => {
     setActiveModal("PaymentOptions");
   }
   function onBuyRaffleTicket(quantity) {
+    // setTicketAmount(amount);
+    setItemQuantity(quantity);
+    setActiveModal("PaymentOptions");
+  }
+  function onBuyToken(quantity) {
     // setTicketAmount(amount);
     setItemQuantity(quantity);
     setActiveModal("PaymentOptions");
@@ -154,6 +170,7 @@ export const PopUpContextProvider = ({ children }) => {
       purpose: purpose,
       itemQuantity: itemQuantity,
       payment_agent: payOptType,
+      // payment_agent: "PAYSTACK",
       ticketType: ticketType,
       redirectUrl: redirectUrl,
     });
@@ -165,6 +182,7 @@ export const PopUpContextProvider = ({ children }) => {
           purpose: purpose,
           itemQuantity: ticketAmount,
           payment_agent: payOptType,
+          // payment_agent: "PAYSTACK",
           ticketType: ticketType,
           redirectUrl: redirectUrl,
         },
@@ -174,7 +192,7 @@ export const PopUpContextProvider = ({ children }) => {
           },
         }
       );
-      console.log("response is", resp.data.redirectUrl);
+      console.log("response is", resp.data);
       router.push(resp.data.redirectUrl);
       toggleLoad();
     } catch (error) {
@@ -192,14 +210,14 @@ export const PopUpContextProvider = ({ children }) => {
     console.log("enviroment is", env);
     let redirectUrl = "";
     if (env == "development") {
-      redirectUrl = "http://localhost:3000/dashboard?status=success";
+      redirectUrl = `http://localhost:3000/dashboard?status=success&amount=${checkAmount}`;
     } else if (env == "production") {
-      redirectUrl = "https://ken-music-fiesta-2.vercel.app/dashboard?status=success";
+      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?status=success&amount=${checkAmount}`;
     }
     console.log("payment details is", {
       purpose: purpose,
       amount: checkAmount,
-      itemQuantity: ticketAmount,
+      // itemQuantity: ticketAmount,
       payment_agent: "PAYSTACK",
       // ticketType: "string",
       redirectUrl: redirectUrl,
@@ -222,8 +240,8 @@ export const PopUpContextProvider = ({ children }) => {
           },
         }
       );
-      console.log("response is", resp.data.redirectUrl);
-      router.push(resp.data.redirectUrl);
+      console.log("response is", resp.data);
+      // router.push(resp.data.redirectUrl);
       toggleLoad();
     } catch (error) {
       console.log("AN error has occured pls try again laters", error.response);
@@ -249,7 +267,7 @@ export const PopUpContextProvider = ({ children }) => {
       console.log("sucess payed");
       setLinkText("Go to dashboard");
       setStatusTitle("Purchase Order Success");
-      setText(`Your purchase order for ${router.query.amount} tickets was successful`);
+      setText(`Your purchase order for ${router?.query?.amount} tickets was successful`);
       setActiveModal("Status");
       toggle();
       router.push("/dashboard");
@@ -266,6 +284,7 @@ export const PopUpContextProvider = ({ children }) => {
         {activeModal == "Status" && <PopupStatus action={toggle} title={statusTitle} link={`/dashboard`} linkText={linkText} text={text} status={"success"}></PopupStatus>}
         {activeModal == "BuyEventTicket" && <BuyEventTicket onCancel={toggle} onBuyTicket={onBuyTicket}></BuyEventTicket>}
         {activeModal == "BuyRaffleTicket" && <BuyRaffleTicket onCancel={toggle} onBuyRaffleTicket={onBuyRaffleTicket}></BuyRaffleTicket>}
+        {activeModal == "BuyToken" && <BuyToken onCancel={toggle} onBuyToken={onBuyToken}></BuyToken>}
         {activeModal == "PaymentOptions" && <PaymentOptions onCancel={toggle} onSelectPayOption={onSelectPayOption}></PaymentOptions>}
         {activeModal == "SelfCheckOut" && <SelfCheckOut onCancel={toggle} onCheckOut={onCheckOut}></SelfCheckOut>}
         {activeModal == "ReviewCheckOut" && <ReviewCheckOut amount={checkAmount} vendor={vendor} onCancel={toggle} onReview={onReview}></ReviewCheckOut>}

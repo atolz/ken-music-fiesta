@@ -5,8 +5,8 @@ import { popUpContext } from "../../Context/PopUps";
 import { DataContext } from "../../Context/fetchData";
 
 const UserSideBar = ({ activePage, setActivePage }) => {
-  const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Livestream Event"];
-  const icons = ["Dashboard", "Raffle-Tickets", "Rewards", "Livestream-Event"];
+  const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Livestream Event", "Progressive Token"];
+  const icons = ["Dashboard", "Raffle-Tickets", "Rewards", "Livestream-Event", "Livestream-Event"];
   const popUpFunctions = useContext(popUpContext);
   const AppData = useContext(DataContext);
 
@@ -33,7 +33,7 @@ const UserSideBar = ({ activePage, setActivePage }) => {
               >
                 {/* Dot */}
                 <div
-                  className={`transition-all duration-200 w-[1rem] h-[1rem] rounded-full bg-[#FCAC0D] mr-[2.6rem] opacity-0 ${page == activePage ? " opacity-100" : ""} 
+                  className={`transition-all duration-200 w-[1rem] h-[1rem] rounded-full bg-[#FCAC0D] mr-[2.6rem]  ${page == activePage ? " opacity-100" : "opacity-0"} 
                  ${page == "Dashboard" && activePage == "Profile" ? " opacity-100" : ""}`}
                 ></div>
                 {/* Icon */}

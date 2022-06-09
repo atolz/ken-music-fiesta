@@ -22,6 +22,7 @@ import LandingPage from "../Components/Pages/LandingPage";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { DataContext } from "../Context/fetchData";
 import App from "next/app";
+import ProgressiveToken from "../Components/Pages/ProgressiveToken";
 // import { setActivePage as setGlobalPage } from "../store/pages";
 // import UseIsLoggedIn from "../hooks/useIsLoggedIn";
 
@@ -52,6 +53,7 @@ export default function Home() {
       {activePage == "Raffle Tickets" && <RaffleTickets appData={AppData}></RaffleTickets>}
       {activePage == "Rewards" && <Rewards appData={AppData}></Rewards>}
       {activePage == "Livestream Event" && <LiveStream AppData={AppData}></LiveStream>}
+      {activePage == "Progressive Token" && <ProgressiveToken AppData={AppData}></ProgressiveToken>}
       {activePage == "Profile" && <Profile appData={AppData}></Profile>}
       {/* {activePage == "Transactions" && <Transactions></Transactions>} */}
       {/* {activePage == "Landing" && <LandingPage></LandingPage>} */}

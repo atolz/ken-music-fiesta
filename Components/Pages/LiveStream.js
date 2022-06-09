@@ -83,7 +83,7 @@ const LiveStream = (props) => {
 
         {/* LiveStream && Count down */}
         {showLiveStream && (
-          <section className="px-[2rem] bg-[#FFF6E4] w-full h-[100vw] mobile:h-[72vw] md:!h-[36vw] rounded-[2rem] grid place-items-center place-content-center text-center">
+          <section className="px-[2rem] bg-[#FFF6E4] w-full h-[70vh] mobile:h-[70vh] md:!h-[79vh] rounded-[2rem] grid place-items-center place-content-center text-center">
             <p className=" font-bold text-[2.9rem] leading-[3.5rem]">Livestream of Easter fiesta</p>
             <LSCountDown time={1000000}></LSCountDown>
           </section>
