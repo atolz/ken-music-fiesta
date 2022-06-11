@@ -15,13 +15,10 @@ import Profile from "../Components/Pages/Profile";
 import BaseLayout from "../Components/Layout";
 
 import { useSelector } from "react-redux";
-// import { getMessage, getStatus, toggleSnackbar } from "../store/snackbar";
-// import { login } from "../store/user";
+
 import { getPage } from "../store/pages";
-import LandingPage from "../Components/Pages/LandingPage";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { DataContext } from "../Context/fetchData";
-import App from "next/app";
 import ProgressiveToken from "../Components/Pages/ProgressiveToken";
 // import { setActivePage as setGlobalPage } from "../store/pages";
 // import UseIsLoggedIn from "../hooks/useIsLoggedIn";
