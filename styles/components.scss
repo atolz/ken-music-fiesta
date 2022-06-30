@@ -94,7 +94,7 @@
     border: 2px solid transparent;
     box-sizing: border-box;
     border-radius: 1rem;
-    padding: 2rem 4.5rem;
+    padding: 2rem 2rem;
     transition: all 0.2s;
 
     @media (max-width: 400px) {
@@ -154,7 +154,7 @@
   /* Note: backdrop-filter has minimal browser support */
 
   border-radius: 2rem;
-  padding: 4.6rem 6.4rem;
+  padding: 5.6rem 4.4rem;
   // @apply sidebar:;
 
   @media (max-width: 500px) {

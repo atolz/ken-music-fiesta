@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CountDown from "../Dashboard/CountDown";
 
 import Dialog from "@mui/material/Dialog";
@@ -11,10 +11,12 @@ import ActivateCard from "../PopUps/ActivateCard";
 import ClaimReward from "../PopUps/ClaimReward";
 import CardColor from "../PopUps/CardColor";
 import VerifyBVN from "../PopUps/VerifyBVN";
+import { popUpContext } from "../../Context/PopUps";
 
 const Activate = () => {
   const [visible, setVisible] = useState(false);
   const [activeModal, setActiveModal] = useState("");
+  const popUpFunctions = useContext(popUpContext);
 
   const [show, setShow] = useState(false);
   function toggle() {
@@ -61,15 +63,16 @@ const Activate = () => {
         <h2 className="text-[2.8rem] sm:text-[3.6rem] font-bold leading-[3.4rem] mb-[1.2rem]">Activate Card</h2>
         <p className="font-normal leading-[2rem] text-[1.4rem]  max-w-[27rem] relative z-20">You have to activate your card to start making purchases. Kindly do that ASAP.</p>
         <div className="flex items-center">
-          {/* <button
+          <button
             onClick={() => {
-              setActiveModal("ActivateCard");
-              setShow(true);
+              // setActiveModal("ActivateCard");
+              // setShow(true);
+              popUpFunctions.initActivateCard();
             }}
             className="btn !bg-white white-shadow !text-black mr-[29rem] mt-[3.7rem] z-10"
           >
             Activate
-          </button> */}
+          </button>
           {/* {!visible && (
             <button
               onClick={() => {

@@ -104,7 +104,7 @@ const SignIn = () => {
         className="auth-form"
       >
         <h3>Sign In</h3>
-        <p className="mb-[4.4rem]">
+        <p className="mb-[3.4rem]">
           Hey there! Welcome back. Not yet a member?{" "}
           <Link href="/auth/sign-up">
             <a className="text-[#FCAC0D]">Sign Up</a>

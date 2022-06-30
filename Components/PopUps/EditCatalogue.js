@@ -9,6 +9,7 @@ import PopupLayout from "../Layout/Popup";
 import Upload from "../Upload";
 import { setActivePage as setGlobalPage } from "../../store/pages";
 import useLoading from "../../hooks/useLoading";
+import { popUpContext } from "../../Context/PopUps";
 // import { setActivePage as setGlobalPage } from "../../store/pages";
 
 const EditCatalogue = ({ toggleModal, onCancel, catalogueObj }) => {
@@ -38,6 +39,7 @@ const EditCatalogue = ({ toggleModal, onCancel, catalogueObj }) => {
     // ],
   });
   const [selectedValue, setSelectedValue] = useState("Music Artist");
+  const popUpFunctions = useContext(popUpContext);
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -107,6 +109,9 @@ const EditCatalogue = ({ toggleModal, onCancel, catalogueObj }) => {
       fetchArtisteUserCatalogues();
       toggleAlertBar("Catalogue updated successfully!!", "success", true, 6000);
       toggleModal();
+      setTimeout(() => {
+        popUpFunctions.initSetStatus("Go to dashboard", "Your Just successfully updated your catalogue", "Edit successful");
+      }, 1400);
       setActivePage("Catalogue");
       toggleLoad();
     } catch (error) {

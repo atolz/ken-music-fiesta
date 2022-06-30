@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ReactPlayer from "react-player";
 import { popUpContext } from "../../Context/PopUps";
 import useShowAlert from "../../hooks/useShowAlert";
 
 const ProgressiveToken = () => {
   const popUpFunctions = useContext(popUpContext);
+  const [url, setUrl] = useState("https://3961337113c0.eu-central-1.playback.live-video.net/api/video/v1/eu-central-1.116743752267.channel.PvTbwujZu99A.m3u8");
   const toggleAlertBar = useShowAlert();
   return (
     <section
@@ -28,11 +29,14 @@ const ProgressiveToken = () => {
         height={"100%"}
         light={"/performing.jpg"}
         controls={true}
+        url={url}
         // url="https://www.youtube.com/watch?v=PfpEefKiG2I"
-        url="https://www.youtube.com/watch?v=oKKKDfkgBho"
+        // url="https://3961337113c0.eu-central-1.playback.live-video.net/api/video/v1/eu-central-1.116743752267.channel.PvTbwujZu99A.m3u8"
+        // url="https://www.youtube.com/watch?v=oKKKDfkgBho"
         // url={["https://www.youtube.com/watch?v=PfpEefKiG2I", "https://www.youtube.com/watch?v=oKKKDfkgBho"]}
-        onError={() => {
-          console.log("An error occured trying to play video");
+        onError={(error) => {
+          console.log("An error occured trying to play video", error);
+          setUrl("https://www.youtube.com/watch?v=oKKKDfkgBho");
           toggleAlertBar("An error occured playing the livestream. Pls check your internet or try again later!", "error", true, 10000);
         }}
       />

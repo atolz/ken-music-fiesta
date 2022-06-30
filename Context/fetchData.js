@@ -18,7 +18,7 @@ export const DataContext = createContext({
 const AppDataProvider = ({ children }) => {
   const router = useRouter();
   const { getLocalStorage, isLoggedIn } = useLocalStorage();
-  const [section, setSection] = useState(""); // Sections: User, Admin, Artiste
+  const [section, setSection] = useState("User"); // Sections: User, Admin, Artiste
   const [artistes, setArtistes] = useState({
     data: [],
     error: false,

@@ -19,11 +19,15 @@ import CreateCatalogue from "../Components/PopUps/CreateCatalogue";
 import BuyToken from "../Components/PopUps/BuyToken";
 import { setActivePage } from "../store/pages";
 import { useDispatch } from "react-redux";
+import CardColor from "../Components/PopUps/CardColor";
+import VerifyBVN from "../Components/PopUps/VerifyBVN";
+import ActivateCard from "../Components/PopUps/ActivateCard";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
   initBuyRaffleTicket: () => {},
   initBuyToken: () => {},
+  initActivateCard: () => {},
   initPayPerView: () => {},
   initChangePassword: () => {},
   initBuyTicket: () => {},
@@ -35,6 +39,7 @@ const pouUpContextFunctions = {
   closeModal: () => {},
   initEditCatalogue: (catalogue) => {},
   initCreateCatalogue: () => {},
+  initSetStatus: () => {},
   // test: "",
 };
 export const popUpContext = createContext(pouUpContextFunctions);
@@ -45,6 +50,7 @@ export const PopUpContextProvider = ({ children }) => {
   const [showPopUp, setShowPopUp] = useState(false);
   const [statusTitle, setStatusTitle] = useState();
   const [linkText, setLinkText] = useState();
+  const [link, setLink] = useState("/dashboard");
   const [text, setText] = useState();
   const [ticketAmount, setTicketAmount] = useState(1);
   const [ticketType, setTicketType] = useState("");
@@ -64,6 +70,7 @@ export const PopUpContextProvider = ({ children }) => {
     initBuyRaffleTicket: initBuyRaffleTicket,
     onBuyTicket: onBuyTicket,
     initBuyToken: initBuyToken,
+    initActivateCard: initActivateCard,
     initPayPerView: initPayPerView,
     initSelfCheckOut: initSelfCheckOut,
     initChangePassword: initChangePassword,
@@ -71,6 +78,7 @@ export const PopUpContextProvider = ({ children }) => {
     onCheckOut: onCheckOut,
     initEditCatalogue: initEditCatalogue,
     initCreateCatalogue: initCreateCatalogue,
+    initSetStatus: initSetStatus,
 
     onReview: onReview,
 
@@ -105,6 +113,11 @@ export const PopUpContextProvider = ({ children }) => {
     toggle();
     setActiveModal("BuyToken");
   }
+  function initActivateCard() {
+    setPurpose("CardActivation");
+    toggle();
+    setActiveModal("ActivateCard");
+  }
 
   function initPayPerView() {
     if (!isLoggedIn()) {
@@ -137,6 +150,16 @@ export const PopUpContextProvider = ({ children }) => {
     toggle();
   }
 
+  function initSetStatus(linkText, text, title) {
+    console.log("setting status.................'''");
+    setLinkText(linkText);
+    setLink("/catalogues/dashboard");
+    setText(text);
+    setStatusTitle(title);
+    setActiveModal("Status");
+    setShowPopUp(true);
+  }
+
   function onBuyTicket(quantity, type) {
     // setTicketAmount(amount);
     setTicketType(type);
@@ -151,6 +174,21 @@ export const PopUpContextProvider = ({ children }) => {
   function onBuyToken(quantity) {
     // setTicketAmount(amount);
     setItemQuantity(quantity);
+    setActiveModal("PaymentOptions");
+  }
+  function onActivate(type) {
+    // setItemQuantity(quantity);
+    setActiveModal("CardColor");
+  }
+  function onSelectColor(type) {
+    // setItemQuantity(quantity);
+    setActiveModal("PaymentOptions");
+  }
+  function onInputBVN(status) {
+    // setItemQuantity(quantity);
+    if (status == false) {
+      return;
+    }
     setActiveModal("PaymentOptions");
   }
 
@@ -309,7 +347,7 @@ export const PopUpContextProvider = ({ children }) => {
   }, [router.query?.status]);
 
   return (
-    <>
+    <popUpContext.Provider value={pouUpContextFunctions}>
       <Dialog scroll="body" open={showPopUp} onClose={pouUpContextFunctions.toggle}>
         {activeModal == "Status" && (
           <PopupStatus
@@ -318,7 +356,7 @@ export const PopUpContextProvider = ({ children }) => {
               setPage(page);
             }}
             title={statusTitle}
-            link={`/dashboard`}
+            link={link}
             linkText={linkText}
             text={text}
             status={"success"}
@@ -332,6 +370,9 @@ export const PopUpContextProvider = ({ children }) => {
         {activeModal == "ReviewCheckOut" && <ReviewCheckOut amount={checkAmount} vendor={vendor} onCancel={toggle} onReview={onReview}></ReviewCheckOut>}
         {activeModal == "SelectCardType" && <SelectCardType onCancel={toggle} onSelectCardType={onSelectCardType}></SelectCardType>}
         {activeModal == "VerifyPayment" && <VerifyPayment onCancel={toggle} onVerify={onVerify}></VerifyPayment>}
+        {activeModal == "CardColor" && <CardColor onCancel={toggle} onSelectColor={onSelectColor}></CardColor>}
+        {/* {activeModal == "VerifyBVN" && <VerifyBVN onCancel={toggle} onInputBVN={onInputBVN}></VerifyBVN>} */}
+        {activeModal == "ActivateCard" && <ActivateCard onCancel={toggle} onActivate={onActivate}></ActivateCard>}
         {activeModal == "EditCatalogue" && <EditCatalogue catalogueObj={editCatalogueObj} onCancel={toggle} toggleModal={toggle}></EditCatalogue>}
         {activeModal == "CreateCatalogue" && <CreateCatalogue onCancel={toggle} toggleModal={toggle}></CreateCatalogue>}
         {activeModal == "ChangePassword" && (
@@ -344,7 +385,7 @@ export const PopUpContextProvider = ({ children }) => {
           ></ChangePassword>
         )}
       </Dialog>
-      <popUpContext.Provider value={pouUpContextFunctions}>{children}</popUpContext.Provider>
-    </>
+      {children}
+    </popUpContext.Provider>
   );
 };

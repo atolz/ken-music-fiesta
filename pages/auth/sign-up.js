@@ -92,7 +92,7 @@ const SignUp = () => {
             }}
           >
             <h3>Sign up</h3>
-            <p className="mb-[5.4rem]">
+            <p className="mb-[3.4rem]">
               Hey there! Not yet a member fill the form below to register. Already a member?{" "}
               <Link href="/auth/sign-in">
                 <a className="text-[#FCAC0D]">Sign In</a>

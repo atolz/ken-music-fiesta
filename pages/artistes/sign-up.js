@@ -69,16 +69,20 @@ const SignUp = () => {
       setCreated(true);
       toggleLoad();
       // Loggin user to get token for creating Catalogue or redirecting to dashboard: User is not redirected to Artiste Signin after signup
-      const loginResp = await baseInstanceAPI.post(
-        "/artist/login",
-        JSON.stringify({
-          email: user.email,
-          password: user.password,
-        })
-      );
-      setLocalStorage("token", loginResp.data.access_token);
-      setLocalStorage("section", "Artiste");
-      AppData.setUserOnLogin("Artiste", { username: user.email });
+      try {
+        const loginResp = await baseInstanceAPI.post(
+          "/artist/login",
+          JSON.stringify({
+            email: user.email,
+            password: user.password,
+          })
+        );
+        setLocalStorage("token", loginResp.data.access_token);
+        setLocalStorage("section", "Artiste");
+        AppData.setUserOnLogin("Artiste", { username: user.email });
+      } catch (error) {
+        toggleAlertBar("Login Error! Pls try again later.", "fail", 20000);
+      }
     } catch (error) {
       toggleLoad();
       if (!error.response) {
