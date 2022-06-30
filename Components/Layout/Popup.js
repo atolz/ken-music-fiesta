@@ -4,11 +4,11 @@ const Popup = ({ children, actionText, cancelAction = () => {}, action = () => {
   return (
     <div className="bg-white rounded-[2rem] scroll_hide">
       {/* Body */}
-      <div className="border-b py-[4rem] sidebar:py-[4rem] pb-[3.3rem] px-[3.5rem] sidebar:px-[5.4rem]">{children}</div>
+      <div className="border-b py-[3.5rem] sidebar:py-[3.5rem] sidebar:pt-[4.5rem] pb-[3.3rem] px-[3.5rem] sidebar:px-[4.4rem]">{children}</div>
 
       {/* Footer */}
       {footer && (
-        <div className="py-[3rem] sidbar:py-[4.1rem] px-[3.5rem] sidebar:px-[5.4rem] flex items-center justify-end">
+        <div className="py-[2.4rem] sidbar:py-[2.4rem] px-[3.5rem] sidebar:px-[5.4rem] flex items-center justify-end">
           <button
             onClick={() => {
               cancelAction();

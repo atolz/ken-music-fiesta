@@ -29,7 +29,7 @@ const BuyRaffleTicket = ({ onBuyRaffleTicket, onCancel }) => {
           <IncDec onCange={onChange}></IncDec>
         </div>
         {/* Total */}
-        <div className=" py-[2rem] mobile:py-[3rem] px-[2.2rem] rounded-[2rem] bg-[#F8F9FD] grid place-items-center">
+        <div className=" py-[2rem] mobile:py-[2.5rem] px-[2.2rem] rounded-[2rem] bg-[#F8F9FD] grid place-items-center">
           <p className="font-semibold text-[2rem] mobile:text-[3rem] text-[#CECECE] leading-[3.6rem] whitespace-nowrap">Total - N{total}</p>
         </div>
       </PopupLayout>
