@@ -8,7 +8,8 @@ import Security from "../Profile/Security";
 
 const Profile = (props) => {
   const [active, setActive] = useState("Profile");
-  const navs = ["Profile", "Security", "Bank Details"];
+  // const navs = ["Profile", "Security", "Bank Details"];
+  const navs = ["Profile", "Security"];
 
   return (
     <div {...props} className="">
@@ -34,7 +35,7 @@ const Profile = (props) => {
           {/* Profile */}
           {active == "Profile" && <MyProfile user={props.appData.user.data}></MyProfile>}
           {active == "Security" && <Security></Security>}
-          {active == "Bank Details" && <ActDetails></ActDetails>}
+          {/* {active == "Bank Details" && <ActDetails></ActDetails>} */}
           {/* <button className="btn ml-auto !bg-[#F0F0F0] relative mt-auto">Save Changes</button> */}
         </div>
       </div>

@@ -34,7 +34,7 @@ const Rewards = (props) => {
                   setShow(true);
                   setActiveModal("ClaimReward");
                 }}
-                className="btn btn--outlined mt-[5.8rem] !border-2 !border-[black]"
+                className="btn btn--outlined mt-[5.8rem] !border-2 !border-[black] invisible"
               >
                 Claim Reward
               </button>

@@ -13,8 +13,8 @@ const AuthStatus = ({
   return (
     <div className="auth-container !mb-[10rem]">
       <div className="grid place-items-center text-center">
-        {status == "success" && <img src="/success.svg" className="mb-[7rem]"></img>}
-        {status == "failed" && <img src="/failed.svg" className="mb-[7rem]"></img>}
+        {status == "success" && <img src="/success.svg" className="mb-[7rem] w-[129px] h-[129px]"></img>}
+        {status == "failed" && <img src="/failed.svg" className="mb-[7rem] w-[129px] h-[129px]"></img>}
         <h3 className="text-[3.2rem] text-white leading-[3.9rem] font-bold mb-[1.4rem]">{title}</h3>
         {status == "success" && <p className="mb-[5.8rem] !text-center font-medium text-[1.6rem] leading-[2.6rem] max-w-[42.7rem]">{caption}</p>}
         {status == "failed" && (
