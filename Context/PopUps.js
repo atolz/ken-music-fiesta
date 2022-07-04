@@ -330,7 +330,9 @@ export const PopUpContextProvider = ({ children }) => {
       setText(`Your purchase order for ${router?.query?.amount} tickets was successful`);
       setActiveModal("Status");
       toggle();
-      // router.push("/dashboard");
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000);
     }
     if (router.query?.status?.includes("success") && router.query?.purpose?.includes("SelfCheckout")) {
       setLinkText("Go to dashboard");
@@ -338,7 +340,9 @@ export const PopUpContextProvider = ({ children }) => {
       setText(`Your payment of ${router?.query?.amount} was successful!`);
       setActiveModal("Status");
       toggle();
-      // router.push("/dashboard");
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000);
     }
 
     if (router.query?.status?.includes("success") && router.query?.purpose?.includes("LiveStream")) {
@@ -348,11 +352,10 @@ export const PopUpContextProvider = ({ children }) => {
       setActiveModal("Status");
       toggle();
       setGlobalPage("Livestream Event");
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000);
     }
-
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 1000);
   }, [router.query?.status]);
 
   return (
