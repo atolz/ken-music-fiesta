@@ -24,7 +24,12 @@ const SelfCheckOut = ({ onCheckOut, onCancel }) => {
         <div className="popup-box">
           <h3>Self Checkout</h3>
           <p className=" !mb-[2.3rem]">Provide your purchase details and purchase location and confirm your payment</p>
-          <form className="popup-form ">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+            className="popup-form "
+          >
             <div className="form-group !mb-[1.2rem]">
               <label>Vendor</label>
               <select

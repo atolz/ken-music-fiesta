@@ -319,6 +319,7 @@ export const PopUpContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    router.prefetch("https://checkout.seerbitapi.com/");
     console.log("Roter is ////////", router.query?.status);
     console.log("Roter is ////////", router.query);
     if (router.query?.status?.includes("success") && (!router.query?.purpose?.includes("LiveStream") || !router.query?.purpose?.includes("SelfCheckout"))) {
