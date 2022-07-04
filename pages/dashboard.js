@@ -20,12 +20,14 @@ import { getPage } from "../store/pages";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { DataContext } from "../Context/fetchData";
 import ProgressiveToken from "../Components/Pages/ProgressiveToken";
+import useIsLoggedIn from "../hooks/useIsLoggedIn";
 // import { setActivePage as setGlobalPage } from "../store/pages";
 // import UseIsLoggedIn from "../hooks/useIsLoggedIn";
 
 export default function Home() {
   const activePage = useSelector(getPage);
-  const { getLocalStorage } = useLocalStorage();
+  const { getLocalStorage, isLoggedIn } = useLocalStorage();
+  // const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
   const AppData = useContext(DataContext);
   // const user = AppData.user.data;
@@ -33,7 +35,7 @@ export default function Home() {
 
   useEffect(() => {
     router.prefetch("/auth/sign-in");
-    if (getLocalStorage("section") != "User") {
+    if (getLocalStorage("section") != "User" || !isLoggedIn()) {
       router.replace("/auth/sign-in");
     }
   }, []);

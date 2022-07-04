@@ -203,9 +203,9 @@ const AppDataProvider = ({ children }) => {
     fetchArtistes();
     fetchAllCatalogues();
     setAppSection();
-    if (!isLoggedIn()) {
-      return redirectLoginSection();
-    }
+    // if (!isLoggedIn()) {
+    //   return redirectLoginSection();
+    // }
     if (isLoggedIn()) {
       loadAppSectionData();
     }

@@ -263,9 +263,9 @@ export const PopUpContextProvider = ({ children }) => {
     console.log("enviroment is", env);
     let redirectUrl = "";
     if (env == "development") {
-      redirectUrl = `http://localhost:3000/dashboard?status=success&amount=${checkAmount}`;
+      redirectUrl = `http://localhost:3000/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}`;
     } else if (env == "production") {
-      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?status=success&amount=${checkAmount}`;
+      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}`;
     }
     console.log("payment details is", {
       purpose: purpose,
@@ -294,7 +294,7 @@ export const PopUpContextProvider = ({ children }) => {
         }
       );
       console.log("response is", resp.data);
-      // router.push(resp.data.redirectUrl);
+      router.push(resp.data.redirectUrl);
       toggleLoad();
     } catch (error) {
       console.log("AN error has occured pls try again laters", error.response);
@@ -321,7 +321,7 @@ export const PopUpContextProvider = ({ children }) => {
   useEffect(() => {
     console.log("Roter is ////////", router.query?.status);
     console.log("Roter is ////////", router.query);
-    if (router.query?.status?.includes("success") && !router.query?.purpose?.includes("LiveStream")) {
+    if (router.query?.status?.includes("success") && (!router.query?.purpose?.includes("LiveStream") || !router.query?.purpose?.includes("SelfCheckout"))) {
       console.log("sucess payed");
       setLinkText("Go to dashboard");
       // if
@@ -331,19 +331,27 @@ export const PopUpContextProvider = ({ children }) => {
       toggle();
       // router.push("/dashboard");
     }
+    if (router.query?.status?.includes("success") && router.query?.purpose?.includes("SelfCheckout")) {
+      setLinkText("Go to dashboard");
+      setStatusTitle("Purchase Order Success");
+      setText(`Your payment of ${router?.query?.amount} was successful!`);
+      setActiveModal("Status");
+      toggle();
+      // router.push("/dashboard");
+    }
 
     if (router.query?.status?.includes("success") && router.query?.purpose?.includes("LiveStream")) {
       setLinkText("Go to livestream");
-      setText("Your purchase order for pay-per-view access was successful");
+      setText("Your purchase order for pay-per-view access was successful!");
       setStatusTitle("Pay-Per-View Access Successful");
       setActiveModal("Status");
       toggle();
       setGlobalPage("Livestream Event");
     }
 
-    // setTimeout(() => {
-    //   router.push("/dashboard");
-    // }, 5000);
+    setTimeout(() => {
+      router.push("/dashboard");
+    }, 1000);
   }, [router.query?.status]);
 
   return (
