@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import CardColor from "../Components/PopUps/CardColor";
 import VerifyBVN from "../Components/PopUps/VerifyBVN";
 import ActivateCard from "../Components/PopUps/ActivateCard";
+import Head from "next/head";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
@@ -319,7 +320,6 @@ export const PopUpContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    router.prefetch("https://checkout.seerbitapi.com/");
     console.log("Roter is ////////", router.query?.status);
     console.log("Roter is ////////", router.query);
     if (router.query?.status?.includes("success") && (!router.query?.purpose?.includes("LiveStream") || !router.query?.purpose?.includes("SelfCheckout"))) {
@@ -356,45 +356,52 @@ export const PopUpContextProvider = ({ children }) => {
   }, [router.query?.status]);
 
   return (
-    <popUpContext.Provider value={pouUpContextFunctions}>
-      <Dialog scroll="body" open={showPopUp} onClose={pouUpContextFunctions.toggle}>
-        {activeModal == "Status" && (
-          <PopupStatus
-            action={() => {
-              toggle();
-              setPage(page);
-            }}
-            title={statusTitle}
-            link={link}
-            linkText={linkText}
-            text={text}
-            status={"success"}
-          ></PopupStatus>
-        )}
-        {activeModal == "BuyEventTicket" && <BuyEventTicket onCancel={toggle} onBuyTicket={onBuyTicket}></BuyEventTicket>}
-        {activeModal == "BuyRaffleTicket" && <BuyRaffleTicket onCancel={toggle} onBuyRaffleTicket={onBuyRaffleTicket}></BuyRaffleTicket>}
-        {activeModal == "BuyToken" && <BuyToken onCancel={toggle} onBuyToken={onBuyToken}></BuyToken>}
-        {activeModal == "PaymentOptions" && <PaymentOptions onCancel={toggle} onSelectPayOption={onSelectPayOption}></PaymentOptions>}
-        {activeModal == "SelfCheckOut" && <SelfCheckOut onCancel={toggle} onCheckOut={onCheckOut}></SelfCheckOut>}
-        {activeModal == "ReviewCheckOut" && <ReviewCheckOut amount={checkAmount} vendor={vendor} onCancel={toggle} onReview={onReview}></ReviewCheckOut>}
-        {activeModal == "SelectCardType" && <SelectCardType onCancel={toggle} onSelectCardType={onSelectCardType}></SelectCardType>}
-        {activeModal == "VerifyPayment" && <VerifyPayment onCancel={toggle} onVerify={onVerify}></VerifyPayment>}
-        {activeModal == "CardColor" && <CardColor onCancel={toggle} onSelectColor={onSelectColor}></CardColor>}
-        {/* {activeModal == "VerifyBVN" && <VerifyBVN onCancel={toggle} onInputBVN={onInputBVN}></VerifyBVN>} */}
-        {activeModal == "ActivateCard" && <ActivateCard onCancel={toggle} onActivate={onActivate}></ActivateCard>}
-        {activeModal == "EditCatalogue" && <EditCatalogue catalogueObj={editCatalogueObj} onCancel={toggle} toggleModal={toggle}></EditCatalogue>}
-        {activeModal == "CreateCatalogue" && <CreateCatalogue onCancel={toggle} toggleModal={toggle}></CreateCatalogue>}
-        {activeModal == "ChangePassword" && (
-          <ChangePassword
-            toggleModal={toggle}
-            // onCancel={() => {
-            //   // console.log("should toggleChange password");
-            //   toggle();
-            // }}
-          ></ChangePassword>
-        )}
-      </Dialog>
-      {children}
-    </popUpContext.Provider>
+    <>
+      <Head>
+        <link rel="preconnect" href="https://checkout.seerbitapi.com/" />
+        <link rel="dns-prefetch" href="https://checkout.seerbitapi.com/" />
+        <link rel="prefetch" href="https://checkout.seerbitapi.com/" />
+      </Head>
+      <popUpContext.Provider value={pouUpContextFunctions}>
+        <Dialog scroll="body" open={showPopUp} onClose={pouUpContextFunctions.toggle}>
+          {activeModal == "Status" && (
+            <PopupStatus
+              action={() => {
+                toggle();
+                setPage(page);
+              }}
+              title={statusTitle}
+              link={link}
+              linkText={linkText}
+              text={text}
+              status={"success"}
+            ></PopupStatus>
+          )}
+          {activeModal == "BuyEventTicket" && <BuyEventTicket onCancel={toggle} onBuyTicket={onBuyTicket}></BuyEventTicket>}
+          {activeModal == "BuyRaffleTicket" && <BuyRaffleTicket onCancel={toggle} onBuyRaffleTicket={onBuyRaffleTicket}></BuyRaffleTicket>}
+          {activeModal == "BuyToken" && <BuyToken onCancel={toggle} onBuyToken={onBuyToken}></BuyToken>}
+          {activeModal == "PaymentOptions" && <PaymentOptions onCancel={toggle} onSelectPayOption={onSelectPayOption}></PaymentOptions>}
+          {activeModal == "SelfCheckOut" && <SelfCheckOut onCancel={toggle} onCheckOut={onCheckOut}></SelfCheckOut>}
+          {activeModal == "ReviewCheckOut" && <ReviewCheckOut amount={checkAmount} vendor={vendor} onCancel={toggle} onReview={onReview}></ReviewCheckOut>}
+          {activeModal == "SelectCardType" && <SelectCardType onCancel={toggle} onSelectCardType={onSelectCardType}></SelectCardType>}
+          {activeModal == "VerifyPayment" && <VerifyPayment onCancel={toggle} onVerify={onVerify}></VerifyPayment>}
+          {activeModal == "CardColor" && <CardColor onCancel={toggle} onSelectColor={onSelectColor}></CardColor>}
+          {/* {activeModal == "VerifyBVN" && <VerifyBVN onCancel={toggle} onInputBVN={onInputBVN}></VerifyBVN>} */}
+          {activeModal == "ActivateCard" && <ActivateCard onCancel={toggle} onActivate={onActivate}></ActivateCard>}
+          {activeModal == "EditCatalogue" && <EditCatalogue catalogueObj={editCatalogueObj} onCancel={toggle} toggleModal={toggle}></EditCatalogue>}
+          {activeModal == "CreateCatalogue" && <CreateCatalogue onCancel={toggle} toggleModal={toggle}></CreateCatalogue>}
+          {activeModal == "ChangePassword" && (
+            <ChangePassword
+              toggleModal={toggle}
+              // onCancel={() => {
+              //   // console.log("should toggleChange password");
+              //   toggle();
+              // }}
+            ></ChangePassword>
+          )}
+        </Dialog>
+        {children}
+      </popUpContext.Provider>
+    </>
   );
 };
