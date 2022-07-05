@@ -5,6 +5,7 @@ import GotMail from "../../Components/Auth/GotMail";
 import { baseInstanceAPI } from "../../axios";
 import useLoading from "../../hooks/useLoading";
 import useShowAlert from "../../hooks/useShowAlert";
+import { useRouter } from "next/router";
 
 const SignUp = () => {
   const { isLoading, toggleLoad } = useLoading();
@@ -13,12 +14,18 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneErrror] = useState("");
+  const [confError, setConfError] = useState("");
+  const [passError, setPassError] = useState("");
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
+    password: "",
+    confirmPassword: "",
+    ref: "",
   });
+  const router = useRouter();
 
   function emailValidation() {
     const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -34,12 +41,13 @@ const SignUp = () => {
       console.log("Email is not valid");
       return;
     }
+    let userObj = { ...user, ref: router?.query?.ref };
     console.log("base url is", process.env.NEXT_PUBLIC_DEVELOPMENT_URL);
     toggleLoad();
 
     try {
-      console.log("submited user is", JSON.stringify(user));
-      const response = await baseInstanceAPI.post("account/initiate", JSON.stringify(user));
+      console.log("submited user is", JSON.stringify(userObj));
+      const response = await baseInstanceAPI.post("account/initiate", JSON.stringify(userObj));
       toggleAlertBar("Verification email sent.", "success", 5000);
       console.log(response);
       setGotMail(true);

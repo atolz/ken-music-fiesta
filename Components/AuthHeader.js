@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { popUpContext } from "../Context/PopUps";
+import { useRouter } from "next/router";
 
 const Container = ({ children }) => {
   return <div className="max-w-[182rem] mx-auto w-full px-[2rem] sidebar:px-[10rem] flex items-center">{children}</div>;
@@ -9,6 +10,7 @@ const Container = ({ children }) => {
 const AuthHeader = () => {
   const [show, setShow] = useState(false);
   const popUpFunctions = useContext(popUpContext);
+  const router = useRouter();
   return (
     // <header className="flex items-center px-[12.5rem] py-[2.6rem] fixed top-0 left-0 w-full z-10">
     //   <Link href={"/"}>
@@ -37,9 +39,17 @@ const AuthHeader = () => {
           >
             Buy Event Ticket
           </button>
-          <Link href={"/auth/sign-up"}>
-            <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign Up</button>
-          </Link>
+          {}
+          {(router.pathname.includes("sign-in") || router.pathname === "/") && (
+            <Link href={"/auth/sign-up"}>
+              <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign Up</button>
+            </Link>
+          )}
+          {router.pathname.includes("sign-up") && (
+            <Link href={"/auth/sign-in"}>
+              <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign In</button>
+            </Link>
+          )}
         </div>
         {/* Burger Menu */}
         <button

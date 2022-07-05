@@ -163,19 +163,22 @@ export const PopUpContextProvider = ({ children }) => {
 
   function onBuyTicket(quantity, type) {
     // setTicketAmount(amount);
-    setTicketType(type);
-    setItemQuantity(quantity);
-    setActiveModal("PaymentOptions");
+    // setTicketType(type);
+    // setItemQuantity(quantity);
+    // setActiveModal("PaymentOptions");
+    onSelectPayOption("SEERBIT", quantity, type);
   }
   function onBuyRaffleTicket(quantity) {
     // setTicketAmount(amount);
-    setItemQuantity(quantity);
-    setActiveModal("PaymentOptions");
+    // setItemQuantity(quantity);
+    // setActiveModal("PaymentOptions");
+    onSelectPayOption("SEERBIT", quantity);
   }
   function onBuyToken(quantity) {
     // setTicketAmount(amount);
-    setItemQuantity(quantity);
-    setActiveModal("PaymentOptions");
+    // setItemQuantity(quantity);
+    // setActiveModal("PaymentOptions");
+    onSelectPayOption("SEERBIT", quantity);
   }
   function onActivate(type) {
     // setItemQuantity(quantity);
@@ -211,21 +214,21 @@ export const PopUpContextProvider = ({ children }) => {
     setActiveModal("Status");
   }
 
-  async function onSelectPayOption(payOptType) {
+  async function onSelectPayOption(payOptType, quantity, type) {
     const env = process.env.NODE_ENV;
     console.log("enviroment is", env);
     let redirectUrl = "";
     if (env == "development") {
-      redirectUrl = `http://localhost:3000/dashboard?amount=${itemQuantity}&status=success&purpose=${purpose}`;
+      redirectUrl = `http://localhost:3000/dashboard?amount=${quantity}&status=success&purpose=${purpose}`;
     } else if (env == "production") {
-      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?amount=${itemQuantity}&status=success&purpose=${purpose}`;
+      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?amount=${quantity}&status=success&purpose=${purpose}`;
     }
     console.log("payment details is", {
       purpose: purpose,
-      itemQuantity: itemQuantity,
-      payment_agent: payOptType,
+      itemQuantity: quantity || itemQuantity,
+      payment_agent: payOptType || "SEERBIT",
       // payment_agent: "PAYSTACK",
-      ticketType: ticketType,
+      ticketType: type || ticketType,
       redirectUrl: redirectUrl,
     });
     toggleLoad();
@@ -234,7 +237,7 @@ export const PopUpContextProvider = ({ children }) => {
         "/payment/buy",
         {
           purpose: purpose,
-          itemQuantity: ticketAmount,
+          itemQuantity: quantity || itemQuantity,
           payment_agent: payOptType,
           // payment_agent: "PAYSTACK",
           ticketType: ticketType,
@@ -272,7 +275,7 @@ export const PopUpContextProvider = ({ children }) => {
       purpose: purpose,
       amount: checkAmount,
       // itemQuantity: ticketAmount,
-      payment_agent: "PAYSTACK",
+      payment_agent: "SEERBIT",
       // ticketType: "string",
       redirectUrl: redirectUrl,
     });
@@ -284,7 +287,7 @@ export const PopUpContextProvider = ({ children }) => {
           purpose: purpose,
           itemQuantity: ticketAmount,
           amount: checkAmount,
-          payment_agent: "PAYSTACK",
+          payment_agent: "SEERBIT",
           // ticketType: "string",
           redirectUrl: redirectUrl,
         },

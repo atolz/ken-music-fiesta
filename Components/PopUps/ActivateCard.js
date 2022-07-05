@@ -4,7 +4,7 @@ import Radio from "@mui/material/Radio";
 import { FormControlLabel } from "@mui/material";
 
 const ActivateCard = ({ onActivate, onCancel }) => {
-  const [selectedValue, setSelectedValue] = React.useState("a");
+  const [selectedValue, setSelectedValue] = React.useState("virtual");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);

@@ -4,7 +4,7 @@ import Radio from "@mui/material/Radio";
 import { FormControlLabel } from "@mui/material";
 
 const SelectCardType = ({ onSelectCardType, onCancel }) => {
-  const [selectedValue, setSelectedValue] = React.useState("Kennis Card");
+  const [selectedValue, setSelectedValue] = React.useState("Online payment platform");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
