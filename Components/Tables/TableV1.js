@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableV1 = ({ data = true }) => {
+const TableV1 = ({ data = false }) => {
   return (
     // <div className="rounded-[2rem] bg-white min-w-[52rem] min-h-[48.3rem] h-max default-shadow flex flex-col overflow-hidden">
     <div className="rounded-[2rem] bg-white  min-h-[48.3rem] h-min default-shadow flex flex-col overflow-hidden">
