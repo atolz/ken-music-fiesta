@@ -13,7 +13,7 @@ const Popup = ({ children, actionText, cancelAction = () => {}, action = () => {
             onClick={() => {
               cancelAction();
             }}
-            className="btn btn--outlined ml-[auto] !px-[2.8rem] sidebar:!px-[3.8rem] !py-[2rem] !text-[#4C4D50] !border-[#4C4D50]"
+            className=" border-2 font-bold text-[1.6rem] grid place-items-center rounded-[10px] h-[6rem] ml-[auto] !px-[2.8rem] sidebar:!px-[3.8rem] !text-[#4C4D50] !border-[#4C4D50]"
           >
             Cancel
           </button>

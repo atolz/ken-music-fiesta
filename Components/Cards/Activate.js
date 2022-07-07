@@ -77,7 +77,7 @@ const Activate = ({ user }) => {
                   popUpFunctions.openRequestBvnPrompt();
                 }
               }}
-              className="btn !bg-white white-shadow !text-black mr-[29rem] mt-[3.7rem] z-10"
+              className="btn !bg-white !bg-none white-shadow !text-black mr-[29rem] mt-[3.7rem] z-10"
             >
               Activate
             </button>

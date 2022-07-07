@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #fcac0d;
+  --color-primary: #a307a8;
+  --color-primary-grad: linear-gradient(255.14deg, #a608a3 34.14%, #c6155f 76.78%, #d82023 122.17%);
 }
 
 html,
@@ -64,4 +65,10 @@ a {
   /* font-size: 26px !important; */
   font-weight: 700;
   line-height: 31px;
+}
+
+.text-grad {
+  background: var(--color-primary-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

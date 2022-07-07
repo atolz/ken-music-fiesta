@@ -2,6 +2,11 @@ module.exports = {
   content: ["./pages/**/*.{js,ts,jsx,tsx}", "./Components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        primary: "var( --color-primary)",
+        primaryGrad: "var(--color-primary-grad)",
+        // secondary: "var(--color-secondary)",
+      },
       screens: {
         sm: "640px",
         // => @media (min-width: 640px) { ... }

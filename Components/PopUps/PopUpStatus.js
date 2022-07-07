@@ -17,7 +17,7 @@ const PopupStatus = ({ status, title, text, link = "/dashboard", linkText = "Lin
           </p>
         )}
         <Link href={link}>
-          <a onClick={action} className="text-[1.7rem] font-bold text-[#FCAC0D] underline cursor-pointer ">
+          <a onClick={action} className="!text-[1.7rem] font-bold kef-link underline cursor-pointer ">
             {linkText}
           </a>
         </Link>

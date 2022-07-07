@@ -30,7 +30,7 @@ const LandPageLayout = ({ children }) => {
             {" "}
             <header className="flex items-center pt-[3rem] pb-[1.6rem]">
               <Link href={"/"}>
-                <img src="/kef-logo.svg" className="mr-auto w-[6.4rem] cursor-pointer"></img>
+                <img className="mr-auto h-[66.5px] cursor-pointer " src="/new_logo.png"></img>
               </Link>
               {/* Desktop Nav */}
               <div className="items-center hidden sidebar:flex ">

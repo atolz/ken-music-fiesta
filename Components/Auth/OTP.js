@@ -119,7 +119,7 @@ const OTP = ({ action }) => {
                 },
               }}
               focusStyle={{
-                outline: "2px solid #fcac0d",
+                outline: "2px solid #A307A8",
               }}
               hasErrored={!!error}
               errorStyle={{

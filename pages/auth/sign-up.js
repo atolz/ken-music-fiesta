@@ -138,7 +138,7 @@ const SignUp = () => {
             <p className="mb-[3.4rem]">
               Hey there! Not yet a member fill the form below to register. Already a member?{" "}
               <Link href="/auth/sign-in">
-                <a className="text-[#FCAC0D]">Sign In</a>
+                <a className=" !font-medium !text-[1.6rem] !text-[#FA6BFF]">Sign In</a>
               </Link>
             </p>
             {error && <span className="text-white text-lg">*Error MEssage </span>}

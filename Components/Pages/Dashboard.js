@@ -41,8 +41,8 @@ const Dashboard = (props) => {
           <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold">Total Number of Raffle Tickets</p>
           <img className="absolute right-[2.6rem] bottom-0 w-[7.3rem] mobile:w-[9.3rem] translate-x-6 mr-5 raffle-ticket" src={"/3d-ticket.svg"}></img>
         </div>
-        <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#FFF7E7] relative  min-w-[30rem] overflow-hidden flex-1`}>
-          <h3 className="h3 mb-[.4rem] mr-[11.0rem] text-[#FCAC0D]">{dashboardHistory?.total_rewards ?? 0} Rewards</h3>
+        <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#F6EBF5] relative  min-w-[30rem] overflow-hidden flex-1`}>
+          <h3 className="h3 mb-[.4rem] mr-[11.0rem] !text-[#A307A8]">{dashboardHistory?.total_rewards ?? 0} Rewards</h3>
           <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold">Total Number of Rewards</p>
           {/* <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem]  hand-card" src={"/3d-trophy.svg"}></img> */}
           <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem] translate-x-6 reward" src={"/3d-trophy.svg"}></img>

@@ -36,7 +36,7 @@ const RaffleTickets = () => {
             </div>
 
             {/* Merchannt Ticket Purchase */}
-            <div className=" flex-1 flex-wrap justify-center py-[2.7rem] px-[3.6rem] bg-[#FFF6E4] rounded-[2rem]  min-h-[29.2rem]  text-[#3C3E42] leading-[2.9rem]">
+            <div className=" flex-1 flex-wrap justify-center py-[2.7rem] px-[3.6rem] bg-[#F6EBF5] rounded-[2rem]  min-h-[29.2rem]  text-[#3C3E42] leading-[2.9rem]">
               <h2 className="text-[2.4rem] leading-[2.9rem] font-bold w-[22rem] mb-[1.2rem]">Merchant Ticket Purchase</h2>
               <p className="text-[#717171] font-normal leading-[1.6rem] text-[1rem] w-[23.2rem] mb-[2.4rem]">Check your progress points based on your purchase from merchants</p>
               <div className="flex flex-wrap justify-center mobile:flex-nowrap mobile:justify-start  items-center">
@@ -45,20 +45,20 @@ const RaffleTickets = () => {
                     value={parseInt(user?.raffleTickets?.weekly_total_progress)}
                     text={`${parseInt(user?.raffleTickets?.weekly_total_purchase)}`}
                     styles={buildStyles({
-                      pathColor: "#FCAC0D",
+                      pathColor: "#A307A8",
                       strokeLinecap: "butt",
                       trailColor: "black",
                       textColor: "Black",
                       pathTransitionDuration: 0.5,
                       textSize: "18px",
-                      trailColor: "#d6d6d6",
+                      trailColor: "black",
                     })}
                   />
                 </div>
                 <div className="text-center mobile:text-left">
                   <span className="text-[#BFBDBD] font-medium text-[1rem] mb-[1rem] leading-[1.2rem]">Your Progress</span>
                   <p className="font font-bold text-[1.8rem] leading-[2.1rem] w-[18.5rem]">
-                    <span className="!text-[#FCAC0D]">N4,000</span> more to get a raffle ticket
+                    <span className="!text-[#A307A8]">N4,000</span> more to get a raffle ticket
                   </p>
                 </div>
               </div>

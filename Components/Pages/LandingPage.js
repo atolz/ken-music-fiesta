@@ -13,7 +13,7 @@ const LandingPage = () => {
   return (
     <Container>
       <div>
-        <span className=" font-bold text-[1.6rem] mobile:text-[2.5rem] leading-[3rem] text-[#FCAC0D] mb-[1.6rem] mobile:mb-[.8rem]">22nd Edition</span>
+        <span className=" font-bold text-[1.6rem] mobile:text-[2.5rem] leading-[3rem]  text-grad mb-[1.6rem] mobile:mb-[.8rem]">22nd Edition</span>
         <h1 className=" font-bold text-[4rem] mobile:text-[9.4rem] leading-[4rem] mobile:leading-[9.1rem] text-white uppercase ">
           Kennis<br></br> Music Festival
         </h1>
@@ -26,9 +26,12 @@ const LandingPage = () => {
       {/* CTA */}
       <section className="flex items-center flex-wrap">
         <Link href={"/auth/sign-in"}>
-          <button className="btn btn--outlined text-white !px-[6rem] mr-[3.2rem]  mb-[3.7rem] mobile:mb-0">Sign In</button>
+          <div className=" rounded-sm overflow-hidden">
+            <button className="btn btn--outlined text-white !px-[6rem] mr-[3.2rem]  mb-[3.7rem] mobile:mb-0">Sign In</button>
+          </div>
         </Link>
         <button
+          // style={{ boxShadow: "0px 10px 34px rgba(255, 255, 255, 0.23)" }}
           onClick={() => {
             popUpFunctions.initBuyTicket();
           }}

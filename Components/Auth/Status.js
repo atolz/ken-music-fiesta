@@ -37,7 +37,7 @@ const AuthStatus = ({
 
         {link && (
           <Link href={link}>
-            <a className="text-[1.7rem] font-bold text-[#FCAC0D] underline">{linkText}</a>
+            <a className="text-[1.7rem] font-bold kef-link underline">{linkText}</a>
           </Link>
         )}
       </div>

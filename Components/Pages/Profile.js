@@ -22,7 +22,7 @@ const Profile = (props) => {
                   onClick={() => {
                     setActive(nav);
                   }}
-                  className={` transition-all px-[3.2rem] py-[1.5rem] rounded-full cursor-pointer text-[#777E90] ${active == nav ? " bg-[#FCAC0D] text-[black]" : ""}`}
+                  className={` transition-all px-[3.2rem] py-[1.5rem] rounded-full cursor-pointer text-[#777E90] ${active == nav ? " bg-primary text-[white]" : ""}`}
                   key={i}
                 >
                   <span className=" font-bold text-[1.4rem] leading-[1.6rem] whitespace-nowrap ">{nav}</span>

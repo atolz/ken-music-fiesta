@@ -27,7 +27,7 @@ const AuthHeader = () => {
       <Container>
         {/* <img src="/kef-logo.svg" className="mr-auto w-[6.4rem]"></img> */}
         <Link href={"/"}>
-          <img className="mr-auto w-[6.4rem] cursor-pointer " src="/kef-logo.svg"></img>
+          <img className="mr-auto h-[66.5px] cursor-pointer " src="/new_logo.png"></img>
         </Link>
         {/* Desktop Nav */}
         <div className="items-center hidden sidebar:flex ">

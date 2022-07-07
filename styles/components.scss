@@ -4,10 +4,13 @@
   place-content: center;
   padding: 2rem 2.25rem;
   border-radius: 10px;
-  border: 2px solid transparent;
   white-space: nowrap;
-  background-color: #fcac0d;
+  // background-color: #fcac0d;
+  background: var(--color-primary-grad);
+  background-repeat: no-repeat;
+  // border: 2px solid transparent;
   line-height: 1.95rem;
+  color: white;
 
   font-family: Montserrat;
   font-size: 1.6rem;
@@ -22,13 +25,13 @@
   }
 
   &--outlined {
-    border: 2px solid #fcac0d;
-    background-color: transparent;
+    border: 2px solid #a307a8;
+    background: none;
   }
 }
 
 .kef-link {
-  color: #fcac0d;
+  color: var(--color-primary);
   font-family: Montserrat;
   font-size: 1.2rem;
   font-style: normal;
@@ -121,7 +124,7 @@
 
     &:focus {
       outline: none;
-      border: 2px solid #fcac0d;
+      border: 2px solid var(--color-primary);
     }
   }
   input[type="date"]::-webkit-calendar-picker-indicator {
@@ -254,7 +257,7 @@
     color: black;
 
     &:focus {
-      border: 1.4px solid #fcac0d !important;
+      border: 1.4px solid var(--color-primary) !important;
       outline: none;
     }
     &::placeholder {
