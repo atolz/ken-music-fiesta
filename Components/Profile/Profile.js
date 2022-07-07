@@ -1,7 +1,8 @@
 import { Avatar } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { baseInstanceAPI } from "../../axios";
+import { DataContext } from "../../Context/fetchData";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useShowAlert from "../../hooks/useShowAlert";
 import { setUser } from "../../store/user";
@@ -13,6 +14,7 @@ const Profile = ({ user }) => {
   const [uploadImgUrl, setUploadImgUrl] = useState("");
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState(null);
+  const AppData = useContext(DataContext);
   const [userDetails, setUserDetails] = useState({
     firstName: user?.firstName,
     lastName: user?.lastName,
@@ -22,7 +24,7 @@ const Profile = ({ user }) => {
     avatar: user?.avatar,
   });
   const formEls = [
-    { label: "Username", span: "View your username for your account", name: "username", value: user?.username },
+    // { label: "Username", span: "View your username for your account", name: "username", value: user?.username },
     { label: "First Name", span: "This a name your account will be identified by", name: "firstName", value: user?.firstName },
     { label: "Last Name", span: "This a name your account will be identified by", name: "lastName" },
     { label: "Email Address", span: "Email that is linked to the account", name: "email" },
@@ -101,6 +103,7 @@ const Profile = ({ user }) => {
         },
       });
       console.log("Proife avaartar response is", resp.data);
+      AppData.fetchUserDetails();
       // toggleAlertBar(resp.data.message, "success", true, 3000);
       setImageFile(null);
       setCanSubmit(false);
@@ -112,7 +115,7 @@ const Profile = ({ user }) => {
 
   return (
     <form className="profile-form">
-      <section className="mb-[9.6rem]">
+      <section className="mb-[6.6rem]">
         {/* Profile Picture */}
         <section className="flex items-center  flex-wrap gap-7 sidebar:gap-0">
           <div className="flex flex-col mr-[8.9rem]">

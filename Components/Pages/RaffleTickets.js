@@ -7,9 +7,21 @@ import { getDashHistory } from "../../store/user";
 import PoweredBy from "../Cards/PoweredBy";
 import Container from "../Layout/Container";
 
-const RaffleTickets = (props) => {
+const RaffleTickets = () => {
+  const user = useContext(DataContext).user;
+  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  const genDate = (time) => {
+    if (!time) {
+      return "No Date Yet";
+    }
+    console.log("date is", new Date(time));
+    const formattedDate = `${new Date(time).getDate()} ${monthNames[new Date(time).getUTCMonth()]}, ${new Date(time).getFullYear()}`;
+    console.log("formatted date is", formattedDate);
+    return formattedDate;
+  };
   return (
-    <div {...props}>
+    <div>
       {" "}
       <div className="flex flex-wrap gap-10 mb-[3.2rem]">
         {/* Section 1 */}
@@ -18,7 +30,7 @@ const RaffleTickets = (props) => {
             {/* Raffle Tickets */}
             <div className="flex-1 py-[3.1rem] px-[3.6rem] bg-[#F0F0F0] rounded-[20px] min-w-[20.5rem] relative max-h-[29.2rem]">
               <p className="mb-[.8rem] font-semibold text-[1.2rem] leading-[1.43rem] text-[#717171] ">Total Number of Raffle Tickets</p>
-              <h2 className="f font-bold text-[2.8rem] leading-[3.4rem]  flex flex-wrap max-w-[25rem] min-w-min">{props.appData.user.dashboardHistory.raffleTickets} Raffle Tickets</h2>
+              <h2 className="f font-bold text-[2.8rem] leading-[3.4rem]  flex flex-wrap max-w-[25rem] min-w-min">{user?.raffleTickets?.total_raffle} Raffle Tickets</h2>
               {/* <button className="btn btn--outlined !border-[black] mt-[5.6rem] mr-[17.5rem]">View Tickets</button> */}
               <img style={{ animationDelay: "1s" }} className="absolute bottom-0 right-[1.7rem] w-[10.7rem] xl:w-[40%] mobile:w-[14.7rem] object-cover slide-up-now-opacity" src="/3d-ticket.svg"></img>
             </div>
@@ -30,8 +42,8 @@ const RaffleTickets = (props) => {
               <div className="flex flex-wrap justify-center mobile:flex-nowrap mobile:justify-start  items-center">
                 <div className="w-[95px] h-[95px]  mr-[2.4rem]">
                   <CircularProgressbar
-                    value={0}
-                    text={"0"}
+                    value={parseInt(user?.raffleTickets?.weekly_total_progress)}
+                    text={`${parseInt(user?.raffleTickets?.weekly_total_purchase)}`}
                     styles={buildStyles({
                       pathColor: "#FCAC0D",
                       strokeLinecap: "butt",
@@ -55,12 +67,12 @@ const RaffleTickets = (props) => {
           <div className="flex gap-10 flex-wrap">
             <div className={`flex-1 px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-white relative min-w-[30.5rem] border-[#CECCCC] border`}>
               <img style={{ animationDelay: ".8s" }} className="absolute right-[2.6rem] bottom-0 w-[93px] slide-up-now-opacity" src="/3d-tickets-used.svg"></img>
-              <h3 className="h3 mb-[.4rem] mr-[11.0rem]">0 Used</h3>
+              <h3 className="h3 mb-[.4rem] mr-[11.0rem]">{user?.raffleTickets?.weekly_total_ticket} Used</h3>
               <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold relative">Total Number of Tickets Used</p>
             </div>
             <div className={`flex-1 px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-white relative min-w-[30.5rem] border-[#CECCCC] border`}>
               <img className="absolute right-[.8rem] bottom-0 w-[93px] w-[12.9rem] slide-up-now-opacity" src="/3d-trophy.svg"></img>
-              <h3 className="h3 mb-[.4rem] mr-[11.0rem] !text-[#FCAC0D] whitespace-nowrap">{props.appData.user.dashboardHistory.rewardWon} Tickets Won</h3>
+              <h3 className="h3 mb-[.4rem] mr-[11.0rem] !text-[#FCAC0D] whitespace-nowrap">{user?.raffleTickets?.total_rewards ?? 1} Tickets Won</h3>
               <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold relative">Total Number of Tickets Used</p>
             </div>
           </div>
@@ -71,8 +83,8 @@ const RaffleTickets = (props) => {
           <div className="px-[3.9rem] py-[3.56rem] bg-[#F0F0F0] rounded-[2rem] relative overflow-hidden">
             <h3 className="h3 !text-[3.4rem] !leading-[4.1rem] w-[20.7rem] mb-[1.9rem]">Next Raffle Draw</h3>
             <p className="font font-normal text-[1.4rem] leading-[2rem] max-w-[23.1rem] mb-[17rem]">
-              The next raffle draw will happen on <span className="text-[#717171] font-bold">20 April, 2022.</span> Do well to buy your raffle tickets or purchase from our merchants to stand a chance
-              to win amazing rewards
+              The next raffle draw will happen on <span className="text-[#717171] font-bold"> {genDate(user?.raffleTickets?.next_draw_date)}.</span> Do well to buy your raffle tickets or purchase from
+              our merchants to stand a chance to win amazing rewards
             </p>
             <img src="/3d-hand-point.svg" className="absolute bottom-0 right-0 slide-up-now-opacity"></img>
           </div>

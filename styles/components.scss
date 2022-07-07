@@ -239,7 +239,7 @@
   }
   input {
     background: #f8f9fd;
-    outline: 1px solid #bebdbd;
+    border: 1.4px solid #bebdbd;
     box-sizing: border-box;
     border-radius: 1rem;
     padding: 2rem 2rem;
@@ -254,7 +254,8 @@
     color: black;
 
     &:focus {
-      outline: 2px solid #fcac0d;
+      border: 1.4px solid #fcac0d !important;
+      outline: none;
     }
     &::placeholder {
       color: #d5d6d8;

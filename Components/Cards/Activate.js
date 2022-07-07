@@ -12,11 +12,13 @@ import ClaimReward from "../PopUps/ClaimReward";
 import CardColor from "../PopUps/CardColor";
 import VerifyBVN from "../PopUps/VerifyBVN";
 import { popUpContext } from "../../Context/PopUps";
+import { DataContext } from "../../Context/fetchData";
 
-const Activate = () => {
+const Activate = ({ user }) => {
   const [visible, setVisible] = useState(false);
   const [activeModal, setActiveModal] = useState("");
   const popUpFunctions = useContext(popUpContext);
+  const AppData = useContext(DataContext);
 
   const [show, setShow] = useState(false);
   function toggle() {
@@ -63,16 +65,23 @@ const Activate = () => {
         <h2 className="text-[2.8rem] sm:text-[3.6rem] font-bold leading-[3.4rem] mb-[1.2rem]">Activate Card</h2>
         <p className="font-normal leading-[2rem] text-[1.4rem]  max-w-[27rem] relative z-20">You have to activate your card to start making purchases. Kindly do that ASAP.</p>
         <div className="flex items-center">
-          <button
-            onClick={() => {
-              // setActiveModal("ActivateCard");
-              // setShow(true);
-              popUpFunctions.initActivateCard();
-            }}
-            className="btn !bg-white white-shadow !text-black mr-[29rem] mt-[3.7rem] z-10"
-          >
-            Activate
-          </button>
+          {!AppData?.user?.data?.hasCard && (
+            <button
+              onClick={() => {
+                // setActiveModal("ActivateCard");
+                // setShow(true);
+                console.log("has added is: ", AppData?.user?.data?.hasAddedBVN);
+                if (AppData?.user?.data?.hasAddedBVN) {
+                  popUpFunctions.initActivateCard();
+                } else {
+                  popUpFunctions.openRequestBvnPrompt();
+                }
+              }}
+              className="btn !bg-white white-shadow !text-black mr-[29rem] mt-[3.7rem] z-10"
+            >
+              Activate
+            </button>
+          )}
           {/* {!visible && (
             <button
               onClick={() => {

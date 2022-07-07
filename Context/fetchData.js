@@ -13,6 +13,7 @@ export const DataContext = createContext({
   section: "",
   setSection: () => {},
   fetchArtisteUserCatalogues: () => {},
+  fetchUserDetails: () => {},
 });
 
 const AppDataProvider = ({ children }) => {
@@ -38,6 +39,7 @@ const AppDataProvider = ({ children }) => {
       rewardWon: 0,
       eventTickets: 0,
     },
+    raffleTickets: {},
   });
   const [artistesUser, setArtistesUser] = useState({
     data: null,
@@ -118,13 +120,26 @@ const AppDataProvider = ({ children }) => {
 
   const fetchUserDashboardHistory = async () => {
     try {
-      const historyData = await baseInstanceAPI.get("/ticket/get-raffle-history", {
+      const historyData = await baseInstanceAPI.get("/dashboard", {
         headers: {
           Authorization: `Bearer ${getLocalStorage("token")}`,
         },
       });
-      console.log("Raffle history data is... ", historyData.data);
+      console.log("Dasboard data is... ", historyData.data);
       setUser((val) => ({ ...val, dashboardHistory: historyData.data }));
+    } catch (error) {
+      console.log("Error loadin user extra data: History Data", error);
+    }
+  };
+  const fetchUserRaffleTickets = async () => {
+    try {
+      const raffleData = await baseInstanceAPI.get("/dashboard/raffle-tickets", {
+        headers: {
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+      });
+      console.log("User Rafffle Ticket data is... ", raffleData.data);
+      setUser((val) => ({ ...val, raffleTickets: raffleData.data }));
     } catch (error) {
       console.log("Error loadin user extra data: History Data", error);
     }
@@ -161,6 +176,7 @@ const AppDataProvider = ({ children }) => {
     if (section == "User" && !user.data) {
       fetchUserDetails();
       fetchUserDashboardHistory();
+      fetchUserRaffleTickets();
     } else if (section == "Artiste" && !artistesUser.data) {
       fetchArtisteUserCatalogues();
     } else if (section == "Admin" && !adminUser.data) {
@@ -170,9 +186,11 @@ const AppDataProvider = ({ children }) => {
   // Function to set the user type base on the section of the App: User, Admin, Artiste
   const setUserOnLogin = (type, data) => {
     if (type == "User") {
+      console.log("user in setusr onlogin is: type user -----------", data);
       setUser((val) => ({ ...val, data: data }));
-      fetchUserDetails();
+      // fetchUserDetails();
       fetchUserDashboardHistory();
+      fetchUserRaffleTickets();
       setSection("User");
     }
     if (type == "Artiste") {
@@ -211,7 +229,9 @@ const AppDataProvider = ({ children }) => {
     }
   }, [section]);
   return (
-    <DataContext.Provider value={{ allArtisteCatalogues, artistes, user, artistesUser, adminUser, setUserOnLogin, section: section, setSection: setSection, fetchArtisteUserCatalogues }}>
+    <DataContext.Provider
+      value={{ allArtisteCatalogues, artistes, user, artistesUser, adminUser, setUserOnLogin, section: section, setSection: setSection, fetchArtisteUserCatalogues, fetchUserDetails }}
+    >
       {children}
     </DataContext.Provider>
   );

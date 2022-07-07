@@ -38,9 +38,10 @@ const SignIn = () => {
       toggleAlertBar("Login Successful!", "success", true);
       // dispatch(setLoginStatus(true));
       // dispatch(setUserRedux({ username: user.email }));
+      console.log("user is on sigin", response.data.user);
       setLocalStorage("token", response.data.access_token);
       setLocalStorage("section", "User");
-      AppData.setUserOnLogin("User", { username: user.email });
+      AppData.setUserOnLogin("User", response.data.user);
 
       // // Profiel INfo
       // try {

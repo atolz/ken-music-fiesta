@@ -24,9 +24,9 @@ const Rewards = (props) => {
       </Dialog>
       <div {...props}>
         <div className="flex flex-wrap gap-10">
-          <section className="flex-1 flex flex-col gap-[3.2rem]">
+          <section className="flex-1 flex flex-col gap-[3.2rem] basis-[10%]">
             {/* You Won */}
-            <div className="bg-[#FFF6E4] rounded-[2rem] px-[3rem] mobile:px-[5.1rem] py-[3rem] mobile:py-[3.9rem] min-w-[30rem] relative">
+            {/* <div className="bg-[#FFF6E4] rounded-[2rem] px-[3rem] mobile:px-[5.1rem] py-[3rem] mobile:py-[3.9rem] min-w-[30rem] relative">
               <h3 className="font-bold text-[3.2rem] leading-[3.9rem] text-[#3C3E42]">Your Ticket Won</h3>
               <p className="font-normal text-[1.4rem] leading-[2rem] text-[#717171] w-[25.9rem] mt-[1rem] z-20">Congratulations! Your ticket won the raffle draw for this week.</p>
               <button
@@ -39,20 +39,12 @@ const Rewards = (props) => {
                 Claim Reward
               </button>
               <img src="/3d-trophy.svg" className="bottom-0 right-0 absolute h-[15rem] sidebar:h-[19.8rem]"></img>
-            </div>
+            </div> */}
 
-            <PoweredBy />
-            {/* Top Winners */}
-            {/* 
-          <TableV1 data={"data"}></TableV1> */}
-          </section>
-
-          {/*  */}
-          <section className="flex-1 flex flex-col gap-[3.2rem]">
-            <div className="max-w-[89vw] table:max-w-none flex overflow-auto scroll_hide">
-              <div className=" flex-grow w-max">
+            <div className="max-w-[89vw] table:max-w-none flex overflow-auto scroll_hide default-shadow rounded-[2rem] ">
+              <div className=" flex-grow w-max default-shadow">
                 {/*  Table*/}
-                <div className="rounded-[2rem] bg-white whitespace-nowrap">
+                <div className="rounded-[2rem] bg-white whitespace-nowrap min-h-[70rem]">
                   {/* Table Head */}
                   <div className="px-[2.2rem] sidebar:px-[4.2rem] py-[3rem] border-b">
                     <h3 className="font-bold text-black text-[2.1rem] leading-[2.1rem]">Rewards Won</h3>
@@ -86,12 +78,13 @@ const Rewards = (props) => {
                 </div>
               </div>
             </div>
+          </section>
 
+          {/*  */}
+          <section className="flex-1 flex flex-col gap-[3.2rem] ">
             {/* Top Winners */}
 
             <TableV1></TableV1>
-
-            {/* <LatestWinnerCard /> */}
           </section>
         </div>
       </div>

@@ -23,6 +23,7 @@ import CardColor from "../Components/PopUps/CardColor";
 import VerifyBVN from "../Components/PopUps/VerifyBVN";
 import ActivateCard from "../Components/PopUps/ActivateCard";
 import Head from "next/head";
+import Prompt from "../Components/PopUps/Prompt";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
@@ -41,6 +42,7 @@ const pouUpContextFunctions = {
   initEditCatalogue: (catalogue) => {},
   initCreateCatalogue: () => {},
   initSetStatus: () => {},
+  openRequestBvnPrompt: () => {},
   // test: "",
 };
 export const popUpContext = createContext(pouUpContextFunctions);
@@ -80,6 +82,7 @@ export const PopUpContextProvider = ({ children }) => {
     initEditCatalogue: initEditCatalogue,
     initCreateCatalogue: initCreateCatalogue,
     initSetStatus: initSetStatus,
+    openRequestBvnPrompt: openRequestBvnPrompt,
 
     onReview: onReview,
 
@@ -161,6 +164,11 @@ export const PopUpContextProvider = ({ children }) => {
     setShowPopUp(true);
   }
 
+  function openRequestBvnPrompt() {
+    setActiveModal("ProvideBvnPrompt");
+    setShowPopUp(true);
+  }
+
   function onBuyTicket(quantity, type) {
     // setTicketAmount(amount);
     // setTicketType(type);
@@ -186,14 +194,16 @@ export const PopUpContextProvider = ({ children }) => {
   }
   function onSelectColor(type) {
     // setItemQuantity(quantity);
-    setActiveModal("PaymentOptions");
+    // setActiveModal("PaymentOptions");
+    onSelectPayOption("SEERBIT");
   }
   function onInputBVN(status) {
     // setItemQuantity(quantity);
     if (status == false) {
       return;
     }
-    setActiveModal("PaymentOptions");
+    setShowPopUp(false);
+    // setActiveModal("PaymentOptions");
   }
 
   function onCheckOut(amount, vendor) {
@@ -212,6 +222,9 @@ export const PopUpContextProvider = ({ children }) => {
 
   function onVerify() {
     setActiveModal("Status");
+  }
+  function onContinueToBvnVerification() {
+    setActiveModal("VerifyBVN");
   }
 
   async function onSelectPayOption(payOptType, quantity, type) {
@@ -383,6 +396,15 @@ export const PopUpContextProvider = ({ children }) => {
               status={"success"}
             ></PopupStatus>
           )}
+          {activeModal == "ProvideBvnPrompt" && (
+            <Prompt
+              title={"We need more information"}
+              desc={"Thank you for signing up. To further make your card collection easier, we will need you to provide your BVN"}
+              onCancel={toggle}
+              imgUrl="/3d-Padlock.png"
+              onAction={onContinueToBvnVerification}
+            ></Prompt>
+          )}
           {activeModal == "BuyEventTicket" && <BuyEventTicket onCancel={toggle} onBuyTicket={onBuyTicket}></BuyEventTicket>}
           {activeModal == "BuyRaffleTicket" && <BuyRaffleTicket onCancel={toggle} onBuyRaffleTicket={onBuyRaffleTicket}></BuyRaffleTicket>}
           {activeModal == "BuyToken" && <BuyToken onCancel={toggle} onBuyToken={onBuyToken}></BuyToken>}
@@ -392,7 +414,7 @@ export const PopUpContextProvider = ({ children }) => {
           {activeModal == "SelectCardType" && <SelectCardType onCancel={toggle} onSelectCardType={onSelectCardType}></SelectCardType>}
           {activeModal == "VerifyPayment" && <VerifyPayment onCancel={toggle} onVerify={onVerify}></VerifyPayment>}
           {activeModal == "CardColor" && <CardColor onCancel={toggle} onSelectColor={onSelectColor}></CardColor>}
-          {/* {activeModal == "VerifyBVN" && <VerifyBVN onCancel={toggle} onInputBVN={onInputBVN}></VerifyBVN>} */}
+          {activeModal == "VerifyBVN" && <VerifyBVN onCancel={toggle} onInputBVN={onInputBVN}></VerifyBVN>}
           {activeModal == "ActivateCard" && <ActivateCard onCancel={toggle} onActivate={onActivate}></ActivateCard>}
           {activeModal == "EditCatalogue" && <EditCatalogue catalogueObj={editCatalogueObj} onCancel={toggle} toggleModal={toggle}></EditCatalogue>}
           {activeModal == "CreateCatalogue" && <CreateCatalogue onCancel={toggle} toggleModal={toggle}></CreateCatalogue>}

@@ -2,6 +2,7 @@ import React from "react";
 
 import "../styles/globals.scss";
 import "../styles/style.css";
+import "../styles/svg-icons-base-style.css";
 import "../styles/components.scss";
 import "../styles/typography.scss";
 import "../styles/mui.scss";

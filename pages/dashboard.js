@@ -21,6 +21,8 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import { DataContext } from "../Context/fetchData";
 import ProgressiveToken from "../Components/Pages/ProgressiveToken";
 import useIsLoggedIn from "../hooks/useIsLoggedIn";
+import Event from "../Components/Pages/Event";
+import { popUpContext } from "../Context/PopUps";
 // import { setActivePage as setGlobalPage } from "../store/pages";
 // import UseIsLoggedIn from "../hooks/useIsLoggedIn";
 
@@ -30,15 +32,23 @@ export default function Home() {
   // const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
   const AppData = useContext(DataContext);
+  const popUpFunctions = useContext(popUpContext);
   // const user = AppData.user.data;
   // const dashboardHistory = AppData.user.dashboardHistory;
 
   useEffect(() => {
+    console.log("app data inside dahs board is", AppData);
     router.prefetch("/auth/sign-in");
     if (getLocalStorage("section") != "User" || !isLoggedIn()) {
-      router.replace("/auth/sign-in");
+      return router.replace("/auth/sign-in");
     }
-  }, []);
+
+    if (AppData?.user?.data && !AppData?.user?.data?.hasAddedBVN) {
+      setTimeout(() => {
+        popUpFunctions.openRequestBvnPrompt();
+      }, 5000);
+    }
+  }, [AppData?.user?.data?.hasAddedBVN]);
 
   return (
     <>
@@ -51,6 +61,7 @@ export default function Home() {
       {activePage == "Dashboard" && <Dashboard appData={AppData}></Dashboard>}
       {activePage == "Raffle Tickets" && <RaffleTickets appData={AppData}></RaffleTickets>}
       {activePage == "Rewards" && <Rewards appData={AppData}></Rewards>}
+      {activePage == "Events" && <Event AppData={AppData}></Event>}
       {activePage == "Livestream Event" && <LiveStream AppData={AppData}></LiveStream>}
       {activePage == "Progressive Token" && <ProgressiveToken AppData={AppData}></ProgressiveToken>}
       {activePage == "Profile" && <Profile appData={AppData}></Profile>}

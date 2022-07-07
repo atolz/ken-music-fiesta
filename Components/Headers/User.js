@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import useLoading from "../../hooks/useLoading";
 import { popUpContext } from "../../Context/PopUps";
 import { DataContext } from "../../Context/fetchData";
+import SvgIconWrapper from "../SvgIconWrapper";
 
 const UserHeader = ({ title, setActivePage }) => {
   // const VerifyPaymentProcess = ["VerifyPayment", "Status"];
@@ -62,21 +63,12 @@ const UserHeader = ({ title, setActivePage }) => {
             </div>
             <div className="peer  py-4">
               <div className="b border-l ">
-                {/* <Tooltip title="Profile" leaveDelay={200}> */}
-                {/* <img
-                  onClick={() => {
-                    // setShowMore((val) => !val);
-                  }}
-                  className="h-[4.2rem] cursor-pointer w-[4.2rem] object-cover rounded-full ml-[16px] yellow-shadow"
-                  src="/user-img.jpg"
-                /> */}
                 <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "orange" }} alt={user?.name} src={`${user?.avatar}`}>
                   <span className=" font-semibold"> {user?.firstName ? user?.firstName[0] : "Name"}</span>
                 </Avatar>
-                {/* </Tooltip> */}
               </div>
             </div>
-            {/* Logout/Profile */}
+            {/* Logout/Profile Dropdown */}
             <ul className="p-[2.2rem] hidden hover:block peer-hover:block absolute top-[5.5rem] z-50 right-0 bg-white yellow-shadow rounded-[2rem] rounded-tr-none">
               <li
                 onClick={() => {
@@ -118,6 +110,22 @@ const UserHeader = ({ title, setActivePage }) => {
           Buy Raffle Ticket...
         </button>
       </div>
+
+      {/* Verify BVN notification */}
+      {user && !user?.hasAddedBVN && (
+        <div className="py-[2rem] px-[4.8rem] w-full bg-[#FBF3E5] rounded-[2rem] mb-[2.7rem] flex items-center -translate-y-6">
+          <SvgIconWrapper className={" mr-[2.6rem]"} iconName={"info-circle"}></SvgIconWrapper>
+          <span className=" mr-10 text-black font-semibold text-2xl">To complete your registration, please provide your BVN.</span>
+          <span
+            onClick={() => {
+              popUpFunctions.openRequestBvnPrompt();
+            }}
+            className=" font-bold text-2xl underline text-[#FCAC0D] cursor-pointer"
+          >
+            Verify Your BVN
+          </span>
+        </div>
+      )}
     </>
   );
 };

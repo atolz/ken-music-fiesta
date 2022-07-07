@@ -1,9 +1,9 @@
 import React from "react";
 
-const TableV1 = ({ data }) => {
+const TableV1 = ({ data = true }) => {
   return (
     // <div className="rounded-[2rem] bg-white min-w-[52rem] min-h-[48.3rem] h-max default-shadow flex flex-col overflow-hidden">
-    <div className="rounded-[2rem] bg-white flex-grow min-h-[48.3rem] h-max default-shadow flex flex-col overflow-hidden">
+    <div className="rounded-[2rem] bg-white  min-h-[48.3rem] h-min default-shadow flex flex-col overflow-hidden">
       {/* Table Head */}
       <div className="px-[2rem] mobile:px-[4.2rem] py-[3rem] flex items-center">
         <h3 className="font-bold text-black text-[2.1rem] leading-[2.1rem]">Top Winners</h3>

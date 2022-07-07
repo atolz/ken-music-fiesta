@@ -5,8 +5,8 @@ import { popUpContext } from "../../Context/PopUps";
 import { DataContext } from "../../Context/fetchData";
 
 const UserSideBar = ({ activePage, setActivePage }) => {
-  const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Livestream Event", "Progressive Token"];
-  const icons = ["Dashboard", "Raffle-Tickets", "Rewards", "Livestream-Event", "Livestream-Event"];
+  const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Events", "Livestream Event", "Progressive Token"];
+  const icons = ["Dashboard", "Raffle-Tickets", "Rewards", "Livestream-Event", "Livestream-Event", "Livestream-Event"];
   const popUpFunctions = useContext(popUpContext);
   const AppData = useContext(DataContext);
 

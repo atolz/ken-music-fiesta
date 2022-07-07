@@ -38,11 +38,12 @@ const OTP = ({ action }) => {
     console.log("data is ", JSON.stringify(data));
     toggleLoad();
     try {
-      const response = await baseInstanceAPI.post("account/verify-otp", JSON.stringify(data));
+      const response = await baseInstanceAPI.post("/account/verify-account", JSON.stringify(data));
       console.log(response);
       toggleAlertBar("OTP verified successfully!", "success", true);
       if (verificationType == "registration") {
-        router.push(`/auth/create-account/${response.data.verifiedToken}`);
+        router.push(`/auth/sign-in`);
+        // router.push(`/auth/sign-in/${response.data.verifiedToken}`);
       }
       if (verificationType == "reset-password") {
         router.push(`/auth/reset-password/${response.data.verifiedToken}`);
