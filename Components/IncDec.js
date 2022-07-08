@@ -21,13 +21,13 @@ const IncDec = ({ min = 1, max = 500000, defaultValue = 1, onCange = (type, valu
   };
   return (
     <div className="flex gap-x-[2.2rem] mb-[1.7rem]">
-      <span onClick={onDec} className="h-[6.8rem] mobile:h-[8rem] w-[7rem] mobile:w-[8.8rem] grid place-items-center bg-[#FFF7E7] rounded-[2rem] border-2 border-[#FCAC0D] cursor-pointer">
+      <span onClick={onDec} className="h-[6.8rem] mobile:h-[8rem] w-[7rem] mobile:w-[8.8rem] grid place-items-center bg-[#F6EBF5] rounded-[2rem] border-2 border-primary cursor-pointer">
         <span className="font font-medium text-[3.6rem] mobile:text-[4.6rem]">-</span>
       </span>
       <span className="h-[6.8rem] mobile:h-[8rem] flex-1 max-w-[23.7rem] border-2 border-[#000000] bg-[#F8F9FD] rounded-[2rem] grid place-items-center text-[3rem] font-bold leading-[4.3rem]">
         {value}
       </span>
-      <span onClick={onInc} className=" h-[6.8rem] mobile:h-[8rem] w-[7rem] mobile:w-[8.8rem] grid place-items-center bg-[#FFF7E7] rounded-[2rem] border-2 border-[#FCAC0D] cursor-pointer">
+      <span onClick={onInc} className=" h-[6.8rem] mobile:h-[8rem] w-[7rem] mobile:w-[8.8rem] grid place-items-center bg-[#F6EBF5] rounded-[2rem] border-2 border-primary cursor-pointer">
         <span className="font font-medium text-[3.6rem] mobile:text-[4.6rem]">+</span>
       </span>
     </div>

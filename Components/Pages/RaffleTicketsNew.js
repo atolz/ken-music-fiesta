@@ -5,7 +5,9 @@ import { useSelector } from "react-redux";
 import { DataContext } from "../../Context/fetchData";
 import { getDashHistory } from "../../store/user";
 import PoweredBy from "../Cards/PoweredBy";
+import RaffleCategory from "../Cards/RaffleCategory";
 import Container from "../Layout/Container";
+import RaffleTicketsTable from "../Tables/RaffleTickets";
 
 const RaffleTicketsNew = () => {
   const user = useContext(DataContext).user;
@@ -66,23 +68,14 @@ const RaffleTicketsNew = () => {
               </div>
             </div>
           </div>
-          <div className="flex gap-10 flex-wrap">
-            <div className={`flex-1 px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-white relative min-w-[30.5rem] border-[#CECCCC] border`}>
-              <img style={{ animationDelay: ".8s" }} className="absolute right-[2.6rem] bottom-0 w-[93px] slide-up-now-opacity" src="/3d-tickets-used.svg"></img>
-              <h3 className="h3 mb-[.4rem] mr-[11.0rem]">{user?.raffleTickets?.weekly_total_ticket} Used</h3>
-              <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold relative">Total Number of Tickets Used</p>
-            </div>
-            <div className={`flex-1 px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-white relative min-w-[30.5rem] border-[#CECCCC] border`}>
-              <img className="absolute right-[.8rem] bottom-0 w-[93px] w-[12.9rem] slide-up-now-opacity" src="/3d-trophy.svg"></img>
-              <h3 className="h3 mb-[.4rem] mr-[11.0rem] !text-[#FCAC0D] whitespace-nowrap">{user?.raffleTickets?.total_rewards ?? 1} Tickets Won</h3>
-              <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold relative">Total Number of Tickets Used</p>
-            </div>
+          <div className="flex gap-10 flex-wrap overflow-x-scroll scroll_hide">
+            <RaffleTicketsTable></RaffleTicketsTable>
           </div>
         </section>
 
         {/* Next Raffle Draw */}
         <section className="flex-1">
-          <div className="px-[3.9rem] py-[3.56rem] bg-[#F0F0F0] rounded-[2rem] relative overflow-hidden">
+          <div className="px-[3.9rem] py-[3.56rem] bg-[#F0F0F0] rounded-[2rem] relative overflow-hidden mb-[3.2rem]">
             <h3 className="h3 !text-[3.4rem] !leading-[4.1rem] w-[20.7rem] mb-[1.9rem]">Next Raffle Draw</h3>
             <p className="font font-normal text-[1.4rem] leading-[2rem] max-w-[23.1rem] mb-[17rem]">
               The next raffle draw will happen on <span className="text-[#717171] font-bold"> {genDate(user?.raffleTickets?.next_draw_date)}.</span> Do well to buy your raffle tickets or purchase from
@@ -90,6 +83,7 @@ const RaffleTicketsNew = () => {
             </p>
             <img src="/3d-hand-point.svg" className="absolute bottom-0 right-0 slide-up-now-opacity"></img>
           </div>
+          <RaffleCategory></RaffleCategory>
         </section>
         {/* Section 2 */}
       </div>

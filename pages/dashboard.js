@@ -24,6 +24,7 @@ import useIsLoggedIn from "../hooks/useIsLoggedIn";
 import Event from "../Components/Pages/Event";
 import { popUpContext } from "../Context/PopUps";
 import RaffleTicketsNew from "../Components/Pages/RaffleTicketsNew";
+import Payment from "../Components/Pages/Payment";
 // import { setActivePage as setGlobalPage } from "../store/pages";
 // import UseIsLoggedIn from "../hooks/useIsLoggedIn";
 
@@ -65,6 +66,7 @@ export default function Home() {
       {activePage == "Events" && <Event AppData={AppData}></Event>}
       {activePage == "Livestream Event" && <LiveStream AppData={AppData}></LiveStream>}
       {activePage == "Progressive Token" && <ProgressiveToken AppData={AppData}></ProgressiveToken>}
+      {activePage == "Payment" && <Payment AppData={AppData}></Payment>}
       {activePage == "Profile" && <Profile appData={AppData}></Profile>}
       {/* {activePage == "Transactions" && <Transactions></Transactions>} */}
       {/* {activePage == "Landing" && <LandingPage></LandingPage>} */}

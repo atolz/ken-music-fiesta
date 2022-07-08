@@ -6,8 +6,8 @@ import { DataContext } from "../../Context/fetchData";
 
 const UserSideBar = ({ activePage, setActivePage }) => {
   // const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Events", "Livestream Event", "Progressive Token"];
-  const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Events"];
-  const icons = ["Dashboard", "Raffle-Tickets", "Rewards", "Livestream-Event", "Livestream-Event", "Livestream-Event"];
+  const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Events", "Payment"];
+  const icons = ["Dashboard", "Raffle-Tickets", "Rewards", "Livestream-Event", "coin-dollar", "Livestream-Event"];
   const popUpFunctions = useContext(popUpContext);
   const AppData = useContext(DataContext);
 
@@ -34,14 +34,18 @@ const UserSideBar = ({ activePage, setActivePage }) => {
               >
                 {/* Dot */}
                 <div
-                  className={`transition-all duration-200 w-[1rem] h-[1rem] rounded-full bg-[#D82025] mr-[2.6rem]  ${page == activePage ? " opacity-100" : "opacity-0"} 
+                  // style={{ background: "var(--color-primary-grad)" }}
+                  className={`transition-all duration-200 w-[1rem] h-[1rem] rounded-full bg-[#D82025]  mr-[2.6rem]  ${page == activePage ? " opacity-100" : "opacity-0"} 
                  ${page == "Dashboard" && activePage == "Profile" ? " opacity-100" : ""}`}
                 ></div>
                 {/* Icon */}
                 <i
-                  className={`icon icon-${icons[i]} mr-[1.7rem] text-[1.8rem] ${icons[i] == "Dashboard" ? " text-[2.8rem]" : ""}  ${page == activePage ? "  text-grad" : ""}
+                  className={`icon icon-${icons[i]} mr-[1.7rem] text-[1.9rem] ${icons[i] == "Dashboard" ? " !text-[2.8rem]" : ""}  ${page == activePage ? "  text-grad" : ""}
                   ${page == "Dashboard" && activePage == "Profile" ? " !text-grad" : ""}`}
                 ></i>
+                {/* Does Not work with linear graddient i.e clip text */}
+                {/* <SvgIconWrapper className={"text-grad"} iconName={icons[i]}></SvgIconWrapper> */}
+
                 {/* Text */}
                 <span
                   className={`transition-all duration-200 font-normal text-[1.6rem] text-ellipsis overflow-hidden w-[160px]  ${

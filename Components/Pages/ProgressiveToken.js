@@ -62,7 +62,7 @@ const ProgressiveToken = () => {
       {showBuyToken && (
         <div className=" py-[1.8rem] px-[3.8rem] rounded-[2rem] bg-white flex flex-wrap gap-[4rem] justify-between mx-auto relative items-center">
           <p className=" font-bold text-[1.8rem] leading-[3.5rem] max-w-[34.9rem]">
-            Participate in our quick raffle draw and win <span className="text-[#FCAC0D]">amazing prices!</span>
+            Participate in our quick raffle draw and win <span className="text-primary">amazing prices!</span>
           </p>
           <button
             onClick={() => {

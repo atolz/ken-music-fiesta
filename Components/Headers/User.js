@@ -62,19 +62,19 @@ const UserHeader = ({ title, setActivePage }) => {
               <i className="icon icon-notification text-[1.7rem]"></i>
             </div>
             <div className="peer  py-4">
-              <div className="b border-l ">
+              <div className="b border-l cursor-pointer">
                 <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "#A307A8" }} alt={user?.name} src={`${user?.avatar}`}>
                   <span className=" font-semibold"> {user?.firstName ? user?.firstName[0] : "Name"}</span>
                 </Avatar>
               </div>
             </div>
             {/* Logout/Profile Dropdown */}
-            <ul className="p-[2.2rem] hidden hover:block peer-hover:block absolute top-[5.5rem] z-50 right-0 bg-white shadow-sm rounded-[2rem] rounded-tr-none">
+            <ul className=" w-0 overflow-hidden duration-300 h-auto -z-30 opacity-0 hover:w-full hover:h-auto hover:opacity-100 transition-all peer-hover:w-full peer-hover:h-auto peer-hover:opacity-100 absolute top-[5.5rem] hover:z-50 peer-hover:z-50 right-0 bg-white shadow-lg rounded-[2rem] border rounded-tr-none">
               <li
                 onClick={() => {
                   setActivePage("Profile");
                 }}
-                className="flex items-center mb-[1.9rem] cursor-pointer"
+                className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
               >
                 <img src="/profile-box.svg"></img> <span className=" font-medium text-[1.4rem] ml-3">Profile</span>
               </li>
@@ -82,7 +82,7 @@ const UserHeader = ({ title, setActivePage }) => {
                 onClick={() => {
                   onLogOut();
                 }}
-                className="flex items-center text-red-700 cursor-pointer"
+                className="flex items-center text-red-700 cursor-pointer hover:bg-slate-50 p-[2.2rem]"
               >
                 <img src="/logout.svg"></img> <span className=" font-medium text-[1.4rem] ml-3">Log out</span>
               </li>

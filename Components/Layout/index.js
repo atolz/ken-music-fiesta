@@ -59,8 +59,10 @@ const BaseLayout = ({ children }) => {
       {AppData.section == "Artiste" && <ArtisteSideBar activePage={activePage} setActivePage={setActivePage}></ArtisteSideBar>}
       {AppData.section == "Admin" && <AdminSideBar activePage={activePage} setActivePage={setActivePage}></AdminSideBar>}
       {/* <SideBar activePage={activePage} setActivePage={setActivePage} /> */}
-      <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "right" }} open={isopen} autoHideDuration={6000} onClose={handleClose} message={snbMsg} />
-      <main className={"bg-[#FBFAFA] h-full flex-grow px-[2.2rem] !pb-[11.4rem] sidebar:pb-[5.2rem] sidebar:px-[5.2rem] py-[1.4rem]  sidebar:py-[4.4rem] overflow-y-scroll scroll_hide"}>
+      <main
+        style={{ width: "calc(100% - 37rem)" }}
+        className={"bg-[#FBFAFA] h-full flex-grow px-[2.2rem] !pb-[11.4rem] sidebar:pb-[5.2rem] sidebar:px-[5.2rem] py-[1.4rem]  sidebar:py-[4.4rem] overflow-y-scroll scroll_hide"}
+      >
         <Container>
           {" "}
           {AppData.section == "User" && <UserHeader title={activePage} setActivePage={setActivePage}></UserHeader>}
@@ -71,6 +73,7 @@ const BaseLayout = ({ children }) => {
         </Container>
         {/* <div className="w-full h-full grid place-items-center text-3xl">🚧 Under Construction...</div> */}
       </main>
+      <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "right" }} open={isopen} autoHideDuration={6000} onClose={handleClose} message={snbMsg} />
     </div>
   );
 };

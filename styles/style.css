@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src: url('fonts/icomoon.eot?iapbvj');
-  src: url('fonts/icomoon.eot?iapbvj#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?iapbvj') format('truetype'),
-    url('fonts/icomoon.woff?iapbvj') format('woff'),
-    url('fonts/icomoon.svg?iapbvj#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?gsbbfp');
+  src:  url('fonts/icomoon.eot?gsbbfp#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?gsbbfp') format('truetype'),
+    url('fonts/icomoon.woff?gsbbfp') format('woff'),
+    url('fonts/icomoon.svg?gsbbfp#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,75 +25,96 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-pause:before {
-  content: "\e90c";
-}
-
-.icon-next:before {
-  content: "\e90d";
-}
-
-.icon-play:before {
-  content: "\e90e";
-
-}
-
-.icon-playing:before {
-  content: "\e90f";
-}
-
-.icon-Crown:before {
+.icon-arr-left:before {
   content: "\e900";
 }
-
-.icon-Dashboard:before {
+.icon-calendar:before {
   content: "\e901";
 }
-
-.icon-Graph:before {
+.icon-coin-dollar:before {
   content: "\e902";
 }
-
-.icon-kudibar-logo:before {
-  content: "\e910";
-}
-
-.icon-Livestream-Event:before {
+.icon-Crown:before {
   content: "\e903";
 }
-
-.icon-logout:before {
-  content: "\e911";
-}
-
-.icon-notification:before {
+.icon-Dashboard:before {
   content: "\e904";
 }
-
-.icon-Raffle-Tickets:before {
+.icon-delete:before {
   content: "\e905";
 }
-
-.icon-Rewards:before {
+.icon-edit-pen:before {
   content: "\e906";
 }
-
-.icon-Settings:before {
+.icon-fb:before {
   content: "\e907";
 }
-
-.icon-sidebar-wallet:before {
+.icon-Graph:before {
   content: "\e908";
 }
-
-.icon-smiley:before {
+.icon-info-circle:before {
   content: "\e909";
 }
-
-.icon-Transactions:before {
+.icon-insta:before {
   content: "\e90a";
 }
-
-.icon-Wallet:before {
+.icon-kudibar-logo:before {
   content: "\e90b";
+}
+.icon-Livestream-Event:before {
+  content: "\e90c";
+}
+.icon-logout:before {
+  content: "\e90d";
+}
+.icon-notification:before {
+  content: "\e90e";
+}
+.icon-pause:before {
+  content: "\e90f";
+}
+.icon-play:before {
+  content: "\e910";
+}
+.icon-Raffle-Tickets:before {
+  content: "\e911";
+}
+.icon-Rewards:before {
+  content: "\e912";
+}
+.icon-Settings:before {
+  content: "\e913";
+}
+.icon-sidebar-wallet:before {
+  content: "\e914";
+}
+.icon-smiley:before {
+  content: "\e915";
+}
+.icon-Transactions:before {
+  content: "\e916";
+}
+.icon-twt:before {
+  content: "\e917";
+}
+.icon-Users:before {
+  content: "\e918";
+}
+.icon-view-password:before {
+  content: "\e919";
+}
+.icon-Wallet:before {
+  content: "\e91a";
+}
+.icon-yt:before {
+  content: "\e91b";
+}
+.icon-coin-dollar1:before {
+  content: "\e91c";
+}
+.icon-arr-left1:before {
+  content: "\e91d";
+}
+.icon-info-circle1:before {
+  content: "\e91e";
 }
