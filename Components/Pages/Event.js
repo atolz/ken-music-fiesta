@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { popUpContext } from "../../Context/PopUps";
 import EventCard from "../Cards/EventCard";
 import SvgIconWrapper from "../SvgIconWrapper";
+import ProgressiveToken from "./ProgressiveToken";
 
 const Event = () => {
   const [showDetails, setShowDetails] = useState(false);
+  const [joinLive, setJoinLive] = useState(false);
+  const popUpFunctions = useContext(popUpContext);
   return (
     <div>
-      {!showDetails && (
+      {!showDetails && !joinLive && (
         <div className="flex flex-wrap sidebar:flex-nowrap">
-          <section className=" flex-shrink inline-block mr-10 mb-10">
+          <section className=" flex-shrink flex-1 inline-block mr-10 mb-10">
             <EventCard
               action={() => {
                 setShowDetails(true);
               }}
             />
           </section>
-          <section className="flex-shrink inline-block mr-10 mb-10">
+          <section className="flex-shrink flex-1 inline-block mr-10 mb-10">
             <EventCard
               action={() => {
                 setShowDetails(true);
@@ -41,13 +45,16 @@ const Event = () => {
 
           {/* Details */}
           <div className="flex gap-[6rem] flex-wrap sidebar:flex-nowrap items-center ">
-            <img src="/event-img.jpg"></img>
+            {/* <img src="/event-img.jpg"></img> */}
+            <img className="h-[501px] w-[384px] object-cover rounded-[2rem]" src="/bg-party.jpg"></img>
+
             <div className="-translate-y-6">
               <h4 className=" font-bold text-[2rem] leading-[2.4rem]">Description</h4>
               <p className="max-w-[49.2rem] font-normal text-[1.4rem] text-[#717171] mb-[4rem] mt-[.8rem] leading-[2rem]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper ultrices sollicitudin eu laoreet pretium, eleifend porttitor. Volutpat sagittis amet, diam ut amet bibendum ut. Gravida
-                vitae nunc tellus eu viverra senectus sagittis malesuada bibendum. Metus, rutrum vitae etiam enim eget viverra et nibh aliquet. Elementum egestas sed etiam scelerisque morbi id
-                tristique tristique. Cursus ac fringilla convallis malesuada. Amet scelerisque euismod.
+                Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly
+                go where no man has gone before. Many say exploration is part of our destiny, but it’s actually our duty to future generations and their quest to ensure the survival of the human
+                species.<br></br> If one examines precultural libertarianism, one is faced with a choice: either accept rationalism or conclude that context is a product of the masses, given that
+                Marx’s essay on precultural libertarianism is invalid.
               </p>
               <div className="flex gap-[3.2rem] mb-[5rem]">
                 <div>
@@ -60,13 +67,30 @@ const Event = () => {
                 </div>
               </div>
               <div className="grid gap-[1.6rem] grid-cols-2">
-                <button className="btn">Join Livestream Event</button>
-                <button className="btn btn--outlined">Buy Event Ticket</button>
+                <button
+                  onClick={() => {
+                    setJoinLive(true);
+                    setShowDetails(false);
+                  }}
+                  className="btn"
+                >
+                  Join Livestream Event
+                </button>
+                <button
+                  onClick={() => {
+                    popUpFunctions.initBuyTicket();
+                  }}
+                  className="btn btn--outlined !text-black"
+                >
+                  Buy Event Ticket
+                </button>
               </div>
             </div>
           </div>
         </section>
       )}
+
+      {joinLive && <ProgressiveToken></ProgressiveToken>}
     </div>
   );
 };

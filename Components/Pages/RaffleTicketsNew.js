@@ -7,7 +7,7 @@ import { getDashHistory } from "../../store/user";
 import PoweredBy from "../Cards/PoweredBy";
 import Container from "../Layout/Container";
 
-const RaffleTickets = () => {
+const RaffleTicketsNew = () => {
   const user = useContext(DataContext).user;
   var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -93,55 +93,8 @@ const RaffleTickets = () => {
         </section>
         {/* Section 2 */}
       </div>
-      <div className="flex flex-wrap gap-10">
-        {/* div-1 */}
-        <div className="min-w-[33rem] flex-grow">
-          {/*  Table*/}
-          <div className="rounded-[2rem] bg-white whitespace-nowrap">
-            {/* Table Head */}
-            <div className="px-[2.2rem] sidebar:px-[4.2rem] py-[3rem] border-b">
-              <h3 className="font-bold text-black text-[2.1rem] leading-[2.1rem]">Raffle Category</h3>
-            </div>
-            {/* Table Body */}
-            <div className="body px-[2.2rem] sidebar:px-[4.2rem] py-[3rem]">
-              <div className="row flex justify-between py-[2.2rem] px-[2.5rem] text-[#706C6C] bg-[rgba(255,246,228,0.31)] rounded-[2rem] leading-[2.1rem] text-[1.4rem] mobile:text-[1.8rem] mb-[.8rem]">
-                <span className="font-normal">Category 1</span>
-                <span className="font-semibold">#500 - #10,000</span>
-              </div>
-              <div className="row flex justify-between py-[2.2rem] px-[2.5rem] text-[#706C6C] bg-[rgba(240,240,240,0.31)] rounded-[2rem] leading-[2.1rem] text-[1.4rem] mobile:text-[1.8rem]">
-                <span className="font-normal">Category 1</span>
-                <span className="font-semibold">#500 - #10,000</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* div-2 */}
-        <div className="min-w-[33rem] flex-grow">
-          {/*  Table*/}
-          <div className="rounded-[2rem] bg-white">
-            {/* Table Head */}
-            <div className=" px-[2.2rem] sidebar:px-[4.2rem] py-[3rem] border-b">
-              <h3 className="font-bold text-black text-[2.1rem] leading-[2.1rem]">Ticket Numbers</h3>
-            </div>
-            {/* Table Body */}
-            <div className="body px-[2.2rem] sidebar:px-[4.2rem] py-[3rem]">
-              <div className="row flex justify-between py-[2.2rem] px-[2.5rem] text-[#706C6C] bg-[rgba(255,246,228,0.31)] rounded-[2rem] leading-[2.1rem] text-[1.4rem] mobile:text-[1.8rem] mb-[.8rem]">
-                <span className="font-normal">Ticket 1</span>
-                <span className="font-semibold">#1223345ABG</span>
-              </div>
-              <div className="row flex justify-between py-[2.2rem] px-[2.5rem] text-[#706C6C] bg-[rgba(240,240,240,0.31)] rounded-[2rem] leading-[2.1rem] text-[1.4rem] mobile:text-[1.8rem]">
-                <span className="font-normal">Ticket 2</span>
-                <span className="font-semibold">#1223345ABG</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* <PoweredBy></PoweredBy> */}
-      </div>
     </div>
   );
 };
 
-export default RaffleTickets;
+export default RaffleTicketsNew;

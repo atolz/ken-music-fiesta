@@ -19,8 +19,10 @@ const Progress = () => {
       <div className="flex items-center">
         <div className="w-[87px] h-[87px]  mr-[2.4rem]">
           <CircularProgressbar
-            value={parseInt(user?.dashboardHistory?.weekly_total_progress)}
-            text={`${parseInt(user?.raffleTickets?.weekly_total_purchase ?? 0)}`}
+            value={45}
+            text={"45%"}
+            // value={parseInt(user?.dashboardHistory?.weekly_total_progress)}
+            // text={`${parseInt(user?.raffleTickets?.weekly_total_purchase ?? 0)}`}
             styles={buildStyles({
               pathColor: "#FA6BFF",
               strokeLinecap: "butt",

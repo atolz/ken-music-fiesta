@@ -5,7 +5,8 @@ import { popUpContext } from "../../Context/PopUps";
 import { DataContext } from "../../Context/fetchData";
 
 const UserSideBar = ({ activePage, setActivePage }) => {
-  const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Events", "Livestream Event", "Progressive Token"];
+  // const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Events", "Livestream Event", "Progressive Token"];
+  const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Events"];
   const icons = ["Dashboard", "Raffle-Tickets", "Rewards", "Livestream-Event", "Livestream-Event", "Livestream-Event"];
   const popUpFunctions = useContext(popUpContext);
   const AppData = useContext(DataContext);
@@ -38,15 +39,15 @@ const UserSideBar = ({ activePage, setActivePage }) => {
                 ></div>
                 {/* Icon */}
                 <i
-                  className={`icon icon-${icons[i]} mr-[1.7rem] text-[1.8rem] ${icons[i] == "Dashboard" ? " text-[2.8rem]" : ""}  ${page == activePage ? "  text-[#D82025]" : ""}
-                  ${page == "Dashboard" && activePage == "Profile" ? " !text-[#D82025]" : ""}`}
+                  className={`icon icon-${icons[i]} mr-[1.7rem] text-[1.8rem] ${icons[i] == "Dashboard" ? " text-[2.8rem]" : ""}  ${page == activePage ? "  text-grad" : ""}
+                  ${page == "Dashboard" && activePage == "Profile" ? " !text-grad" : ""}`}
                 ></i>
                 {/* Text */}
                 <span
                   className={`transition-all duration-200 font-normal text-[1.6rem] text-ellipsis overflow-hidden w-[160px]  ${
-                    page == activePage ? " text-[#D82025] !font-bold text-[2rem]" : "text-white"
+                    page == activePage ? " text-grad !font-bold text-[2rem]" : "text-white"
                   }  
-                  ${page == "Dashboard" && activePage == "Profile" ? " !text-[#D82025] !font-bold text-[2rem]" : ""}`}
+                  ${page == "Dashboard" && activePage == "Profile" ? " !text-grad !font-bold text-[2rem]" : ""}`}
                 >
                   {page}
                 </span>
@@ -71,7 +72,7 @@ const UserSideBar = ({ activePage, setActivePage }) => {
           {pages.map((page, i) => {
             return (
               <li
-                className={`flex items-center transition-all ease-in mb-[4.2rem] cursor-pointer flex-col ${page == activePage ? "  text-[#D82025]" : "text-white"}`}
+                className={`flex items-center transition-all ease-in mb-[4.2rem] cursor-pointer flex-col ${page == activePage ? "  text-grad" : "text-white"}`}
                 key={i}
                 onClick={() => {
                   setActivePage(page);

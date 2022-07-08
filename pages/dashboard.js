@@ -23,6 +23,7 @@ import ProgressiveToken from "../Components/Pages/ProgressiveToken";
 import useIsLoggedIn from "../hooks/useIsLoggedIn";
 import Event from "../Components/Pages/Event";
 import { popUpContext } from "../Context/PopUps";
+import RaffleTicketsNew from "../Components/Pages/RaffleTicketsNew";
 // import { setActivePage as setGlobalPage } from "../store/pages";
 // import UseIsLoggedIn from "../hooks/useIsLoggedIn";
 
@@ -59,7 +60,7 @@ export default function Home() {
       {/* <Profile className={` transition-all ease-in ${activePage == "Profile" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></Profile> */}
       {/* {activePage == "Profile" && <Profile></Profile>} */}
       {activePage == "Dashboard" && <Dashboard appData={AppData}></Dashboard>}
-      {activePage == "Raffle Tickets" && <RaffleTickets appData={AppData}></RaffleTickets>}
+      {activePage == "Raffle Tickets" && <RaffleTicketsNew appData={AppData}></RaffleTicketsNew>}
       {activePage == "Rewards" && <Rewards appData={AppData}></Rewards>}
       {activePage == "Events" && <Event AppData={AppData}></Event>}
       {activePage == "Livestream Event" && <LiveStream AppData={AppData}></LiveStream>}
