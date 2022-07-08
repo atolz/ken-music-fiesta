@@ -63,7 +63,7 @@ const Event = () => {
                 </div>
                 <div>
                   <h3 className=" text-[1.4rem] font-bold mb-3">Venue</h3>
-                  <p className=" font-semibold text-[1.6rem] text-[#717171]">Tafawa Balewa Square, Lagos State</p>
+                  <p className=" font-semibold text-[1.6rem] text-[#717171]">Eko Hotel & Suites, VI</p>
                 </div>
               </div>
               <div className="grid gap-[1.6rem] grid-cols-2">
