@@ -68,7 +68,7 @@ const MusicPlayerV2 = ({ title, songList, albumTitle, theme = "dark" }) => {
     <>
       {title && <h1 className="mb-[1.6rem] text-primary font-bold text-[2.5rem]">Stream Artiste Music</h1>}
       <div className="w-[100%] overflow-x-scroll scroll_hide max-w-[79.3rem]">
-        <div className=" w-full border-gray-lighter border-collapse  min-w-[7.3rem]">
+        <div className=" w-full border-gray-lighter border-collapse  min-w-[7.3rem] text-[1.2rem]">
           {/* Header */}
           <div className=" text-[#838383] whitespace-nowrap  grid grid-cols-[1fr_16.2rem_2fr_1fr_3fr_16.2rem] mb-[1.6rem]">
             <span className=" align-text-bottom  border-gray-lighter font-medium text-left pt-[10px] px-[16px]">#</span>
@@ -89,10 +89,10 @@ const MusicPlayerV2 = ({ title, songList, albumTitle, theme = "dark" }) => {
               <div
                 style={{ color: `${theme == "light" ? "white" : "black"}` }}
                 key={i}
-                className=" hover:bg-primary rounded-full cursor-pointer grid grid-cols-[1fr_16.2rem_2fr_1fr_3fr_16.2rem] place-items-start items-center justify-start "
+                className=" hover:bg-primary hover:!text-white rounded-full cursor-pointer grid grid-cols-[1fr_16.2rem_2fr_1fr_3fr_16.2rem] place-items-start items-center justify-start "
               >
-                <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.2rem] font-medium">{i + 1}</span>
-                <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">
+                <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.4rem] font-medium">{i + 1}</span>
+                <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.4rem] font-medium whitespace-nowrap">
                   <div className="flex items-center">
                     {playingIndex == i && (
                       <svg width="22" height="20" viewBox="0 0 22 20" fill="red" xmlns="http://www.w3.org/2000/svg">
@@ -102,10 +102,10 @@ const MusicPlayerV2 = ({ title, songList, albumTitle, theme = "dark" }) => {
                     <span className=" ml-4 text-ellipsis overflow-hidden max-w-[12rem]">{el.name}</span>
                   </div>
                 </span>
-                <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">Artist 1</span>
-                <span className=" border-gray-lighter p-[16px] !py-[14px] text-right align-text-bottom text-[1.2rem] font-medium">1:30</span>
-                <span className=" border-gray-lighter p-[16px] !py-[14px]  align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">{albumTitle || el.albumTitle}</span>
-                <span className=" border-gray-lighter p-[16px] !py-[14px] text-right align-text-bottom text-[1.2rem] font-medium ">
+                <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.4rem] font-medium whitespace-nowrap">Artist 1..</span>
+                <span className=" border-gray-lighter p-[16px] !py-[14px] text-right align-text-bottom text-[1.4rem] font-medium">1:30</span>
+                <span className=" border-gray-lighter p-[16px] !py-[14px]  align-text-bottom text-[1.4rem] font-medium whitespace-nowrap">{albumTitle || el.albumTitle}</span>
+                <span className=" border-gray-lighter p-[16px] !py-[14px] text-right align-text-bottom text-[1.4rem] font-medium ">
                   <div className="flex items-center gap-[1.4rem] place-self-start">
                     <img
                       onClick={() => {

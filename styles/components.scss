@@ -228,6 +228,14 @@
   // font-family: "Montserrat", sans-serif;
 }
 
+.MuiDrawer-root .MuiDrawer-paper {
+  max-width: calc(100% - 37rem);
+  margin-left: auto;
+  @media (max-width: 752px) {
+    max-width: 100%;
+  }
+}
+
 // Popup Forms
 .popup-form {
   label {

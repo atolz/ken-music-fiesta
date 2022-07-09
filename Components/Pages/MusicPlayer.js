@@ -63,7 +63,7 @@ const MusicPlayer = () => {
       <h1 className="mb-[1.6rem] text-primary font-bold text-[2.5rem]">Stream Artiste Music</h1>
       <div className="w-[100%] overflow-x-scroll scroll_hide max-w-[79.3rem]">
         <table className=" w-full border-gray-lighter border-collapse  min-w-[7.3rem]">
-          <thead className="text-bl text-black-light whitespace-nowrap bg-gray-lightest-2 caption_heavy h-[48px] font-medium">
+          <thead className="text-bl text-black-light whitespace-nowrap bg-gray-lightest-2 caption_heavy h-[48px] font-medium text-[1.3rem]">
             <tr>
               <th className=" text-[#838383] border-gray-lighter font-medium text-left pt-[10px] px-[16px] ">
                 <span className=" align-text-bottom mt-auto">#</span>
@@ -87,8 +87,8 @@ const MusicPlayer = () => {
             {songs.map((el, i) => {
               return (
                 <tr key={i} className=" hover:bg-primary rounded-lg cursor-pointer">
-                  <td className="text-white border-gray-lighter p-[16px] text-left align-text-bottom text-[1.2rem] font-medium">{i + 1}</td>
-                  <td className="text-white border-gray-lighter p-[16px] text-left align-text-bottom text-[1.2rem] font-medium">
+                  <td className="text-white border-gray-lighter p-[16px] text-left align-text-bottom text-[1.4rem] font-medium">{i + 1}</td>
+                  <td className="text-white border-gray-lighter p-[16px] text-left align-text-bottom text-[1.4rem] font-medium">
                     <div className="flex items-center">
                       {playingIndex == i && (
                         <svg width="22" height="20" viewBox="0 0 22 20" fill="red" xmlns="http://www.w3.org/2000/svg">
@@ -98,10 +98,10 @@ const MusicPlayer = () => {
                       <span className=" ml-4">{el.name}</span>
                     </div>
                   </td>
-                  <td className="text-white border-gray-lighter p-[16px] text-left align-text-bottom text-[1.2rem] font-medium">Artist 1</td>
-                  <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.2rem] font-medium">1:30</td>
-                  <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.2rem] font-medium ">{el.album}</td>
-                  <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.2rem] font-medium ">
+                  <td className="text-white border-gray-lighter p-[16px] text-left align-text-bottom text-[1.4rem] font-medium">Artist 1</td>
+                  <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.4rem] font-medium">1:30</td>
+                  <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.4rem] font-medium ">{el.album}</td>
+                  <td className="text-white border-gray-lighter p-[16px] text-right align-text-bottom text-[1.4rem] font-medium ">
                     <div className="flex items-center gap-[1.4rem]">
                       <img
                         onClick={() => {

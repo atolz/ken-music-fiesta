@@ -63,7 +63,7 @@ const ArtisteHeader = ({ title, setActivePage }) => {
                   className="h-[4.2rem] cursor-pointer w-[4.2rem] object-cover rounded-full ml-[16px] yellow-shadow"
                   src="/user-img.jpg"
                 /> */}
-                <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "orange" }} alt={user?.name} src={`${baseURL}${user?.avatar}`}>
+                <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "#758DAA" }} alt={user?.name} src={`${baseURL}${user?.avatar}`}>
                   <span className=" font-semibold"> {user?.username ? user?.username[0] : "N"}</span>
                 </Avatar>
                 {/* </Tooltip> */}

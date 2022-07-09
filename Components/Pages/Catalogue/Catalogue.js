@@ -71,7 +71,7 @@ const Catalogue = () => {
                 {/* <Image objectFit="cover" width={194} height={185} src={`${el.coverImage.includes("cdn") ? `https://${el.coverImage}` : el.coverImage} `}></Image> */}
                 <img className="w-full h-[18.5rem] object-cover bg-slate-800 rounded-[2rem]" src={`${el.coverImage}`}></img>
                 <p className="mt-[2.4rem] font-bold text-[2rem] mb-[5px]">{el.albumTitle}</p>
-                <p className=" font-semibold text-[1.6rem] text-[#BDBCBC]">{el.yearOfRelease}</p>
+                <p className=" font-semibold text-[1.4rem] text-[#878484]">{el.yearOfRelease}</p>
               </div>
             );
           })}
@@ -95,34 +95,34 @@ const Catalogue = () => {
                 {/* <Image width={194} height={185} src={el.image}></Image> */}
                 <img className="w-full h-[24rem] object-cover bg-slate-800 rounded-[2rem]" src={`${el.coverImage}`}></img>
                 <p className="mt-[2.4rem] font-bold text-[2rem] mb-[5px]">{el.albumTitle}</p>
-                <p className=" font-semibold text-[1.6rem] text-[#BDBCBC]">{el.yearOfRelease}</p>
+                <p className=" font-semibold text-[1.4rem] text-[#878484]">{el.yearOfRelease}</p>
               </div>
             );
           })}
         </section>
       )}
 
-      <Drawer sx={{ maxWidth: "600px", marginLeft: "auto", "& .MuiDrawer-paper": { borderRadius: "3rem 3rem 0 0", minHeight: "642px" } }} anchor={"bottom"} open={showDetails} onClose={toggleDrawer()}>
+      <Drawer sx={{ maxWidth: "600px", marginLeft: "auto", "& .MuiDrawer-paper": { borderRadius: "0rem 0rem 0 0", minHeight: "642px" } }} anchor={"bottom"} open={showDetails} onClose={toggleDrawer()}>
         <div className="w-ful  max-h-[70vh]  rounded-tl-[3rem] rounded-tr-[3rem] pt-[5.2rem] ">
           <Container twStyles={"flex gap-[9.4rem] flex-wrap"}>
             {/* <div className=" sidebar:-translate-y-[15.4rem] -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex"> */}
-            <div className=" relative  rounded-2xl h-[26.7rem] w-[25.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex yellow-shadow">
+            <div className=" relative  rounded-2xl h-[26.7rem] w-[25.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex ">
               <Image className="object-cover overflow-hidden bg-slate-800  scale-[1.18]" layout="fill" src={`${activeCatalogue.coverImage}`} alt={"artist-name"}></Image>
             </div>
             <section className="flex-1 max-w-[80rem]">
-              <div className="flex flex-wrap mb-[4.9rem] items-center justify-between border-b pb-[2.7rem]">
+              <div className="flex flex-wrap mb-[2.9rem] items-center justify-between border-b pb-[2.7rem]">
                 <div>
                   <h2 className="text-[#252626] font-bold text-[5rem] mb-[1.3rem] leading-[4.8rem] whitespace-nowrap mr-8">{activeCatalogue.albumTitle}</h2>
                   <div className="flex flex-wrap gap-[1.6rem] max-w-[50rem]">
-                    <p className=" font-normal text-[1.3rem] text-[#bdbcbc9c]">
-                      Album - <span className=" font-bold text-[1.3rem] text-[#BDBCBC]">{activeCatalogue.albumTitle}</span>
+                    <p className=" font-normal text-[1.4rem] text-[#8784849c]">
+                      Album - <span className=" font-bold text-[1.4rem] text-[#878484]">{activeCatalogue.albumTitle}</span>
                     </p>
-                    <p className=" font-normal text-[1.3rem] text-[#bdbcbc9c]">
-                      Year of release - <span className=" font-bold text-[1.3rem] text-[#BDBCBC]">{activeCatalogue.yearOfRelease}</span>
+                    <p className=" font-normal text-[1.4rem] text-[#8784849c]">
+                      Year of release - <span className=" font-bold text-[1.4rem] text-[#878484]">{activeCatalogue.yearOfRelease}</span>
                     </p>
                   </div>
-                  <p className=" font-normal text-[1.3rem] text-[#bdbcbc9c] mt-[1.6rem]">
-                    Record Label - <span className=" font-bold text-[1.3rem] text-[#BDBCBC]">Gang Bangers</span>
+                  <p className=" font-normal text-[1.4rem] text-[#8784849c] mt-[1.6rem]">
+                    Record Label - <span className=" font-bold text-[1.4rem] text-[#878484]">Gang Bangers</span>
                   </p>
                 </div>
 
