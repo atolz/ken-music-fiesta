@@ -30,6 +30,7 @@ export default function Document() {
         <link rel="prefetch" href="/3d-ticket-1.png"></link>
         <link rel="prefetch" href="/3d-tickets-used.svg"></link>
         <link rel="prefetch" href="/success.svg"></link>
+        <link rel="icon" href="/new_logo_ico.png" sizes="0x16" type="image/png"></link>
       </Head>
       <body>
         <Main />
