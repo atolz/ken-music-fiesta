@@ -42,7 +42,7 @@ const Index = () => {
     <div className="grow-0 shrink overflow-y-scroll scroll_hide">
       <Container>
         <div className="text-center">
-          <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FCAC0D] mb-[9rem]">Meet the Artistes</h3>
+          <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FA6BFF] mb-[9rem]">Meet the Artistes</h3>
           <main className={`flex flex-wrap  items-center ${artistes.data.length > 3 ? " justify-between gap-[16rem]" : " justify-center gap-96"}   mb-40`}>
             {artistes.data.map((el, i) => {
               return (

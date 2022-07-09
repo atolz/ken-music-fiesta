@@ -5,7 +5,7 @@ import LandPageLayout from "../../Components/Layout/LandPageLayout";
 import { DataContext } from "../../Context/fetchData";
 
 const Container = ({ children }) => {
-  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem]">{children}</div>;
+  return <div className="max-w-[170rem] mx-auto w-full px-[4rem] sidebar:px-[10rem]">{children}</div>;
 };
 
 const Index = () => {
@@ -35,14 +35,14 @@ const Index = () => {
     },
   ];
   return (
-    <div className="grow-0 shrink overflow-y-scroll scroll_hide">
+    <div className="grow-0 shrink overflow-y-scroll scroll_hide -translate-y-14">
       <Container>
         <div className="text-center">
           <div className="flex items-center justify-between mb-[9rem] mt-[6rem]">
-            <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FCAC0D] ">Artistes Catalogue</h3>
+            <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FA6BFF] ">Catalogue</h3>
             <div>
               <Link href={"/catalogues/create"}>
-                <button className="btn">Create Catalogue</button>
+                <button className="btn ">Create Catalogue</button>
               </Link>
             </div>
           </div>
@@ -53,7 +53,7 @@ const Index = () => {
                 <Link href={`/catalogues/${el.uuid}`} key={i}>
                   <a className=" last:mr-auto">
                     <div className="flex flex-col">
-                      <div className=" -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex">
+                      <div className=" -skew-y-12 rounded-2xl h-[32.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex">
                         {/* <Image className="object-cover overflow-hidden !skew-y-12 scale-[1.18]" layout="fixed" width={234} height={347} src={el.coverImage} alt={el.albumTitle}></Image> */}
                         <img className="object-cover bg-slate-800 overflow-hidden !skew-y-12 scale-[1.18]" layout="fixed" width={234} height={347} src={el.coverImage} alt={el.albumTitle}></img>
                         {/* </div> */}
