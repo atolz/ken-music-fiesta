@@ -45,12 +45,14 @@ const Utils = ({ children }) => {
 
   return (
     <div>
-      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 300 }} open={isLoading}>
-        <div className="grid place-content-center place-items-center text-[#A307A8]">
-          <img className="mr-auto w-[150px] cursor-pointer absolute " src="/new_logo.png"></img>
-          <CircularProgress thickness={0.5} size={"210px"} color="inherit" />
-        </div>
-      </Backdrop>
+      {isLoading && (
+        <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 300 }} open={isLoading}>
+          <div className="grid place-content-center place-items-center text-[#A307A8]">
+            <img className="mr-auto w-[150px] cursor-pointer absolute " src="/new_logo.png"></img>
+            <CircularProgress thickness={0.5} size={"210px"} color="inherit" />
+          </div>
+        </Backdrop>
+      )}
 
       {/* Alert Global */}
       <div
