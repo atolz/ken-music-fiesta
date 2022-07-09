@@ -60,7 +60,7 @@ const MusicPlayer = () => {
   };
   return (
     <>
-      <h1 className="mb-[1.6rem] text-[#FCAC0D] font-bold text-[2.5rem]">Stream Artiste Music</h1>
+      <h1 className="mb-[1.6rem] text-primary font-bold text-[2.5rem]">Stream Artiste Music</h1>
       <div className="w-[100%] overflow-x-scroll scroll_hide max-w-[79.3rem]">
         <table className=" w-full border-gray-lighter border-collapse  min-w-[7.3rem]">
           <thead className="text-bl text-black-light whitespace-nowrap bg-gray-lightest-2 caption_heavy h-[48px] font-medium">
@@ -86,7 +86,7 @@ const MusicPlayer = () => {
           <tbody className="caption_light text-black-default whitespace-nowrap h-[48px]">
             {songs.map((el, i) => {
               return (
-                <tr key={i} className=" hover:bg-[#FCAC0D] rounded-lg cursor-pointer">
+                <tr key={i} className=" hover:bg-primary rounded-lg cursor-pointer">
                   <td className="text-white border-gray-lighter p-[16px] text-left align-text-bottom text-[1.2rem] font-medium">{i + 1}</td>
                   <td className="text-white border-gray-lighter p-[16px] text-left align-text-bottom text-[1.2rem] font-medium">
                     <div className="flex items-center">

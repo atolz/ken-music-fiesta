@@ -95,7 +95,7 @@ const Uploaded = ({ type, caption, uploaded, catId }) => {
                         onClick={() => {
                           onPlay(el.fileUrl, i);
                         }}
-                        className="icon-play cursor-pointer text-[#FCAC0D] text-[2rem] flex-shrink-0"
+                        className="icon-play cursor-pointer text-primary text-[2rem] flex-shrink-0"
                       ></i>
                     );
                   }
@@ -105,7 +105,7 @@ const Uploaded = ({ type, caption, uploaded, catId }) => {
                     onClick={() => {
                       pause();
                     }}
-                    className="icon-pause cursor-pointer text-[#FCAC0D] text-[2rem] flex-shrink-0"
+                    className="icon-pause cursor-pointer text-primary text-[2rem] flex-shrink-0"
                   ></i>
                 )}
                 <span className="ml-[2.6rem] font-medium text-[1.4rem] text-slate-800 max-w-[10rem] mobile:max-w-[20rem] sidebar:max-w-[30rem] whitespace-nowrap overflow-hidden text-ellipsis shrink block">

@@ -66,7 +66,7 @@ const MusicPlayerV2 = ({ title, songList, albumTitle, theme = "dark" }) => {
   };
   return (
     <>
-      {title && <h1 className="mb-[1.6rem] text-[#FCAC0D] font-bold text-[2.5rem]">Stream Artiste Music</h1>}
+      {title && <h1 className="mb-[1.6rem] text-primary font-bold text-[2.5rem]">Stream Artiste Music</h1>}
       <div className="w-[100%] overflow-x-scroll scroll_hide max-w-[79.3rem]">
         <div className=" w-full border-gray-lighter border-collapse  min-w-[7.3rem]">
           {/* Header */}
@@ -89,7 +89,7 @@ const MusicPlayerV2 = ({ title, songList, albumTitle, theme = "dark" }) => {
               <div
                 style={{ color: `${theme == "light" ? "white" : "black"}` }}
                 key={i}
-                className=" hover:bg-[#FCAC0D] rounded-full cursor-pointer grid grid-cols-[1fr_16.2rem_2fr_1fr_3fr_16.2rem] place-items-start items-center justify-start "
+                className=" hover:bg-primary rounded-full cursor-pointer grid grid-cols-[1fr_16.2rem_2fr_1fr_3fr_16.2rem] place-items-start items-center justify-start "
               >
                 <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.2rem] font-medium">{i + 1}</span>
                 <span className=" border-gray-lighter p-[16px] !py-[14px] text-left align-text-bottom text-[1.2rem] font-medium whitespace-nowrap">

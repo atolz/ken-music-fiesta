@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import React, { useState, useRef, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useShowAlert from "../hooks/useShowAlert";
@@ -15,6 +16,7 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded, uploaded, catId 
   const [playing, setPlaying] = useState(false);
   const { getLocalStorage, isLoggedIn } = useLocalStorage();
   const toggleAlertBar = useShowAlert();
+  const router = useRouter();
 
   const onSelectFles = (e) => {
     console.log("files are ", e.target.files[0]);
@@ -51,7 +53,7 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded, uploaded, catId 
       formData.append("music", file);
       formData.append("musicTitle", file.name);
 
-      return axios.post("https://api.kennismusic.app/artist-catalogue/upload-music", formData, {
+      return axios.post("https://kmf.kennismusic.app/artist-catalogue/upload-music", formData, {
         // const res = await axios.post("http://a805df5bc8dc349ea81228a62f357233-654010950.eu-west-3.elb.amazonaws.com/v1/file/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -152,7 +154,7 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded, uploaded, catId 
       {/* Audio Display */}
       {type == "audio" && (
         <div>
-          {files[0] && <p className="text-white font-medium text-[1.4rem] !mb-[1.6rem] mt-[4.7rem]">Selected Tracks</p>}
+          {files[0] && <p className={`text-white font-medium text-[1.4rem] !mb-[1.6rem] mt-[4.7rem]`}>Selected Tracks</p>}
           {files.map((el, i) => {
             return (
               <div key={i} className="flex items-center px-[2.9rem] py-[1.5rem] rounded-[2rem] border-[#606060] border mb-[1.6rem] relative overflow-hidden">
@@ -164,7 +166,7 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded, uploaded, catId 
                         onClick={() => {
                           onPlay(el, i);
                         }}
-                        className="icon-play cursor-pointer text-[#FCAC0D] text-[2rem] flex-shrink-0"
+                        className="icon-play cursor-pointer text-primary text-[2rem] flex-shrink-0"
                       ></i>
                     );
                   }
@@ -174,10 +176,14 @@ const Upload = ({ type, caption, htmlFor, onChange, onUploaded, uploaded, catId 
                     onClick={() => {
                       pause();
                     }}
-                    className="icon-pause cursor-pointer text-[#FCAC0D] text-[2rem] flex-shrink-0"
+                    className="icon-pause cursor-pointer text-primary text-[2rem] flex-shrink-0"
                   ></i>
                 )}
-                <span className="ml-[2.6rem] font-medium text-[1.4rem] text-slate-800 max-w-[10rem] mobile:max-w-[20rem] sidebar:max-w-[30rem] whitespace-nowrap overflow-hidden text-ellipsis shrink block">
+                <span
+                  className={`ml-[2.6rem] font-medium text-[1.4rem]   ${
+                    router.pathname.includes("/catalogues/create") ? "text-white" : "text-slate-800"
+                  } max-w-[10rem] mobile:max-w-[20rem] sidebar:max-w-[30rem] whitespace-nowrap overflow-hidden text-ellipsis shrink block`}
+                >
                   {el.name}
                 </span>
                 <div

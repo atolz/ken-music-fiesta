@@ -130,7 +130,7 @@ const Catalogue = () => {
                   onClick={() => {
                     popUpFunctions.initEditCatalogue(activeCatalogue);
                   }}
-                  className="btn btn--outlined text-[#252626]  !inline-flex"
+                  className="btn btn--outlined !text-[#252626]  !inline-flex"
                 >
                   Edit Catalogue
                 </button>

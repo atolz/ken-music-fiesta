@@ -17,7 +17,7 @@ const ArtisteSideBar = ({ activePage, setActivePage }) => {
     <>
       <div className="w-[37rem] h-screen px-[4.7rem] py-[4.9rem] hidden flex-col bg-[#010101] text-white bg-sidebar sidebar:flex">
         <Link href={"/"}>
-          <img src="/kef-logo.svg" className="mb-[5.1rem] w-[11.3rem] mx-auto cursor-pointer"></img>
+          <img src="/new_logo.png" className="mb-[5.1rem]  h-[83px] mx-auto cursor-pointer"></img>
         </Link>
         <ul className="bg-r whitespace-nowrap">
           {/* Base Page Sidebar Items */}
@@ -35,14 +35,14 @@ const ArtisteSideBar = ({ activePage, setActivePage }) => {
                  ${page == "Dashboard" && activePage == "Profile" ? " opacity-100" : ""}`}
                 ></div>
                 <i
-                  className={`icon icon-${icons[i]} mr-[1.7rem] text-[1.8rem] ${icons[i] == "Dashboard" ? " text-[2.8rem]" : ""}  ${page == activePage ? "  text-[#FCAC0D]" : ""}
-                  ${page == "Dashboard" && activePage == "Profile" ? " !text-[#FCAC0D]" : ""}`}
+                  className={`icon icon-${icons[i]} mr-[1.7rem] text-[1.8rem] ${icons[i] == "Dashboard" ? " text-[2.8rem]" : ""}  ${page == activePage ? "  text-grad" : ""}
+                  ${page == "Dashboard" && activePage == "Profile" ? " text-grad" : ""}`}
                 ></i>
                 <span
                   className={`transition-all duration-200 font-normal text-[1.6rem] text-ellipsis overflow-hidden w-[160px]  ${
-                    page == activePage ? " text-[#FCAC0D] !font-bold text-[2rem]" : "text-white"
+                    page == activePage ? " text-grad !font-bold text-[2rem]" : "text-white"
                   }  
-                  ${page == "Dashboard" && activePage == "Profile" ? " !text-[#FCAC0D] !font-bold text-[2rem]" : ""}`}
+                  ${page == "Dashboard" && activePage == "Profile" ? " text-grad !font-bold text-[2rem]" : ""}`}
                 >
                   {page}
                 </span>
@@ -67,7 +67,7 @@ const ArtisteSideBar = ({ activePage, setActivePage }) => {
           {pages.map((page, i) => {
             return (
               <li
-                className={`flex items-center transition-all ease-in mb-[4.2rem] cursor-pointer flex-col ${page == activePage ? "  text-[#FCAC0D]" : "text-white"}`}
+                className={`flex items-center transition-all ease-in mb-[4.2rem] cursor-pointer flex-col ${page == activePage ? "  text-grad" : "text-white"}`}
                 key={i}
                 onClick={() => {
                   setActivePage(page);

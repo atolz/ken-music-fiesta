@@ -31,21 +31,23 @@ const AuthHeader = () => {
         </Link>
         {/* Desktop Nav */}
         <div className="items-center hidden sidebar:flex ">
-          <button
-            onClick={() => {
-              popUpFunctions.initBuyTicket();
-            }}
-            className="btn ml-auto"
-          >
-            Buy Event Ticket
-          </button>
+          {!router.pathname.includes("artiste") && (
+            <button
+              onClick={() => {
+                popUpFunctions.initBuyTicket();
+              }}
+              className="btn ml-auto"
+            >
+              Buy Event Ticket
+            </button>
+          )}
           {}
-          {(router.pathname.includes("sign-in") || router.pathname === "/") && (
+          {(router.pathname.includes("sign-in") || router.pathname === "/") && !router.pathname.includes("artiste") && (
             <Link href={"/auth/sign-up"}>
               <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign Up</button>
             </Link>
           )}
-          {router.pathname.includes("sign-up") && (
+          {router.pathname.includes("sign-up") && !router.pathname.includes("artiste") && (
             <Link href={"/auth/sign-in"}>
               <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign In</button>
             </Link>
