@@ -2,6 +2,9 @@ module.exports = {
   content: ["./pages/**/*.{js,ts,jsx,tsx}", "./Components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      borderRadius: {
+        primary: "2rem",
+      },
       colors: {
         primary: "var( --color-primary)",
         primaryGrad: "var(--color-primary-grad)",

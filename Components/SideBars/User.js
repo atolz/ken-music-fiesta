@@ -12,7 +12,9 @@ const UserSideBar = ({ activePage, setActivePage }) => {
   const AppData = useContext(DataContext);
 
   useEffect(() => {
-    setActivePage("Dashboard");
+    if (!activePage) {
+      setActivePage("Dashboard");
+    }
   }, []);
 
   return (

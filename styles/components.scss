@@ -33,13 +33,15 @@
 .kef-link {
   color: var(--color-primary);
   font-family: Montserrat;
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   font-style: normal;
   font-weight: 700;
   line-height: 1.5rem;
   letter-spacing: 0em;
   text-align: left;
   text-decoration: underline;
+  display: block;
+  cursor: pointer;
 }
 
 // Utils
