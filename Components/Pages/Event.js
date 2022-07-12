@@ -133,7 +133,7 @@ const Event = () => {
         </section>
       )}
 
-      {joinLive && <ProgressiveToken></ProgressiveToken>}
+      {joinLive && <ProgressiveToken setJoinLive={setJoinLive} setShowDetails={setShowDetails} date={AppData.kudibarEvents?.hash[activeEvent]?.eventDate}></ProgressiveToken>}
       {AppData.kudibarEvents?.loading && <p>loading...</p>}
     </div>
   );
