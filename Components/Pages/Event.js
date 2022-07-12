@@ -21,7 +21,7 @@ const Event = () => {
 
   const EventTicketCard = () => {
     return (
-      <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#F0F0F0] border-2 border-[#FDE8FE]  relative  min-w-[30rem] overflow-hidden flex-1`}>
+      <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#F0F0F0] bg-[#FCF9FC] border-2 border-[#FDE8FE]  relative  min-w-[30rem] overflow-hidden flex-1`}>
         <h3 className="h3 mb-[.4rem] mr-[11.0rem]">{0} Event Tickets</h3>
         <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold">Total Number of Event Tickets</p>
         {/* <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem] hand-card block" src={"/3d-ticket-1.png"}></img> */}
@@ -64,7 +64,6 @@ const Event = () => {
           </section> */}
         </div>
       )}
-      {AppData.kudibarEvents?.loading && <p>loading...</p>}
 
       {showDetails && (
         <section>
@@ -128,13 +127,14 @@ const Event = () => {
                   {AppData.kudibarEvents?.hash[activeEvent]?.isSoldOut && <button className="btn !border-2 !border-[#C4C4C4] !bg-none !text-[#C4C4C4]">Sold out</button>}
                 </div>
               </div>
-              <EventTicketCard></EventTicketCard>
+              {/* <EventTicketCard></EventTicketCard> */}
             </div>
           </div>
         </section>
       )}
 
       {joinLive && <ProgressiveToken></ProgressiveToken>}
+      {AppData.kudibarEvents?.loading && <p>loading...</p>}
     </div>
   );
 };
