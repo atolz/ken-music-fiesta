@@ -44,10 +44,10 @@ const RaffleTicketsNew = () => {
               <div className="flex flex-wrap justify-center mobile:flex-nowrap mobile:justify-start  items-center">
                 <div className="w-[95px] h-[95px]  mr-[2.4rem]">
                   <CircularProgressbar
-                    value={35}
-                    text={"35%"}
-                    // value={parseInt(user?.raffleTickets?.weekly_total_progress)}
-                    // text={`${parseInt(user?.raffleTickets?.weekly_total_purchase)}`}
+                    // value={35}
+                    // text={"35%"}
+                    value={parseInt(user?.raffleTickets?.weekly_total_progress)}
+                    text={`${parseInt(user?.raffleTickets?.weekly_total_progress)}%`}
                     styles={buildStyles({
                       pathColor: "#A307A8",
                       strokeLinecap: "butt",
@@ -69,7 +69,7 @@ const RaffleTicketsNew = () => {
             </div>
           </div>
           <div className="flex gap-10 flex-wrap overflow-x-scroll scroll_hide">
-            <RaffleTicketsTable></RaffleTicketsTable>
+            <RaffleTicketsTable data={user?.raffleTickets?.tickets}></RaffleTicketsTable>
           </div>
         </section>
 
@@ -83,7 +83,7 @@ const RaffleTicketsNew = () => {
             </p>
             <img src="/3d-hand-point.svg" className="absolute bottom-0 right-0 slide-up-now-opacity"></img>
           </div>
-          <RaffleCategory></RaffleCategory>
+          <RaffleCategory data={user?.raffleTickets?.ticket_category}></RaffleCategory>
         </section>
         {/* Section 2 */}
       </div>

@@ -9,11 +9,13 @@ export const DataContext = createContext({
   user: {},
   artistesUser: {},
   adminUser: {},
+  kudibarEvents: {},
   setUserOnLogin: (type, data) => {},
   section: "",
   setSection: () => {},
   fetchArtisteUserCatalogues: () => {},
   fetchUserDetails: () => {},
+  fetchKudibarEvents: () => {},
 });
 
 const AppDataProvider = ({ children }) => {
@@ -51,6 +53,39 @@ const AppDataProvider = ({ children }) => {
     data: null,
   });
 
+  const [kudibarEvents, setKudibarEvents] = useState({
+    data: [],
+    error: false,
+    loading: true,
+    hash: {},
+  });
+
+  const fetchKudibarEvents = async () => {
+    let events = [];
+    setKudibarEvents((val) => ({ ...val, error: false, loading: true }));
+    try {
+      const resp = await baseInstanceAPI.get("/dashboard/get-events/");
+      // console.log("artiste are")
+      let allEventsPromises = resp.data.events.map(async (el) => {
+        return baseInstanceAPI.get(`/dashboard/get-event-detail/${el.slug}`);
+      });
+      events = (await Promise.all(allEventsPromises)).map((resp) => {
+        return resp.data;
+      });
+      console.log("All events are:", events);
+      let evenstObjHashMap = {};
+
+      for (let value of events) {
+        // console.log("Values is ", value);
+        evenstObjHashMap[value.name] = value;
+      }
+      setKudibarEvents((val) => ({ ...val, data: events, hash: evenstObjHashMap, error: false, loading: false }));
+      console.log("All Kudibar events hash is", evenstObjHashMap);
+    } catch (error) {
+      console.log("THere was an error loading all artistes");
+      setArtistes((val) => ({ ...val, error: true, loading: false }));
+    }
+  };
   const fetchArtistes = async () => {
     let artistes = [];
     setArtistes((val) => ({ ...val, error: false, loading: true }));
@@ -230,7 +265,20 @@ const AppDataProvider = ({ children }) => {
   }, [section]);
   return (
     <DataContext.Provider
-      value={{ allArtisteCatalogues, artistes, user, artistesUser, adminUser, setUserOnLogin, section: section, setSection: setSection, fetchArtisteUserCatalogues, fetchUserDetails }}
+      value={{
+        allArtisteCatalogues,
+        artistes,
+        user,
+        artistesUser,
+        adminUser,
+        kudibarEvents,
+        setUserOnLogin,
+        section: section,
+        setSection: setSection,
+        fetchArtisteUserCatalogues,
+        fetchUserDetails,
+        fetchKudibarEvents,
+      }}
     >
       {children}
     </DataContext.Provider>

@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import { Dialog } from "@mui/material";
+import React, { useContext, useState } from "react";
+import { popUpContext } from "../../Context/PopUps";
 import PaymentCard from "../Cards/PaymentCard";
+import ReceiptStatus from "../PopUps/ReceiptStatus";
 
 const Button = ({ text, active, action = () => {} }) => {
   return (
@@ -16,8 +19,18 @@ const Button = ({ text, active, action = () => {} }) => {
 
 const Payment = () => {
   const [activeTab, setActiveTab] = useState("Pending");
+  const popUpFunctions = useContext(popUpContext);
+  const [show, setShow] = useState(false);
   return (
     <div>
+      <Dialog
+        open={show}
+        onClose={() => {
+          setShow(false);
+        }}
+      >
+        <ReceiptStatus caption="Transaction Receipt"></ReceiptStatus>
+      </Dialog>
       <header className="flex items-center gap-[3.2rem] mb-[6rem]">
         {["Pending", "Completed"].map((el, i) => {
           return (
@@ -35,14 +48,32 @@ const Payment = () => {
       <main className="flex flex-wrap">
         {activeTab == "Pending" && (
           <>
-            <PaymentCard color={"#FCAC0D"} className={"mr-5 mb-5"}></PaymentCard>
-            <PaymentCard color={"#FCAC0D"} className={"mr-5 mb-5"}></PaymentCard>
+            <PaymentCard
+              action={() => {
+                popUpFunctions.initReviewVendorPayment("4,000", "The Place, Lekki");
+              }}
+              color={"#FCAC0D"}
+              className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
+            ></PaymentCard>
+            <PaymentCard a color={"#FCAC0D"} className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}></PaymentCard>
           </>
         )}
         {activeTab == "Completed" && (
           <>
-            <PaymentCard color={"#348B52"} className={"mr-5 mb-5"}></PaymentCard>
-            <PaymentCard color={"#348B52"} className={"mr-5 mb-5"}></PaymentCard>
+            <PaymentCard
+              action={() => {
+                setShow(true);
+              }}
+              color={"#348B52"}
+              className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
+            ></PaymentCard>
+            <PaymentCard
+              action={() => {
+                setShow(true);
+              }}
+              color={"#348B52"}
+              className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
+            ></PaymentCard>
           </>
         )}
       </main>

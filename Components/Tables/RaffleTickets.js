@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import formatDate from "../../Utils/formatDate";
 
 const Button = ({ text, active, action = () => {} }) => {
   return (
@@ -13,7 +14,7 @@ const Button = ({ text, active, action = () => {} }) => {
   );
 };
 
-const RaffleTicketsTable = () => {
+const RaffleTicketsTable = ({ data = [] }) => {
   const [activeFilter, setActiveFilter] = useState("Purchased");
   return (
     <div className="rounded-[2rem] bg-white w-full min-w-[50rem]">
@@ -49,21 +50,29 @@ const RaffleTicketsTable = () => {
       </section>
 
       {/* Main Body */}
-      <section className="py-[4rem] px-[2.4rem]">
-        {new Array(6).fill(0).map((el, i) => {
-          return (
-            <div
-              key={i}
-              className="grid gap-2 grid-cols-4 bg-[rgba(246,235,245,0.38)] rounded-[2rem] place-items-center h-[65px] mb-[1.6rem] last:mb-0 hover:bg-[rgba(246,235,245,0.86)] hover:scale-[1.002]"
-            >
-              <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">Ticket {++i}</span>
-              <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">10 July, 2022</span>
-              <span className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap max-w-[80px] sm:max-w-[100px] sidebar:max-w-full text-ellipsis overflow-hidden">#1223345ABG</span>
-              <span className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">Not used</span>
-            </div>
-          );
-        })}
-      </section>
+      {data.length > 0 && (
+        <section className="py-[4rem] px-[2.4rem] max-h-[60rem] overflow-y-scroll scroll_hide">
+          {data?.map((el, i) => {
+            return (
+              <div
+                key={i}
+                className="grid gap-2 grid-cols-4 bg-[rgba(246,235,245,0.38)] rounded-[2rem] place-items-center h-[65px] mb-[1.6rem] last:mb-0 hover:bg-[rgba(246,235,245,0.86)] hover:scale-[1.002]"
+              >
+                <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">Ticket {++i}</span>
+                <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">{formatDate(el?.created_at)}</span>
+                <span className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap max-w-[80px] sm:max-w-[100px] sidebar:max-w-full text-ellipsis overflow-hidden">#{el.ticket}</span>
+                <span className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">{el?.status}</span>
+              </div>
+            );
+          })}
+        </section>
+      )}
+
+      {data.length == 0 && (
+        <div className="grid flex-1 place-content-center place-items-center my-auto min-h-[30rem]">
+          <span className="f font-medium text-[2.5rem] text-[#F0F0F0]">No Tickets Purchased Yet</span>
+        </div>
+      )}
     </div>
   );
 };

@@ -82,30 +82,7 @@ const OTP = ({ action }) => {
             <h3>OTP Verification</h3>
             <p className="mb-[3.6rem]">Enter the code that was sent to your mail to continue registration.</p>
             {error && <p className=" !text-[1.4rem] !text-red-500">*{error}</p>}
-            {/* <div className="grid grid-cols-6 gap-5 gap-y-[2.4rem]">
-              {inputAmount.map((el, i) => {
-                return (
-                  <div key={el} className="form-group ">
-                    <input
-                      required
-                      onChange={(e) => {
-                        setOtp((value) => {
-                          const newOTP = value;
-                          newOTP[i] = e.target.value;
-                          console.log(newOTP);
-                          return newOTP;
-                        });
-                      }}
-                      type={"tel"}
-                      className="!px-[2.5rem] h-[7rem] w-[6.7rem] grid place-items-center"
-                      maxLength={1}
-                    />
-                  </div>
-                );
-              })}
 
-              <button className="btn col-span-6 mt-[6.8rem]">Verify OTP</button>
-            </div> */}
             <OtpInput
               inputStyle={{
                 background: "white",

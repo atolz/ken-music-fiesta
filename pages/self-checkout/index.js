@@ -4,6 +4,7 @@ import SvgIconWrapper from "../../Components/SvgIconWrapper";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { setActivePage } from "../../store/pages";
+import PaymentDetailsBox from "../../Components/PaymentDetailsBox";
 
 const ContainerBlur = ({ children }) => {
   return <div className="p-[5.5rem] rounded-primary bg-[rgba(255,255,255,0.16)] backdrop-blur-[44px] max-w-[55.3rem] m-10 mt-[17rem] h-max">{children}</div>;
@@ -55,27 +56,6 @@ const P = ({ children, className }) => {
   return <p className={`text-[1.6rem] font-medium text-white mb-[3rem] max-w-[475px] h-[5.2rem] ${className}`}>{children}</p>;
 };
 
-const DetailsBox = ({
-  items = [
-    { name: "Transaction ID", value: "34538590584736s" },
-    { name: "Phone Number", value: "0800044455555" },
-    { name: "Amount", value: 5000 },
-  ],
-}) => {
-  return (
-    <div className="bg-[rgba(255,255,255,0.09)] backdrop-blur-[40px] rounded-primary p-[2.3rem] px-[4.1rem] py-[5.2rem] ">
-      {items.map((el, i) => {
-        return (
-          <div key={i} className=" text-center mb-[2.4rem] last:mb-0 grid !grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] place-items-center mobile:place-items-start">
-            <span className="f font-semibold text-[1.4rem] text-[#CECECE] leading-[1.7rem] mb-[.4rem] mr-[2.4rem]  text-left">{el.name}</span>
-            <h2 className="text-[2.2rem] font-semibold leading-[2.6rem]  overflow-hidden text-ellipsis text-white">{el.value}</h2>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
 const PaymentStatus = ({ status }) => {
   const items = [
     { name: "Amount", value: 5000 },
@@ -92,7 +72,7 @@ const PaymentStatus = ({ status }) => {
       <H1 className={"mt-[4.8rem] mb-[2.6rem]"}>Payment Initiated</H1>
 
       <div className=" place-self-stretch sidebar:!w-[43.6rem] w-auto">
-        <DetailsBox items={items}></DetailsBox>
+        <PaymentDetailsBox items={items}></PaymentDetailsBox>
       </div>
       <span
         onClick={() => {
@@ -158,7 +138,7 @@ const Review = ({ action }) => {
     <>
       <H1>Review Payment</H1>
       <P className={"mb-[5rem] max-w-[45.6rem]"}>Provide your purchase details and purchase location and confirm your payment</P>
-      <DetailsBox items={items}></DetailsBox>
+      <PaymentDetailsBox items={items}></PaymentDetailsBox>
       <button
         onClick={() => {
           action();

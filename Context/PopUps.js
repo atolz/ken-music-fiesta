@@ -24,15 +24,17 @@ import VerifyBVN from "../Components/PopUps/VerifyBVN";
 import ActivateCard from "../Components/PopUps/ActivateCard";
 import Head from "next/head";
 import Prompt from "../Components/PopUps/Prompt";
+import ReceiptStatus from "../Components/PopUps/ReceiptStatus";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
+  initReviewVendorPayment: (amount, vendor) => {},
   initBuyRaffleTicket: () => {},
   initBuyToken: () => {},
   initActivateCard: () => {},
   initPayPerView: () => {},
   initChangePassword: () => {},
-  initBuyTicket: () => {},
+  initBuyTicket: (eventName, slugName) => {},
   onBuyTicket: () => {},
   onCheckOut: () => {},
   onReview: () => {},
@@ -49,9 +51,12 @@ export const popUpContext = createContext(pouUpContextFunctions);
 
 export const PopUpContextProvider = ({ children }) => {
   const [purpose, setPurpose] = useState("");
+  const [nameOfEvent, setNameOfEvent] = useState("");
+  const [eventSlugName, setEventSlugName] = useState("");
   const [activeModal, setActiveModal] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
   const [statusTitle, setStatusTitle] = useState();
+  const [statusAction, setStatusAction] = useState(null);
   const [linkText, setLinkText] = useState();
   const [link, setLink] = useState("/dashboard");
   const [text, setText] = useState();
@@ -83,6 +88,7 @@ export const PopUpContextProvider = ({ children }) => {
     initCreateCatalogue: initCreateCatalogue,
     initSetStatus: initSetStatus,
     openRequestBvnPrompt: openRequestBvnPrompt,
+    initReviewVendorPayment: initReviewVendorPayment,
 
     onReview: onReview,
 
@@ -92,13 +98,15 @@ export const PopUpContextProvider = ({ children }) => {
     test: "activeModal",
   };
 
-  function initBuyTicket() {
+  function initBuyTicket(eventName, slugName) {
     if (!isLoggedIn() || getLocalStorage("section") !== "User") {
       return router.push("/auth/sign-in");
     }
     setPurpose("EventTicket");
     toggle();
     setActiveModal("BuyEventTicket");
+    setNameOfEvent(eventName);
+    setEventSlugName(slugName);
   }
 
   function initBuyRaffleTicket() {
@@ -136,6 +144,13 @@ export const PopUpContextProvider = ({ children }) => {
     setPurpose("SelfCheckout");
     toggle();
     setActiveModal("SelfCheckOut");
+  }
+  function initReviewVendorPayment(amount, vendor) {
+    setPurpose("SelfCheckout");
+    setCheckAmount(amount);
+    setVendor(vendor);
+    toggle();
+    setActiveModal("ReviewCheckOut");
   }
 
   function initChangePassword() {
@@ -238,6 +253,8 @@ export const PopUpContextProvider = ({ children }) => {
     }
     console.log("payment details is", {
       purpose: purpose,
+      eventName: nameOfEvent,
+      eventSlug: eventSlugName,
       itemQuantity: quantity || itemQuantity,
       payment_agent: payOptType || "SEERBIT",
       // payment_agent: "PAYSTACK",
@@ -250,10 +267,12 @@ export const PopUpContextProvider = ({ children }) => {
         "/payment/buy",
         {
           purpose: purpose,
+          eventName: nameOfEvent,
+          eventSlug: eventSlugName,
           itemQuantity: quantity || itemQuantity,
           payment_agent: payOptType,
           // payment_agent: "PAYSTACK",
-          ticketType: ticketType,
+          ticketType: type || ticketType,
           redirectUrl: redirectUrl,
         },
         {
@@ -286,7 +305,7 @@ export const PopUpContextProvider = ({ children }) => {
     }
     console.log("payment details is", {
       purpose: purpose,
-      amount: checkAmount,
+      amount: parseInt(checkAmount),
       // itemQuantity: ticketAmount,
       payment_agent: "SEERBIT",
       // ticketType: "string",
@@ -299,7 +318,7 @@ export const PopUpContextProvider = ({ children }) => {
         {
           purpose: purpose,
           itemQuantity: ticketAmount,
-          amount: checkAmount,
+          amount: parseInt(checkAmount.replaceAll(",", "")),
           payment_agent: "SEERBIT",
           // ticketType: "string",
           redirectUrl: redirectUrl,
@@ -351,10 +370,15 @@ export const PopUpContextProvider = ({ children }) => {
       }, 1000);
     }
     if (router.query?.status?.includes("success") && router.query?.purpose?.includes("SelfCheckout")) {
-      setLinkText("Go to dashboard");
+      setLinkText("View Receipt");
       setStatusTitle("Purchase Order Success");
       setText(`Your payment of ${router?.query?.amount} was successful!`);
       setActiveModal("Status");
+      setStatusAction(() => {
+        return () => {
+          setActiveModal("PaymentDetails");
+        };
+      });
       toggle();
       setTimeout(() => {
         router.push("/dashboard");
@@ -386,7 +410,11 @@ export const PopUpContextProvider = ({ children }) => {
           {activeModal == "Status" && (
             <PopupStatus
               action={() => {
-                toggle();
+                if (statusAction) {
+                  statusAction();
+                } else {
+                  toggle();
+                }
                 setPage(page);
               }}
               title={statusTitle}
@@ -404,6 +432,16 @@ export const PopUpContextProvider = ({ children }) => {
               imgUrl="/3d-Padlock.png"
               onAction={onContinueToBvnVerification}
             ></Prompt>
+          )}
+          {activeModal == "PaymentDetails" && (
+            <ReceiptStatus
+              items={[
+                { name: "Vendor Details", value: "The Place, Lekki" },
+                { name: "Amount", value: 5000 },
+                { name: "Transaction ID", value: "34538590584736s" },
+              ]}
+              caption="Transaction Receipt"
+            ></ReceiptStatus>
           )}
           {activeModal == "BuyEventTicket" && <BuyEventTicket onCancel={toggle} onBuyTicket={onBuyTicket}></BuyEventTicket>}
           {activeModal == "BuyRaffleTicket" && <BuyRaffleTicket onCancel={toggle} onBuyRaffleTicket={onBuyRaffleTicket}></BuyRaffleTicket>}

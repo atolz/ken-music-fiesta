@@ -12,9 +12,15 @@ const StatusCircle = ({ type, color, children }) => {
   );
 };
 
-const PaymentCard = ({ className, color }) => {
+const PaymentCard = ({ className, color, action = () => {} }) => {
   return (
-    <div style={{ boxShadow: "0px 4px 44px rgba(163, 7, 168, 0.1)" }} className={`py-[2.4rem] max-w-[51.3rem] px-[3.6rem] rounded-[2rem] bg-white flex items-center w-full relative ${className}`}>
+    <div
+      onClick={() => {
+        action();
+      }}
+      style={{ boxShadow: "0px 4px 44px rgba(163, 7, 168, 0.1)" }}
+      className={`py-[2.4rem] max-w-[51.3rem] px-[3.6rem] rounded-[2rem] bg-white flex items-center w-full relative ${className}`}
+    >
       <StatusCircle color={color}>
         <SvgIconWrapper className={" text-black w-[2.84rem] h-[2.84rem]"} iconName={"info-circle"}></SvgIconWrapper>
       </StatusCircle>

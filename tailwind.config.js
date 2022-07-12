@@ -28,6 +28,7 @@ module.exports = {
         sidebar: "752px",
         mobile: "395px",
         table: "419px",
+        events_card: "1285px",
         // => @media (min-width: 1536px) { ... }
       },
       gridTemplateColumns: {
