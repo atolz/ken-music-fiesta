@@ -104,7 +104,7 @@
             </path>
         </symbol>
         <symbol id="icon-mark" viewBox="0 0 32 32">
-            <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4.1481"
+            <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" fill="none" stroke-width="4.1481"
                 d="M29.692 6.62l-18.826 18.826-8.557-8.557"></path>
         </symbol>
         <symbol id="icon-notification" viewBox="0 0 26 32">

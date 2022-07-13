@@ -212,6 +212,7 @@ const AppDataProvider = ({ children }) => {
       fetchUserDetails();
       fetchUserDashboardHistory();
       fetchUserRaffleTickets();
+      fetchKudibarEvents();
     } else if (section == "Artiste" && !artistesUser.data) {
       fetchArtisteUserCatalogues();
     } else if (section == "Admin" && !adminUser.data) {
@@ -261,6 +262,11 @@ const AppDataProvider = ({ children }) => {
     // }
     if (isLoggedIn()) {
       loadAppSectionData();
+
+      // Timeout to call loadAppSection incase of delayed webhook i.e tries to get updated value after app loads
+      setTimeout(() => {
+        loadAppSectionData();
+      }, 2000);
     }
   }, [section]);
   return (

@@ -12,26 +12,30 @@ const StatusCircle = ({ type, color, children }) => {
   );
 };
 
-const PaymentCard = ({ className, color, action = () => {} }) => {
+const PaymentCard = ({ className, color, action = () => {}, iconName = "info-circle", iconClassName }) => {
   return (
     <div
       onClick={() => {
         action();
       }}
       style={{ boxShadow: "0px 4px 44px rgba(163, 7, 168, 0.1)" }}
-      className={`py-[2.4rem] max-w-[51.3rem] px-[3.6rem] rounded-[2rem] bg-white flex items-center w-full relative ${className}`}
+      className={`py-[2.4rem]  px-[3.6rem] rounded-[2rem] max-w-[100rem] bg-white flex items-center w-full relative ${className}`}
     >
       <StatusCircle color={color}>
-        <SvgIconWrapper className={" text-black w-[2.84rem] h-[2.84rem]"} iconName={"info-circle"}></SvgIconWrapper>
+        <SvgIconWrapper className={` text-black w-[2.84rem] h-[2.84rem] ${iconClassName}`} iconName={iconName}></SvgIconWrapper>
       </StatusCircle>
-      <div className="ml-[3.9rem] flex">
+      <div className="ml-[3.9rem] flex justify-between">
         <span className="text-[#706C6C] mr-[4rem]">
           <p className=" font-semibold text-[1.4rem] mb-[8px]">Amount</p>
           <p className=" font-bold text-[2rem]">N4,000</p>
         </span>
-        <span className="text-[#706C6C]">
+        <span className="text-[#706C6C] mr-[4rem]">
           <p className=" font-semibold text-[1.4rem] mb-[8px]">Vendor</p>
           <p className=" font-bold text-[2rem]">The Place, Lekki</p>
+        </span>
+        <span className="text-[#706C6C]">
+          <p className=" font-semibold text-[1.4rem] mb-[8px]">Date Issued</p>
+          <p className=" font-bold text-[2rem]">22-06-2022. 6:15pm</p>
         </span>
       </div>
     </div>

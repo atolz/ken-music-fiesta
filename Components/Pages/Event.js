@@ -12,9 +12,9 @@ const Event = () => {
   const popUpFunctions = useContext(popUpContext);
   const AppData = useContext(DataContext);
   const [activeEvent, setActiveEvent] = useState("");
-  useEffect(() => {
-    AppData.fetchKudibarEvents();
-  }, []);
+  // useEffect(() => {
+  //   AppData.fetchKudibarEvents();
+  // }, []);
   useEffect(() => {
     console.log("Events in evenst is", AppData.kudibarEvents);
   }, [AppData.kudibarEvents]);
@@ -84,12 +84,12 @@ const Event = () => {
             {/* <img src="/event-img.jpg"></img> */}
             <div
               style={{ backgroundImage: `url(${AppData.kudibarEvents?.hash[activeEvent]?.cover})` }}
-              className="h-[501px] w-[384px] bg-cover bg-no-repeat rounded-[2rem] bg-slate-900"
+              className="h-[61vh] w-[384px] bg-cover bg-no-repeat rounded-[2rem] bg-slate-900"
               // src={AppData.kudibarEvents?.hash[activeEvent]?.cover}
             ></div>
 
             <div>
-              <div className="px-[4rem] h-[501px] py-[5rem] rounded-primary border border-[#FDE8FE] bg-[#FCF9FC] grid place-content-center mb-[3.1rem]">
+              <div className="px-[4rem] min-h-[61vh] py-[5rem] rounded-primary border border-[#FDE8FE] bg-[#FCF9FC] grid place-content-center mb-[3.1rem]">
                 <h4 className=" font-bold text-[2rem] leading-[2.4rem]">Description</h4>
                 <p className="max-w-[49.2rem] font-normal text-[1.4rem] text-[#717171] mb-[4rem] mt-[.8rem] leading-[2rem]">{AppData.kudibarEvents?.hash[activeEvent]?.description}</p>
                 <div className="flex gap-[3.2rem] mb-[5rem]">
@@ -134,7 +134,7 @@ const Event = () => {
       )}
 
       {joinLive && <ProgressiveToken setJoinLive={setJoinLive} setShowDetails={setShowDetails} date={AppData.kudibarEvents?.hash[activeEvent]?.eventDate}></ProgressiveToken>}
-      {AppData.kudibarEvents?.loading && <p>loading...</p>}
+      {/* {AppData.kudibarEvents?.loading && <p>loading...</p>} */}
     </div>
   );
 };

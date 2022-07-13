@@ -61,6 +61,8 @@ const Payment = () => {
         {activeTab == "Completed" && (
           <>
             <PaymentCard
+              iconName="mark"
+              iconClassName=" !text-white"
               action={() => {
                 setShow(true);
               }}
@@ -72,6 +74,8 @@ const Payment = () => {
                 setShow(true);
               }}
               color={"#348B52"}
+              iconName="mark"
+              iconClassName=" !text-white"
               className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
             ></PaymentCard>
           </>

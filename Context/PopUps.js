@@ -366,7 +366,7 @@ export const PopUpContextProvider = ({ children }) => {
       setActiveModal("Status");
       toggle();
       setTimeout(() => {
-        router.push("/dashboard");
+        router.replace("/dashboard");
       }, 1000);
     }
     if (router.query?.status?.includes("success") && router.query?.purpose?.includes("SelfCheckout")) {
@@ -381,7 +381,7 @@ export const PopUpContextProvider = ({ children }) => {
       });
       toggle();
       setTimeout(() => {
-        router.push("/dashboard");
+        router.replace("/dashboard");
       }, 1000);
     }
 
@@ -393,7 +393,7 @@ export const PopUpContextProvider = ({ children }) => {
       toggle();
       setGlobalPage("Livestream Event");
       setTimeout(() => {
-        router.push("/dashboard");
+        router.replace("/dashboard");
       }, 1000);
     }
   }, [router.query?.status]);
