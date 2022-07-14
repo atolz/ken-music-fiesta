@@ -16,7 +16,7 @@ const LandingPage = () => {
     <Container>
       <div>
         <span className={` font-bold text-[1.6rem] mobile:text-[2.5rem] leading-[3rem]  text-grad mb-[1.6rem] mobile:mb-[.8rem] ${styles.slide_up_now} inline-block `}>22nd Edition</span>
-        <h1 className="text-animation font-bold text-[4rem] mobile:text-[9.4rem] leading-[4rem] mobile:leading-[9.1rem] text-white uppercase block landing_1068:hidden">
+        <h1 className={` text-animation font-bold text-[4rem] mobile:text-[9.4rem] leading-[4rem] mobile:leading-[9.1rem] text-white uppercase block landing_1068:hidden ${styles.slide_up_now_3}`}>
           Kennis<br></br> Music Festival
         </h1>
         <h1 className={`mr-auto mt-6 hidden landing_1068:block ${styles.slide_up_now_3}`}>
