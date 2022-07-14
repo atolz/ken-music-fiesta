@@ -10,7 +10,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
   const [total, setTotal] = useState(0);
   const [regularQuantity, setRegularQuantity] = useState(1);
   const [vipQunatity, setVipQuantity] = useState(0);
-  const [ticketType, setTicketType] = useState(ticketCategories[0]?.ticketTypeId);
+  const [ticketType, setTicketType] = useState(ticketCategories?.length ? ticketCategories[0]?.ticketTypeId : "111");
   const AppData = useContext(DataContext);
   // const allEventTicketCategory = AppData.kudibarEvents.data;
   const onRegularChange = (type, value) => {

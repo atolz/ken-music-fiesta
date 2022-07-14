@@ -42,7 +42,7 @@ const LandingPage = () => {
           onClick={() => {
             popUpFunctions.initBuyTicket();
           }}
-          className="btn mr-[4.5rem] !px-[7.2rem] mb-[3.7rem] mobile:mb-0"
+          className="btn mr-[4.5rem] !px-[7.2rem] mb-[3.7rem] mobile:mb-0 shiny_slide"
         >
           Mint Event Ticket
         </button>

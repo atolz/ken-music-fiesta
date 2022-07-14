@@ -108,7 +108,7 @@ const OTP = ({ action }) => {
               numInputs={6}
               separator={<span>-</span>}
             />
-            <button className="btn w-full mt-[6.8rem]">Verify OTP</button>
+            <button className="btn w-full mt-[6.8rem] shiny_slide_2">Verify OTP</button>
           </form>
         </div>
       )}

@@ -162,7 +162,7 @@ const SignIn = () => {
             </Link>
           </div>
 
-          <button className="btn col-span-2 mt-[1.8rem]">Log In</button>
+          <button className="btn col-span-2 mt-[1.8rem] shiny_slide_2">Log In</button>
         </div>
       </form>
     </div>
