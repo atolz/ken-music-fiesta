@@ -15,11 +15,11 @@ const LandingPage = () => {
   return (
     <Container>
       <div>
-        <span className={` font-bold text-[1.6rem] mobile:text-[2.5rem] leading-[3rem]  text-grad mb-[1.6rem] mobile:mb-[.8rem] ${styles.slide_up_now} inline-block translate-y-5`}>22nd Edition</span>
+        <span className={` font-bold text-[1.6rem] mobile:text-[2.5rem] leading-[3rem]  text-grad mb-[1.6rem] mobile:mb-[.8rem] ${styles.slide_up_now} inline-block `}>22nd Edition</span>
         <h1 className="text-animation font-bold text-[4rem] mobile:text-[9.4rem] leading-[4rem] mobile:leading-[9.1rem] text-white uppercase block landing_1068:hidden">
           Kennis<br></br> Music Festival
         </h1>
-        <h1 className="mr-auto mt-6 hidden landing_1068:block">
+        <h1 className={`mr-auto mt-6 hidden landing_1068:block ${styles.slide_up_now_3}`}>
           <TextAnimation></TextAnimation>
         </h1>
         <p
@@ -31,7 +31,7 @@ const LandingPage = () => {
       </div>
 
       {/* CTA */}
-      <section className="flex items-center flex-wrap">
+      <section className={`flex items-center flex-wrap ${styles.slide_up_now_2}`}>
         <Link href={"/auth/sign-in"}>
           <div className=" rounded-sm overflow-hidden">
             <button className="btn btn--outlined-grad text-white !px-[6rem] mr-[3.2rem]  mb-[3.7rem] mobile:mb-0">Sign In</button>
