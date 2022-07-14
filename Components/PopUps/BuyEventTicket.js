@@ -10,7 +10,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
   const [total, setTotal] = useState(0);
   const [regularQuantity, setRegularQuantity] = useState(1);
   const [vipQunatity, setVipQuantity] = useState(0);
-  const [selectedValue, setSelectedValue] = useState("REGULAR");
+  const [ticketType, setTicketType] = useState(ticketCategories[0]?.ticketTypeId);
   const AppData = useContext(DataContext);
   // const allEventTicketCategory = AppData.kudibarEvents.data;
   const onRegularChange = (type, value) => {
@@ -52,14 +52,23 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
         disabled={total == 0}
         cancelAction={onCancel}
         action={() => {
-          onBuyTicket(regularQuantity, selectedValue);
+          console.log("quntity is", regularQuantity);
+          onBuyTicket(regularQuantity, ticketType);
         }}
         actionText={"Buy Ticket"}
       >
         <div className="popup-box">
           <h3>Buy Event Ticket</h3>
           <p className="!mb-[4.3rem]">
-            Event tickets are sold at <span className=" font-bold !text-[#827F7F]">#500</span> per ticket. There is no discount for multiple ticket purchases.
+            {ticketCategories?.map((cat, i) => {
+              return (
+                <span key={i}>
+                  {/* {i !== 0 && <span>&nbsp;</span>} */}
+                  <span className=" font-bold !text-[#827F7F]">{cat.ticketType}</span> tickets are sold at <span className=" font-bold !text-[#827F7F]">#{cat.price}</span> per ticket.<br></br>
+                </span>
+              );
+            })}
+            There is no discount for multiple ticket purchases.
           </p>
 
           {ticketCategories?.map((category, i) => {
@@ -109,7 +118,7 @@ export default BuyEventTicket;
             <div className="flex flex-col">
               <div className=" mb-4">
                 <FormControl>
-                  <RadioGroup row aria-labelledby="demo-controlled-radio-buttons-group" name="controlled-radio-buttons-group" value={selectedValue} onChange={handleChange}>
+                  <RadioGroup row aria-labelledby="demo-controlled-radio-buttons-group" name="controlled-radio-buttons-group" value={ticketType} onChange={handleChange}>
                     <FormControlLabel
                       value="REGULAR"
                       control={<Radio sx={{ "& span .MuiSvgIcon-root": { fontSize: "25px !important" } }} className=" ml-[.2rem] !text-white" />}

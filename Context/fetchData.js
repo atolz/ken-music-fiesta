@@ -227,6 +227,7 @@ const AppDataProvider = ({ children }) => {
       // fetchUserDetails();
       fetchUserDashboardHistory();
       fetchUserRaffleTickets();
+      fetchKudibarEvents();
       setSection("User");
     }
     if (type == "Artiste") {

@@ -88,3 +88,35 @@
   animation: slide-right-opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 500ms backwards;
   animation-delay: 0.2s;
 }
+
+// ------------------------
+.text-line {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: dash 5s linear forwards, filling 5s ease-in forwards;
+  font-size: 80px;
+}
+
+.text-line text {
+  // font-family: Helvetica, Arial, sans-serif;
+  // font-weight: normal;
+  // font-style: normal;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes filling {
+  0%,
+  90% {
+    fill: #fff;
+    fill-opacity: 0;
+  }
+  100% {
+    fill: #fff;
+    fill-opacity: 1;
+  }
+}
