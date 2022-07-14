@@ -1,6 +1,6 @@
 import React from "react";
 
-const Popup = ({ children, actionText, cancelAction = () => {}, action = () => {}, footer = true }) => {
+const Popup = ({ children, actionText, cancelAction = () => {}, action = () => {}, footer = true, disabled = false }) => {
   return (
     <div className="bg-white rounded-[2rem] scroll_hide pop-up-animation">
       {/* Body */}
@@ -18,10 +18,15 @@ const Popup = ({ children, actionText, cancelAction = () => {}, action = () => {
             Cancel
           </button>
           <button
+            title={disabled ? "Action required" : ""}
+            disabled={disabled}
             onClick={() => {
+              if (disabled) {
+                return;
+              }
               action();
             }}
-            className="btn ml-[2.4rem] !px-[2.8rem] sidebar:!px-[3.8rem] !py-[2rem]"
+            className={`btn ml-[2.4rem] !px-[2.8rem] sidebar:!px-[3.8rem] !py-[2rem] ${disabled ? "cursor-not-allowed" : ""}`}
           >
             {actionText}
           </button>

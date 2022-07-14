@@ -18,7 +18,7 @@ const AuthHeader = () => {
     //   </Link>
     //   <button className="btn ml-auto">Buy Event Ticket</button>
     //   <Link href={"/auth/sign-up"}>
-    //     <button className="btn btn--outlined text-white ml-[2.4rem]">Sign Up</button>
+    //     <button className="btn btn--outlined-grad text-white ml-[2.4rem]">Sign Up</button>
     //   </Link>
     // </header>
 
@@ -44,12 +44,12 @@ const AuthHeader = () => {
           {}
           {(router.pathname.includes("sign-in") || router.pathname === "/") && !router.pathname.includes("artiste") && (
             <Link href={"/auth/sign-up"}>
-              <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign Up</button>
+              <button className="btn btn--outlined-grad text-white !px-[6rem] ml-[2.4rem]">Sign Up</button>
             </Link>
           )}
           {router.pathname.includes("sign-up") && !router.pathname.includes("artiste") && (
             <Link href={"/auth/sign-in"}>
-              <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign In</button>
+              <button className="btn btn--outlined-grad text-white !px-[6rem] ml-[2.4rem]">Sign In</button>
             </Link>
           )}
         </div>
@@ -82,7 +82,7 @@ const AuthHeader = () => {
           </button>
 
           <Link href={"/auth/sign-up"}>
-            <button className="btn btn--outlined text-white !px-[6rem] mb-[2.4rem]">Sign Up</button>
+            <button className="btn btn--outlined-grad text-white !px-[6rem] mb-[2.4rem]">Sign Up</button>
           </Link>
           <button
             onClick={() => {

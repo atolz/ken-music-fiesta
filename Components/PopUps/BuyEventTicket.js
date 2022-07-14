@@ -1,15 +1,18 @@
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { DataContext } from "../../Context/fetchData";
 import IncDec from "../IncDec";
 import IncDecV2 from "../IncDecV2";
 import PopupLayout from "../Layout/Popup";
 
-const BuyEventTicket = ({ onBuyTicket, onCancel }) => {
-  const [total, setTotal] = useState(500);
+const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
+  const [total, setTotal] = useState(0);
   const [regularQuantity, setRegularQuantity] = useState(1);
   const [vipQunatity, setVipQuantity] = useState(0);
   const [selectedValue, setSelectedValue] = useState("REGULAR");
+  const AppData = useContext(DataContext);
+  // const allEventTicketCategory = AppData.kudibarEvents.data;
   const onRegularChange = (type, value) => {
     console.log("Change event occured: type: value", type, value);
 
@@ -29,10 +32,24 @@ const BuyEventTicket = ({ onBuyTicket, onCancel }) => {
     }
     setRegularQuantity(value);
   };
+  const onChange = (type, value, ticketPrice) => {
+    console.log("Change event occured: type: value", type, value);
+    if (type == "inc") {
+      setTotal((val) => val + ticketPrice);
+    } else {
+      setTotal((val) => val - ticketPrice);
+    }
+    setRegularQuantity(value);
+  };
+
+  useEffect(() => {
+    console.log("Ticket categories are:", ticketCategories);
+  }, [ticketCategories]);
 
   return (
     <div>
       <PopupLayout
+        disabled={total == 0}
         cancelAction={onCancel}
         action={() => {
           onBuyTicket(regularQuantity, selectedValue);
@@ -45,7 +62,22 @@ const BuyEventTicket = ({ onBuyTicket, onCancel }) => {
             Event tickets are sold at <span className=" font-bold !text-[#827F7F]">#500</span> per ticket. There is no discount for multiple ticket purchases.
           </p>
 
-          <div className="flex items-center justify-between mb-[3.7rem]">
+          {ticketCategories?.map((category, i) => {
+            return (
+              <div key={i} className="flex items-center justify-between mb-[3.7rem] last:!mb-0">
+                <p className=" !font-medium !text-[2.5rem] !mb-0">{category.ticketType} Ticket</p>
+                <IncDecV2
+                  onCange={(type, value) => {
+                    onChange(type, value, category.price);
+                  }}
+                  min={0}
+                  defaultValue={0}
+                ></IncDecV2>
+              </div>
+            );
+          })}
+
+          {/* <div className="flex items-center justify-between mb-[3.7rem]">
             <p className=" !font-medium !text-[2.5rem] !mb-0">Regular Tickets</p>
             <IncDecV2 onCange={onRegularChange} min={1} defaultValue={1}></IncDecV2>
           </div>
@@ -53,7 +85,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel }) => {
           <div className="flex items-center justify-between">
             <p className=" !font-medium !text-[2.5rem] !mb-0">VIP Tickets</p>
             <IncDecV2 onCange={onVipChange}></IncDecV2>
-          </div>
+          </div> */}
         </div>
         {/* Total */}
         <div className=" py-[2rem] mobile:py-[2.5rem] px-[2.2rem] rounded-[2rem] bg-[#F8F9FD] grid place-items-center mt-[3.8rem]">

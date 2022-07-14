@@ -27,7 +27,7 @@ const LandingPage = () => {
       <section className="flex items-center flex-wrap">
         <Link href={"/auth/sign-in"}>
           <div className=" rounded-sm overflow-hidden">
-            <button className="btn btn--outlined text-white !px-[6rem] mr-[3.2rem]  mb-[3.7rem] mobile:mb-0">Sign In</button>
+            <button className="btn btn--outlined-grad text-white !px-[6rem] mr-[3.2rem]  mb-[3.7rem] mobile:mb-0">Sign In</button>
           </div>
         </Link>
         <button

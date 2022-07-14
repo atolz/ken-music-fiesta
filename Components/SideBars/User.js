@@ -66,7 +66,7 @@ const UserSideBar = ({ activePage, setActivePage }) => {
           onClick={() => {
             popUpFunctions.initBuyRaffleTicket();
           }}
-          className="btn btn--outlined mt-auto mb-[57px]"
+          className="btn btn--outlined-grad mt-auto mb-[57px]"
         >
           Buy Raffle Ticket
         </button>

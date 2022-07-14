@@ -28,6 +28,27 @@
     border: 2px solid #a307a8;
     background: none;
   }
+
+  &--outlined-grad {
+    // border: 2px solid #a307a8;
+    background: none;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      border-radius: 10px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px solid transparent !important;
+      background: var(--color-primary-grad) border-box !important;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0) !important;
+      -webkit-mask-composite: destination-out !important;
+      mask-composite: exclude;
+    }
+  }
 }
 
 .kef-link {

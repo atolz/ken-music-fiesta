@@ -117,9 +117,13 @@ const Event = () => {
                   {!AppData.kudibarEvents?.hash[activeEvent]?.isSoldOut && (
                     <button
                       onClick={() => {
-                        popUpFunctions.initBuyTicket(AppData.kudibarEvents?.hash[activeEvent]?.name, AppData.kudibarEvents?.hash[activeEvent]?.eventSlug);
+                        popUpFunctions.initBuyTicket(
+                          AppData.kudibarEvents?.hash[activeEvent]?.name,
+                          AppData.kudibarEvents?.hash[activeEvent]?.eventSlug,
+                          AppData.kudibarEvents?.hash[activeEvent]?.tickets
+                        );
                       }}
-                      className="btn btn--outlined !text-black"
+                      className="btn btn--outlined-grad !text-black"
                     >
                       Buy Event Ticket
                     </button>

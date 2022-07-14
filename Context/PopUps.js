@@ -34,7 +34,7 @@ const pouUpContextFunctions = {
   initActivateCard: () => {},
   initPayPerView: () => {},
   initChangePassword: () => {},
-  initBuyTicket: (eventName, slugName) => {},
+  initBuyTicket: (eventName, slugName, ticketCategories) => {},
   onBuyTicket: () => {},
   onCheckOut: () => {},
   onReview: () => {},
@@ -53,6 +53,7 @@ export const PopUpContextProvider = ({ children }) => {
   const [purpose, setPurpose] = useState("");
   const [nameOfEvent, setNameOfEvent] = useState("");
   const [eventSlugName, setEventSlugName] = useState("");
+  const [eventTicketCategories, setEventTicketCategories] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
   const [statusTitle, setStatusTitle] = useState();
@@ -98,7 +99,7 @@ export const PopUpContextProvider = ({ children }) => {
     test: "activeModal",
   };
 
-  function initBuyTicket(eventName, slugName) {
+  function initBuyTicket(eventName, slugName, tickets) {
     if (!isLoggedIn() || getLocalStorage("section") !== "User") {
       return router.push("/auth/sign-in");
     }
@@ -107,6 +108,7 @@ export const PopUpContextProvider = ({ children }) => {
     setActiveModal("BuyEventTicket");
     setNameOfEvent(eventName);
     setEventSlugName(slugName);
+    setEventTicketCategories(tickets);
   }
 
   function initBuyRaffleTicket() {
@@ -443,7 +445,7 @@ export const PopUpContextProvider = ({ children }) => {
               caption="Transaction Receipt"
             ></ReceiptStatus>
           )}
-          {activeModal == "BuyEventTicket" && <BuyEventTicket onCancel={toggle} onBuyTicket={onBuyTicket}></BuyEventTicket>}
+          {activeModal == "BuyEventTicket" && <BuyEventTicket ticketCategories={eventTicketCategories} onCancel={toggle} onBuyTicket={onBuyTicket}></BuyEventTicket>}
           {activeModal == "BuyRaffleTicket" && <BuyRaffleTicket onCancel={toggle} onBuyRaffleTicket={onBuyRaffleTicket}></BuyRaffleTicket>}
           {activeModal == "BuyToken" && <BuyToken onCancel={toggle} onBuyToken={onBuyToken}></BuyToken>}
           {activeModal == "PaymentOptions" && <PaymentOptions onCancel={toggle} onSelectPayOption={onSelectPayOption}></PaymentOptions>}

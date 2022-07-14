@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/user";
 import ActDetails from "../Profile/ActDetails";
+import Assets from "../Profile/Assets";
 import MyProfile from "../Profile/Profile";
 import Security from "../Profile/Security";
 
 const Profile = (props) => {
   const [active, setActive] = useState("Profile");
   // const navs = ["Profile", "Security", "Bank Details"];
-  const navs = ["Profile", "Security"];
+  const navs = ["Profile", "Security", "Assets"];
 
   return (
     <div {...props} className="">
@@ -31,10 +32,11 @@ const Profile = (props) => {
             })}
           </ul>
         </nav>
-        <div className="profile-form mx-auto pt-[6.4rem] pb-[4.3rem] sidebar:pl-[8.1rem] sidebar:pr-[6.3rem] px-[2.5rem] rounded-[2rem] border border-[#D0CCCC] max-w-[81.2rem] min-h-[57.4rem] relative flex flex-col">
+        <div className="profile-form mx-auto pt-[5.4rem] pb-[4.3rem] sidebar:pl-[5.1rem] sidebar:pr-[4.3rem] px-[2.5rem] rounded-[2rem] border border-[#D0CCCC] max-w-[81.2rem] min-h-[57.4rem] relative flex flex-col">
           {/* Profile */}
           {active == "Profile" && <MyProfile user={props.appData.user.data}></MyProfile>}
           {active == "Security" && <Security></Security>}
+          {active == "Assets" && <Assets></Assets>}
           {/* {active == "Bank Details" && <ActDetails></ActDetails>} */}
           {/* <button className="btn ml-auto !bg-[#F0F0F0] relative mt-auto">Save Changes</button> */}
         </div>

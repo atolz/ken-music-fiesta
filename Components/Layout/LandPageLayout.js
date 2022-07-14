@@ -8,6 +8,7 @@ import PaymentOptions from "../PopUps/PaymentOptions";
 import SelfCheckOut from "../PopUps/SelfCheckOut";
 import ReviewCheckOut from "../PopUps/ReviewCheckOut";
 import { popUpContext, PopUpContextProvider } from "../../Context/PopUps";
+import { useRouter } from "next/router";
 
 const Container = ({ children }) => {
   return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem]">{children}</div>;
@@ -20,6 +21,7 @@ const Container = ({ children }) => {
 const LandPageLayout = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
   const popUpFunctions = useContext(popUpContext);
+  const router = useRouter();
 
   return (
     // <PopUpContainerWrapper>
@@ -34,18 +36,22 @@ const LandPageLayout = ({ children }) => {
               </Link>
               {/* Desktop Nav */}
               <div className="items-center hidden sidebar:flex ">
-                <Link href={"/brands"}>
-                  <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
-                    BRANDS
-                  </a>
-                </Link>
                 <Link href={"/artistes"}>
-                  <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
+                  <a style={{ letterSpacing: "0.4rem" }} className={`" font-medium !text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem] ${router.pathname.includes("/artistes") ? " kef-link" : ""}`}>
                     ARTISTES
                   </a>
                 </Link>
+                <Link href={"/brands"}>
+                  <a style={{ letterSpacing: "0.4rem" }} className={`" font-medium !text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem] ${router.pathname.includes("/brands") ? " kef-link" : ""}`}>
+                    BRANDS
+                  </a>
+                </Link>
+
                 <Link href={"/catalogues"}>
-                  <a style={{ letterSpacing: "0.4rem" }} className=" font-medium text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem]">
+                  <a
+                    style={{ letterSpacing: "0.4rem" }}
+                    className={`" font-medium !text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem] ${router.pathname.includes("/catalogues") ? " kef-link" : ""}`}
+                  >
                     CATALOGUES
                   </a>
                 </Link>
@@ -55,12 +61,12 @@ const LandPageLayout = ({ children }) => {
                     console.log("clicking btn", popUpFunctions.initSelfCheckOut());
                     popUpFunctions.initSelfCheckOut();
                   }}
-                  className="btn btn--outlined text-white "
+                  className="btn btn--outlined-grad text-white "
                 >
                   Self Checkout
                 </button> */}
                 <Link href={"/auth/sign-up"}>
-                  <button className="btn btn--outlined text-white !px-[6rem] ml-[2.4rem]">Sign Up</button>
+                  <button className="btn btn--outlined-grad text-white !px-[6rem] ml-[2.4rem]">Sign Up</button>
                 </Link>
               </div>
               {/* Burger Menu */}
@@ -106,14 +112,14 @@ const LandPageLayout = ({ children }) => {
                   </a>
                 </Link>
                 <Link href={"/auth/sign-up"}>
-                  <button className="btn btn--outlined text-white !px-[6rem] mb-[2.4rem]">Sign Up</button>
+                  <button className="btn btn--outlined-grad text-white !px-[6rem] mb-[2.4rem]">Sign Up</button>
                 </Link>
                 <button
                   onClick={() => {
                     console.log("clicking btn", popUpFunctions.initSelfCheckOut());
                     popUpFunctions.initSelfCheckOut();
                   }}
-                  className="btn btn--outlined text-white"
+                  className="btn btn--outlined-grad text-white"
                 >
                   Self Checkout
                 </button>
