@@ -95,7 +95,7 @@ const SignIn = () => {
     };
   }, []);
   return (
-    <div className="auth-container !mb-[3rem]">
+    <div className="auth-container !mb-[3rem] ">
       <form
         onSubmit={(e) => {
           e.preventDefault();

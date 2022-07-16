@@ -267,7 +267,7 @@ const AppDataProvider = ({ children }) => {
       // Timeout to call loadAppSection incase of delayed webhook i.e tries to get updated value after app loads
       setTimeout(() => {
         loadAppSectionData();
-      }, 2000);
+      }, 3500);
     }
   }, [section]);
   return (
