@@ -15,7 +15,7 @@ const ReviewCheckOut = ({ onReview, onCancel, vendor, amount }) => {
           </div> */}
           <div className=" text-center mb-[2.4rem] mobile:flex">
             <span className="f font-semibold text-[1.4rem] text-[#CECECE] leading-[1.7rem] mb-[.4rem] mr-[2.4rem] min-w-[13.8rem] text-left">Vendor Details</span>
-            <h2 className="text-[2.2rem] font-semibold leading-[2.6rem] whitespace-nowrap overflow-hidden text-ellipsis">{vendor}</h2>
+            <h2 className="text-[2.2rem] font-semibold leading-[2.6rem] whitespace-nowrap overflow-hidden text-ellipsis capitalize">{vendor}</h2>
             {/* <h2 className="text-[2.2rem] font-semibold leading-[2.6rem]">The Place, Lekki</h2> */}
           </div>
           <div className=" text-center flex-wrap mobile:flex">

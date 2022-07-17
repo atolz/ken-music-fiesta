@@ -1,5 +1,6 @@
 import { Dialog } from "@mui/material";
 import React, { useContext, useState } from "react";
+import { DataContext } from "../../Context/fetchData";
 import { popUpContext } from "../../Context/PopUps";
 import PaymentCard from "../Cards/PaymentCard";
 import ReceiptStatus from "../PopUps/ReceiptStatus";
@@ -20,7 +21,11 @@ const Button = ({ text, active, action = () => {} }) => {
 const Payment = () => {
   const [activeTab, setActiveTab] = useState("Pending");
   const popUpFunctions = useContext(popUpContext);
+  const [vendor, setVendor] = useState();
+  const [transactionId, setTransactionId] = useState();
+  const [amount, setAmount] = useState();
   const [show, setShow] = useState(false);
+  const AppData = useContext(DataContext);
   return (
     <div>
       <Dialog
@@ -29,7 +34,14 @@ const Payment = () => {
           setShow(false);
         }}
       >
-        <ReceiptStatus caption="Transaction Receipt"></ReceiptStatus>
+        <ReceiptStatus
+          items={[
+            { name: "Vendor Details", value: vendor },
+            { name: "Amount", value: amount },
+            { name: "Transaction ID", value: transactionId },
+          ]}
+          caption="Transaction Receipt"
+        ></ReceiptStatus>
       </Dialog>
       <header className="flex items-center gap-[3.2rem] mb-[6rem]">
         {["Pending", "Completed"].map((el, i) => {
@@ -48,36 +60,43 @@ const Payment = () => {
       <main className="flex flex-wrap">
         {activeTab == "Pending" && (
           <>
-            <PaymentCard
-              action={() => {
-                popUpFunctions.initReviewVendorPayment("4,000", "The Place, Lekki");
-              }}
-              color={"#FCAC0D"}
-              className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
-            ></PaymentCard>
-            <PaymentCard a color={"#FCAC0D"} className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}></PaymentCard>
+            {AppData.user?.pendingPayments?.map((el, i) => {
+              return (
+                <PaymentCard
+                  vendor={el?.vendor}
+                  amount={el?.amount}
+                  date={el?.created_at}
+                  key={i}
+                  action={() => {
+                    popUpFunctions.initReviewVendorPayment(el.amount, el.vendor, el.id);
+                  }}
+                  color={"#FCAC0D"}
+                  className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
+                ></PaymentCard>
+              );
+            })}
           </>
         )}
         {activeTab == "Completed" && (
           <>
-            <PaymentCard
-              iconName="mark"
-              iconClassName=" !text-white"
-              action={() => {
-                setShow(true);
-              }}
-              color={"#348B52"}
-              className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
-            ></PaymentCard>
-            <PaymentCard
-              action={() => {
-                setShow(true);
-              }}
-              color={"#348B52"}
-              iconName="mark"
-              iconClassName=" !text-white"
-              className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
-            ></PaymentCard>
+            {AppData.user?.completedPayments?.map((el, i) => {
+              return (
+                <PaymentCard
+                  vendor={el?.vendor}
+                  amount={el?.amount}
+                  date={el?.created_at}
+                  key={i}
+                  action={() => {
+                    setAmount(el?.amount);
+                    setVendor(el?.vendor);
+                    setTransactionId(el?.id);
+                    setShow(true);
+                  }}
+                  color={"#348B52"}
+                  className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
+                ></PaymentCard>
+              );
+            })}
           </>
         )}
       </main>

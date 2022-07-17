@@ -28,7 +28,7 @@ import ReceiptStatus from "../Components/PopUps/ReceiptStatus";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
-  initReviewVendorPayment: (amount, vendor) => {},
+  initReviewVendorPayment: (amount, vendor, transactionId) => {},
   initBuyRaffleTicket: () => {},
   initBuyToken: () => {},
   initActivateCard: () => {},
@@ -51,6 +51,7 @@ export const popUpContext = createContext(pouUpContextFunctions);
 
 export const PopUpContextProvider = ({ children }) => {
   const [purpose, setPurpose] = useState("");
+  const [transactionId, setTransactionId] = useState("");
   const [nameOfEvent, setNameOfEvent] = useState("");
   const [eventSlugName, setEventSlugName] = useState("");
   const [eventTicketCategories, setEventTicketCategories] = useState([]);
@@ -147,8 +148,9 @@ export const PopUpContextProvider = ({ children }) => {
     toggle();
     setActiveModal("SelfCheckOut");
   }
-  function initReviewVendorPayment(amount, vendor) {
+  function initReviewVendorPayment(amount, vendor, transactionId) {
     setPurpose("SelfCheckout");
+    setTransactionId(transactionId);
     setCheckAmount(amount);
     setVendor(vendor);
     toggle();
@@ -301,7 +303,7 @@ export const PopUpContextProvider = ({ children }) => {
     console.log("enviroment is", env);
     let redirectUrl = "";
     if (env == "development") {
-      redirectUrl = `http://localhost:3000/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}`;
+      redirectUrl = `http://localhost:3000/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}&transactionId=${transactionId}&vendor=${vendor}`;
     } else if (env == "production") {
       redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}`;
     }
@@ -312,6 +314,7 @@ export const PopUpContextProvider = ({ children }) => {
       payment_agent: "SEERBIT",
       // ticketType: "string",
       redirectUrl: redirectUrl,
+      transactionId: transactionId,
     });
     toggleLoad();
     try {
@@ -320,10 +323,12 @@ export const PopUpContextProvider = ({ children }) => {
         {
           purpose: purpose,
           itemQuantity: ticketAmount,
-          amount: parseInt(checkAmount.replaceAll(",", "")),
+          // amount: parseInt(checkAmount?.replaceAll(",", "")),
+          amount: parseInt(checkAmount),
           payment_agent: "SEERBIT",
           // ticketType: "string",
           redirectUrl: redirectUrl,
+          transactionId: transactionId,
         },
         {
           headers: {
@@ -331,11 +336,12 @@ export const PopUpContextProvider = ({ children }) => {
           },
         }
       );
+      // console.log("after response is.................................");
       console.log("response is", resp.data);
       router.push(resp.data.redirectUrl);
       toggleLoad();
     } catch (error) {
-      console.log("AN error has occured pls try again laters", error.response);
+      console.log("AN error has occured pls try again laters", error);
       toggleLoad();
       toggleAlertBar("An error occured. Pls try again later!", "error", true, 20000);
       toggle();
@@ -379,6 +385,9 @@ export const PopUpContextProvider = ({ children }) => {
       setStatusAction(() => {
         return () => {
           setActiveModal("PaymentDetails");
+          setVendor(router?.query?.vendor);
+          setTransactionId(router?.query?.transactionId);
+          setCheckAmount(router?.query?.amount);
         };
       });
       toggle();
@@ -438,9 +447,9 @@ export const PopUpContextProvider = ({ children }) => {
           {activeModal == "PaymentDetails" && (
             <ReceiptStatus
               items={[
-                { name: "Vendor Details", value: "The Place, Lekki" },
-                { name: "Amount", value: 5000 },
-                { name: "Transaction ID", value: "34538590584736s" },
+                { name: "Vendor Details", value: vendor.split("?")[0] || "The Place, Lekki" },
+                { name: "Amount", value: checkAmount || 5000 },
+                { name: "Transaction ID", value: transactionId || "34538590584736s" },
               ]}
               caption="Transaction Receipt"
             ></ReceiptStatus>

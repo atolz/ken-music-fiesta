@@ -103,3 +103,11 @@ a {
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
 }
+
+.react-tel-input .flag-dropdown {
+  border-radius: 10px 0 0 10px !important;
+}
+
+.react-tel-input .flag-dropdown.open .selected-flag {
+  border-radius: 10px 0 0 10px !important;
+}

@@ -57,6 +57,12 @@ const UserSideBar = ({ activePage, setActivePage }) => {
                 >
                   {page}
                 </span>
+
+                {page == "Payment" && AppData.user.pendingPayments.length > 0 && (
+                  <div className="w-[2.5rem] h-[2.5rem] rounded-full bg-[#FFB6B8] text-[#D82025] grid place-items-center font-bold text-[1.2rem] -translate-x-[7rem]">
+                    {AppData.user?.pendingPayments.length}
+                  </div>
+                )}
               </li>
             );
           })}

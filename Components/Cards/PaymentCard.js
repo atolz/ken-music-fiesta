@@ -1,4 +1,7 @@
 import React from "react";
+import formatNumberWithCommas from "../../Utils/addCommas";
+import formatDate from "../../Utils/formatDate";
+import getTimeInAmPm from "../../Utils/getTimeInAmPm";
 import SvgIconWrapper from "../SvgIconWrapper";
 
 const StatusCircle = ({ type, color, children }) => {
@@ -12,7 +15,7 @@ const StatusCircle = ({ type, color, children }) => {
   );
 };
 
-const PaymentCard = ({ className, color, action = () => {}, iconName = "info-circle", iconClassName }) => {
+const PaymentCard = ({ amount, vendor, date, className, color, action = () => {}, iconName = "info-circle", iconClassName }) => {
   return (
     <div
       onClick={() => {
@@ -27,15 +30,17 @@ const PaymentCard = ({ className, color, action = () => {}, iconName = "info-cir
       <div className="ml-[3.9rem] flex justify-between">
         <span className="text-[#706C6C] mr-[4rem]">
           <p className=" font-semibold text-[1.4rem] mb-[8px]">Amount</p>
-          <p className=" font-bold text-[2rem]">N4,000</p>
+          <p className=" font-bold text-[2rem]">N{formatNumberWithCommas(amount || 0)}</p>
         </span>
         <span className="text-[#706C6C] mr-[4rem]">
           <p className=" font-semibold text-[1.4rem] mb-[8px]">Vendor</p>
-          <p className=" font-bold text-[2rem]">The Place, Lekki</p>
+          <p className=" font-bold text-[2rem] capitalize">{vendor || "The Place, Lekki"}</p>
         </span>
         <span className="text-[#706C6C]">
           <p className=" font-semibold text-[1.4rem] mb-[8px]">Date Issued</p>
-          <p className=" font-bold text-[2rem]">22-06-2022. 6:15pm</p>
+          <p className=" font-bold text-[2rem]">
+            {formatDate(date || "2022-07-17T12:11:28.992Z")}. {getTimeInAmPm(new Date(date))}
+          </p>
         </span>
       </div>
     </div>

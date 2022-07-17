@@ -42,6 +42,8 @@ const AppDataProvider = ({ children }) => {
       eventTickets: 0,
     },
     raffleTickets: {},
+    pendingPayments: [],
+    completedPayments: [],
   });
   const [artistesUser, setArtistesUser] = useState({
     data: null,
@@ -195,6 +197,35 @@ const AppDataProvider = ({ children }) => {
     }
   };
 
+  const getUserPendingPayment = async () => {
+    // User profile details
+    try {
+      const userResp = await baseInstanceAPI.get("/dashboard/pending-payments", {
+        headers: {
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+      });
+      console.log("user pending payments ", userResp.data.payments);
+      setUser((val) => ({ ...val, pendingPayments: userResp.data?.payments }));
+    } catch (error) {
+      console.log("Error loadin user extra pending payment data", error);
+    }
+  };
+  const getComletedPayments = async () => {
+    // User profile details
+    try {
+      const userResp = await baseInstanceAPI.get("/dashboard/payments", {
+        headers: {
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+      });
+      console.log("user completed payments ", userResp.data.payments);
+      setUser((val) => ({ ...val, completedPayments: userResp.data?.payments }));
+    } catch (error) {
+      console.log("Error loadin user extra pending payment data", error);
+    }
+  };
+
   const setAppSection = () => {
     if (router.route.includes("/dashboard")) {
       setSection("User");
@@ -213,6 +244,8 @@ const AppDataProvider = ({ children }) => {
       fetchUserDashboardHistory();
       fetchUserRaffleTickets();
       fetchKudibarEvents();
+      getUserPendingPayment();
+      getComletedPayments();
     } else if (section == "Artiste" && !artistesUser.data) {
       fetchArtisteUserCatalogues();
     } else if (section == "Admin" && !adminUser.data) {
@@ -228,6 +261,8 @@ const AppDataProvider = ({ children }) => {
       fetchUserDashboardHistory();
       fetchUserRaffleTickets();
       fetchKudibarEvents();
+      getUserPendingPayment();
+      getComletedPayments();
       setSection("User");
     }
     if (type == "Artiste") {

@@ -11,8 +11,15 @@ const PaymentDetailsBox = ({
       {items.map((el, i) => {
         return (
           <div key={i} className=" text-center mb-[2.4rem] last:mb-0 grid !grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] place-items-center mobile:place-items-start">
-            <span className="f font-semibold text-[1.4rem] text-[#CECECE] leading-[1.7rem] mb-[.4rem] mr-[2.4rem]  text-left">{el?.name}</span>
-            <h2 className={`text-[2.2rem] font-semibold leading-[2.6rem]  overflow-hidden text-ellipsis whitespace-nowrap ${theme == "light" ? " text-black" : " text-white"}`}>{el?.value}</h2>
+            <span className="f font-semibold text-[1.4rem] text-[#CECECE] leading-[1.7rem] mb-[.4rem] mr-[2.4rem]  text-left capitalize">{el?.name}</span>
+            <h2
+              title={el?.value}
+              className={`text-[2.2rem] cursor-pointer font-semibold leading-[2.6rem]  overflow-hidden text-ellipsis whitespace-nowrap !max-w-[175px] capitalize ${
+                theme == "light" ? " text-black" : " text-white"
+              }`}
+            >
+              {el?.value}
+            </h2>
           </div>
         );
       })}

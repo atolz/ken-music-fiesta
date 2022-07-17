@@ -7,6 +7,8 @@ import useLoading from "../../hooks/useLoading";
 import useShowAlert from "../../hooks/useShowAlert";
 import { useRouter } from "next/router";
 import axios from "axios";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const SignUp = () => {
   const passRef = useRef();
@@ -182,7 +184,7 @@ const SignUp = () => {
               {/* Phone Number */}
               <div className="form-group col-span-2">
                 <label>Phone Number</label>
-                <input
+                {/* <input
                   className={`${phoneError ? "!border-red-500 !border-[2px]" : ""} focus:!border-[#FA6BFF]`}
                   onChange={(e) => {
                     setUser({ ...user, phone: e.target.value });
@@ -196,6 +198,21 @@ const SignUp = () => {
                   // pattern="/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g"
                   required
                   placeholder="+2348110377770"
+                /> */}
+
+                <PhoneInput
+                  containerClass=""
+                  inputClass={`!h-[6rem]  !w-full !rounded-2xl px-[2rem] !text-black !font-medium !text-[1.6rem] !placeholder:text-[#D5D6D8] !border-2  focus:!border-primary !outline-none ${
+                    phoneError ? " !border-red-500 !border-[2px]" : ""
+                  }`}
+                  country={"ng"}
+                  enableAreaCodes={true}
+                  enableSearch={true}
+                  value={user.phone}
+                  onChange={(phone) => {
+                    setUser({ ...user, phone: `+${phone}` });
+                    setPhoneErrror("");
+                  }}
                 />
                 {phoneError && <p className=" !text-[1.4rem] !text-red-500">*Phone number must be valid</p>}
               </div>
