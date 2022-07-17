@@ -27,7 +27,7 @@ const UserHeader = ({ title, setActivePage }) => {
   function onLogOut() {
     logOut();
     dispatch(toggleAlert("success", "Logged Out successfully!", true));
-    router.replace("/auth/sign-in");
+    router.replace("/");
   }
 
   return (
@@ -69,7 +69,7 @@ const UserHeader = ({ title, setActivePage }) => {
               </div>
             </div>
             {/* Logout/Profile Dropdown */}
-            <ul className=" w-0 overflow-hidden duration-300 h-auto -z-30 opacity-0 hover:w-full hover:h-auto hover:opacity-100 transition-all peer-hover:w-full peer-hover:h-auto peer-hover:opacity-100 absolute top-[5.5rem] hover:z-50 peer-hover:z-50 right-0 bg-white shadow-lg rounded-[2rem] border rounded-tr-none">
+            <ul className=" w-1/2 overflow-hidden duration-300 h-auto -z-30 opacity-0 hover:w-full hover:h-auto hover:opacity-100 transition-all peer-hover:w-full peer-hover:h-auto peer-hover:opacity-100 absolute top-[5.5rem] hover:z-50 peer-hover:z-50 right-0 bg-white shadow-lg rounded-[2rem] border rounded-tr-none">
               <li
                 onClick={() => {
                   setActivePage("Profile");

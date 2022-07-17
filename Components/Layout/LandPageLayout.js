@@ -26,8 +26,9 @@ const LandPageLayout = ({ children }) => {
   return (
     // <PopUpContainerWrapper>
     <>
-      <div className=" bg-homepage bg-black flex flex-col h-screen justify-between scroll_hide">
-        <div className=" grow-0 shrink-0 ">
+      <div className=" bg-black flex flex-col h-screen justify-between scroll_hide">
+        <div className="fixed top-0 left-0 w-screen h-screen z-[1] fadeIn-animation bg-homepage">{/* <img className=" object-cover h-full w-full" src="/bg-home-min.png"></img> */}</div>
+        <div className=" grow-0 shrink-0 relative z-10">
           <Container>
             {" "}
             <header className="flex items-center pt-[3rem] pb-[1.6rem]">
@@ -128,9 +129,9 @@ const LandPageLayout = ({ children }) => {
           </Container>
         </div>
         {/* <div className="grow-0 shrink overflow-y-scroll scroll_hide">{children}</div> */}
-        <>{children}</>
+        <div className=" z-10">{children}</div>
 
-        <footer className=" bg-black py-[3.5rem]   w-full grow-0 shrink-0 max-h-min">
+        <footer className=" bg-black py-[3.5rem]   w-full grow-0 shrink-0 max-h-min relative z-10">
           <Container>
             <div className="flex items-center flex-wrap">
               <span className=" mr-auto font-normal text-white text-[1.4rem] mb-[2.9rem] mobile:mb-0">All rights reserved. Copyright 2022</span>

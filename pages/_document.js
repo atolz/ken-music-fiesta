@@ -25,6 +25,7 @@ export default function Document() {
         <link rel="prefetch" href="/3d-hand-card-2.svg"></link>
         <link rel="prefetch" href="/seerbit-2.png"></link>
         <link rel="prefetch" href="/3d-hand-card.png"></link>
+        <link rel="prefetch" href="/3d-hand-point.svg"></link>
         <link rel="prefetch" href="/3d-trophy.svg"></link>
         <link rel="prefetch" href="/3d-ticket.svg"></link>
         <link rel="prefetch" href="/3d-ticket-1.png"></link>

@@ -186,12 +186,12 @@ export const PopUpContextProvider = ({ children }) => {
     setShowPopUp(true);
   }
 
-  function onBuyTicket(quantity, type) {
+  function onBuyTicket(quantity, tickets) {
     // setTicketAmount(amount);
     // setTicketType(type);
     // setItemQuantity(quantity);
     // setActiveModal("PaymentOptions");
-    onSelectPayOption("SEERBIT", quantity, type);
+    onSelectPayOption("SEERBIT", quantity, tickets);
   }
   function onBuyRaffleTicket(quantity) {
     // setTicketAmount(amount);
@@ -244,7 +244,7 @@ export const PopUpContextProvider = ({ children }) => {
     setActiveModal("VerifyBVN");
   }
 
-  async function onSelectPayOption(payOptType, quantity, type) {
+  async function onSelectPayOption(payOptType, quantity, tickets) {
     const env = process.env.NODE_ENV;
     console.log("enviroment is", env);
     let redirectUrl = "";
@@ -260,7 +260,7 @@ export const PopUpContextProvider = ({ children }) => {
       itemQuantity: quantity || itemQuantity,
       payment_agent: payOptType || "SEERBIT",
       // payment_agent: "PAYSTACK",
-      ticketType: type || ticketType,
+      tickets: tickets || ticketType,
       redirectUrl: redirectUrl,
     });
     toggleLoad();
@@ -274,7 +274,7 @@ export const PopUpContextProvider = ({ children }) => {
           itemQuantity: quantity || itemQuantity,
           payment_agent: payOptType,
           // payment_agent: "PAYSTACK",
-          ticketType: type || ticketType,
+          tickets: tickets || ticketType,
           redirectUrl: redirectUrl,
         },
         {

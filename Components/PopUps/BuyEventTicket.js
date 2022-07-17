@@ -10,7 +10,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
   const [total, setTotal] = useState(0);
   const [regularQuantity, setRegularQuantity] = useState(1);
   const [vipQunatity, setVipQuantity] = useState(0);
-  const [ticketType, setTicketType] = useState(ticketCategories?.length ? ticketCategories[0]?.ticketTypeId : "111");
+  const [tickets, setTickets] = useState([]);
   const AppData = useContext(DataContext);
   // const allEventTicketCategory = AppData.kudibarEvents.data;
   const onRegularChange = (type, value) => {
@@ -32,7 +32,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
     }
     setRegularQuantity(value);
   };
-  const onChange = (type, value, ticketPrice) => {
+  const onChange = (type, value, ticketPrice, ticketId, ticketIndex) => {
     console.log("Change event occured: type: value", type, value);
     if (type == "inc") {
       setTotal((val) => val + ticketPrice);
@@ -40,6 +40,18 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
       setTotal((val) => val - ticketPrice);
     }
     setRegularQuantity(value);
+    const ticketData = {};
+    const newTickets = [...tickets];
+    if (value == 0) {
+      ticketData = undefined;
+      newTickets[ticketIndex] = ticketData;
+      setTickets(newTickets.filter((el) => el != undefined));
+    } else {
+      ticketData = { ticketId, quantity: value };
+      newTickets[ticketIndex] = ticketData;
+      setTickets(newTickets);
+    }
+    // setTicketType(ticketType[ticketIndex].quantity);
   };
 
   useEffect(() => {
@@ -52,8 +64,14 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
         disabled={total == 0}
         cancelAction={onCancel}
         action={() => {
-          console.log("quntity is", regularQuantity);
-          onBuyTicket(regularQuantity, ticketType);
+          console.log(
+            "tickets are:",
+            tickets.filter((el) => el != undefined)
+          );
+          onBuyTicket(
+            regularQuantity,
+            tickets.filter((el) => el != undefined)
+          );
         }}
         actionText={"Buy Ticket"}
       >
@@ -77,7 +95,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
                 <p className=" !font-medium !text-[2.5rem] !mb-0">{category.ticketType} Ticket</p>
                 <IncDecV2
                   onCange={(type, value) => {
-                    onChange(type, value, category.price);
+                    onChange(type, value, category.price, category.ticketTypeId, i);
                   }}
                   min={0}
                   defaultValue={0}
