@@ -1,5 +1,5 @@
 import { Dialog } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../Context/fetchData";
 import { popUpContext } from "../../Context/PopUps";
 import PaymentCard from "../Cards/PaymentCard";
@@ -26,6 +26,11 @@ const Payment = () => {
   const [amount, setAmount] = useState();
   const [show, setShow] = useState(false);
   const AppData = useContext(DataContext);
+
+  useEffect(() => {
+    AppData.getComletedPayments();
+    AppData.getUserPendingPayment();
+  }, []);
   return (
     <div>
       <Dialog

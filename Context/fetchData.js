@@ -16,6 +16,8 @@ export const DataContext = createContext({
   fetchArtisteUserCatalogues: () => {},
   fetchUserDetails: () => {},
   fetchKudibarEvents: () => {},
+  getUserPendingPayment: () => {},
+  getComletedPayments: () => {},
 });
 
 const AppDataProvider = ({ children }) => {
@@ -322,6 +324,8 @@ const AppDataProvider = ({ children }) => {
         fetchArtisteUserCatalogues,
         fetchUserDetails,
         fetchKudibarEvents,
+        getComletedPayments,
+        getUserPendingPayment,
       }}
     >
       {children}
