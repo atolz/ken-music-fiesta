@@ -47,8 +47,10 @@ const RaffleTicketsNew = () => {
                   <CircularProgressbar
                     // value={35}
                     // text={"35%"}
-                    value={parseInt(user?.raffleTickets?.weekly_total_progress)}
-                    text={`${parseInt(user?.raffleTickets?.weekly_total_progress)}%`}
+                    // value={parseInt(user?.raffleTickets?.weekly_total_progress)}
+                    // text={`${parseInt(user?.raffleTickets?.weekly_total_progress)}%`}
+                    value={parseInt(user?.dashboardHistory?.weekly_total_progress ?? 0)}
+                    text={`${parseInt(user?.dashboardHistory?.weekly_total_progress ?? 0)}%`}
                     styles={buildStyles({
                       pathColor: "#A307A8",
                       strokeLinecap: "butt",
