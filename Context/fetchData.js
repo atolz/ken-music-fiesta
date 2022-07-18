@@ -258,7 +258,7 @@ const AppDataProvider = ({ children }) => {
   const setUserOnLogin = (type, data) => {
     if (type == "User") {
       console.log("user in setusr onlogin is: type user -----------", data);
-      setUser((val) => ({ ...val, data: data }));
+      setUser((val) => ({ ...val, data: data, loading: false }));
       // fetchUserDetails();
       fetchUserDashboardHistory();
       fetchUserRaffleTickets();
