@@ -45,6 +45,7 @@ const VerifyBVN = ({ onInputBVN, onCancel }) => {
       setVerifying(false);
       onInputBVN(false);
       console.log("there was an error", error);
+      toggleAlertBar("Something went wrong. Pls try again later!", "fail", true, 8000);
     }
   };
   return (
