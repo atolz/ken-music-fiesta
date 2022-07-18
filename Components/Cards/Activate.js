@@ -64,12 +64,13 @@ const Activate = ({ user }) => {
       <div className="py-[4.4rem] mobile:py-[5.4rem] px-[3.2rem] mobile:px-[5.2rem] rounded-[2rem] flex-1 bgGrad text-white relative overflow-hidden min-h-[30rem] flex-grow min-w-[30rem] mb-[3.2rem]">
         <h2 className="text-[2.8rem] sm:text-[3.6rem] font-bold leading-[3.4rem] mb-[1.2rem]">Activate Card</h2>
         <p className="font-normal leading-[2rem] text-[1.4rem]  max-w-[27rem] relative z-20">
-          {!AppData?.user?.data?.hasCard
-            ? "You have to activate your card to start making purchases. Kindly do that ASAP."
-            : "Your activation request has been received and your card will be activated soon."}
+          {!AppData?.user?.loading &&
+            (!AppData?.user?.data?.hasCard
+              ? "You have to activate your card to start making purchases. Kindly do that ASAP."
+              : "Your activation request has been received and your card will be activated soon.")}
         </p>
         <div className="flex items-center">
-          {!AppData?.user?.data?.hasCard && (
+          {!AppData?.user?.loading && !AppData?.user?.data?.hasCard && (
             <button
               onClick={() => {
                 // setActiveModal("ActivateCard");

@@ -36,6 +36,7 @@ const AppDataProvider = ({ children }) => {
 
   const [user, setUser] = useState({
     data: null,
+    loading: true,
     dashboardHistory: {
       raffleTickets: 0,
       rewardWon: 0,
@@ -184,6 +185,7 @@ const AppDataProvider = ({ children }) => {
 
   const fetchUserDetails = async () => {
     // User profile details
+
     try {
       const userResp = await baseInstanceAPI.get("/profile/dashboard", {
         headers: {
@@ -191,7 +193,7 @@ const AppDataProvider = ({ children }) => {
         },
       });
       console.log("user is in layount ", userResp.data);
-      setUser((val) => ({ ...val, data: userResp.data }));
+      setUser((val) => ({ ...val, data: userResp.data, loading: false }));
     } catch (error) {
       console.log("Error loadin user extra data", error);
     }
