@@ -71,7 +71,7 @@ const Payment = () => {
                     popUpFunctions.initReviewVendorPayment(el.amount, el.vendor, el.id);
                   }}
                   color={"#FCAC0D"}
-                  className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
+                  className={"mr-5 mb-10 cursor-pointer hover:scale-[1.01] z-50"}
                 ></PaymentCard>
               );
             })}
@@ -93,7 +93,7 @@ const Payment = () => {
                     setShow(true);
                   }}
                   color={"#348B52"}
-                  className={"mr-5 mb-5 cursor-pointer hover:scale-[1.01] z-50"}
+                  className={"mr-5 mb-10 cursor-pointer hover:scale-[1.01] z-50"}
                 ></PaymentCard>
               );
             })}

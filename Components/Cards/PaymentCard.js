@@ -22,7 +22,7 @@ const PaymentCard = ({ amount, vendor, date, className, color, action = () => {}
         action();
       }}
       style={{ boxShadow: "0px 4px 44px rgba(163, 7, 168, 0.1)" }}
-      className={`py-[2.4rem]  px-[3.6rem] rounded-[2rem] max-w-[100rem] bg-white flex items-center w-full relative ${className}`}
+      className={`py-[2.4rem]  px-[3.6rem] rounded-[2rem] max-w-[100rem] bg-white flex items-center w-full relative ${className} `}
     >
       <StatusCircle color={color}>
         <SvgIconWrapper className={` text-black w-[2.84rem] h-[2.84rem] ${iconClassName}`} iconName={iconName}></SvgIconWrapper>
