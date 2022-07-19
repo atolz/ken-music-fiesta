@@ -50,7 +50,7 @@ export default function Home() {
         popUpFunctions.openRequestBvnPrompt();
       }, 5000);
     }
-  }, [AppData?.user?.data?.hasAddedBVN]);
+  }, [AppData?.user?.data?.hasMintedTicket]);
 
   return (
     <>
