@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { getDashHistory, getUser } from "../../store/user";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { DataContext } from "../../Context/fetchData";
+import EventsCarouselCard from "../Cards/EventsCarousel";
+import EventsCarousel2 from "../Cards/EventsCarousel2";
 
 const Dashboard = (props) => {
   // const user = useSelector(getUser);
@@ -87,8 +89,11 @@ const Dashboard = (props) => {
         </div>
 
         {/* div-2 */}
-        <div className=" flex-1">
-          <PoweredBy></PoweredBy>
+        <div className=" flex-1 min-w-[30rem] rounded-primary">
+          {/* <PoweredBy></PoweredBy> */}
+          {/* <EventsCarouselCard></EventsCarouselCard> */}
+          {/* <p></p> */}
+          {AppData.kudibarEvents.data.length < 1 ? <PoweredBy></PoweredBy> : <EventsCarousel2></EventsCarousel2>}
         </div>
       </section>
     </div>

@@ -27,7 +27,9 @@ const LandPageLayout = ({ children }) => {
     // <PopUpContainerWrapper>
     <>
       <div className=" bg-black flex flex-col h-screen justify-between scroll_hide">
-        <div className="fixed top-0 left-0 w-screen h-screen z-[1] fadeIn-animation bg-homepage">{/* <img className=" object-cover h-full w-full" src="/bg-home-min.png"></img> */}</div>
+        <div className={`fixed top-0 left-0 w-screen h-screen z-[1]  bg-homepage ${router.pathname == "/" ? " fadeIn-animation opacity-100" : " opacity-50"}`}>
+          {/* <img className=" object-cover h-full w-full" src="/bg-home-min.png"></img> */}
+        </div>
         <div className=" grow-0 shrink-0 relative z-10">
           <Container>
             {" "}
@@ -134,6 +136,23 @@ const LandPageLayout = ({ children }) => {
         <footer className=" bg-black py-[3.5rem]   w-full grow-0 shrink-0 max-h-min relative z-10">
           <Container>
             <div className="flex items-center flex-wrap">
+              <ul className="mr-auto grid grid-cols-3 gap-[4rem]">
+                <Link href={"/faq"}>
+                  <a>
+                    <li className=" text-[1.2rem] font-medium text-white underline hover:text-primary">FAQ</li>
+                  </a>
+                </Link>
+                <Link href={"/contact"}>
+                  <a className="visited:text-primary">
+                    <li className=" text-[1.2rem] font-medium text-white underline hover:text-primary active:text-primary">Contact</li>
+                  </a>
+                </Link>
+                <Link href={"/privacy-policy"}>
+                  <a className="visited:text-primary">
+                    <li className=" text-[1.2rem] font-medium text-white underline hover:text-primary active:text-primary">Privacy Policy</li>
+                  </a>
+                </Link>
+              </ul>
               <span className=" mr-auto font-normal text-white text-[1.4rem] mb-[2.9rem] mobile:mb-0">All rights reserved. Copyright 2022</span>
               <div className="flex items-center">
                 <img src="/twitter.svg"></img>

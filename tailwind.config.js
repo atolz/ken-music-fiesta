@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         primary: "var( --color-primary)",
         primaryGrad: "var(--color-primary-grad)",
+        primaryLighter: "#FA6BFF",
         // secondary: "var(--color-secondary)",
       },
       screens: {

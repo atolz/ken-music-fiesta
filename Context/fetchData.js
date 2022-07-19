@@ -47,6 +47,7 @@ const AppDataProvider = ({ children }) => {
     raffleTickets: {},
     pendingPayments: [],
     completedPayments: [],
+    asset: {},
   });
   const [artistesUser, setArtistesUser] = useState({
     data: null,
@@ -229,6 +230,20 @@ const AppDataProvider = ({ children }) => {
       console.log("Error loadin user extra pending payment data", error);
     }
   };
+  const getMintEventTicketAccess = async () => {
+    // User profile details
+    try {
+      const userResp = await baseInstanceAPI.get("/mint-ticket/get-assets", {
+        headers: {
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+      });
+      console.log("user assets... ", userResp.data.asset);
+      setUser((val) => ({ ...val, asset: userResp.data?.asset }));
+    } catch (error) {
+      console.log("Error loadin user mint assets", error);
+    }
+  };
 
   const setAppSection = () => {
     if (router.route.includes("/dashboard")) {
@@ -250,6 +265,7 @@ const AppDataProvider = ({ children }) => {
       fetchKudibarEvents();
       getUserPendingPayment();
       getComletedPayments();
+      getMintEventTicketAccess();
     } else if (section == "Artiste" && !artistesUser.data) {
       fetchArtisteUserCatalogues();
     } else if (section == "Admin" && !adminUser.data) {
@@ -267,6 +283,7 @@ const AppDataProvider = ({ children }) => {
       fetchKudibarEvents();
       getUserPendingPayment();
       getComletedPayments();
+      getMintEventTicketAccess();
       setSection("User");
     }
     if (type == "Artiste") {

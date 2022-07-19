@@ -111,3 +111,15 @@ a {
 .react-tel-input .flag-dropdown.open .selected-flag {
   border-radius: 10px 0 0 10px !important;
 }
+
+.carousel__dot--selected button {
+  /* width: 0.5rem;
+  height: 0.5rem; */
+  opacity: 1 !important;
+  transform: scale(1.2) !important;
+}
+
+// .carousel .slider-wrapper {
+//   min-height: 300px;
+//   background-color: rgb(12, 23, 34);
+// }
