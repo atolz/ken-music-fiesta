@@ -158,7 +158,7 @@ const SignIn = () => {
             </div>
 
             <Link href="/auth/forgot-password">
-              <p className=" mt-[1.6rem] font-medium text-[1.6rem] cursor-pointer">Forgot Password?</p>
+              <a className=" mt-[1.6rem] font-medium text-[1.6rem] cursor-pointer text-white inline-block w-max">Forgot Password?</a>
             </Link>
           </div>
 

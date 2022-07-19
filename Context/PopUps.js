@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect, useContext } from "react";
 import Dialog from "@mui/material/Dialog";
 import BuyEventTicket from "../Components/PopUps/BuyEventTicket";
 import PaymentOptions from "../Components/PopUps/PaymentOptions";
@@ -25,6 +25,7 @@ import ActivateCard from "../Components/PopUps/ActivateCard";
 import Head from "next/head";
 import Prompt from "../Components/PopUps/Prompt";
 import ReceiptStatus from "../Components/PopUps/ReceiptStatus";
+import { DataContext } from "./fetchData";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
@@ -75,6 +76,7 @@ export const PopUpContextProvider = ({ children }) => {
   const toggleAlertBar = useShowAlert();
   const dispatch = useDispatch();
   const [page, setGlobalPage] = useState("Dashboard");
+  const AppData = useContext(DataContext);
 
   const pouUpContextFunctions = {
     initBuyRaffleTicket: initBuyRaffleTicket,
@@ -185,6 +187,7 @@ export const PopUpContextProvider = ({ children }) => {
 
   function openRequestBvnPrompt() {
     setActiveModal("ProvideBvnPrompt");
+    setPurpose("MintTicket");
     setShowPopUp(true);
   }
 
@@ -220,9 +223,10 @@ export const PopUpContextProvider = ({ children }) => {
     // setItemQuantity(quantity);
     if (status == false) {
       return;
+    } else {
+      // setActiveModal("PaymentOptions");
+      onSelectPayOption("SEERBIT", 200);
     }
-    setShowPopUp(false);
-    // setActiveModal("PaymentOptions");
   }
 
   function onCheckOut(amount, vendor) {
@@ -242,8 +246,13 @@ export const PopUpContextProvider = ({ children }) => {
   function onVerify() {
     setActiveModal("Status");
   }
-  function onContinueToBvnVerification() {
-    setActiveModal("VerifyBVN");
+  function onContinueToMint() {
+    console.log("on mint ticket: country is", AppData.user?.data?.country);
+    if (AppData.user?.data?.country !== "Nigeria") {
+      onSelectPayOption("SEERBIT", 200);
+    } else {
+      setActiveModal("VerifyBVN");
+    }
   }
 
   async function onSelectPayOption(payOptType, quantity, tickets) {
@@ -437,11 +446,15 @@ export const PopUpContextProvider = ({ children }) => {
           )}
           {activeModal == "ProvideBvnPrompt" && (
             <Prompt
-              title={"We need more information"}
-              desc={"Thank you for signing up. To further make your card collection easier, we will need you to provide your BVN"}
+              title={"Welcome to kennis Music Bites"}
+              desc={
+                <span>
+                  Thank you for signing up. To further make your experience better, mint you ticket today for just<span className=" font-bold !text-[#827F7F]"> N200 </span>and enjoy more offers.
+                </span>
+              }
               onCancel={toggle}
-              imgUrl="/3d-Padlock.png"
-              onAction={onContinueToBvnVerification}
+              imgUrl="/3d-onpoint-finger.jpg"
+              onAction={onContinueToMint}
             ></Prompt>
           )}
           {activeModal == "PaymentDetails" && (

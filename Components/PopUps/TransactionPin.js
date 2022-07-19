@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PopupLayout from "../Layout/Popup";
 import OtpInput from "react-otp-input";
 
-const TransactionPin = () => {
+const TransactionPin = ({ onClose = () => {} }) => {
   const [pinVal, setPinVal] = useState("");
   const [error, setError] = useState("");
   const handlePinChange = (pin) => {
@@ -56,7 +56,12 @@ const TransactionPin = () => {
             numInputs={4}
             separator={<span></span>}
           />
-          <button onClick={() => {}} className="btn  mt-[5.8rem]">
+          <button
+            onClick={() => {
+              onClose();
+            }}
+            className="btn  mt-[5.8rem]"
+          >
             Create Pin
           </button>
         </div>

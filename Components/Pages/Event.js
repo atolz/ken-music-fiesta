@@ -22,7 +22,7 @@ const Event = () => {
   const EventTicketCard = () => {
     return (
       <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#F0F0F0] bg-[#FCF9FC] border-2 border-[#FDE8FE]  relative  min-w-[30rem] overflow-hidden flex-1`}>
-        <h3 className="h3 mb-[.4rem] mr-[11.0rem]">{0} Event Tickets</h3>
+        <h3 className="h3 mb-[.4rem] mr-[11.0rem]">{AppData.user.dashboardHistory?.total_event_ticket ?? 0} Event Tickets</h3>
         <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold">Total Number of Event Tickets</p>
         {/* <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem] hand-card block" src={"/3d-ticket-1.png"}></img> */}
         <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem] translate-x-6 event-ticket block" src={"/3d-ticket-1.png"}></img>
@@ -106,11 +106,14 @@ const Event = () => {
                 </div>
                 <div className="grid gap-[1.6rem] grid-cols-2">
                   <button
+                    title={` ${AppData.user.dashboardHistory?.total_event_ticket < 1 ? " You don't have any ticket" : "join"}`}
                     onClick={() => {
-                      setJoinLive(true);
-                      setShowDetails(false);
+                      if (AppData.user.dashboardHistory?.total_event_ticket > 0) {
+                        setJoinLive(true);
+                        setShowDetails(false);
+                      }
                     }}
-                    className="btn"
+                    className={`btn ${AppData.user.dashboardHistory?.total_event_ticket < 1 ? " cursor-not-allowed" : "cursor-pointer"}`}
                   >
                     Join Livestream Event
                   </button>
@@ -131,7 +134,7 @@ const Event = () => {
                   {AppData.kudibarEvents?.hash[activeEvent]?.isSoldOut && <button className="btn !border-2 !border-[#C4C4C4] !bg-none !text-[#C4C4C4]">Sold out</button>}
                 </div>
               </div>
-              {/* <EventTicketCard></EventTicketCard> */}
+              <EventTicketCard></EventTicketCard>
             </div>
           </div>
         </section>

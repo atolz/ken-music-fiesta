@@ -15,7 +15,13 @@ const Security = () => {
           setShowModal(false);
         }}
       >
-        {activeModal == "TransactionPin" && <TransactionPin></TransactionPin>}
+        {activeModal == "TransactionPin" && (
+          <TransactionPin
+            onClose={() => {
+              setShowModal(false);
+            }}
+          ></TransactionPin>
+        )}
       </Dialog>
       <div className="grid grid-cols-[2fr,1fr] items-center mb-[3.2rem]">
         <div className=" flex flex-col">

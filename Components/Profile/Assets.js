@@ -43,11 +43,14 @@ const Assets = () => {
             View Ticket
           </a>
           <a
-            onClick={(e) => {
-              e.preventDefault();
-              setShowModal(true);
-              setActiveModal("ViewTicket");
-            }}
+            title="Download Ticket"
+            download={"Kennis Music Fiesta All Access Pass"}
+            href="/qr-code.png"
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   // setShowModal(true);
+            //   // setActiveModal("ViewTicket");
+            // }}
             className="kef-link !text-[1.3rem] ml-[1.6rem]"
           >
             Download Ticket

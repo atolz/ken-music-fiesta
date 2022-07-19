@@ -45,7 +45,7 @@ export default function Home() {
       return router.replace("/auth/sign-in");
     }
 
-    if (AppData?.user?.data && !AppData?.user?.data?.hasAddedBVN) {
+    if (AppData?.user?.data && !AppData?.user?.data?.hasMintedTicket) {
       setTimeout(() => {
         popUpFunctions.openRequestBvnPrompt();
       }, 5000);

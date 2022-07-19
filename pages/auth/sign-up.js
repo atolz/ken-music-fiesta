@@ -62,8 +62,8 @@ const SignUp = () => {
   };
 
   const onSignUp = async (user) => {
-    const locationData = await getGeoInfo();
-    console.log("In signup data", locationData);
+    // const locationData = await getGeoInfo();
+    // console.log("In signup data", locationData);
     if (!emailValidation()) {
       console.log("Email is not valid");
       return;
@@ -78,10 +78,11 @@ const SignUp = () => {
       return;
     }
 
+    toggleLoad();
+    const locationData = await getGeoInfo();
+    console.log("In signup data", locationData);
     let userObj = { ...user, ref: router?.query?.ref, location: { country: locationData?.country_name, ip: locationData?.IPv4 } };
     console.log("base url is", process.env.NEXT_PUBLIC_DEVELOPMENT_URL);
-    toggleLoad();
-
     try {
       console.log("submited user is", JSON.stringify(userObj));
       const response = await baseInstanceAPI.post("account/signup", JSON.stringify(userObj));
@@ -102,9 +103,20 @@ const SignUp = () => {
         console.log("Phone error error...", error.response.data.message[0]);
         return;
       }
+      if (error.response.data.message[0].includes("location")) {
+        toggleAlertBar("An Error Occured getting your location. Pls ensure you have adblocker disabled in your browser or try using another browser", "fail", true, 50000);
+
+        return;
+      }
       if (error.response.data.message.includes("email")) {
         // setEmailError(error.response.data.message);
         setEmailError(error.response.data.message);
+        return;
+        // console.log("email eroro");
+      }
+      if (error.response.data.message[0]?.includes("password")) {
+        // setEmailError(error.response.data.message);
+        setPassError(error.response.data.message[0]);
         return;
         // console.log("email eroro");
       } else {
@@ -251,6 +263,7 @@ const SignUp = () => {
                   </svg>
                 </div>
                 {passError && <p className=" !text-[1.2rem] !font-normal !text-red-500">*{passError}</p>}
+                <span className=" mt-2 text-[1.2rem] text-gray-100">Must contain: a captital letter & number</span>
               </div>
               <div className="form-group col-span-2">
                 <label>Confirm Password</label>

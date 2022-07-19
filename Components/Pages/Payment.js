@@ -48,7 +48,7 @@ const Payment = () => {
           caption="Transaction Receipt"
         ></ReceiptStatus>
       </Dialog>
-      <header className="flex items-center gap-[3.2rem] mb-[6rem]">
+      {/* <header className="flex items-center gap-[3.2rem] mb-[6rem]">
         {["Pending", "Completed"].map((el, i) => {
           return (
             <Button
@@ -61,7 +61,7 @@ const Payment = () => {
             ></Button>
           );
         })}
-      </header>
+      </header> */}
       <main className="flex flex-wrap">
         {activeTab == "Pending" && (
           <>
@@ -80,9 +80,33 @@ const Payment = () => {
                 ></PaymentCard>
               );
             })}
+            {AppData.user?.completedPayments?.map((el, i) => {
+              return (
+                <PaymentCard
+                  vendor={el?.vendor}
+                  amount={el?.amount}
+                  date={el?.created_at}
+                  key={i}
+                  action={() => {
+                    setAmount(el?.amount);
+                    setVendor(el?.vendor);
+                    setTransactionId(el?.id);
+                    setShow(true);
+                  }}
+                  color={"#348B52"}
+                  className={"mr-5 mb-8 cursor-pointer hover:scale-[1.01] z-50"}
+                ></PaymentCard>
+              );
+            })}
+
+            {AppData.user?.pendingPayments?.length < 1 && AppData.user?.completedPayments?.length < 1 && (
+              <div className="grid flex-1 place-content-center place-items-center my-auto min-h-[50vh]">
+                <span className="f font-medium text-[2.5rem] text-[#E0E0E0]">No Payment From Vendors</span>
+              </div>
+            )}
           </>
         )}
-        {activeTab == "Completed" && (
+        {/* {activeTab == "Completed" && (
           <>
             {AppData.user?.completedPayments?.map((el, i) => {
               return (
@@ -103,7 +127,7 @@ const Payment = () => {
               );
             })}
           </>
-        )}
+        )} */}
       </main>
     </div>
   );
