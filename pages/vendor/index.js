@@ -235,7 +235,7 @@ const Review = ({ action, amount, phone, setTransactionId, goBack }) => {
   const toggleAlertBar = useShowAlert();
 
   const onInitialPayment = async () => {
-    const data = { amount, phone: `+${phone}`, vendor: "f0f7faa1-749c-491c-9dfd-6a63b08c7b73", branch: "1" };
+    const data = { amount, phone: `+${phone}`, vendor: "8df21bc2-d96c-4598-9a79-9a1e30a38d2e", branch: "1" };
     console.log("On review: Details are:", data);
     toggleLoad();
     try {

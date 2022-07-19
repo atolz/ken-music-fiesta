@@ -460,7 +460,7 @@ export const PopUpContextProvider = ({ children }) => {
           {activeModal == "PaymentDetails" && (
             <ReceiptStatus
               items={[
-                { name: "Vendor Details", value: vendor?.split("?")[0] || "The Place, Lekki" },
+                { name: "Vendor Details", value: vendor?.split("?")[0] || "Kfc Nigeria" },
                 { name: "Amount", value: checkAmount || 5000 },
                 { name: "Transaction ID", value: transactionId || "34538590584736s" },
               ]}
