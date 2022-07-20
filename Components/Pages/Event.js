@@ -5,6 +5,7 @@ import EventCard from "../Cards/EventCard";
 import SvgIconWrapper from "../SvgIconWrapper";
 import ProgressiveToken from "./ProgressiveToken";
 import formatDate from "../../Utils/formatDate";
+import EventTicketsTable from "../Tables/EventsTickets";
 
 const Event = () => {
   const [showDetails, setShowDetails] = useState(false);
@@ -19,9 +20,9 @@ const Event = () => {
     console.log("Events in evenst is", AppData.kudibarEvents);
   }, [AppData.kudibarEvents]);
 
-  const EventTicketCard = () => {
+  const EventTicketCard = ({ className }) => {
     return (
-      <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#F0F0F0] bg-[#FCF9FC] border-2 border-[#FDE8FE]  relative  min-w-[30rem] overflow-hidden flex-1`}>
+      <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#F0F0F0] bg-[#FCF9FC] border-2 border-[#FDE8FE]  relative  min-w-[30rem] overflow-hidden flex-1 ${className}`}>
         <h3 className="h3 mb-[.4rem] mr-[11.0rem]">{AppData.user.dashboardHistory?.total_event_ticket ?? 0} Event Tickets</h3>
         <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold">Total Number of Event Tickets</p>
         {/* <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem] hand-card block" src={"/3d-ticket-1.png"}></img> */}
@@ -89,7 +90,8 @@ const Event = () => {
             ></div>
 
             <div>
-              <div className="px-[4rem] min-h-[61vh] py-[5rem] rounded-primary border border-[#FDE8FE] bg-[#FCF9FC] grid place-content-center mb-[3.1rem]">
+              <EventTicketCard className={"mb-[1.6rem]"}></EventTicketCard>
+              <div className="px-[4rem] min-h-[47vh] py-[5rem] rounded-primary border border-[#FDE8FE] bg-[#FCF9FC] grid place-content-center mb-[3.1rem]">
                 <h4 className=" font-bold text-[2rem] leading-[2.4rem]">Description</h4>
                 <p className="max-w-[49.2rem] font-normal text-[1.4rem] text-[#717171] mb-[4rem] mt-[.8rem] leading-[2rem]">{AppData.kudibarEvents?.hash[activeEvent]?.description}</p>
                 <div className="flex gap-[3.2rem] mb-[5rem]">
@@ -134,7 +136,8 @@ const Event = () => {
                   {AppData.kudibarEvents?.hash[activeEvent]?.isSoldOut && <button className="btn !border-2 !border-[#C4C4C4] !bg-none !text-[#C4C4C4]">Sold out</button>}
                 </div>
               </div>
-              <EventTicketCard></EventTicketCard>
+
+              <EventTicketsTable></EventTicketsTable>
             </div>
           </div>
         </section>

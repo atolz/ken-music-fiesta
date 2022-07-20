@@ -9,7 +9,7 @@ const Container = ({ children, twStyles }) => {
 
 const Details = () => {
   return (
-    <div className="grow-0 shrink  scroll_hide mt-auto">
+    <div className="grow-0 shrink  scroll_hide mt-auto absolute bottom-[80px] left-0 w-full">
       <div className="bg-black w-full overflow-scroll  max-h-[70vh]  rounded-tl-[3rem] rounded-tr-[3rem] pt-[7.2rem] slide-up-now-opacity scroll_hide">
         <Container twStyles={"flex gap-[9.4rem] flex-wrap"}>
           {/* <div className=" sidebar:-translate-y-[15.4rem] -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer flex"> */}
@@ -23,12 +23,12 @@ const Details = () => {
             {/* About */}
             <div className="mb-[4.8rem]  max-w-[79.3rem]">
               <h1 className="mb-[1.6rem] text-[#FCAC0D] font-bold text-[2.5rem]">About Artist</h1>
-              <p className="text-[#C4C4C4] leading-[1.8rem] text-[1.2rem] font-normal pb-[4.8rem] border-b-[.3px] border-[#FCAC0D]">
+              <p className="text-[#C4C4C4] leading-[1.8rem] text-[1.4rem] font-normal pb-[4.8rem] border-b-[.3px] border-[#FCAC0D]">
+                Aliaune Damala Badara Akon Thiam, known mononymously as Akon, is a Senegalese American singer, songwriter, record producer, and entrepreneur. He rose to prominence in 2004 following
+                the release of "Locked Up", the first single from his debut album Trouble, followed by the second single "Lonely". <br></br>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel et sagittis, cursus pretium aliquam pharetra amet at. Sit at integer ut ante cursus justo, volutpat imperdiet. Ut rhoncus,
                 orci nulla adipiscing pellentesque quam. Semper nec etiam viverra aliquam, purus turpis eu. Turpis lectus sit viverra feugiat. Morbi viverra senectus dictum mauris, id in velit fames
-                morbi. Adipiscing orci quam ornare augue velit. Cras erat odio non sit. Massa quisque elementum, eget nisi, ut et non. Faucibus ut amet massa praesent suspendisse donec velit sit
-                placerat. In praesent laoreet molestie id dui pretium. Adipiscing enim, in aliquet feugiat. Dictum diam urna dignissim auctor non in. In amet id adipiscing eget et ornare gravida quis.
-                Dui nibh porta vitae gravida at quam elementum est sollicitudin maecenas sed.
+                morbi.
               </p>
             </div>
 

@@ -21,7 +21,7 @@ const contact = () => {
           onSubmit={(e) => {
             e.preventDefault();
           }}
-          className="auth-form max-w-[50rem]"
+          className="auth-form max-w-[60rem]"
         >
           <div className="form-group mb-[1.6rem]">
             <label>First Name</label>

@@ -138,8 +138,9 @@ const LandPageLayout = ({ children }) => {
             <div className="flex items-center flex-wrap">
               <ul className="mr-auto grid grid-cols-3 gap-[4rem]">
                 <Link href={"/faq"}>
-                  <a>
-                    <li className=" text-[1.2rem] font-medium text-white underline hover:text-primary">FAQ</li>
+                  <a className="flex items-center text-white hover:first:block">
+                    <span className="mr-[8px] hidden">#</span>
+                    <li className=" text-[1.2rem] font-medium  underline hover:text-primary peer">FAQ</li>
                   </a>
                 </Link>
                 <Link href={"/contact"}>

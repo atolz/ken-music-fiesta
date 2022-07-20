@@ -32,7 +32,7 @@ const ArtisteHeader = ({ title, setActivePage }) => {
 
   return (
     <>
-      <div className="flex items-center mb-[2.4rem] sidebar:mb-[4.5rem] hdr:mb-[8.4rem] w-full">
+      <div className="flex items-center mb-[2.4rem] sidebar:mb-[4.5rem] hdr:mb-[8.4rem] w-full  pt-[1.4rem] bg-[#FBFAFA]  sidebar:pt-[3.4rem] sticky top-0 sidebar:pb-[2rem] z-[1000]">
         <h1 className="h1 transition-all">{title}</h1>
         <div className="flex flex-wrap ml-auto">
           {/* Catalogue Artiste Buttons */}
