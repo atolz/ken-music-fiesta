@@ -27,7 +27,7 @@ const Faq = () => {
   const [active, setActive] = useState();
   return (
     <Container>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] items-center">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(37rem,1fr))] gap-[5rem] items-center">
         <div>
           <h1 className=" text-primaryLighter font-bold text-[5.7rem] max-w-[511px] leading-[6rem]">Frequently Asked Questions</h1>
           <p className=" font-medium text-[1.6rem] mt-[1.6rem] text-white max-w-[462px]">

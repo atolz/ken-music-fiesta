@@ -151,6 +151,43 @@
       border: 2px solid var(--color-primary);
     }
   }
+
+  textarea {
+    background: #f8f9fd;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    border-radius: 1rem;
+    padding: 2rem 2rem;
+    transition: all 0.2s;
+
+    @media (max-width: 400px) {
+      padding: 2rem 2rem;
+    }
+
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    &::placeholder {
+      font-family: Montserrat;
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 2rem;
+      letter-spacing: 0em;
+      text-align: left;
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid var(--color-primary);
+    }
+  }
+
   input[type="date"]::-webkit-calendar-picker-indicator {
     background-repeat: no-repeat;
     cursor: pointer;

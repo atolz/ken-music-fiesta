@@ -131,7 +131,7 @@ const LandPageLayout = ({ children }) => {
           </Container>
         </div>
         {/* <div className="grow-0 shrink overflow-y-scroll scroll_hide">{children}</div> */}
-        <div className=" z-10">{children}</div>
+        <div className=" z-10 overflow-scroll scroll_hide">{children}</div>
 
         <footer className=" bg-black py-[3.5rem]   w-full grow-0 shrink-0 max-h-min relative z-10">
           <Container>
