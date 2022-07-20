@@ -138,28 +138,28 @@ const LandPageLayout = ({ children }) => {
             <div className="flex items-center flex-wrap">
               <ul className="mr-auto grid grid-cols-3 gap-[4rem]">
                 <Link href={"/faq"}>
-                  <li className="group w-max">
+                  <div className="group w-max">
                     <a className="flex items-center text-white  group-hover:text-primary">
                       <span className=" block translate-x-3 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all">#</span>
-                      <li className=" text-[1.2rem] font-medium  underline transition-all group-hover:translate-x-3">FAQ</li>
+                      <span className=" text-[1.2rem] font-medium  underline transition-all group-hover:translate-x-3">FAQ</span>
                     </a>
-                  </li>
+                  </div>
                 </Link>
                 <Link href={"/contact"}>
-                  <li className="group w-max">
+                  <div className="group w-max">
                     <a className="flex items-center text-white  group-hover:text-primary">
                       <span className=" block translate-x-3 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all">#</span>
-                      <li className=" text-[1.2rem] font-medium  underline transition-all group-hover:translate-x-3">Contact</li>
+                      <span className=" text-[1.2rem] font-medium  underline transition-all group-hover:translate-x-3">Contact</span>
                     </a>
-                  </li>
+                  </div>
                 </Link>
                 <Link href={"/privacy-policy"}>
-                  <li className="group w-max">
+                  <div className="group w-max">
                     <a className="flex items-center text-white  group-hover:text-primary">
                       <span className=" block translate-x-3 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all">#</span>
-                      <li className=" text-[1.2rem] font-medium  underline transition-all group-hover:translate-x-3">Privacy Policy</li>
+                      <span className=" text-[1.2rem] font-medium  underline transition-all group-hover:translate-x-3">Privacy Policy</span>
                     </a>
-                  </li>
+                  </div>
                 </Link>
               </ul>
               <span className=" mr-auto font-normal text-white text-[1.4rem] mb-[2.9rem] mobile:mb-0">All rights reserved. Copyright 2022</span>
