@@ -17,7 +17,12 @@ const contact = () => {
         </div>
 
         {/* Contact form */}
-        <form className="auth-form max-w-[50rem]">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+          className="auth-form max-w-[50rem]"
+        >
           <div className="form-group mb-[1.6rem]">
             <label>First Name</label>
             <input onChange={(e) => {}} placeholder="Ex. Jonathan" />
