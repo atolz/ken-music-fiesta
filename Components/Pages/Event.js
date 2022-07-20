@@ -32,7 +32,7 @@ const Event = () => {
   return (
     <div>
       {!showDetails && !joinLive && (
-        <div className="grid grid-cols-[repeat(auto-fit,_minmax(35rem,_1fr))] events_card:grid-cols-[repeat(auto-fit,_minmax(50rem,_1fr))] gap-5">
+        <div className="grid grid-cols-[repeat(auto-fill,_minmax(35rem,_1fr))] events_card:grid-cols-[repeat(auto-fill,_minmax(50rem,_1fr))] gap-5">
           {AppData.kudibarEvents?.data?.map((el, i) => {
             return (
               <EventCard
