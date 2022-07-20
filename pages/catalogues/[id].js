@@ -25,7 +25,7 @@ const Details = () => {
               <h1 className="mb-[1.6rem] text-[#FCAC0D] font-bold text-[2.5rem]">About Artist</h1>
               <p className="text-[#C4C4C4] leading-[1.8rem] text-[1.4rem] font-normal pb-[4.8rem] border-b-[.3px] border-[#FCAC0D]">
                 Aliaune Damala Badara Akon Thiam, known mononymously as Akon, is a Senegalese American singer, songwriter, record producer, and entrepreneur. He rose to prominence in 2004 following
-                the release of "Locked Up", the first single from his debut album Trouble, followed by the second single "Lonely". <br></br>
+                the release of `Locked Up`, the first single from his debut album Trouble, followed by the second single `Lonely``. <br></br>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel et sagittis, cursus pretium aliquam pharetra amet at. Sit at integer ut ante cursus justo, volutpat imperdiet. Ut rhoncus,
                 orci nulla adipiscing pellentesque quam. Semper nec etiam viverra aliquam, purus turpis eu. Turpis lectus sit viverra feugiat. Morbi viverra senectus dictum mauris, id in velit fames
                 morbi.
