@@ -138,20 +138,28 @@ const LandPageLayout = ({ children }) => {
             <div className="flex items-center flex-wrap">
               <ul className="mr-auto grid grid-cols-3 gap-[4rem]">
                 <Link href={"/faq"}>
-                  <a className="flex items-center text-white hover:first:block">
-                    <span className="mr-[8px] hidden">#</span>
-                    <li className=" text-[1.2rem] font-medium  underline hover:text-primary peer">FAQ</li>
-                  </a>
+                  <li className="group w-max">
+                    <a className="flex items-center text-white  group-hover:text-primary">
+                      <span className=" block translate-x-3 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all">#</span>
+                      <li className=" text-[1.2rem] font-medium  underline transition-all group-hover:translate-x-3">FAQ</li>
+                    </a>
+                  </li>
                 </Link>
                 <Link href={"/contact"}>
-                  <a className="visited:text-primary">
-                    <li className=" text-[1.2rem] font-medium text-white underline hover:text-primary active:text-primary">Contact</li>
-                  </a>
+                  <li className="group w-max">
+                    <a className="flex items-center text-white  group-hover:text-primary">
+                      <span className=" block translate-x-3 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all">#</span>
+                      <li className=" text-[1.2rem] font-medium  underline transition-all group-hover:translate-x-3">Contact</li>
+                    </a>
+                  </li>
                 </Link>
                 <Link href={"/privacy-policy"}>
-                  <a className="visited:text-primary">
-                    <li className=" text-[1.2rem] font-medium text-white underline hover:text-primary active:text-primary">Privacy Policy</li>
-                  </a>
+                  <li className="group w-max">
+                    <a className="flex items-center text-white  group-hover:text-primary">
+                      <span className=" block translate-x-3 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all">#</span>
+                      <li className=" text-[1.2rem] font-medium  underline transition-all group-hover:translate-x-3">Privacy Policy</li>
+                    </a>
+                  </li>
                 </Link>
               </ul>
               <span className=" mr-auto font-normal text-white text-[1.4rem] mb-[2.9rem] mobile:mb-0">All rights reserved. Copyright 2022</span>

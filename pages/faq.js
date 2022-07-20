@@ -41,10 +41,10 @@ const Faq = () => {
             return (
               <div key={i} className=" border-b-2 text-[1.6rem] font-normal leading-[24px] text-white py-[2.4rem]">
                 <Collapsible
-                  open={active == i}
-                  handleTriggerClick={() => {
-                    setActive(i);
-                  }}
+                  // open={active == i}
+                  // handleTriggerClick={() => {
+                  //   setActive(i);
+                  // }}
                   height={70}
                   trigger={
                     <div className="flex items-center">
