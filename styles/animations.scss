@@ -231,3 +231,23 @@
 .fadeIn-animation {
   animation: fadeIn 2s cubic-bezier(0.4, 0, 0.2, 1) 2.5s backwards;
 }
+
+@keyframes gelatine {
+  from,
+  to {
+    transform: translateX(-50%) scale(1, 1);
+  }
+  25% {
+    transform: translateX(-50%) scale(0.9, 1.1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.1, 0.9);
+  }
+  75% {
+    transform: translateX(-50%) scale(0.95, 1.05);
+  }
+}
+
+.gelatine {
+  animation: gelatine 0.5s backwards;
+}

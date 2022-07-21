@@ -314,7 +314,7 @@ export const PopUpContextProvider = ({ children }) => {
     if (env == "development") {
       redirectUrl = `http://localhost:3000/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}&transactionId=${transactionId}&vendor=${vendor}`;
     } else if (env == "production") {
-      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}`;
+      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}&transactionId=${transactionId}&vendor=${vendor}`;
     }
     console.log("payment details is", {
       purpose: purpose,
@@ -460,7 +460,7 @@ export const PopUpContextProvider = ({ children }) => {
           {activeModal == "PaymentDetails" && (
             <ReceiptStatus
               items={[
-                { name: "Vendor Details", value: vendor?.split("?")[0] || "Kfc Nigeria" },
+                { name: "Vendor Details", value: vendor?.split("?")[0] || "*Kfc Nigeria" },
                 { name: "Amount", value: checkAmount || 5000 },
                 { name: "Transaction ID", value: transactionId || "34538590584736s" },
               ]}

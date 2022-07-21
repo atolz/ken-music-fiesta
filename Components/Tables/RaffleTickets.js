@@ -16,6 +16,12 @@ const Button = ({ text, active, action = () => {} }) => {
 
 const RaffleTicketsTable = ({ data = [] }) => {
   const [activeFilter, setActiveFilter] = useState("Purchased");
+  const [items, setItems] = useState(data);
+
+  const onFilter = (data, filter) => {
+    console.log("Filter is: ", filter);
+    setItems(data.filter((el) => el.status == filter));
+  };
   return (
     <div className="rounded-[2rem] bg-white w-full min-w-[50rem]">
       {/* Table Info and swithcer */}
@@ -23,15 +29,20 @@ const RaffleTicketsTable = ({ data = [] }) => {
         <h2 className="mr-auto font-bold text-[2.1rem] ml-[2rem]">Tickets</h2>
         {/* Switcher */}
         <div className="flex items-center gap-[.8rem]">
-          {["Purchased", "Won Tickets", "Used"].map((el, i) => {
+          {[
+            { title: "Purchased", alias: "Not used" },
+            { title: "Won Tickets", alias: "Won" },
+            { title: "Used", alias: "Used" },
+          ].map((el, i) => {
             return (
               <Button
-                active={activeFilter == el}
+                active={activeFilter == el.title}
                 action={() => {
-                  setActiveFilter(el);
+                  setActiveFilter(el.title);
+                  onFilter(data, el.alias);
                 }}
                 key={i}
-                text={el}
+                text={el.title}
               ></Button>
             );
           })}
@@ -50,9 +61,9 @@ const RaffleTicketsTable = ({ data = [] }) => {
       </section>
 
       {/* Main Body */}
-      {data.length > 0 && (
+      {items.length > 0 && (
         <section className="py-[4rem] px-[2.4rem] max-h-[60rem] overflow-y-scroll scroll_hide">
-          {data?.map((el, i) => {
+          {items?.map((el, i) => {
             return (
               <div
                 key={i}
@@ -68,9 +79,9 @@ const RaffleTicketsTable = ({ data = [] }) => {
         </section>
       )}
 
-      {data.length == 0 && (
+      {items.length == 0 && (
         <div className="grid flex-1 place-content-center place-items-center my-auto min-h-[30rem]">
-          <span className="f font-medium text-[2.5rem] text-[#F0F0F0]">No Tickets Purchased Yet</span>
+          <span className="f font-medium text-[2.5rem] text-[#F0F0F0]">No Tickets {activeFilter} Yet</span>
         </div>
       )}
     </div>

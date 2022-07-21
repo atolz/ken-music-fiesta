@@ -9,6 +9,7 @@ import PopupLayout from "../Layout/Popup";
 const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
   const [total, setTotal] = useState(0);
   const [regularQuantity, setRegularQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
   const [vipQunatity, setVipQuantity] = useState(0);
   const [tickets, setTickets] = useState([]);
   const AppData = useContext(DataContext);
@@ -36,10 +37,12 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
     console.log("Change event occured: type: value", type, value);
     if (type == "inc") {
       setTotal((val) => val + ticketPrice);
+      setQuantity((val) => val + 1);
     } else {
       setTotal((val) => val - ticketPrice);
+      setQuantity((val) => val - 1);
     }
-    setRegularQuantity(value);
+    // setRegularQuantity(value);
     const ticketData = {};
     const newTickets = [...tickets];
     if (value == 0) {
@@ -69,7 +72,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
             tickets.filter((el) => el != undefined)
           );
           onBuyTicket(
-            regularQuantity,
+            quantity,
             tickets.filter((el) => el != undefined)
           );
         }}
