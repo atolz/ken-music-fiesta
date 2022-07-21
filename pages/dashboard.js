@@ -45,10 +45,10 @@ export default function Home() {
       return router.replace("/auth/sign-in");
     }
 
-    if (AppData?.user?.data && !AppData?.user?.data?.hasMintedTicket) {
+    if (AppData?.user?.data && !AppData?.user?.data?.hasMintedTicket && (router.query?.signIn || router.query?.signUp)) {
       setTimeout(() => {
         popUpFunctions.openRequestBvnPrompt();
-      }, 5000);
+      }, 2500);
     }
   }, [AppData?.user?.data?.hasMintedTicket]);
 

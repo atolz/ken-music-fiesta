@@ -70,7 +70,7 @@ const SignIn = () => {
       // }
 
       toggleLoad();
-      router.replace("/dashboard");
+      router.replace(`/dashboard?signIn=${true}`);
     } catch (error) {
       toggleLoad();
       if (!error.response) {

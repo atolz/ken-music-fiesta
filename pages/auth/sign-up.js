@@ -114,6 +114,12 @@ const SignUp = () => {
         return;
         // console.log("email eroro");
       }
+      if (error.response.data.message.includes("same phone")) {
+        // setEmailError(error.response.data.message);
+        setPhoneErrror(error.response.data.message);
+        return;
+        // console.log("email eroro");
+      }
       if (error.response.data.message[0]?.includes("password")) {
         // setEmailError(error.response.data.message);
         setPassError(error.response.data.message[0]);
@@ -226,7 +232,7 @@ const SignUp = () => {
                     setPhoneErrror("");
                   }}
                 />
-                {phoneError && <p className=" !text-[1.4rem] !text-red-500">*Phone number must be valid</p>}
+                {phoneError && <p className=" !text-[1.4rem] !text-red-500">*{phoneError ?? "Phone number must be valid"}</p>}
               </div>
 
               <div className="form-group col-span-2">

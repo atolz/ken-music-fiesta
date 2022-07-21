@@ -5,6 +5,7 @@ import { DataContext } from "../../Context/fetchData";
 import IncDec from "../IncDec";
 import IncDecV2 from "../IncDecV2";
 import PopupLayout from "../Layout/Popup";
+import formatNumberWithCommas from "../../Utils/addCommas";
 
 const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
   const [total, setTotal] = useState(0);
@@ -118,9 +119,11 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
           </div> */}
         </div>
         {/* Total */}
-        <div className=" py-[2rem] mobile:py-[2.5rem] px-[2.2rem] rounded-[2rem] bg-[#F8F9FD] grid place-items-center mt-[3.8rem]">
-          <p className="font-semibold text-[2rem] mobile:text-[3rem] text-[#CECECE] leading-[3.6rem] whitespace-nowrap">Total - N{total}</p>
-        </div>
+        {quantity > 0 && (
+          <div className=" py-[2rem] mobile:py-[2.5rem] px-[2.2rem] rounded-[2rem] bg-[#F8F9FD] grid place-items-center mt-[3.8rem]">
+            <p className="font-semibold text-[2rem] mobile:text-[3rem] text-[#CECECE] leading-[3.6rem] whitespace-nowrap">Total - &#8358;{formatNumberWithCommas(total)}</p>
+          </div>
+        )}
         <div className="flex items-center mt-[3.3rem] justify-center">
           <span className="font-normal text-[1.2rem] text-[#C4C4C4] mr-12">Powered by</span>
           <Link href={"https://staging.kudibar.com/"}>
