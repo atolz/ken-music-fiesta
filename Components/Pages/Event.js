@@ -137,7 +137,7 @@ const Event = () => {
                 </div>
               </div>
 
-              {AppData.user.dashboardHistory?.total_event_ticket > 1 && <EventTicketsTable></EventTicketsTable>}
+              {AppData.user.dashboardHistory?.total_event_ticket > 0 && <EventTicketsTable></EventTicketsTable>}
             </div>
           </div>
         </section>

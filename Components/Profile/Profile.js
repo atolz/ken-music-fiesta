@@ -3,6 +3,7 @@ import React, { useContext, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { baseInstanceAPI } from "../../axios";
 import { DataContext } from "../../Context/fetchData";
+import useLoading from "../../hooks/useLoading";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useShowAlert from "../../hooks/useShowAlert";
 import { setUser } from "../../store/user";
@@ -15,6 +16,8 @@ const Profile = ({ user }) => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState(null);
   const AppData = useContext(DataContext);
+  const { toggleLoad } = useLoading();
+  const [detailsChange, setDetailsChange] = useState(false);
   const [userDetails, setUserDetails] = useState({
     firstName: user?.firstName,
     lastName: user?.lastName,
@@ -57,6 +60,7 @@ const Profile = ({ user }) => {
 
   const onUpdateUserDetails = async () => {
     console.log("Details is", { ...userDetails, username: undefined });
+    toggleLoad();
     setCanSubmit(false);
     setUserDetailsChanged(true);
     try {
@@ -73,11 +77,14 @@ const Profile = ({ user }) => {
       console.log("user details is ", userDetails);
       dispatch(setUser({ ...userDetails }));
       toggleAlertBar("Profile Updated Successfully!", "success", true, 4000);
+      setDetailsChange(false);
+      toggleLoad();
       // setCanSubmit(false);
     } catch (error) {
       console.log("There was an error, t", error?.response);
       toggleAlertBar("Problem Updating Profile. Please Ensure all Fields are Correct and Try Again!", "error", true, 4000);
       setCanSubmit(true);
+      toggleLoad();
     }
   };
 
@@ -94,6 +101,7 @@ const Profile = ({ user }) => {
     setImageFile(e.target.files[0]);
   };
   const updateAvatar = async () => {
+    toggleLoad();
     const formData = new FormData();
     formData.append("avatar", imageFile);
     try {
@@ -104,12 +112,14 @@ const Profile = ({ user }) => {
       });
       console.log("Proife avaartar response is", resp.data);
       AppData.fetchUserDetails();
-      // toggleAlertBar(resp.data.message, "success", true, 3000);
+      toggleAlertBar(resp.data.message, "success", true, 3000);
       setImageFile(null);
       setCanSubmit(false);
       URL.revokeObjectURL(uploadImgUrl);
+      toggleLoad();
     } catch (error) {
       toggleAlertBar("Problem Updating Profile Picture. Please Ensure all Fields are Correct and Try Again!", "error", true, 8000);
+      toggleLoad();
     }
   };
 
@@ -157,7 +167,9 @@ const Profile = ({ user }) => {
                   readOnly={el.name == "userName" ? true : false}
                   required
                   onChange={(e) => {
+                    console.log("on details change");
                     handleChange(e, el.name);
+                    setDetailsChange(true);
                   }}
                 />
               </div>
@@ -166,19 +178,30 @@ const Profile = ({ user }) => {
         </div>
       </section>
       <button
+        style={{ background: canSubmit ? "" : "#F0F0F0" }}
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
-          if (imageFile) {
-            onUpdateUserDetails();
+          if (imageFile && !detailsChange) {
+            console.log("image change and no details change");
             updateAvatar();
+            // onUpdateUserDetails();
+            return;
+          }
+          if (imageFile && detailsChange) {
+            console.log("image change and detais change");
+
+            updateAvatar();
+            onUpdateUserDetails();
+            return;
           } else {
             onUpdateUserDetails();
           }
         }}
         type="submit"
         disabled={canSubmit ? false : true}
-        className={`btn transition-all ml-auto ${canSubmit ? " !bg-[#fcac0d]" : " !bg-[#F0F0F0]"}  relative mt-auto`}
+        title={canSubmit ? "Save changes" : "Edit profile"}
+        className={`btn transition-all ml-auto ${canSubmit ? " cursor-pointer" : " !text-black cursor-not-allowed"}  relative mt-auto`}
       >
         Save Changes
       </button>
