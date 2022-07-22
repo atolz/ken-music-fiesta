@@ -26,7 +26,7 @@ const Popup = ({ children, actionText, cancelAction = () => {}, action = () => {
               }
               action();
             }}
-            className={`btn ml-[2.4rem] !px-[2.8rem] sidebar:!px-[3.8rem] !py-[2rem] ${disabled ? "cursor-not-allowed" : ""}`}
+            className={`btn ml-[2.4rem] !px-[2.8rem] sidebar:!px-[3.8rem] depress !py-[2rem] ${disabled ? "cursor-not-allowed" : ""}`}
           >
             {actionText}
           </button>

@@ -5,7 +5,7 @@ const Button = ({ text, active, action = () => {} }) => {
   return (
     <button
       onClick={() => action()}
-      className={`h-[3.7rem] box-border rounded-[10px]  bg-[#F0F0F0] font-bold text-[1.4rem] px-[1.4rem] grid place-content-center border transition-all ${
+      className={`h-[3.7rem] depress box-border rounded-[10px]  bg-[#F0F0F0] font-bold text-[1.4rem] px-[1.4rem] grid place-content-center border transition-all ${
         active ? " border-primary text-primary !bg-white !border-1" : " border-black"
       }`}
     >

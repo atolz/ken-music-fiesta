@@ -26,6 +26,7 @@ import Head from "next/head";
 import Prompt from "../Components/PopUps/Prompt";
 import ReceiptStatus from "../Components/PopUps/ReceiptStatus";
 import { DataContext } from "./fetchData";
+import formatNumberWithCommas from "../Utils/addCommas";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
@@ -461,7 +462,16 @@ export const PopUpContextProvider = ({ children }) => {
             <ReceiptStatus
               items={[
                 { name: "Vendor Details", value: vendor?.split("?")[0] || "*Kfc Nigeria" },
-                { name: "Amount", value: checkAmount || 5000 },
+                {
+                  name: "Amount",
+                  value:
+                    (
+                      <span>
+                        <span className=" font-sans">&#8358;</span>
+                        {formatNumberWithCommas(checkAmount)}
+                      </span>
+                    ) || 5000,
+                },
                 { name: "Transaction ID", value: transactionId || "34538590584736s" },
               ]}
               caption="Transaction Receipt"

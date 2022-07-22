@@ -10,6 +10,7 @@ import useLoading from "../../hooks/useLoading";
 import { popUpContext } from "../../Context/PopUps";
 import { DataContext } from "../../Context/fetchData";
 import SvgIconWrapper from "../SvgIconWrapper";
+import HeaderDropDown from "../HeaderDropDown";
 
 const UserHeader = ({ title, setActivePage }) => {
   // const VerifyPaymentProcess = ["VerifyPayment", "Status"];
@@ -58,9 +59,15 @@ const UserHeader = ({ title, setActivePage }) => {
 
           {/* User Profile */}
           <div className="flex items-center ml-auto relative">
-            <div className=" w-[42px] h-[42px] rounded-full grid place-items-center bg-[#F6EBF5] ml-auto mobile:ml-[59px] mr-[16px]">
-              <i className="icon icon-notification text-[1.7rem]"></i>
+            <div className="relative mobile:ml-[59px] mr-[16px]">
+              <HeaderDropDown>
+                <div className=" peer relative w-[42px] h-[42px] rounded-full grid place-items-center bg-[#F6EBF5] ml-auto " title="Notification">
+                  <div className="bg-red-500 w-[10px] h-[10px] rounded-full top-2 -left-0 absolute"></div>
+                  <i className="icon icon-notification text-[1.7rem]"></i>
+                </div>
+              </HeaderDropDown>
             </div>
+
             <div className="peer  py-4">
               <div className="b border-l cursor-pointer">
                 <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "#A307A8" }} alt={user?.name} src={`${user?.avatar}`}>

@@ -1,4 +1,5 @@
 import React from "react";
+import formatNumberWithCommas from "../../Utils/addCommas";
 
 import PopupLayout from "../Layout/Popup";
 
@@ -20,7 +21,10 @@ const ReviewCheckOut = ({ onReview, onCancel, vendor, amount }) => {
           </div>
           <div className=" text-center flex-wrap mobile:flex">
             <span className="f font-semibold text-[1.4rem] text-[#CECECE] leading-[1.7rem] mb-[.4rem] mr-[2.4rem] min-w-[13.8rem] text-left">Amount</span>
-            <h2 className="text-[2.2rem] font-semibold leading-[2.6rem] whitespace-nowrap overflow-hidden text-ellipsis">N{amount || "5,000"}</h2>
+            <h2 className="text-[2.2rem] font-semibold leading-[2.6rem] whitespace-nowrap overflow-hidden text-ellipsis">
+              <span className=" font-sans">&#8358;</span>
+              {formatNumberWithCommas(amount) || "5,000"}
+            </h2>
           </div>
         </div>
       </div>

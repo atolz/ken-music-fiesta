@@ -37,7 +37,7 @@ const contact = () => {
           </div>
           <div className="form-group mb-[1.6rem]">
             <label>How can we be of help?</label>
-            <textarea row={10} cols="40" onChange={(e) => {}} placeholder="Ex. Jonathan"></textarea>
+            <textarea className="min-h-[15rem]" row={10} cols="40" onChange={(e) => {}} placeholder="Ex. Jonathan"></textarea>
           </div>
 
           <button className="btn w-full mt-[3.5rem] shiny_slide_2">Submit</button>

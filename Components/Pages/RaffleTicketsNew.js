@@ -65,7 +65,11 @@ const RaffleTicketsNew = () => {
                 <div className="text-center mobile:text-left">
                   <span className="text-[#BFBDBD] font-medium text-[1rem] mb-[1rem] leading-[1.2rem]">Your Progress</span>
                   <p className="font font-bold text-[1.8rem] leading-[2.1rem] w-[18.5rem]">
-                    <span className="!text-[#A307A8]">N{formatNumberWithCommas(user?.dashboardHistory?.amountLeftToNextTicket)}</span> more to get a raffle ticket
+                    <span className="!text-[#A307A8]">
+                      <span className=" font-sans">&#8358;</span>
+                      {formatNumberWithCommas(user?.dashboardHistory?.amountLeftToNextTicket)}
+                    </span>{" "}
+                    more to get a raffle ticket
                   </p>
                 </div>
               </div>

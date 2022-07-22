@@ -12,7 +12,7 @@ const RaffleCategory = ({ data }) => {
           return (
             <div key={i} className="grid grid-cols-[fit-content(200px)_fit-content(200px)] place-items-start mb-[2.4rem] last:mb-0">
               <span className="mr-[2.5rem] font-medium text-[1.4rem] text-[#706C6C] sidebar:mr-[4rem] capitalize overflow-hidden">{el?.title?.replace("_", " ")}</span>
-              <span className=" font-bold text-[1.4rem] text-[#706C6C]  text-left mr-auto overflow-hidden">{el?.range?.replaceAll("N", "#")}</span>
+              <span className=" font-bold text-[1.4rem] text-[#706C6C]  text-left mr-auto overflow-hidden fonts-sans">{el?.range?.replaceAll("N", "₦")}</span>
             </div>
           );
         })}

@@ -6,7 +6,7 @@ import TextAnimation from "../TextAnimation";
 import styles from "./LandingPageAnimation.module.css";
 
 const Container = ({ children }) => {
-  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem]">{children}</div>;
+  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem] py-[4rem]">{children}</div>;
 };
 
 const LandingPage = () => {
@@ -36,16 +36,14 @@ const LandingPage = () => {
       {/* CTA */}
       <section className={`flex items-center flex-wrap ${styles.slide_up_now_2}`}>
         <Link href={"/auth/sign-in"}>
-          <div className=" rounded-sm overflow-hidden">
-            <button className="btn btn--outlined-grad text-white !px-[6rem] mr-[3.2rem]  mb-[3.7rem] mobile:mb-0">Sign In</button>
-          </div>
+          <button className="btn btn--outlined-grad text-white !px-[6rem] mr-[3.2rem]  mb-[3.7rem] mobile:mb-0">Sign In</button>
         </Link>
         <button
           // style={{ boxShadow: "0px 10px 34px rgba(255, 255, 255, 0.23)" }}
           onClick={() => {
             popUpFunctions.initBuyTicket();
           }}
-          className="btn mr-[4.5rem] !px-[7.2rem] mb-[3.7rem] mobile:mb-0 shiny_slide shiny_slide_animation"
+          className="btn mr-[4.5rem] !px-[7.2rem] mb-[3.7rem] mobile:mb-0 shiny_slide shiny_slide_animation depress"
         >
           Mint Event Ticket
         </button>

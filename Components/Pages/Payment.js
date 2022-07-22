@@ -2,6 +2,7 @@ import { Dialog } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../Context/fetchData";
 import { popUpContext } from "../../Context/PopUps";
+import formatNumberWithCommas from "../../Utils/addCommas";
 import PaymentCard from "../Cards/PaymentCard";
 import ReceiptStatus from "../PopUps/ReceiptStatus";
 
@@ -42,7 +43,15 @@ const Payment = () => {
         <ReceiptStatus
           items={[
             { name: "Vendor Details", value: vendor },
-            { name: "Amount", value: amount },
+            {
+              name: "Amount",
+              value: (
+                <span>
+                  <span className=" font-sans">&#8358;</span>
+                  {formatNumberWithCommas(amount)}
+                </span>
+              ),
+            },
             { name: "Transaction ID", value: transactionId },
           ]}
           caption="Transaction Receipt"
@@ -94,7 +103,7 @@ const Payment = () => {
                     setShow(true);
                   }}
                   color={"#348B52"}
-                  className={"mr-5 mb-8 cursor-pointer hover:scale-[1.01] z-50"}
+                  className={"mr-5 mb-8 cursor-pointer hover:scale-[1.01] will-change-transform z-50"}
                 ></PaymentCard>
               );
             })}

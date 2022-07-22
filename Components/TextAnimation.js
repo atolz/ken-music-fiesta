@@ -3,7 +3,7 @@ import React from "react";
 const TextAnimation = () => {
   return (
     <div>
-      <svg height="84px" stroke="#fff" strokeWidth="2" className="text-line" width="100%">
+      <svg clas height="84px" stroke="#fff" strokeWidth="2" className="text-line will-change-transform" width="100%">
         <text
           dominantBaseline="middle"
           textAnchor="start"

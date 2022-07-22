@@ -196,7 +196,7 @@ const Payment = ({ action, amountVal, phoneNum }) => {
                 setPhoneError("");
                 action(amountRef.current.value, `${phone}`);
               }}
-              className={` btn w-full `}
+              className={` btn w-full`}
             >
               Continue
             </button>
@@ -277,7 +277,7 @@ const Review = ({ action, amount, phone, setTransactionId, goBack }) => {
         onClick={() => {
           onInitialPayment();
         }}
-        className=" btn w-full mt-[6rem]"
+        className=" btn w-full mt-[6rem] depress"
       >
         Continue
       </button>

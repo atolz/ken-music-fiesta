@@ -307,7 +307,7 @@ const SignUp = () => {
                 {confError && <p className=" !text-[1.2rem] !font-normal !text-red-500">*{confError}</p>}
               </div>
 
-              <button className="btn col-span-2 mt-[3.8rem] shiny_slide_2">Sign Up</button>
+              <button className="btn col-span-2 mt-[3.8rem] shiny_slide_2 depress">Sign Up</button>
             </div>
           </form>
         </div>

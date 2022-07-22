@@ -30,7 +30,10 @@ const PaymentCard = ({ amount, vendor, date, className, color, action = () => {}
       <div className="ml-[3.9rem] flex justify-between">
         <span className="text-[#706C6C] mr-[4rem]">
           <p className=" font-semibold text-[1.4rem] mb-[8px]">Amount</p>
-          <p className=" font-bold text-[2rem]">N{formatNumberWithCommas(amount || 0)}</p>
+          <p className=" font-bold text-[2rem]">
+            <span className=" font-sans">&#8358;</span>
+            {formatNumberWithCommas(amount || 0)}
+          </p>
         </span>
         <span className="text-[#706C6C] mr-[4rem]">
           <p className=" font-semibold text-[1.4rem] mb-[8px]">Vendor</p>

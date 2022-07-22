@@ -86,7 +86,12 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
               return (
                 <span key={i}>
                   {/* {i !== 0 && <span>&nbsp;</span>} */}
-                  <span className=" font-bold !text-[#827F7F]">{cat.ticketType}</span> tickets are sold at <span className=" font-bold !text-[#827F7F]">#{cat.price}</span> per ticket.<br></br>
+                  <span className=" font-bold !text-[#827F7F]">{cat.ticketType}</span> tickets are sold at{" "}
+                  <span className=" font-bold !text-[#827F7F]">
+                    <span className=" font-sans">&#8358;</span>
+                    {cat.price}
+                  </span>{" "}
+                  per ticket.<br></br>
                 </span>
               );
             })}
@@ -119,11 +124,14 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
           </div> */}
         </div>
         {/* Total */}
-        {quantity > 0 && (
-          <div className=" py-[2rem] mobile:py-[2.5rem] px-[2.2rem] rounded-[2rem] bg-[#F8F9FD] grid place-items-center mt-[3.8rem]">
-            <p className="font-semibold text-[2rem] mobile:text-[3rem] text-[#CECECE] leading-[3.6rem] whitespace-nowrap">Total - &#8358;{formatNumberWithCommas(total)}</p>
-          </div>
-        )}
+
+        <div className={`" py-[2rem] mobile:py-[2.5rem] px-[2.2rem] rounded-[2rem] bg-[#F8F9FD] grid place-items-center mt-[3.8rem] ${quantity > 0 ? " visible" : " invisible"}`}>
+          <p className="font-semibold text-[2rem] mobile:text-[3rem] text-[#CECECE] leading-[3.6rem] whitespace-nowrap">
+            Total - <span className=" font-sans">&#8358;</span>
+            {formatNumberWithCommas(total)}
+          </p>
+        </div>
+
         <div className="flex items-center mt-[3.3rem] justify-center">
           <span className="font-normal text-[1.2rem] text-[#C4C4C4] mr-12">Powered by</span>
           <Link href={"https://staging.kudibar.com/"}>
