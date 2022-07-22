@@ -16,7 +16,7 @@ const HeaderDropDown = ({ children, imgSlot }) => {
           className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
         >
           <div className=" w-[34px] h-[34px] rounded-full bg-[#FCAC0D] grid place-items-center">
-            <SvgIconWrapper className={"w-[13.5px] h-[13.5px]"} iconName={"coin-dollar"}></SvgIconWrapper>
+            <SvgIconWrapper className={"!w-[13.5px] !h-[13.5px]"} iconName={"coin-dollar"}></SvgIconWrapper>
           </div>
           <span className=" font-medium text-[1.4rem] ml-[1.2rem]">
             Pending payment - <span className=" font-bold">N5,000</span>
@@ -29,7 +29,7 @@ const HeaderDropDown = ({ children, imgSlot }) => {
           className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
         >
           <div className=" w-[34px] h-[34px] rounded-full bg-[#348B52] grid place-items-center">
-            <SvgIconWrapper className={"w-[13.5px] h-[13.5px] text-white"} iconName={"coin-dollar"}></SvgIconWrapper>
+            <SvgIconWrapper className={"!w-[13.5px] !h-[13.5px] text-white"} iconName={"coin-dollar"}></SvgIconWrapper>
           </div>
           <span className=" font-medium text-[1.4rem] ml-[1.2rem]">
             Payment successful - <span className=" font-bold">N4,000</span>
@@ -42,7 +42,7 @@ const HeaderDropDown = ({ children, imgSlot }) => {
           className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
         >
           <div className=" w-[34px] h-[34px] rounded-full bg-[#348B52] grid place-items-center">
-            <SvgIconWrapper className={"w-[13.5px] h-[13.5px] text-white"} iconName={"Raffle-Tickets"}></SvgIconWrapper>
+            <SvgIconWrapper className={"!w-[13.5px] !h-[13.5px] text-white"} iconName={"Raffle-Tickets"}></SvgIconWrapper>
           </div>
           <span className=" font-medium text-[1.4rem] ml-[1.2rem]">Raffle ticket purchased</span>
         </li>
@@ -77,7 +77,7 @@ export default HeaderDropDown;
           className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
         >
           <div className=" w-[34px] h-[34px] rounded-full bg-[#FCAC0D] grid place-items-center">
-            <SvgIconWrapper className={"w-[13.5px] h-[13.5px]"} iconName={"coin-dollar"}></SvgIconWrapper>
+            <SvgIconWrapper className={"!w-[13.5px] !h-[13.5px]"} iconName={"coin-dollar"}></SvgIconWrapper>
           </div>
           <span className=" font-medium text-[1.4rem] ml-[1.2rem]">
             Pending payment - <span className=" font-bold">N5,000</span>
@@ -90,7 +90,7 @@ export default HeaderDropDown;
           className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
         >
           <div className=" w-[34px] h-[34px] rounded-full bg-[#348B52] grid place-items-center">
-            <SvgIconWrapper className={"w-[13.5px] h-[13.5px] text-white"} iconName={"coin-dollar"}></SvgIconWrapper>
+            <SvgIconWrapper className={"!w-[13.5px] !h-[13.5px] text-white"} iconName={"coin-dollar"}></SvgIconWrapper>
           </div>
           <span className=" font-medium text-[1.4rem] ml-[1.2rem]">
             Payment successful - <span className=" font-bold">N4,000</span>
@@ -103,7 +103,7 @@ export default HeaderDropDown;
           className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
         >
           <div className=" w-[34px] h-[34px] rounded-full bg-[#348B52] grid place-items-center">
-            <SvgIconWrapper className={"w-[13.5px] h-[13.5px] text-white"} iconName={"Raffle-Tickets"}></SvgIconWrapper>
+            <SvgIconWrapper className={"!w-[13.5px] !h-[13.5px] text-white"} iconName={"Raffle-Tickets"}></SvgIconWrapper>
           </div>
           <span className=" font-medium text-[1.4rem] ml-[1.2rem]">Raffle ticket purchased</span>
         </li>
