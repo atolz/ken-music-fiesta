@@ -69,7 +69,10 @@ const VerifyBVN = ({ onInputBVN, onCancel }) => {
     >
       <div className="popup-box">
         <h3>Verify BVN</h3>
-        <p className=" max-w-[45.2rem] !mb-[3.5rem]">Provide your Bank Verification Number to help us protect you from fraudulent transactions</p>
+        {/* <p className=" max-w-[45.2rem] !mb-[3.5rem]">Provide your Bank Verification Number to help us protect you from fraudulent transactions</p> */}
+        <p className=" max-w-[45.2rem] !mb-[3.5rem]">
+          By continuing, you consent to and authorize Parallex Bank Limited to open an account with your details on the platform and issue a Kennis Music Bites debit card in your name.
+        </p>
       </div>
       <form
         onSubmit={(e) => {
