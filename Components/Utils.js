@@ -56,7 +56,7 @@ const Utils = ({ children }) => {
 
       {/* Alert Global */}
       <div
-        style={{ "z-index": "1000000" }}
+        style={{ "z-index": "1000000000" }}
         className={`fixed transition-all duration-500 z-50  ${showAlert ? "opacity-100 top-0" : "opacity-0 -top-full"} left-0 w-screen h-[5.5rem] ${
           alertStatus == "success" ? "bg-green-800" : "bg-red-800"
         }  text-white text-xl z-50 grid place-items-center`}
