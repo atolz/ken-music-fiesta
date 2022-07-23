@@ -110,12 +110,12 @@ const Event = () => {
                   <button
                     title={` ${AppData.user.dashboardHistory?.total_event_ticket < 1 ? " You don't have any ticket" : "join"}`}
                     onClick={() => {
-                      if (AppData.user.dashboardHistory?.total_event_ticket > 0) {
+                      if (AppData.kudibarEvents?.hash[activeEvent]?.my_tickets?.length > 0) {
                         setJoinLive(true);
                         setShowDetails(false);
                       }
                     }}
-                    className={`btn ${AppData.user.dashboardHistory?.total_event_ticket < 1 ? " cursor-not-allowed" : "cursor-pointer"}`}
+                    className={`btn ${AppData.kudibarEvents?.hash[activeEvent]?.my_tickets?.length < 1 ? " cursor-not-allowed" : "cursor-pointer"}`}
                   >
                     Join Livestream Event
                   </button>
