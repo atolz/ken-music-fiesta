@@ -253,8 +253,12 @@ export const PopUpContextProvider = ({ children }) => {
     if (AppData.user?.data?.country !== "Nigeria") {
       onSelectPayOption("SEERBIT", 200);
     } else {
-      setActiveModal("VerifyBVN");
+      setActiveModal("Consent");
     }
+  }
+
+  function onConsent() {
+    setActiveModal("VerifyBVN");
   }
 
   async function onSelectPayOption(payOptType, quantity, tickets) {
@@ -457,6 +461,19 @@ export const PopUpContextProvider = ({ children }) => {
               onCancel={toggle}
               imgUrl="/3d-onpoint-finger.jpg"
               onAction={onContinueToMint}
+            ></Prompt>
+          )}
+          {activeModal == "Consent" && (
+            <Prompt
+              title={"Before you continue"}
+              desc={
+                <span>
+                  By continuing, you consent to and authorize Parallex Bank Limited to open an account with your details on the platform and issue a Kennis Music Bites debit card in your name.
+                </span>
+              }
+              onCancel={toggle}
+              imgUrl="/info-yellow.svg"
+              onAction={onConsent}
             ></Prompt>
           )}
           {activeModal == "PaymentDetails" && (

@@ -73,7 +73,11 @@ const AppDataProvider = ({ children }) => {
       const resp = await baseInstanceAPI.get("/dashboard/get-events/");
       // console.log("artiste are")
       let allEventsPromises = resp.data.events.map(async (el) => {
-        return baseInstanceAPI.get(`/dashboard/get-event-detail/${el.slug}`);
+        return baseInstanceAPI.get(`/dashboard/get-event-detail/${el.slug}`, {
+          headers: {
+            Authorization: `Bearer ${getLocalStorage("token")}`,
+          },
+        });
       });
       events = (await Promise.all(allEventsPromises)).map((resp) => {
         return resp.data;

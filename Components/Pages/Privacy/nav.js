@@ -15,8 +15,8 @@ const PrivacyNav = ({ nav = ["Privacy Policy", "Privacy Summary", "Data we colle
         <div
           key={active}
           style={{ top: IndicatorTop }}
-          className="w-[5px] h-[3.5rem] rounded-[3px] absolute top-0 left-0 bg-primary transition-all duration-[2s] ease-in-out  -translate-x-1/2"
-          // className="w-[5px] h-[3.5rem] rounded-[3px] absolute top-0 left-0 bg-primary transition-all duration-500 ease-in-out gelatine -translate-x-1/2"
+          // className="w-[5px] h-[3.5rem] rounded-[3px] absolute top-0 left-0 bg-primary transition-all duration-[2s] ease-in-out  -translate-x-1/2"
+          className="w-[5px] h-[3.5rem] rounded-[3px] absolute top-0 left-0 bg-primary transition-all duration-1000 ease-in-out gelatine -translate-x-1/2"
         ></div>
         {nav.map((el, i) => {
           return (

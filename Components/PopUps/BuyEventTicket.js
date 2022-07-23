@@ -101,7 +101,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
           {ticketCategories?.map((category, i) => {
             return (
               <div key={i} className="flex items-center justify-between mb-[3.7rem] last:!mb-0">
-                <p className=" !font-medium !text-[2.5rem] !mb-0">{category.ticketType} Ticket</p>
+                <p className=" !font-medium !text-[2.5rem] !mb-0">{category.ticketType}</p>
                 <IncDecV2
                   onCange={(type, value) => {
                     onChange(type, value, category.price, category.ticketTypeId, i);

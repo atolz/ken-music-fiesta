@@ -17,7 +17,7 @@ const Button = ({ text, active, action = () => {} }) => {
 const EventTicketsTable = ({ data = [] }) => {
   const [activeFilter, setActiveFilter] = useState("Purchased");
   return (
-    <div className="rounded-[2rem] bg-white w-full min-w-[50rem] border-[#FDE8FE] border-2">
+    <div className="rounded-[2rem] bg-white w-full min-w-[30rem] max-w-[56rem] border-[#FDE8FE] border-2">
       {/* Table Info and swithcer */}
       <section className="flex items-center justify-between p-[2.4rem] border-b">
         <h2 className="mr-auto font-bold text-[2.1rem] ml-[2rem]">Tickets</h2>
@@ -25,7 +25,7 @@ const EventTicketsTable = ({ data = [] }) => {
 
       {/* Table Cols Header */}
       <section className="grid gap-2 grid-cols-4 px-[2.4rem] py-[2.4rem] h-[6.3rem] place-items-center border-b">
-        {["S/N", "Date Acquired", "Ticket Number", "Status"].map((el, i) => {
+        {["S/N", "Date Acquired", "Type", "Id"].map((el, i) => {
           return (
             <span key={i} className=" font-medium text-[1.4rem] text-[#706C6C] px-2 whitespace-nowrap">
               {el}
@@ -45,8 +45,16 @@ const EventTicketsTable = ({ data = [] }) => {
               >
                 <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">Ticket {++i}</span>
                 <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">{formatDate(el?.created_at)}</span>
-                <span className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap max-w-[80px] sm:max-w-[100px] sidebar:max-w-full text-ellipsis overflow-hidden">#{el.ticket}</span>
-                <span className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">{el?.status}</span>
+                <span className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap max-w-[80px] sm:max-w-[100px] sidebar:max-w-full text-ellipsis overflow-hidden">
+                  {el?.ticketType}
+                </span>
+                <span
+                  title={el?.id}
+                  className=" cursor-pointer font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap max-w-[80px] sm:max-w-[100px] sidebar:max-w-full text-ellipsis overflow-hidden"
+                >
+                  #{el?.id}
+                </span>
+                {/* <span className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">{el?.status}</span> */}
               </div>
             );
           })}

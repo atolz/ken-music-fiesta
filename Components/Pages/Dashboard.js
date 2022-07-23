@@ -89,7 +89,7 @@ const Dashboard = (props) => {
         </div>
 
         {/* div-2 */}
-        <div className=" flex-1 min-w-[30rem] rounded-primary">
+        <div className=" flex-1 min-w-[30rem] rounded-primary overflow-hidden">
           {/* <PoweredBy></PoweredBy> */}
           {/* <EventsCarouselCard></EventsCarouselCard> */}
           {/* <p></p> */}
