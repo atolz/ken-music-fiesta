@@ -17,7 +17,7 @@ const Button = ({ text, active, action = () => {} }) => {
 const EventTicketsTable = ({ data = [] }) => {
   const [activeFilter, setActiveFilter] = useState("Purchased");
   return (
-    <div className="rounded-[2rem] bg-white w-full min-w-[30rem] max-w-[56rem] border-[#FDE8FE] border-2">
+    <div className="rounded-[2rem] bg-white w-full min-w-[50rem]  border-[#FDE8FE] border-2 scroll_hide">
       {/* Table Info and swithcer */}
       <section className="flex items-center justify-between p-[2.4rem] border-b">
         <h2 className="mr-auto font-bold text-[2.1rem] ml-[2rem]">Tickets</h2>
@@ -44,8 +44,10 @@ const EventTicketsTable = ({ data = [] }) => {
                 className="grid gap-2 grid-cols-4 bg-[rgba(246,235,245,0.38)] rounded-[2rem] place-items-center h-[65px] mb-[1.6rem] last:mb-0 hover:bg-[rgba(246,235,245,0.86)] hover:scale-[1.002]"
               >
                 <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">Ticket {++i}</span>
-                <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">{formatDate(el?.created_at)}</span>
-                <span className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap max-w-[80px] sm:max-w-[100px] sidebar:max-w-full text-ellipsis overflow-hidden">
+                <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap max-w-[80px] sm:max-w-[80px] sidebar:max-w-full text-ellipsis overflow-hidden">
+                  {formatDate(el?.created_at)}
+                </span>
+                <span title={el?.ticketType} className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap ">
                   {el?.ticketType}
                 </span>
                 <span
@@ -71,3 +73,46 @@ const EventTicketsTable = ({ data = [] }) => {
 };
 
 export default EventTicketsTable;
+
+{
+  /* Table Cols Header */
+}
+//    <div className=" overflow-scroll scroll_hide">
+//    <section className="grid gap-2 grid-cols-4 px-[2.4rem] py-[2.4rem] h-[6.3rem] place-items-center border-b min-w-[65rem]">
+//      {["S/N", "Date Acquired", "Type", "Id"].map((el, i) => {
+//        return (
+//          <span key={i} className=" font-medium text-[1.4rem] text-[#706C6C] px-2 whitespace-nowrap">
+//            {el}
+//          </span>
+//        );
+//      })}
+//    </section>
+//    {/* Main Body */}
+//    {data.length > 0 && (
+//      <section className="py-[4rem] px-[2.4rem] max-h-[60rem] overflow-scroll scroll_hide min-w-[65rem]">
+//        {data?.map((el, i) => {
+//          return (
+//            <div
+//              key={i}
+//              className="grid gap-2 grid-cols-4  bg-[rgba(246,235,245,0.38)] rounded-[2rem] place-items-center h-[65px] mb-[1.6rem] last:mb-0 hover:bg-[rgba(246,235,245,0.86)] hover:scale-[1.002]"
+//            >
+//              <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">Ticket {++i}</span>
+//              <span className=" font-normal text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap max-w-[80px] sm:max-w-[80px] sidebar:max-w-full text-ellipsis overflow-hidden">
+//                {formatDate(el?.created_at)}
+//              </span>
+//              <span title={el?.ticketType} className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap ">
+//                {el?.ticketType}
+//              </span>
+//              <span
+//                title={el?.id}
+//                className=" cursor-pointer font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap max-w-[80px] sm:max-w-[100px] sidebar:max-w-full text-ellipsis overflow-hidden"
+//              >
+//                #{el?.id}
+//              </span>
+//              {/* <span className=" font-semibold text-[1.8rem] text-[#706C6C] px-2 whitespace-nowrap">{el?.status}</span> */}
+//            </div>
+//          );
+//        })}
+//      </section>
+//    )}
+//  </div>

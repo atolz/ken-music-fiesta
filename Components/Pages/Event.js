@@ -81,17 +81,17 @@ const Event = () => {
           </div>
 
           {/* Details */}
-          <div className="flex gap-[6rem] flex-wrap">
-            {/* <img src="/event-img.jpg"></img> */}
+          <div className="grid  event_detail:grid-cols-[1fr,1.5fr] grid-cols-1  gap-[6rem] max-w-[120rem] scroll_hide">
+            {/* <img  src="/event-img.jpg"></img> */}
             <div
               style={{ backgroundImage: `url(${AppData.kudibarEvents?.hash[activeEvent]?.cover})` }}
-              className="h-[61vh] w-[384px] bg-cover bg-no-repeat rounded-[2rem] bg-slate-900"
+              className="h-[61vh]  bg-cover bg-no-repeat rounded-[2rem] bg-slate-900 "
               // src={AppData.kudibarEvents?.hash[activeEvent]?.cover}
             ></div>
 
             <div className="">
               <EventTicketCard className={"mb-[1.6rem]"}></EventTicketCard>
-              <div className="px-[4rem] min-h-[47vh] py-[5rem] rounded-primary border border-[#FDE8FE] bg-[#FCF9FC] grid place-content-center mb-[3.1rem]">
+              <div className="px-[4rem] min-h-[47vh] py-[5rem] rounded-primary border border-[#FDE8FE] bg-[#FCF9FC] grid content-center justify-start mb-[3.1rem]">
                 <h4 className=" font-bold text-[2rem] leading-[2.4rem]">Description</h4>
                 <p className="max-w-[49.2rem] font-normal text-[1.4rem] text-[#717171] mb-[4rem] mt-[.8rem] leading-[2rem]">{AppData.kudibarEvents?.hash[activeEvent]?.description}</p>
                 <div className="flex gap-[3.2rem] mb-[5rem]">
@@ -138,7 +138,7 @@ const Event = () => {
               </div>
 
               {AppData.kudibarEvents?.hash[activeEvent]?.my_tickets?.length > 0 && (
-                <div className=" overflow-scroll">
+                <div className=" overflow-scroll scroll_hide">
                   <EventTicketsTable data={AppData.kudibarEvents?.hash[activeEvent]?.my_tickets}></EventTicketsTable>
                 </div>
               )}
