@@ -237,7 +237,8 @@ export const PopUpContextProvider = ({ children }) => {
   }
 
   function onReview() {
-    setActiveModal("SelectCardType");
+    // setActiveModal("SelectCardType");
+    onSelectCardType();
     // setLinkText("View Receipt");
     // setStatusTitle("Purchase Successful");
     // setText("Your purchase order is successful and your account has been credited.");
