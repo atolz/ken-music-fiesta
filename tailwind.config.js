@@ -32,6 +32,7 @@ module.exports = {
         events_card: "1285px",
         event_detail: "1211px",
         landing_1068: "1068px",
+        landing_868: "868px",
         // => @media (min-width: 1536px) { ... }
       },
       gridTemplateColumns: {

@@ -11,7 +11,7 @@ import { popUpContext, PopUpContextProvider } from "../../Context/PopUps";
 import { useRouter } from "next/router";
 
 const Container = ({ children }) => {
-  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem]">{children}</div>;
+  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] landing_868:px-[10rem]">{children}</div>;
 };
 
 // const PopUpContainerWrapper = ({ children }) => {
@@ -30,7 +30,7 @@ const LandPageLayout = ({ children }) => {
         <div className={`fixed top-0 left-0 w-screen h-screen z-[1]  bg-homepage ${router.pathname == "/" ? " fadeIn-animation opacity-100" : " opacity-50"}`}>
           {/* <img className=" object-cover h-full w-full" src="/bg-home-min.png"></img> */}
         </div>
-        <div className=" grow-0 shrink-0 relative z-10">
+        <div className=" grow-0 shrink-0 relative z-[100000000]">
           <Container>
             {" "}
             <header className="flex items-center pt-[3rem] pb-[1.6rem]">
@@ -38,7 +38,7 @@ const LandPageLayout = ({ children }) => {
                 <img className="mr-auto h-[66.5px] cursor-pointer" src="/new_logo.png"></img>
               </Link>
               {/* Desktop Nav */}
-              <div className="items-center hidden sidebar:flex ">
+              <div className="items-center hidden landing_868:flex ">
                 <Link href={"/artistes"}>
                   <a style={{ letterSpacing: "0.4rem" }} className={`" font-medium !text-[1.4rem] text-white leading-[1.7rem] mr-[6.4rem] ${router.pathname.includes("/artistes") ? " kef-link" : ""}`}>
                     ARTISTES
@@ -74,7 +74,7 @@ const LandPageLayout = ({ children }) => {
               </div>
               {/* Burger Menu */}
               <button
-                className="block sidebar:hidden"
+                className="block landing_868:hidden"
                 onClick={() => {
                   setShowMenu(true);
                 }}
@@ -85,7 +85,7 @@ const LandPageLayout = ({ children }) => {
               </button>
               {/* Mobile Nav... */}
               <div
-                className={`grid z-50 grid-flow-row place-items-center sidebar:hidden bg-black justify-center fixed left-0 transition-all ease-out duration-200 -top-full ${
+                className={`grid z-50 grid-flow-row place-items-center landing_868:hidden bg-black justify-center fixed left-0 transition-all ease-out duration-200 -top-full ${
                   showMenu ? " !top-0" : ""
                 } w-screen px-[3.8rem] py-[7.4rem]`}
               >
@@ -117,7 +117,7 @@ const LandPageLayout = ({ children }) => {
                 <Link href={"/auth/sign-up"}>
                   <button className="btn btn--outlined-grad text-white !px-[6rem] mb-[2.4rem]">Sign Up</button>
                 </Link>
-                <button
+                {/* <button
                   onClick={() => {
                     console.log("clicking btn", popUpFunctions.initSelfCheckOut());
                     popUpFunctions.initSelfCheckOut();
@@ -125,7 +125,7 @@ const LandPageLayout = ({ children }) => {
                   className="btn btn--outlined-grad text-white"
                 >
                   Self Checkout
-                </button>
+                </button> */}
               </div>
             </header>
           </Container>
@@ -135,7 +135,7 @@ const LandPageLayout = ({ children }) => {
 
         <footer className=" bg-black py-[3.5rem]   w-full grow-0 shrink-0 max-h-min relative z-10">
           <Container>
-            <div className="flex items-center flex-wrap">
+            <div className="grid landing_868:grid-cols-[2fr,1fr,1fr] gap-[2rem] items-center">
               <ul className="mr-auto grid grid-cols-3 gap-[4rem]">
                 <Link href={"/faq"}>
                   <div className="group w-max">
@@ -162,8 +162,8 @@ const LandPageLayout = ({ children }) => {
                   </div>
                 </Link>
               </ul>
-              <span className=" mr-auto font-normal text-white text-[1.4rem] mb-[2.9rem] mobile:mb-0">All rights reserved. Copyright 2022</span>
-              <div className="flex items-center">
+              <span className=" mr-auto font-normal text-white text-[1.4rem]">All rights reserved. Copyright 2022</span>
+              <div className="flex items-center landing_868:justify-end ">
                 <img src="/twitter.svg"></img>
                 <img className="ml-[2.9rem]" src="/insta.svg"></img>
                 <img className="ml-[2.9rem]" src="/yt.svg"></img>

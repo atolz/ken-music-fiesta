@@ -22,7 +22,7 @@ const AuthHeader = () => {
     //   </Link>
     // </header>
 
-    <header className="flex items-center pt-[3rem] pb-[1.6rem] fixed top-0 left-0 w-full">
+    <header className="flex items-center pt-[3rem] pb-[1.6rem] fixed top-0 left-0 w-full z-[1000000]">
       {/* <header className="flex items-center pt-[3rem] pb-[1.6rem] fixed top-0 left-0 w-full z-10"> */}
       <Container>
         {/* <img src="/kef-logo.svg" className="mr-auto w-[6.4rem]"></img> */}
