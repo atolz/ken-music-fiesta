@@ -10,7 +10,7 @@ const EventsCarousel2 = () => {
   const AppData = useContext(DataContext);
   const popUpFunctions = useContext(popUpContext);
   return (
-    <Carousel infiniteLoop={true} autoPlay={true} interval={5000} showArrows={false} stopOnHover={false}>
+    <Carousel showStatus={false} infiniteLoop={true} autoPlay={true} interval={5000} showArrows={false} stopOnHover={false}>
       {AppData.kudibarEvents?.data?.map((el, i) => {
         return (
           <EventCard2

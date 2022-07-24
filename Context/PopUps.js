@@ -466,7 +466,7 @@ export const PopUpContextProvider = ({ children }) => {
           )}
           {activeModal == "Consent" && (
             <Prompt
-              title={"Before you continue"}
+              title={"Your consent is needed"}
               desc={
                 <span>
                   By continuing, you consent to and authorize Parallex Bank Limited to open an account with your details on the platform and issue a Kennis Music Bites debit card in your name.
