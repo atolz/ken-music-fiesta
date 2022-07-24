@@ -266,9 +266,9 @@ export const PopUpContextProvider = ({ children }) => {
     console.log("enviroment is", env);
     let redirectUrl = "";
     if (env == "development") {
-      redirectUrl = `http://localhost:3000/dashboard?amount=${quantity}&status=success&purpose=${purpose}`;
+      redirectUrl = `http://${window?.location.hostname}:${window?.location.port}/dashboard?amount=${quantity}&status=success&purpose=${purpose}`;
     } else if (env == "production") {
-      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?amount=${quantity}&status=success&purpose=${purpose}`;
+      redirectUrl = `https://${window?.location.hostname}/dashboard?amount=${quantity}&status=success&purpose=${purpose}`;
     }
     console.log("payment details is", {
       purpose: purpose,
@@ -318,9 +318,10 @@ export const PopUpContextProvider = ({ children }) => {
     console.log("enviroment is", env);
     let redirectUrl = "";
     if (env == "development") {
-      redirectUrl = `http://localhost:3000/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}&transactionId=${transactionId}&vendor=${vendor}`;
+      redirectUrl = `http://${window?.location.hostname}:${window?.location.port}/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}&transactionId=${transactionId}&vendor=${vendor}`;
     } else if (env == "production") {
-      redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}&transactionId=${transactionId}&vendor=${vendor}`;
+      // redirectUrl = `https://ken-music-fiesta-2.vercel.app/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}&transactionId=${transactionId}&vendor=${vendor}`;
+      redirectUrl = `https://${window?.location.hostname}/dashboard?status=success&amount=${checkAmount}&purpose=${purpose}&transactionId=${transactionId}&vendor=${vendor}`;
     }
     console.log("payment details is", {
       purpose: purpose,
