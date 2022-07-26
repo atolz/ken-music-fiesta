@@ -70,16 +70,20 @@ const Activate = ({ user }) => {
               : "Your activation request has been received and your card will be activated soon.")}
         </p>
         <div className="flex items-center">
-          {!AppData?.user?.loading && !AppData?.user?.data?.hasCard && (
+          {!AppData?.user?.loading && !AppData?.user?.data?.hasCard && !AppData?.user?.data?.hasMintedTicket && (
             <button
               onClick={() => {
                 // setActiveModal("ActivateCard");
                 // setShow(true);
-                console.log("has added is: ", AppData?.user?.data?.hasAddedBVN);
-                if (AppData?.user?.data?.hasAddedBVN) {
-                  popUpFunctions.initActivateCard();
-                } else {
-                  popUpFunctions.openRequestBvnPrompt();
+                // console.log("has added is: ", AppData?.user?.data?.hasAddedBVN);
+                // if (AppData?.user?.data?.hasAddedBVN) {
+                //   popUpFunctions.initActivateCard();
+                // } else {
+                //   popUpFunctions.openRequestBvnPrompt();
+                // }
+
+                if (AppData.user?.data && !AppData.user?.data?.hasMintedTicket) {
+                  AppData.user?.data?.country == "Nigeria" ? popUpFunctions.openMintTicketPrompt() : popUpFunctions.initConfirmLocation();
                 }
               }}
               className="btn !bg-white !bg-none white-shadow !text-black mr-[29rem] mt-[3.7rem] z-10"

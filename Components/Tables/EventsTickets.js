@@ -14,10 +14,10 @@ const Button = ({ text, active, action = () => {} }) => {
   );
 };
 
-const EventTicketsTable = ({ data = [] }) => {
+const EventTicketsTable = ({ data = [], className }) => {
   const [activeFilter, setActiveFilter] = useState("Purchased");
   return (
-    <div className="rounded-[2rem] bg-white w-full min-w-[50rem]  border-[#FDE8FE] border-2 scroll_hide">
+    <div className={`rounded-[2rem] bg-white w-full min-w-[50rem]  border-[#FDE8FE] border-2 scroll_hide ${className}`}>
       {/* Table Info and swithcer */}
       <section className="flex items-center justify-between p-[2.4rem] border-b">
         <h2 className="mr-auto font-bold text-[2.1rem] ml-[2rem]">Tickets</h2>

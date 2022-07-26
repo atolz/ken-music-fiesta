@@ -6,6 +6,8 @@ import IncDec from "../IncDec";
 import IncDecV2 from "../IncDecV2";
 import PopupLayout from "../Layout/Popup";
 import formatNumberWithCommas from "../../Utils/addCommas";
+import useIsNigerian from "../../hooks/useIsNigerian";
+import useCalcChargeAndFormat from "../../hooks/useCalcChargeAndFormat";
 
 const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
   const [total, setTotal] = useState(0);
@@ -14,6 +16,8 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
   const [vipQunatity, setVipQuantity] = useState(0);
   const [tickets, setTickets] = useState([]);
   const AppData = useContext(DataContext);
+  const { isNigerian, ExchangeRate } = useIsNigerian();
+  const { calculateAndFormatPrice } = useCalcChargeAndFormat();
   // const allEventTicketCategory = AppData.kudibarEvents.data;
   const onRegularChange = (type, value) => {
     console.log("Change event occured: type: value", type, value);
@@ -36,11 +40,14 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
   };
   const onChange = (type, value, ticketPrice, ticketId, ticketIndex) => {
     console.log("Change event occured: type: value", type, value);
+    const diasporanPrice = Math.ceil(ticketPrice / ExchangeRate);
+    console.log("Diasporan price is", diasporanPrice, ticketPrice);
+    const truePrice = isNigerian() ? ticketPrice : diasporanPrice;
     if (type == "inc") {
-      setTotal((val) => val + ticketPrice);
+      setTotal((val) => val + truePrice);
       setQuantity((val) => val + 1);
     } else {
-      setTotal((val) => val - ticketPrice);
+      setTotal((val) => val - truePrice);
       setQuantity((val) => val - 1);
     }
     // setRegularQuantity(value);
@@ -86,12 +93,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
               return (
                 <span key={i}>
                   {/* {i !== 0 && <span>&nbsp;</span>} */}
-                  <span className=" font-bold !text-[#827F7F]">{cat.ticketType}</span> tickets are sold at{" "}
-                  <span className=" font-bold !text-[#827F7F]">
-                    <span className=" font-sans">&#8358;</span>
-                    {cat.price}
-                  </span>{" "}
-                  per ticket.<br></br>
+                  <span className=" font-bold !text-[#827F7F]">{cat.ticketType}</span> tickets are sold at {calculateAndFormatPrice(cat.price)} per ticket.<br></br>
                 </span>
               );
             })}
@@ -127,7 +129,7 @@ const BuyEventTicket = ({ onBuyTicket, onCancel, ticketCategories }) => {
 
         <div className={`" py-[2rem] mobile:py-[2.5rem] px-[2.2rem] rounded-[2rem] bg-[#F8F9FD] grid place-items-center mt-[3.8rem] ${quantity > 0 ? " visible" : " invisible"}`}>
           <p className="font-semibold text-[2rem] mobile:text-[3rem] text-[#CECECE] leading-[3.6rem] whitespace-nowrap">
-            Total - <span className=" font-sans">&#8358;</span>
+            Total - {isNigerian() ? <span className=" font-sans">&#8358;</span> : "$"}
             {formatNumberWithCommas(total)}
           </p>
         </div>
