@@ -45,12 +45,19 @@ export default function Home() {
       return router.replace("/auth/sign-in");
     }
 
+    // if (AppData?.user?.data && !AppData?.user?.data?.hasMintedTicket && (router.query?.signIn || router.query?.signUp)) {
+    //   setTimeout(() => {
+    //     popUpFunctions.openRequestBvnPrompt();
+    //   }, 2500);
+    // }
+
     if (AppData?.user?.data && !AppData?.user?.data?.hasMintedTicket && (router.query?.signIn || router.query?.signUp)) {
       setTimeout(() => {
-        popUpFunctions.openRequestBvnPrompt();
+        AppData.user?.data?.country == "Nigeria" ? popUpFunctions.openMintTicketPrompt() : popUpFunctions.initConfirmLocation();
       }, 2500);
+      router.replace("/dashboard");
     }
-  }, [AppData?.user?.data?.hasMintedTicket]);
+  }, [AppData?.user?.data?.hasMintedTicket, AppData?.user?.data?.country]);
 
   return (
     <>

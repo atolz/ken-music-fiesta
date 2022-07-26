@@ -11,6 +11,7 @@ import { popUpContext } from "../../Context/PopUps";
 import { DataContext } from "../../Context/fetchData";
 import SvgIconWrapper from "../SvgIconWrapper";
 import HeaderDropDown from "../HeaderDropDown";
+import useIsNigerian from "../../hooks/useIsNigerian";
 
 const UserHeader = ({ title, setActivePage }) => {
   // const VerifyPaymentProcess = ["VerifyPayment", "Status"];
@@ -25,6 +26,7 @@ const UserHeader = ({ title, setActivePage }) => {
   const user = AppData.user.data;
   const baseURL = process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
   const popUpFunctions = useContext(popUpContext);
+  const { isNigerian } = useIsNigerian();
   function onLogOut() {
     logOut();
     dispatch(toggleAlert("success", "Logged Out successfully!", true));
@@ -123,12 +125,24 @@ const UserHeader = ({ title, setActivePage }) => {
         <div className="py-[2rem] px-[4.8rem] w-full bg-[#A307A80F] rounded-[2rem] mb-[2.7rem] flex items-center -translate-y-6">
           <SvgIconWrapper className={" mr-[2.6rem]"} iconName={"info-circle"}></SvgIconWrapper>
           <span className=" mr-10 text-black font-semibold text-2xl">
-            To enjoy more offers, mint your ticket for just <span className=" font-bold">N200 today.</span>
+            To enjoy more offers, mint your ticket for just{" "}
+            <span className=" font-bold">
+              {isNigerian() ? (
+                <span>
+                  <span className=" font-sans">&#8358;</span>200
+                </span>
+              ) : (
+                "$2"
+              )}
+              .
+            </span>
           </span>
           <span className=" underline underline-offset-2 text-primary">
             <span
               onClick={() => {
-                popUpFunctions.openRequestBvnPrompt();
+                if (user && !user?.hasMintedTicket) {
+                  AppData.user?.data?.country == "Nigeria" ? popUpFunctions.openMintTicketPrompt() : popUpFunctions.initConfirmLocation();
+                }
               }}
               className=" font-bold text-[1.65rem] underline text-grad cursor-pointer"
             >

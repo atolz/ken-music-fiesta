@@ -48,6 +48,7 @@ const AppDataProvider = ({ children }) => {
     pendingPayments: [],
     completedPayments: [],
     asset: {},
+    progressiveDraw: [],
   });
   const [artistesUser, setArtistesUser] = useState({
     data: null,
@@ -248,6 +249,19 @@ const AppDataProvider = ({ children }) => {
       console.log("Error loadin user mint assets", error);
     }
   };
+  const getProgressiveDraw = async () => {
+    try {
+      const resp = await baseInstanceAPI.get("/draw/get-active-draws", {
+        headers: {
+          Authorization: `Bearer ${getLocalStorage("token")}`,
+        },
+      });
+      console.log("user Progressive draw is/////... ", resp?.data);
+      setUser((val) => ({ ...val, progressiveDraw: resp?.data.campaigns }));
+    } catch (error) {
+      console.log("Error loadin user progressiveDraw", error);
+    }
+  };
 
   const setAppSection = () => {
     if (router.route.includes("/dashboard")) {
@@ -270,6 +284,7 @@ const AppDataProvider = ({ children }) => {
       getUserPendingPayment();
       getComletedPayments();
       getMintEventTicketAccess();
+      getProgressiveDraw();
     } else if (section == "Artiste" && !artistesUser.data) {
       fetchArtisteUserCatalogues();
     } else if (section == "Admin" && !adminUser.data) {
@@ -288,6 +303,7 @@ const AppDataProvider = ({ children }) => {
       getUserPendingPayment();
       getComletedPayments();
       getMintEventTicketAccess();
+      getProgressiveDraw();
       setSection("User");
     }
     if (type == "Artiste") {

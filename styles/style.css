@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?gsbbfp');
-  src:  url('fonts/icomoon.eot?gsbbfp#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?gsbbfp') format('truetype'),
-    url('fonts/icomoon.woff?gsbbfp') format('woff'),
-    url('fonts/icomoon.svg?gsbbfp#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?hu1apc');
+  src:  url('fonts/icomoon.eot?hu1apc#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?hu1apc') format('truetype'),
+    url('fonts/icomoon.woff?hu1apc') format('woff'),
+    url('fonts/icomoon.svg?hu1apc#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -28,93 +28,96 @@
 .icon-arr-left:before {
   content: "\e900";
 }
-.icon-calendar:before {
+.icon-badge:before {
   content: "\e901";
 }
-.icon-coin-dollar:before {
+.icon-calendar:before {
   content: "\e902";
 }
-.icon-Crown:before {
+.icon-cancel-filled:before {
   content: "\e903";
 }
-.icon-Dashboard:before {
+.icon-coin-dollar:before {
   content: "\e904";
 }
-.icon-delete:before {
+.icon-Crown:before {
   content: "\e905";
 }
-.icon-edit-pen:before {
+.icon-Dashboard:before {
   content: "\e906";
 }
-.icon-fb:before {
+.icon-delete:before {
   content: "\e907";
 }
-.icon-Graph:before {
+.icon-edit-pen:before {
   content: "\e908";
 }
-.icon-info-circle:before {
+.icon-fb:before {
   content: "\e909";
 }
-.icon-insta:before {
+.icon-Graph:before {
   content: "\e90a";
 }
-.icon-kudibar-logo:before {
+.icon-info-circle:before {
   content: "\e90b";
 }
-.icon-Livestream-Event:before {
+.icon-insta:before {
   content: "\e90c";
 }
-.icon-logout:before {
+.icon-Kennis-Music-Festival-SVG:before {
   content: "\e90d";
 }
-.icon-notification:before {
+.icon-kudibar-logo:before {
   content: "\e90e";
 }
-.icon-pause:before {
+.icon-Livestream-Event:before {
   content: "\e90f";
 }
-.icon-play:before {
+.icon-logout:before {
   content: "\e910";
 }
-.icon-Raffle-Tickets:before {
-  content: "\e911";
-}
-.icon-Rewards:before {
+.icon-notification:before {
   content: "\e912";
 }
-.icon-Settings:before {
+.icon-pause:before {
   content: "\e913";
 }
-.icon-sidebar-wallet:before {
+.icon-play:before {
   content: "\e914";
 }
-.icon-smiley:before {
+.icon-Raffle-Tickets:before {
   content: "\e915";
 }
-.icon-Transactions:before {
+.icon-receipt:before {
   content: "\e916";
 }
-.icon-twt:before {
+.icon-Rewards:before {
   content: "\e917";
 }
-.icon-Users:before {
+.icon-Settings:before {
   content: "\e918";
 }
-.icon-view-password:before {
+.icon-sidebar-wallet:before {
   content: "\e919";
 }
-.icon-Wallet:before {
+.icon-smiley:before {
   content: "\e91a";
 }
-.icon-yt:before {
+.icon-Transactions:before {
   content: "\e91b";
 }
-.icon-coin-dollar1:before {
+.icon-twt:before {
   content: "\e91c";
 }
-.icon-arr-left1:before {
+.icon-Users:before {
   content: "\e91d";
 }
-.icon-info-circle1:before {
+.icon-view-password:before {
   content: "\e91e";
+}
+.icon-Wallet:before {
+  content: "\e91f";
+}
+.icon-yt:before {
+  content: "\e920";
 }

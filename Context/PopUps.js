@@ -27,11 +27,16 @@ import Prompt from "../Components/PopUps/Prompt";
 import ReceiptStatus from "../Components/PopUps/ReceiptStatus";
 import { DataContext } from "./fetchData";
 import formatNumberWithCommas from "../Utils/addCommas";
+import ContinueToCountry from "../Components/PopUps/ContinueToCountry";
+import BuyProgressiveToken from "../Components/PopUps/BuyProgressiveToken";
+import NairaSymbol from "../Components/NairaSymbol";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
   initReviewVendorPayment: (amount, vendor, transactionId) => {},
   initBuyRaffleTicket: () => {},
+  initBuyProgressiveToken: () => {},
+  initConfirmLocation: () => {},
   initBuyToken: () => {},
   initActivateCard: () => {},
   initPayPerView: () => {},
@@ -47,6 +52,7 @@ const pouUpContextFunctions = {
   initCreateCatalogue: () => {},
   initSetStatus: () => {},
   openRequestBvnPrompt: () => {},
+  openMintTicketPrompt: () => {},
   // test: "",
 };
 export const popUpContext = createContext(pouUpContextFunctions);
@@ -71,6 +77,7 @@ export const PopUpContextProvider = ({ children }) => {
   const [itemQuantity, setItemQuantity] = useState(1);
   const router = useRouter();
   const [editCatalogueObj, setEditCatalougueObj] = useState({});
+  const [diasporanConfirmedNigerian, setDiasporanConfirmedNigerian] = useState(false);
 
   const { isLoggedIn, getLocalStorage } = useLocalStorage();
   const { toggleLoad } = useLoading();
@@ -81,7 +88,9 @@ export const PopUpContextProvider = ({ children }) => {
 
   const pouUpContextFunctions = {
     initBuyRaffleTicket: initBuyRaffleTicket,
+    initBuyProgressiveToken: initBuyProgressiveToken,
     onBuyTicket: onBuyTicket,
+    initConfirmLocation: initConfirmLocation,
     initBuyToken: initBuyToken,
     initActivateCard: initActivateCard,
     initPayPerView: initPayPerView,
@@ -93,6 +102,8 @@ export const PopUpContextProvider = ({ children }) => {
     initCreateCatalogue: initCreateCatalogue,
     initSetStatus: initSetStatus,
     openRequestBvnPrompt: openRequestBvnPrompt,
+    openMintTicketPrompt,
+    openMintTicketPrompt,
     initReviewVendorPayment: initReviewVendorPayment,
 
     onReview: onReview,
@@ -123,6 +134,19 @@ export const PopUpContextProvider = ({ children }) => {
     toggle();
     setActiveModal("BuyRaffleTicket");
   }
+  function initBuyProgressiveToken() {
+    if (!isLoggedIn()) {
+      return router.push("/auth/sign-in");
+    }
+    setPurpose("BuyProgressiveToken");
+    toggle();
+    setActiveModal("ProgressiveToken");
+  }
+  function initConfirmLocation() {
+    setActiveModal("ContinueToCountry");
+    toggle();
+  }
+
   function initBuyToken() {
     if (!isLoggedIn()) {
       return router.push("/auth/sign-in");
@@ -186,8 +210,25 @@ export const PopUpContextProvider = ({ children }) => {
     setShowPopUp(true);
   }
 
+  function onContinueToCountry(isNigerian) {
+    // At this point the user profile hasConfirmedNigerian should be updated on user if the user continued as Nigerian and stored in the AppDataState.user.data.hasConfirmedNigerian
+    // The call to confirm diasporan country is done in the ContinueToCountry popUp
+    // Which also update the app state(user) and the udpated value is used in the mintTicketPrompt
+    if (isNigerian) {
+      setDiasporanConfirmedNigerian(true);
+    } else {
+      setDiasporanConfirmedNigerian(false);
+    }
+    openMintTicketPrompt();
+  }
+
   function openRequestBvnPrompt() {
     setActiveModal("ProvideBvnPrompt");
+    setPurpose("MintTicket");
+    setShowPopUp(true);
+  }
+  function openMintTicketPrompt() {
+    setActiveModal("MintPrompt");
     setPurpose("MintTicket");
     setShowPopUp(true);
   }
@@ -200,6 +241,12 @@ export const PopUpContextProvider = ({ children }) => {
     onSelectPayOption("SEERBIT", quantity, tickets);
   }
   function onBuyRaffleTicket(quantity) {
+    // setTicketAmount(amount);
+    // setItemQuantity(quantity);
+    // setActiveModal("PaymentOptions");
+    onSelectPayOption("SEERBIT", quantity);
+  }
+  function onBuyProgressiveToken(quantity) {
     // setTicketAmount(amount);
     // setItemQuantity(quantity);
     // setActiveModal("PaymentOptions");
@@ -220,15 +267,6 @@ export const PopUpContextProvider = ({ children }) => {
     // setActiveModal("PaymentOptions");
     onSelectPayOption("SEERBIT");
   }
-  function onInputBVN(status) {
-    // setItemQuantity(quantity);
-    if (status == false) {
-      return;
-    } else {
-      // setActiveModal("PaymentOptions");
-      onSelectPayOption("SEERBIT", 200);
-    }
-  }
 
   function onCheckOut(amount, vendor) {
     setActiveModal("ReviewCheckOut");
@@ -248,17 +286,38 @@ export const PopUpContextProvider = ({ children }) => {
   function onVerify() {
     setActiveModal("Status");
   }
+
   function onContinueToMint() {
     console.log("on mint ticket: country is", AppData.user?.data?.country);
-    if (AppData.user?.data?.country !== "Nigeria") {
-      onSelectPayOption("SEERBIT", 200);
+    setPurpose("MintTicket");
+    if (AppData.user?.data?.country == "Nigeria") {
+      // onSelectPayOption("SEERBIT", 200);
+      setActiveModal("NigerianUserConsent");
+      return;
+    } else if (AppData.user?.data?.country !== "Nigeria" && diasporanConfirmedNigerian) {
+      setActiveModal("NigerianUserConsent");
+      return;
     } else {
-      setActiveModal("Consent");
+      setActiveModal("DiasporaUserConsent");
     }
   }
 
-  function onConsent() {
+  function onNigeriaUserConsent() {
     setActiveModal("VerifyBVN");
+  }
+
+  function onDiasporaConsent() {
+    onSelectPayOption("SEERBIT", 200);
+  }
+
+  function onInputBVN(status) {
+    // setItemQuantity(quantity);
+    if (status == false) {
+      return;
+    } else {
+      // setActiveModal("PaymentOptions");
+      onSelectPayOption("SEERBIT", 200);
+    }
   }
 
   async function onSelectPayOption(payOptType, quantity, tickets) {
@@ -451,30 +510,50 @@ export const PopUpContextProvider = ({ children }) => {
               status={"success"}
             ></PopupStatus>
           )}
-          {activeModal == "ProvideBvnPrompt" && (
+          {activeModal == "ContinueToCountry" && <ContinueToCountry onAction={onContinueToCountry}></ContinueToCountry>}
+          {/* {activeModal == "ContinueToCountry" && <ContinueToCountry></ContinueToCountry>} */}
+
+          {activeModal == "MintPrompt" && (
             <Prompt
-              title={"Welcome to kennis Music Bites"}
-              desc={
-                <span>
-                  Thank you for signing up. To further make your experience better, mint you ticket today for just<span className=" font-bold !text-[#827F7F]"> N200 </span>and enjoy more offers.
-                </span>
-              }
+              title={"Mint Kennis Music Ticket"}
+              desc={<span>Thank you for signing up. To further make your experience better, mint you ticket today and enjoy more offers.</span>}
               onCancel={toggle}
               imgUrl="/3d-onpoint-finger.jpg"
               onAction={onContinueToMint}
             ></Prompt>
           )}
-          {activeModal == "Consent" && (
+
+          {activeModal == "DiasporaUserConsent" && (
+            <Prompt
+              title={"Notice"}
+              desc={
+                <span>
+                  By continuing, you will be charged a fee of<span className=" font-bold !text-[#827F7F]"> $2 </span>to mint your first kennis ticket.
+                </span>
+              }
+              onCancel={toggle}
+              imgUrl="/3d-onpoint-finger.jpg"
+              onAction={onDiasporaConsent}
+            ></Prompt>
+          )}
+
+          {activeModal == "NigerianUserConsent" && (
             <Prompt
               title={"Your consent is needed"}
               desc={
                 <span>
-                  By continuing, you consent to and authorize Parallex Bank Limited to open an account with your details on the platform and issue a Kennis Music Bites debit card in your name.
+                  By continuing, you consent to and authorize Parallex Bank Limited to open an account with your details on the platform and issue a Kennis Music Bites debit card in your name. You
+                  will be charged a fee of{" "}
+                  <span className=" font-bold !text-[#827F7F]">
+                    {" "}
+                    <NairaSymbol></NairaSymbol>200
+                  </span>{" "}
+                  to mint your first kennis ticket{" "}
                 </span>
               }
               onCancel={toggle}
               imgUrl="/info-yellow.svg"
-              onAction={onConsent}
+              onAction={onNigeriaUserConsent}
             ></Prompt>
           )}
           {activeModal == "PaymentDetails" && (
@@ -498,6 +577,7 @@ export const PopUpContextProvider = ({ children }) => {
           )}
           {activeModal == "BuyEventTicket" && <BuyEventTicket ticketCategories={eventTicketCategories} onCancel={toggle} onBuyTicket={onBuyTicket}></BuyEventTicket>}
           {activeModal == "BuyRaffleTicket" && <BuyRaffleTicket onCancel={toggle} onBuyRaffleTicket={onBuyRaffleTicket}></BuyRaffleTicket>}
+          {activeModal == "BuyProgressiveToken" && <BuyProgressiveToken onCancel={toggle} onBuyProgressiveToken={onBuyProgressiveToken}></BuyProgressiveToken>}
           {activeModal == "BuyToken" && <BuyToken onCancel={toggle} onBuyToken={onBuyToken}></BuyToken>}
           {activeModal == "PaymentOptions" && <PaymentOptions onCancel={toggle} onSelectPayOption={onSelectPayOption}></PaymentOptions>}
           {activeModal == "SelfCheckOut" && <SelfCheckOut onCancel={toggle} onCheckOut={onCheckOut}></SelfCheckOut>}

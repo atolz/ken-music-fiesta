@@ -12,6 +12,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { DataContext } from "../../Context/fetchData";
 import EventsCarouselCard from "../Cards/EventsCarousel";
 import EventsCarousel2 from "../Cards/EventsCarousel2";
+import ProgressDrawCard from "../Cards/ProgressDraw";
 
 const Dashboard = (props) => {
   // const user = useSelector(getUser);
@@ -85,7 +86,8 @@ const Dashboard = (props) => {
               <p>22 Oct, 2022</p>
             </div>
           </div> */}
-          <TableV1></TableV1>
+          {/* <TableV1></TableV1> */}
+          <ProgressDrawCard></ProgressDrawCard>
         </div>
 
         {/* div-2 */}
@@ -93,7 +95,7 @@ const Dashboard = (props) => {
           {/* <PoweredBy></PoweredBy> */}
           {/* <EventsCarouselCard></EventsCarouselCard> */}
           {/* <p></p> */}
-          {AppData.kudibarEvents.data.length < 1 ? <PoweredBy></PoweredBy> : <EventsCarousel2></EventsCarousel2>}
+          {AppData.kudibarEvents.data.length < 1 ? "No Events" : <EventsCarousel2></EventsCarousel2>}
         </div>
       </section>
     </div>

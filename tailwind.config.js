@@ -5,6 +5,10 @@ module.exports = {
       borderRadius: {
         primary: "2rem",
       },
+      fontFamily: {
+        // Add your custom fonts and enjoy.
+        Mont: ["Montserrat", "sans-serif"],
+      },
       colors: {
         primary: "var( --color-primary)",
         primaryGrad: "var(--color-primary-grad)",
