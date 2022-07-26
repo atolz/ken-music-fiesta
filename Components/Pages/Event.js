@@ -48,7 +48,12 @@ const Event = () => {
               />
             );
           })}
-          {AppData.kudibarEvents?.data.length < 1 && <p>No events yet</p>}
+          {/* {AppData.kudibarEvents?.data.length < 1 && <p>No events yet</p>} */}
+          {AppData.kudibarEvents?.data.length < 1 && (
+            <div className="grid flex-1 place-content-center place-items-center my-auto min-h-[50vh] w-full events_card:col-span-2">
+              <span className="f font-medium text-[2.5rem] text-[#E0E0E0]">No Event</span>
+            </div>
+          )}
 
           {/* <section className=" flex-shrink flex-1 inline-block mr-10 mb-10">
             <EventCard
