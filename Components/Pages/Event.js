@@ -48,6 +48,7 @@ const Event = () => {
               />
             );
           })}
+          {AppData.kudibarEvents?.data.length < 1 && <p>No events yet</p>}
 
           {/* <section className=" flex-shrink flex-1 inline-block mr-10 mb-10">
             <EventCard

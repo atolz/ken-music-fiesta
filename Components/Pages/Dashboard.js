@@ -95,7 +95,7 @@ const Dashboard = (props) => {
           {/* <PoweredBy></PoweredBy> */}
           {/* <EventsCarouselCard></EventsCarouselCard> */}
           {/* <p></p> */}
-          {AppData.kudibarEvents.data.length < 1 ? "No Events" : <EventsCarousel2></EventsCarousel2>}
+          {AppData.kudibarEvents.data.length < 1 ? <PoweredBy></PoweredBy> : <EventsCarousel2></EventsCarousel2>}
         </div>
       </section>
     </div>
