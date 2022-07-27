@@ -17,10 +17,10 @@ const Brands = () => {
               <PartnersCard title="The Place"></PartnersCard>
               <PartnersCard title="Goldmyne TV" img="/brand/@GoldmyneTV.jpg"></PartnersCard>
               <PartnersCard title="The Beat Fm" img="/brand/the beat 999 fm logo.jpg"></PartnersCard>
-              <PartnersCard title="Yebox Technologies" img="https://www.knight.ventures/static/media/yebox.6dbf75a8175fce11ea09c941b77df661.svg"></PartnersCard>
+              <PartnersCard title="Yebox Technologies" img="yebox-logo.jpg"></PartnersCard>
               <PartnersCard title="Ray Power" img="/Media/raypower_logo_1.jpg"></PartnersCard>
               <PartnersCard title="Kraks TV" img="/brand/@KraksTV.png"></PartnersCard>
-              <PartnersCard title="Kudibar" img="https://www.kudibar.com/_nuxt/img/logo.056a8d6.png"></PartnersCard>
+              <PartnersCard title="Kudibar" img="kudibar-logo.jpg"></PartnersCard>
               <PartnersCard title="Parallex Bank" img={"https://www.nigeriacommunicationsweek.com.ng/wp-content/uploads/2022/01/parallex.jpg"}></PartnersCard>
               {/* <PartnersCard img={"https://upload.wikimedia.org/wikipedia/commons/f/ff/Kentucky_Fried_Chicken_201x_logo.svg"}></PartnersCard> */}
             </div>
