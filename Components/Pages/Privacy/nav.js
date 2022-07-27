@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 
-const PrivacyNav = ({ nav = ["Privacy Policy", "Privacy Summary", "Data we collect"], onChange = () => {} }) => {
+const PrivacyNav = ({ nav = ["GAME INSTRUCTIONS", "Privacy Summary", "Data we collect"], onChange = () => {} }) => {
   const [active, setActive] = useState(nav[0]);
   const [IndicatorTop, setIndicatorTop] = useState(0);
   const parentRef = useRef();
@@ -36,7 +36,7 @@ const PrivacyNav = ({ nav = ["Privacy Policy", "Privacy Summary", "Data we colle
                 });
               }}
               key={i}
-              className={`"font-bold text-[2rem] h-[3.5rem] grid items-center transition-all duration-300 pl-[3rem] ${active == el ? " !text-white" : " !text-[#706C6C]"}`}
+              className={`capitalize font-medium text-[2rem] h-[3.5rem] grid items-center transition-all duration-300 pl-[3rem] ${active == el ? " !text-white" : " !text-[#706C6C]"}`}
             >
               <Link href={`#${el}`}>
                 <a>{el}</a>
