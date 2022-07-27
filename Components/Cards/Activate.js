@@ -65,7 +65,7 @@ const Activate = ({ user }) => {
         <h2 className="text-[2.8rem] sm:text-[3.6rem] font-bold leading-[3.4rem] mb-[1.2rem]">Activate Card</h2>
         <p className="font-normal leading-[2rem] text-[1.4rem]  max-w-[27rem] relative z-20">
           {!AppData?.user?.loading &&
-            (!AppData?.user?.data?.hasCard
+            (!AppData?.user?.data?.hasCard && !AppData?.user?.data?.hasMintedTicket
               ? "You have to activate your card to start making purchases. Kindly do that ASAP."
               : "Your activation request has been received and your card will be activated soon.")}
         </p>

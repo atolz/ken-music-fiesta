@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Drawer } from "@mui/material";
+import Link from "next/link";
+
 
 const Container = ({ children, twStyles }) => {
   return <div className={`max-w-[182rem] mx-auto w-full px-[2.2rem] table:px-[10rem] ${twStyles}`}>{children}</div>;
@@ -48,7 +50,11 @@ const PartnersCard = ({ title = "Food Partners", img = "/the-place.png", classNa
               <div className="flex flex-wrap mb-[4.9rem] items-center justify-between">
                 <h2 className="text-white font-bold text-[5rem] whitespace-nowrap mr-8">{title}</h2>
                 <p className=" text-[14px] font-normal text-white">
-                  For more information, visit <span className=" font-bold text-primary cursor-pointer">www.theplace.com.ng</span>
+                  For more information, visit{" "}
+                  <a target="_blank" href="https://theplace.com.ng/" rel="noopener noreferrer">
+                    <span className=" font-bold text-primary cursor-pointer">www.theplace.com.ng</span>
+                  </a>
+
                 </p>
               </div>
               <p className=" text-[14px] font-light text-white leading-[22px] max-w-[645px]">
@@ -66,7 +72,11 @@ const PartnersCard = ({ title = "Food Partners", img = "/the-place.png", classNa
       {type != "artiste" && (
         <div
           onClick={() => {
-            setShowDetails(true);
+
+            if (title == "The Place") {
+              setShowDetails(true);
+            }
+
           }}
         >
           <div
