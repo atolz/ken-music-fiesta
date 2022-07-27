@@ -56,7 +56,7 @@ const Index = () => {
           <main className={`flex flex-wrap  items-center ${data.length > 3 ? " justify-between gap-[16rem]" : " justify-center gap-96"}   mb-40`}>
             {data.map((el, i) => {
               return (
-                <Link href={`/artistes/`} key={i}>
+                <Link href={`/artistes/`} key={++i}>
                   <a style={{ "--Id": i }} className={` last:mr-auto ${animations.slide_up}`}>
                     <div className="flex flex-col">
                       <div className="bg-[#1B1B1B] -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer grid place-items-center">
