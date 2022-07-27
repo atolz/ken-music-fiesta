@@ -49,9 +49,9 @@ const LandingPage = () => {
         >
           Mint Event Ticket
         </button>
-        <span className="flex items-center text-[1.4rem] font-semibold text-white">
+        {/* <span className="flex items-center text-[1.4rem] font-semibold text-white">
           <img className="mr-[1.1rem]" src="/play-promo.svg"></img>Play Promotional Video
-        </span>
+        </span> */}
       </section>
     </Container>
   );

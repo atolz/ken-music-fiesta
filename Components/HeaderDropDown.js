@@ -9,12 +9,8 @@ const HeaderDropDown = ({ children, imgSlot }) => {
         style={{ willChange: "font-size" }}
         className={` overflow-hidden w-max duration-300 h-auto -translate-x-1 translate-y-1 scale-0 hover:scale-100 peer-hover:scale-100 origin-top-right -z-30 opacity-0 hover:h-auto hover:opacity-100 transition-all peer-hover:h-auto peer-hover:opacity-100 absolute top-[4.5rem] hover:z-50 peer-hover:z-50 right-0 bg-white shadow-lg rounded-[2rem] border rounded-tr-none`}
       >
-        <li
-          onClick={() => {
-            // setActivePage("Profile");
-          }}
-          className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
-        >
+        <div className="grid place-items-center  p-[2.2rem]">No Notification</div>
+        {/* <li onClick={() => {}} className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]">
           <div className=" w-[34px] h-[34px] rounded-full bg-[#FCAC0D] grid place-items-center">
             <SvgIconWrapper className={"!w-[13.5px] !h-[13.5px]"} iconName={"coin-dollar"}></SvgIconWrapper>
           </div>
@@ -22,12 +18,7 @@ const HeaderDropDown = ({ children, imgSlot }) => {
             Pending payment - <span className=" font-bold">N5,000</span>
           </span>
         </li>
-        <li
-          onClick={() => {
-            // setActivePage("Profile");
-          }}
-          className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
-        >
+        <li onClick={() => {}} className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]">
           <div className=" w-[34px] h-[34px] rounded-full bg-[#348B52] grid place-items-center">
             <SvgIconWrapper className={"!w-[13.5px] !h-[13.5px] text-white"} iconName={"coin-dollar"}></SvgIconWrapper>
           </div>
@@ -35,17 +26,12 @@ const HeaderDropDown = ({ children, imgSlot }) => {
             Payment successful - <span className=" font-bold">N4,000</span>
           </span>
         </li>
-        <li
-          onClick={() => {
-            // setActivePage("Profile");
-          }}
-          className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
-        >
+        <li onClick={() => {}} className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]">
           <div className=" w-[34px] h-[34px] rounded-full bg-[#348B52] grid place-items-center">
             <SvgIconWrapper className={"!w-[13.5px] !h-[13.5px] text-white"} iconName={"Raffle-Tickets"}></SvgIconWrapper>
           </div>
           <span className=" font-medium text-[1.4rem] ml-[1.2rem]">Raffle ticket purchased</span>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

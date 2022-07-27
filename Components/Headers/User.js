@@ -64,7 +64,7 @@ const UserHeader = ({ title, setActivePage }) => {
             <div className="relative mobile:ml-[59px] mr-[16px]">
               <HeaderDropDown>
                 <div className=" peer relative w-[42px] h-[42px] rounded-full grid place-items-center bg-[#F6EBF5] ml-auto " title="Notification">
-                  <div className="bg-red-500 w-[10px] h-[10px] rounded-full top-2 -left-0 absolute"></div>
+                  {/* <div className="bg-red-500 w-[10px] h-[10px] rounded-full top-2 -left-0 absolute"></div> */}
                   <i className="icon icon-notification text-[1.7rem]"></i>
                 </div>
               </HeaderDropDown>
