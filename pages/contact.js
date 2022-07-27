@@ -12,7 +12,7 @@ const contact = () => {
         <div>
           <h1 className=" text-primaryLighter font-bold text-[5.7rem] max-w-[511px] leading-[6rem]">We are glad you made it here. Feel free to reach out to us.</h1>
           <p className=" font-medium text-[1.6rem] mt-[1.6rem] text-white max-w-[462px]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus orci laoreet lorem nibh fringilla fusce gravida. Elementum duis nulla a mauris at morbi.
+            {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus orci laoreet lorem nibh fringilla fusce gravida. Elementum duis nulla a mauris at morbi. */}
           </p>
         </div>
 
