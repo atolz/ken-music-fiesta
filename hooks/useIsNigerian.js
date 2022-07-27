@@ -7,7 +7,7 @@ const useIsNigerian = () => {
   const ExchangeRate = 665;
 
   const isNigerian = () => {
-    if (user.country == "Nigeria" || (user.country !== "Nigeria" && user.hasConfirmedNigerian)) {
+    if (user?.country == "Nigeria" || (user?.country !== "Nigeria" && user?.hasConfirmedNigerian)) {
       return true;
     } else {
       return false;

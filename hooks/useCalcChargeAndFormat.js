@@ -8,7 +8,7 @@ const useCalcChargeAndFormat = () => {
 
   const calculateAndFormatPrice = (value) => {
     console.log("Calling format price", value, user);
-    if (user.country == "Nigeria" || (user.country !== "Nigeria" && user.hasConfirmedNigerian)) {
+    if (user?.country == "Nigeria" || (user.country !== "Nigeria" && user?.hasConfirmedNigerian)) {
       return (
         <span className=" font-bold !text-[#827F7F]">
           <span className=" font-sans">&#8358;</span>

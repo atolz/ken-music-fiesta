@@ -2,9 +2,9 @@ import React from "react";
 import PopupLayout from "../Layout/Popup";
 import Link from "next/link";
 
-const Prompt = ({ title, desc, imgUrl, onAction = () => {} }) => {
+const Prompt = ({ title, desc, imgUrl, onAction = () => {}, onCancel = () => {} }) => {
   return (
-    <PopupLayout footer={false}>
+    <PopupLayout cancelAction={onCancel} footer={false}>
       <div className="grid place-items-center text-center px-[1.2rem] sidebar:px-[2.2rem] pb-[1.2rem] pt-[.8rem]">
         <img src={imgUrl} className="mb-[4rem] h-[15rem]" />
 

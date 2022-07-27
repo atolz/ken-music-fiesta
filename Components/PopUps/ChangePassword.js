@@ -62,7 +62,7 @@ const ChangePassword = ({ action, onCancel = () => {}, toggleModal = () => {} })
 
   return (
     // <PopupLayout cancelAction={onCancel} action={onChangePassword} actionText={"Change Password"}>
-    <PopupLayout footer={false}>
+    <PopupLayout cancelAction={toggleModal} footer={false}>
       <form
         onSubmit={(e) => {
           e.preventDefault();

@@ -37,6 +37,7 @@ module.exports = {
         event_detail: "1211px",
         landing_1068: "1068px",
         landing_868: "868px",
+        popUp: "336px",
         // => @media (min-width: 1536px) { ... }
       },
       gridTemplateColumns: {

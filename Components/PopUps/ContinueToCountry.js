@@ -7,7 +7,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import useShowAlert from "../../hooks/useShowAlert";
 import PopupLayout from "../Layout/Popup";
 
-const ContinueToCountry = ({ onAction = () => {} }) => {
+const ContinueToCountry = ({ onAction = () => {}, onCancel = () => {} }) => {
   const { getLocalStorage, isLoggedIn } = useLocalStorage();
   const AppData = useContext(DataContext);
   const toggleAlertBar = useShowAlert();
@@ -38,17 +38,22 @@ const ContinueToCountry = ({ onAction = () => {} }) => {
       toggleLoad();
     } catch (error) {
       console.log("error in continue", error.message);
+      if (!error?.response) {
+        toggleAlertBar("No response from the server. Pls try again later", "fail", true, 7000);
+        toggleLoad();
+        return;
+      }
       if (error?.response) {
         toggleAlertBar("Couldn't handle your request. Pls try again.", "fail", true, 7000);
       } else {
-        toggleAlertBar("A client error occured. Pls try again later", "fail", true, 7000);
+        toggleAlertBar("No resp. Pls try again later", "fail", true, 7000);
       }
       toggleLoad();
     }
   };
 
   return (
-    <PopupLayout footer={false}>
+    <PopupLayout cancelAction={onCancel} footer={false}>
       <div className="grid place-items-center text-center px-[.8rem]  pb-[1.2rem] pt-[.8rem]">
         <img className=" h-[66.5px] cursor-pointer mb-[3rem] mt-5" src="/new_logo.png"></img>
         <h3 className="text-[2.8rem] text-black leading-[3.9rem] font-bold mb-[.8rem]">

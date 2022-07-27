@@ -80,6 +80,11 @@ const Assets = () => {
           </div>
         </div>
       )}
+      {!AppData?.user?.data?.hasMintedTicket && (
+        <div className="grid flex-1 place-content-center place-items-center my-auto min-h-[30vh]">
+          <span className=" !font-medium !text-[2.5rem] !text-[#E0E0E0] !leading-[3.2rem]">To enjoy more offers, mint your ticket for just $2.</span>
+        </div>
+      )}
     </div>
   );
 };
