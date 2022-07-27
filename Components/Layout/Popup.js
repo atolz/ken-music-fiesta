@@ -2,9 +2,16 @@ import React from "react";
 
 const Popup = ({ children, actionText, cancelAction = () => {}, action = () => {}, footer = true, disabled = false }) => {
   return (
-    <div className="bg-white rounded-[2rem] scroll_hide pop-up-animation">
+    <div className="bg-white rounded-[2rem] scroll_hide pop-up-animation relative">
+      <img
+        onClick={() => {
+          cancelAction();
+        }}
+        className=" absolute right-[2.5rem] top-[2.5rem] cursor-pointer"
+        src="/cancel-filled.png"
+      ></img>
       {/* Body */}
-      <div className="border-b py-[3.5rem] sidebar:py-[3.5rem] sidebar:pt-[4.5rem] pb-[3.3rem] px-[3.5rem] sidebar:px-[4.4rem]">{children}</div>
+      <div className="border-b py-[3.5rem] sidebar:py-[3.5rem] sidebar:pt-[5.5rem] pb-[3.3rem] px-[3.5rem] sidebar:px-[4.4rem]">{children}</div>
 
       {/* Footer */}
       {footer && (

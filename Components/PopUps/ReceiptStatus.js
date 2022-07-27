@@ -10,9 +10,17 @@ const ReceiptStatus = ({
     { name: "Transaction ID", value: "34538590584736s" },
   ],
   caption = "Payment Initiated",
+  onClose = () => {},
 }) => {
   return (
-    <div className=" grid place-items-center p-[2.5rem] mobile:p-[5.5rem]">
+    <div className=" grid place-items-center p-[2.5rem] mobile:p-[5.5rem] relative">
+      <img
+        onClick={() => {
+          onClose();
+        }}
+        className=" absolute right-[3rem] top-[3rem] cursor-pointer"
+        src="/cancel-filled.png"
+      ></img>
       <StatusCircle width="124px" color={"#348B52"}>
         <SvgIconWrapper className={" text-white w-[3.8rem] h-[3.8rem]"} iconName={"receipt"}></SvgIconWrapper>
       </StatusCircle>

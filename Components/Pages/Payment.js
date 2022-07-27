@@ -55,6 +55,9 @@ const Payment = () => {
             { name: "Transaction ID", value: transactionId },
           ]}
           caption="Transaction Receipt"
+          onClose={() => {
+            setShow(false);
+          }}
         ></ReceiptStatus>
       </Dialog>
       {/* <header className="flex items-center gap-[3.2rem] mb-[6rem]">

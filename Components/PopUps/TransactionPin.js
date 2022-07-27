@@ -12,7 +12,7 @@ const TransactionPin = ({ onClose = () => {} }) => {
 
   const onChangePin = () => {};
   return (
-    <PopupLayout footer={false}>
+    <PopupLayout cancelAction={onClose} footer={false}>
       <form
         onSubmit={(e) => {
           e.preventDefault();

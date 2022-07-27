@@ -114,17 +114,17 @@ const UserHeader = ({ title, setActivePage }) => {
           onClick={() => {
             popUpFunctions.initBuyRaffleTicket();
           }}
-          className="btn ml-[1.6rem] flex-1 sm:flex-grow-0"
+          className="btn mobile:ml-[1.6rem] flex-1 sm:flex-grow-0"
         >
-          Buy Raffle Ticket...
+          Buy Raffle Ticket
         </button>
       </div>
 
       {/* Verify BVN notification */}
       {user && !user?.hasMintedTicket && (
-        <div className="py-[2rem] px-[4.8rem] w-full bg-[#A307A80F] rounded-[2rem] mb-[2.7rem] flex items-center -translate-y-6">
-          <SvgIconWrapper className={" mr-[2.6rem]"} iconName={"info-circle"}></SvgIconWrapper>
-          <span className=" mr-10 text-black font-semibold text-2xl">
+        <div className="py-[2rem] px-[2.8rem] mobile:px-[4.8rem] w-full bg-[#A307A80F] rounded-[2rem] mb-[2.7rem] flex flex-wrap text-center justify-center mobile:place-content-start mobile:!text-left items-center -translate-y-6">
+          <SvgIconWrapper className={" mb-2 mobile:mb-0 mobile:mr-[2.6rem]"} iconName={"info-circle"}></SvgIconWrapper>
+          <span className=" mobile:mr-10 text-black font-semibold text-2xl">
             To enjoy more offers, mint your ticket for just{" "}
             <span className=" font-bold">
               {isNigerian() ? (

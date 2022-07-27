@@ -510,7 +510,7 @@ export const PopUpContextProvider = ({ children }) => {
               status={"success"}
             ></PopupStatus>
           )}
-          {activeModal == "ContinueToCountry" && <ContinueToCountry onAction={onContinueToCountry}></ContinueToCountry>}
+          {activeModal == "ContinueToCountry" && <ContinueToCountry onCancel={toggle} onAction={onContinueToCountry}></ContinueToCountry>}
           {/* {activeModal == "ContinueToCountry" && <ContinueToCountry></ContinueToCountry>} */}
 
           {activeModal == "MintPrompt" && (
@@ -558,6 +558,7 @@ export const PopUpContextProvider = ({ children }) => {
           )}
           {activeModal == "PaymentDetails" && (
             <ReceiptStatus
+              onCancel={toggle}
               items={[
                 { name: "Vendor Details", value: vendor?.split("?")[0] || "*Kfc Nigeria" },
                 {
