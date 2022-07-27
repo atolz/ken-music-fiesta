@@ -40,15 +40,17 @@ const LandingPage = () => {
         <Link href={"/auth/sign-in"}>
           <button className="btn btn--outlined-grad text-white !px-[6rem] mr-[3.2rem]  mb-[3.7rem] landing_868:mb-0">Sign In</button>
         </Link>
-        <button
-          // style={{ boxShadow: "0px 10px 34px rgba(255, 255, 255, 0.23)" }}
-          onClick={() => {
-            popUpFunctions.initBuyTicket();
-          }}
-          className="btn mr-[4.5rem] !px-[7.2rem] mb-[3.7rem] landing_868:mb-0 shiny_slide shiny_slide_animation depress"
-        >
-          Mint Event Ticket
-        </button>
+        <Link href={"/dashboard"}>
+          <button
+            // style={{ boxShadow: "0px 10px 34px rgba(255, 255, 255, 0.23)" }}
+            onClick={() => {
+              // popUpFunctions.initBuyTicket();
+            }}
+            className="btn mr-[4.5rem] !px-[7.2rem] mb-[3.7rem] landing_868:mb-0 shiny_slide shiny_slide_animation depress"
+          >
+            Mint Event Ticket
+          </button>
+        </Link>
         {/* <span className="flex items-center text-[1.4rem] font-semibold text-white">
           <img className="mr-[1.1rem]" src="/play-promo.svg"></img>Play Promotional Video
         </span> */}
