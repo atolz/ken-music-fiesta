@@ -91,7 +91,7 @@ const Event = () => {
             {/* <img  src="/event-img.jpg"></img> */}
             <div
               style={{ backgroundImage: `url(${AppData.kudibarEvents?.hash[activeEvent]?.cover})` }}
-              className="h-[61vh]  bg-cover bg-no-repeat rounded-[2rem] bg-slate-900 "
+              className="h-[61vh]  bg-cover bg-no-repeat rounded-[2rem] bg-slate-900 bg-center"
               // src={AppData.kudibarEvents?.hash[activeEvent]?.cover}
             ></div>
 
