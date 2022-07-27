@@ -80,7 +80,7 @@ const PartnersCard = ({ title = "Food Partners", img = "/the-place.png", classNa
             className={` gradient-border-bg min-h-[24.9rem] rounded-primary !border-solid !border-transparent !border-0 !border-b-[8px] p-[4rem] py-[5.5rem] grid place-items-center max-h-[32.6rem] max-w-[36.3rem] min-w-[20rem] hover:scale-[1.01] cursor-pointer ${className}`}
           >
             {/* <Image src={img} height={110} width={186} alt="parallex"></Image> */}
-            <img className="max-w-[19.7rem] w-full h-auto max-h-[110px]" src={img} height={110} width={197} alt="parallex"></img>
+            <img className="max-w-[19.7rem] object-contain w-full h-auto max-h-[110px]" src={img} height={110} width={197} alt="parallex"></img>
           </div>
           <p className=" text-[3rem] font-bold mt-[3.2rem] text-white text-center">{title}</p>
         </div>

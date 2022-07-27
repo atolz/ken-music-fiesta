@@ -49,7 +49,7 @@ const BuyRaffleTicket = ({ onBuyRaffleTicket, onCancel }) => {
             Total -
             {isNigerian() ? (
               <span className=" font-sans">
-                <NairaSymbol></NairaSymbol>
+                &nbsp;<NairaSymbol></NairaSymbol>
               </span>
             ) : (
               "$"
