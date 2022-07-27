@@ -45,9 +45,10 @@ const Brands = () => {
               <PartnersCard type="artiste" title="Kenny Ogungbe" img={"partners/@kennyogungbe.jpg"}></PartnersCard>
               <PartnersCard type="artiste" title="Dayo Adeneye" img={"partners/@Dayod1Adeneye.jpe"}></PartnersCard>
               <PartnersCard type="artiste" title="Korede Bello" img={"partners/@KoredeBello.jpg"}></PartnersCard>
+              <PartnersCard type="artiste" title="Annie Idibia" img={"partners/@AnnieIdibia1.jpg"}></PartnersCard>
               <PartnersCard type="artiste" title="Emajor_Official" img={"partners/@Emajor_Official.jpg"}></PartnersCard>
               <PartnersCard type="artiste" title="Mr Macaroni" img={"partners/@MrMacaroni1.jpg"}></PartnersCard>
-              <PartnersCard type="artiste" title="Wizkiddayo" img={"partners/@wizkiddayo.png"}></PartnersCard>
+              <PartnersCard type="artiste" title="Nasty Blaq" img={"partners/@NastyBlaq.jpg"}></PartnersCard>
               <PartnersCard type="artiste" title="Joeel Kennis" img={"partners/@JoeelKennis.jpg"}></PartnersCard>
               <PartnersCard type="artiste" title="Danielle Yul Edochie" img={"partners/@DanielleYulEdochie.jpg"}></PartnersCard>
               <PartnersCard type="artiste" title="@Efe_Macroc" img={"partners/@Efe_Macroc.jpg"}></PartnersCard>
