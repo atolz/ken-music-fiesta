@@ -30,7 +30,7 @@ const LandPageLayout = ({ children }) => {
         <div className={`fixed top-0 left-0 w-screen h-screen z-[1]  bg-homepage ${router.pathname == "/" ? " fadeIn-animation opacity-100" : " opacity-50"}`}>
           {/* <img className=" object-cover h-full w-full" src="/bg-home-min.png"></img> */}
         </div>
-        <div className=" grow-0 shrink-0 relative z-[100000000]">
+        <div className=" grow-0 shrink-0 relative z-[1000]">
           <Container>
             {" "}
             <header className="flex items-center pt-[3rem] pb-[1.6rem]">
