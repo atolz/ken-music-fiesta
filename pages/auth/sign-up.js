@@ -9,12 +9,14 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const SignUp = () => {
   const passRef = useRef();
   const passConfRef = useRef();
   const { isLoading, toggleLoad } = useLoading();
   const toggleAlertBar = useShowAlert();
+  const { isLoggedIn } = useLocalStorage();
   const [gotMail, setGotMail] = useState(false);
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -136,11 +138,9 @@ const SignUp = () => {
     // toggleLoad();
   };
   useEffect(() => {
-    // return () => {
-    //   if (isLoading) {
-    //     toggleLoad();
-    //   }
-    // };
+    if (isLoggedIn()) {
+      router.replace("/dashboard");
+    }
   }, []);
 
   return (

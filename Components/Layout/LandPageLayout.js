@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import Link from "next/link";
 import Dialog from "@mui/material/Dialog";
 import useLoading from "../../hooks/useLoading";
@@ -9,6 +9,7 @@ import SelfCheckOut from "../PopUps/SelfCheckOut";
 import ReviewCheckOut from "../PopUps/ReviewCheckOut";
 import { popUpContext, PopUpContextProvider } from "../../Context/PopUps";
 import { useRouter } from "next/router";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Container = ({ children }) => {
   return <div className="max-w-[182rem] mx-auto w-full px-[4rem] landing_868:px-[10rem]">{children}</div>;
@@ -22,6 +23,13 @@ const LandPageLayout = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
   const popUpFunctions = useContext(popUpContext);
   const router = useRouter();
+  const { isLoggedIn } = useLocalStorage();
+
+  useEffect(() => {
+    if (isLoggedIn()) {
+      router.replace("/dashboard");
+    }
+  }, []);
 
   return (
     // <PopUpContainerWrapper>

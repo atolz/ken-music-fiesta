@@ -3,12 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../Context/fetchData";
 import AllAccessPass from "../PopUps/AllAccessPass";
 import QRCode from "qrcode";
+import useIsNigerian from "../../hooks/useIsNigerian";
 
 const Assets = () => {
   const [showModal, setShowModal] = useState(false);
   const [activeModal, setActiveModal] = useState();
   const AppData = useContext(DataContext);
   const [qrCode, setQrCode] = useState("");
+  const { isNigerian } = useIsNigerian();
 
   useEffect(() => {
     const generateQR = async (text) => {
@@ -82,7 +84,19 @@ const Assets = () => {
       )}
       {!AppData?.user?.data?.hasMintedTicket && (
         <div className="grid flex-1 place-content-center place-items-center my-auto min-h-[30vh]">
-          <span className=" !font-medium !text-[2.5rem] !text-[#E0E0E0] !leading-[3.2rem]">To enjoy more offers, mint your ticket for just $2.</span>
+          <span className=" !font-medium !text-[2.5rem] !text-[#E0E0E0] !leading-[3.2rem]">
+            To enjoy more offers, mint your ticket for just{" "}
+            <span className=" font-bold ">
+              {isNigerian() ? (
+                <span className="!font-medium !text-[2.5rem] !text-[#E0E0E0] !leading-[3.2rem]">
+                  <span className="!font-medium !text-[2.5rem] !text-[#E0E0E0] !leading-[3.2rem] font-sans">&#8358;</span>200
+                </span>
+              ) : (
+                <span className="!font-medium !text-[2.5rem] !text-[#E0E0E0] !leading-[3.2rem]">$2 </span>
+              )}
+              .
+            </span>
+          </span>
         </div>
       )}
     </div>
