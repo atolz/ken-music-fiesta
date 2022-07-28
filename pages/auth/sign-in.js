@@ -22,7 +22,7 @@ const SignIn = () => {
   });
   const dispatch = useDispatch();
   const toggleAlertBar = useShowAlert();
-  const { setLocalStorage } = useLocalStorage();
+  const { setLocalStorage, isLoggedIn } = useLocalStorage();
 
   const showPassword = (ref) => {
     ref.current.type = ref.current.type == "text" ? "password" : "text";
@@ -93,6 +93,12 @@ const SignIn = () => {
     return () => {
       // toggleAlertBar();
     };
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn()) {
+      router.replace("/dashboard");
+    }
   }, []);
   return (
     <div className="auth-container !mb-[3rem] ">

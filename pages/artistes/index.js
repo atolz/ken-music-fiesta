@@ -69,7 +69,7 @@ const Index = () => {
                         </div>
                       </div>
                       <span className=" font-bold text-[2.5rem] leading-[3rem] mt-[4.6rem] text-white">
-                        0{i}. {el.name}
+                        0{++i}. {el.name}
                       </span>
                     </div>
                   </a>

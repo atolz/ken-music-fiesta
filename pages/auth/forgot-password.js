@@ -4,12 +4,14 @@ import GotMail from "../../Components/Auth/GotMail";
 import { baseInstanceAPI } from "../../axios";
 import useLoading from "../../hooks/useLoading";
 import AuthLayout from "../../Components/Layout/AuthLayout";
+import useShowAlert from "../../hooks/useShowAlert";
 
 const ForgotPassword = () => {
   const [gotMail, setGotMail] = useState(false);
   const emailRef = useRef(null);
   const [emailError, setEmailError] = useState("");
   const { toggleLoad } = useLoading();
+  const { toggleAlertBar } = useShowAlert();
 
   const onRequestResetPassword = async () => {
     toggleLoad();
@@ -20,7 +22,13 @@ const ForgotPassword = () => {
       console.log("response is", response);
       setGotMail(true);
     } catch (error) {
-      setEmailError("Pls enter a valid email");
+      if (!error?.response) {
+        toggleAlertBar("No response from the server. Pls try again later!", "error", true, 7000);
+      }
+      if (error?.response) {
+        setEmailError("Pls enter a valid email");
+      } else {
+      }
     }
     toggleLoad();
   };

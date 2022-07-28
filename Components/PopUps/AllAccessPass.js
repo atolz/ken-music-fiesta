@@ -1,7 +1,7 @@
 import React from "react";
 import Popup from "../Layout/Popup";
 
-const AllAccessPass = ({ onClose, qrCode, assetId = "XW25Y5XQKBL2FUUVUEMQ" }) => {
+const AllAccessPass = ({ onClose, qrCode, assetId = "Processing. Pls check later" }) => {
   return (
     <Popup cancelAction={onClose} footer={false}>
       <div className="grid place-items-center px-6 relative">
