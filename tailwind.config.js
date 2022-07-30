@@ -38,6 +38,7 @@ module.exports = {
         landing_1068: "1068px",
         landing_868: "868px",
         popUp: "336px",
+        landing_554: "554px",
         // => @media (min-width: 1536px) { ... }
       },
       gridTemplateColumns: {

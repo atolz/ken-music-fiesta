@@ -95,6 +95,10 @@
   stroke-dashoffset: 500;
   animation: dash 5.5s linear forwards, filling 2.8s ease-in forwards;
   font-size: 80px;
+
+  @media (max-width: 500px) {
+    animation: dash 7.5s linear forwards, filling 2.8s ease-in forwards;
+  }
 }
 
 .text-line text {

@@ -54,12 +54,12 @@ const SignUp = () => {
   const getGeoInfo = async () => {
     console.log("in get geo info");
     try {
-      const resp = await axios.get("https://geolocation-db.com/json/");
+      const resp = await axios.get("https://geolocation-db.com/json/50ad4a90-fd5e-11ec-b463-1717be8c9ff1");
       console.log(resp.data);
       return resp.data;
     } catch (error) {
       console.log("a location error occured", error.message);
-      toggleAlertBar("An Error Occured getting your location. Pls ensure you have adblocker disabled in your browser or try using another browser", "fail", true, 50000);
+      // toggleAlertBar("Error getting your location. Pls disable adblocker and restart your browser or try using another browser.", "fail", true, 10000);
     }
   };
 
@@ -81,7 +81,13 @@ const SignUp = () => {
     }
 
     toggleLoad();
-    const locationData = await getGeoInfo();
+    let locationData;
+    locationData = await getGeoInfo();
+    if (!locationData) {
+      toggleAlertBar("Error getting your location. Pls *disable adblocker and restart your browser, try using another browser or try again later.", "fail", true, 10000);
+      toggleLoad();
+      return;
+    }
     console.log("In signup data", locationData);
     let userObj = { ...user, ref: router?.query?.ref, location: { country: locationData?.country_name, ip: locationData?.IPv4 } };
     console.log("base url is", process.env.NEXT_PUBLIC_DEVELOPMENT_URL);
@@ -105,8 +111,8 @@ const SignUp = () => {
         console.log("Phone error error...", error.response.data.message[0]);
         return;
       }
-      if (error.response.data.message[0].includes("location")) {
-        toggleAlertBar("An Error Occured getting your location. Pls ensure you have adblocker disabled in your browser or try using another browser", "fail", true, 50000);
+      if (error.response?.data?.message[0].includes("location")) {
+        toggleAlertBar("Server: Error getting your location. Pls disable adblocker and restart your browser or try again later.", "fail", true, 10000);
 
         return;
       }
@@ -269,7 +275,7 @@ const SignUp = () => {
                   </svg>
                 </div>
                 {passError && <p className=" !text-[1.2rem] !font-normal !text-red-500">*{passError}</p>}
-                <span className=" mt-2 text-[1.2rem] text-gray-100">Must contain: a captital letter & number</span>
+                <strong className=" mt-2 text-[1.2rem] text-gray-100">Must contain: a captital letter & number</strong>
               </div>
               <div className="form-group col-span-2">
                 <label>Confirm Password</label>

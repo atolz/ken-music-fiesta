@@ -50,9 +50,11 @@ const Faq = () => {
   const [active, setActive] = useState();
   return (
     <Container>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(37rem,1fr))] gap-[5rem] items-center">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(37rem,1fr))] gap-[5rem] items-center mb-[6rem]">
         <div>
-          <h1 className=" text-primaryLighter font-bold text-[5.7rem] max-w-[511px] leading-[6rem]">Frequently Asked Questions</h1>
+          <h1 className=" text-primaryLighter font-bold text-[3.7rem] sidebar:text-[5.7rem] sidebar:mt-0 mt-[4rem] max-w-[511px] leading-[4.5rem] sidebar:leading-[6rem]">
+            Frequently Asked Questions
+          </h1>
           <p className=" font-medium text-[1.6rem] mt-[1.6rem] text-white max-w-[462px]">
             {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus orci laoreet lorem nibh fringilla fusce gravida. Elementum duis nulla a mauris at morbi. */}
           </p>

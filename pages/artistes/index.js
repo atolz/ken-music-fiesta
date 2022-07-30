@@ -53,7 +53,7 @@ const Index = () => {
       <Container>
         <div className="text-center">
           <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FA6BFF] mb-[9rem] mt-[8rem]">Meet the Artistes</h3>
-          <main className={`flex flex-wrap  items-center ${data.length > 3 ? " justify-between gap-[16rem]" : " justify-center gap-96"}   mb-40`}>
+          <main className={`flex flex-wrap  items-center ${data.length > 3 ? " justify-center sidebar:justify-between gap-[16rem]" : " justify-center gap-96"}   mb-40`}>
             {data.map((el, i) => {
               return (
                 <Link href={`/artistes/`} key={++i}>

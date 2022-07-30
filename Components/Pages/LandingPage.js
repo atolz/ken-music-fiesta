@@ -4,6 +4,7 @@ import LandPageLayout from "../Layout/LandPageLayout";
 import { popUpContext } from "../../Context/PopUps";
 import TextAnimation from "../TextAnimation";
 import styles from "./LandingPageAnimation.module.css";
+import TextAnimationMobile from "./LandingPage/MobileTextAnimate";
 
 const Container = ({ children }) => {
   return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem] py-[4rem]">{children}</div>;
@@ -19,10 +20,8 @@ const LandingPage = () => {
         {/* <h1 className={` text-animation font-bold text-[4rem] landing_868:text-[9.4rem] leading-[4rem] landing_868:leading-[9.1rem] text-white uppercase block ${styles.slide_up_now_3}`}>
           Kennis<br></br> Music Festival
         </h1> */}
-        <h1
-          className={` text-animation font-bold text-[4rem] landing_868:text-[9.4rem] leading-[4rem] landing_868:leading-[9.1rem] text-white uppercase block landing_1068:hidden ${styles.slide_up_now_3}`}
-        >
-          Kennis<br></br> Music Festival
+        <h1 className={` landing_1068:hidden ${styles.slide_up_now_3}`}>
+          <TextAnimationMobile></TextAnimationMobile>
         </h1>
         <h1 className={`mr-auto mt-6 hidden landing_1068:block ${styles.slide_up_now_3}`}>
           <TextAnimation></TextAnimation>
