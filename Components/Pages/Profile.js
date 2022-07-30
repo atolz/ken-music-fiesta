@@ -1,16 +1,25 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/user";
 import ActDetails from "../Profile/ActDetails";
 import Assets from "../Profile/Assets";
 import MyProfile from "../Profile/Profile";
 import Security from "../Profile/Security";
+import { useRouter } from "next/router";
 
 const Profile = (props) => {
   const [active, setActive] = useState("Profile");
   // const navs = ["Profile", "Security", "Bank Details"];
   const navs = ["Profile", "Security", "Assets"];
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.mint) {
+      setActive("Assets");
+      router.push("/dashboard");
+    }
+  }, [router.query]);
 
   return (
     <div {...props} className="">

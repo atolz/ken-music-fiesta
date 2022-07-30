@@ -169,6 +169,7 @@ const SignUp = () => {
             </p>
             {error && <span className="text-white text-lg">*Error MEssage </span>}
             <div className="grid grid-cols-2 gap-5 gap-y-[2.4rem]">
+              {/* <div className="form-group  col-span-2 sidebar:col-span-1"> */}
               <div className="form-group">
                 <label>First Name</label>
                 <input
@@ -179,6 +180,7 @@ const SignUp = () => {
                   placeholder="Ex. Jonathan"
                 />
               </div>
+              {/* <div className="form-group  col-span-2 sidebar:col-span-1"></div> */}
               <div className="form-group">
                 <label>Last Name</label>
                 <input

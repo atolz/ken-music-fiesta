@@ -30,6 +30,8 @@ import formatNumberWithCommas from "../Utils/addCommas";
 import ContinueToCountry from "../Components/PopUps/ContinueToCountry";
 import BuyProgressiveToken from "../Components/PopUps/BuyProgressiveToken";
 import NairaSymbol from "../Components/NairaSymbol";
+import AppConfetti from "../Components/Confetti";
+import useIsNigerian from "../hooks/useIsNigerian";
 
 const pouUpContextFunctions = {
   initSelfCheckOut: () => {},
@@ -59,6 +61,8 @@ export const popUpContext = createContext(pouUpContextFunctions);
 
 export const PopUpContextProvider = ({ children }) => {
   const [purpose, setPurpose] = useState("");
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [recycle, setRecyle] = useState(true);
   const [transactionId, setTransactionId] = useState("");
   const [nameOfEvent, setNameOfEvent] = useState("");
   const [eventSlugName, setEventSlugName] = useState("");
@@ -82,6 +86,7 @@ export const PopUpContextProvider = ({ children }) => {
   const { isLoggedIn, getLocalStorage } = useLocalStorage();
   const { toggleLoad } = useLoading();
   const toggleAlertBar = useShowAlert();
+  const { isNigerian } = useIsNigerian();
   const dispatch = useDispatch();
   const [page, setGlobalPage] = useState("Dashboard");
   const AppData = useContext(DataContext);
@@ -433,14 +438,18 @@ export const PopUpContextProvider = ({ children }) => {
     setShowPopUp(false);
   }
 
-  const setPage = (page) => {
-    dispatch(setActivePage(page));
+  const setPage = (p) => {
+    console.log("in set page< pageis", p);
+    dispatch(setActivePage(p));
   };
 
   useEffect(() => {
     console.log("Roter is ////////", router.query?.status);
     console.log("Roter is ////////", router.query);
-    if (router.query?.status?.includes("success") && (!router.query?.purpose?.includes("LiveStream") || !router.query?.purpose?.includes("SelfCheckout"))) {
+    if (
+      router.query?.status?.includes("success") &&
+      (!router.query?.purpose?.includes("LiveStream") || !router.query?.purpose?.includes("SelfCheckout") || !router.query?.purpose?.includes("MintTicket"))
+    ) {
       console.log("sucess payed");
       setLinkText("Go to dashboard");
       // if
@@ -470,6 +479,36 @@ export const PopUpContextProvider = ({ children }) => {
         router.replace("/dashboard");
       }, 1000);
     }
+    if (router.query?.status?.includes("success") && router.query?.purpose?.includes("MintTicket")) {
+      setLinkText("View Ticket");
+      setStatusTitle("Mint Kennis Music Ticket Successfully!");
+      setText(
+        <p>
+          Your payment of {isNigerian() ? <NairaSymbol></NairaSymbol> : "$"}
+          {router?.query?.amount} was successful. You have earned the Kennis all access pass.
+        </p>
+      );
+      setActiveModal("Status");
+      setVendor(router?.query?.vendor);
+      setTransactionId(router?.query?.transactionId);
+      setCheckAmount(router?.query?.amount);
+      setLink("/dashboard?mint=true");
+      setShowConfetti(true);
+      setTimeout(() => {
+        setRecyle(false);
+      }, 2000);
+      setStatusAction(() => {
+        return () => {
+          setPage("Profile");
+          setShowPopUp(false);
+          // router.push("/dashboard?mint=true");
+        };
+      });
+      toggle();
+      setTimeout(() => {
+        router.replace("/dashboard");
+      }, 1000);
+    }
 
     if (router.query?.status?.includes("success") && router.query?.purpose?.includes("LiveStream")) {
       setLinkText("Go to livestream");
@@ -491,6 +530,7 @@ export const PopUpContextProvider = ({ children }) => {
         <link rel="dns-prefetch" href="https://checkout.seerbitapi.com/" />
         <link rel="prefetch" href="https://checkout.seerbitapi.com/" />
       </Head>
+      <AppConfetti recycle={recycle} setShow={setShowConfetti} show={showConfetti}></AppConfetti>
       <popUpContext.Provider value={pouUpContextFunctions}>
         <Dialog scroll="body" open={showPopUp} onClose={pouUpContextFunctions.toggle}>
           {activeModal == "Status" && (
@@ -501,13 +541,14 @@ export const PopUpContextProvider = ({ children }) => {
                 } else {
                   toggle();
                 }
-                setPage(page);
+                // setPage(page);
               }}
               title={statusTitle}
               link={link}
               linkText={linkText}
               text={text}
               status={"success"}
+              onCancel={toggle}
             ></PopupStatus>
           )}
           {activeModal == "ContinueToCountry" && <ContinueToCountry onCancel={toggle} onAction={onContinueToCountry}></ContinueToCountry>}

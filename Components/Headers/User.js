@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { Avatar, Tooltip } from "@mui/material";
+import { Avatar, Skeleton, Tooltip } from "@mui/material";
 
 import { useRouter } from "next/router";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -72,9 +72,13 @@ const UserHeader = ({ title, setActivePage }) => {
 
             <div className="peer  py-4">
               <div className="b border-l cursor-pointer">
-                <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "#A307A8" }} alt={user?.name} src={`${user?.avatar}`}>
-                  <span className=" font-semibold"> {user?.firstName ? user?.firstName[0] : "Name"}</span>
-                </Avatar>
+                {user?.firstName ? (
+                  <Avatar sx={{ width: 42, height: 42, marginLeft: "16px", bgcolor: "#A307A8" }} alt={user?.name} src={`${user?.avatar}`}>
+                    <span className=" font-semibold"> {user?.firstName ? user?.firstName[0] : "N"}</span>
+                  </Avatar>
+                ) : (
+                  <Skeleton sx={{ marginLeft: "16px" }} variant="circular" width={42} height={42} />
+                )}
               </div>
             </div>
             {/* Logout/Profile Dropdown */}

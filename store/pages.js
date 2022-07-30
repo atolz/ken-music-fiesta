@@ -20,5 +20,6 @@ export const getPage = (state) => {
 
 // Actions
 export const setActivePage = (page) => {
+  console.log("Setting active page", page);
   return { type: "page/setActivePage", page };
 };
