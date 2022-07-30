@@ -4,7 +4,7 @@ import { popUpContext } from "../Context/PopUps";
 import { useRouter } from "next/router";
 
 const Container = ({ children }) => {
-  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem] flex items-center">{children}</div>;
+  return <div className="max-w-[182rem] mx-auto w-full px-[3rem] sidebar:px-[10rem] flex items-center">{children}</div>;
 };
 
 const AuthHeader = () => {

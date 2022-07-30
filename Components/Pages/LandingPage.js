@@ -7,7 +7,7 @@ import styles from "./LandingPageAnimation.module.css";
 import TextAnimationMobile from "./LandingPage/MobileTextAnimate";
 
 const Container = ({ children }) => {
-  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] sidebar:px-[10rem] py-[4rem]">{children}</div>;
+  return <div className="max-w-[182rem] mx-auto w-full px-[3rem] sidebar:px-[10rem] py-[4rem]">{children}</div>;
 };
 
 const LandingPage = () => {

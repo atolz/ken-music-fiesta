@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Container = ({ children }) => {
-  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] landing_868:px-[10rem]">{children}</div>;
+  return <div className="max-w-[182rem] mx-auto w-full px-[3rem] landing_868:px-[10rem]">{children}</div>;
 };
 
 // const PopUpContainerWrapper = ({ children }) => {
