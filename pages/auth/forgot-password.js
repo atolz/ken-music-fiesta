@@ -9,11 +9,14 @@ import useShowAlert from "../../hooks/useShowAlert";
 const ForgotPassword = () => {
   const [gotMail, setGotMail] = useState(false);
   const emailRef = useRef(null);
+  const [email, setEmail] = useState();
+  const [requestNew, setRequestNew] = useState(false);
   const [emailError, setEmailError] = useState("");
   const { toggleLoad } = useLoading();
   const { toggleAlertBar } = useShowAlert();
 
   const onRequestResetPassword = async () => {
+    setEmail(emailRef.current.value);
     toggleLoad();
     try {
       const response = await baseInstanceAPI.post("/account/request-password-reset", {
@@ -51,8 +54,10 @@ const ForgotPassword = () => {
               <div className="form-group col-span-2">
                 <label>Email</label>
                 <input
-                  onChange={() => {
+                  value={email}
+                  onChange={(e) => {
                     setEmailError("");
+                    setEmail(e.target.value);
                   }}
                   ref={emailRef}
                   required
@@ -60,12 +65,31 @@ const ForgotPassword = () => {
                   placeholder="Ex. Jonathan@gmail.com"
                 />
               </div>
-              <button className="btn col-span-2 mt-[3.4rem]">Continue</button>
+              <button className="btn col-span-2 mt-[3.4rem]">{requestNew ? "Resend it" : "Continue"}</button>
             </div>
           </form>
         </div>
       )}
-      {gotMail && <GotMail></GotMail>}
+      {gotMail && (
+        <GotMail>
+          <p className="">
+            We sent you a mail to reset your password.
+            <p className="flex items-center">
+              Didn&apos;t get an email yet? &nbsp;
+              <a
+                onClick={() => {
+                  setGotMail(false);
+                  setRequestNew(true);
+                }}
+                className="kef-link"
+              >
+                {" "}
+                Resend it.
+              </a>
+            </p>
+          </p>
+        </GotMail>
+      )}
     </main>
   );
 };
