@@ -46,16 +46,16 @@ const Assets = () => {
         )}
       </Dialog>
       {AppData?.user?.data?.hasMintedTicket && (
-        <div className="flex items-center">
+        <div className="grid gap-10 grid-cols-1 landing_1068:grid-cols-[60px,1fr,1fr] justify-items-center landing_1068:justify-items-start ">
           <img src={"/badge.jpg"}></img>
-          <div className=" flex flex-col ml-[2.5rem] self-start">
-            <label>
+          <div className=" flex flex-col self-start !text-center landing_1068:!text-left">
+            <label className=" !text-center landing_1068:!text-left">
               You have earned the Kennis<br></br> all access pass
             </label>
-            <span className="!text-[1.4rem]">Download this ticket for easy verification</span>
+            <span className="!text-[1.4rem] !text-center landing_1068:!text-left">Download this ticket for easy verification</span>
           </div>
 
-          <div className="flex items-center ml-auto">
+          <div className="flex items-center landing_1068:justify-self-end">
             <a
               onClick={(e) => {
                 e.preventDefault();
