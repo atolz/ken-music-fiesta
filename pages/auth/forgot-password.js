@@ -74,7 +74,7 @@ const ForgotPassword = () => {
         <GotMail>
           <p className="">
             We sent you a mail to reset your password.
-            <p className="flex items-center">
+            <p className="flex flex-wrap items-center">
               Didn&apos;t get an email yet? &nbsp;
               <a
                 onClick={() => {
