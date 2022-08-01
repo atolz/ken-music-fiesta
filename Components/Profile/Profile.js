@@ -128,11 +128,11 @@ const Profile = ({ user }) => {
       <section className="mb-[6.6rem]">
         {/* Profile Picture */}
         <section className="flex items-center  flex-wrap gap-7 sidebar:gap-0">
-          <div className="flex flex-col mr-[8.9rem]">
+          <div className="flex flex-col mr-1 sm:mr-[8.9rem]">
             <label>Profile Picture</label>
             <span>Choose a display picture for your account</span>
           </div>
-          <div className="relative">
+          <div className="relative m-auto">
             <input onChange={onFileChange} className="hidden " id="upload" type="file" accept="image/*"></input>
             <Avatar ref={imageRef} sx={{ width: 145, height: 145, bgcolor: "orange" }} alt="Remy Sharp" src={`${user?.avatar}`}>
               <span className=" !text-white !text-[5rem] font-semibold"> {user?.firstName ? user?.firstName[0] : "N"}</span>
@@ -162,7 +162,6 @@ const Profile = ({ user }) => {
                 <input
                   className=" max-w-[36.4rem] w-full placeholder:text-[#D5D6D8] px-[3.2rem] text-[1.6rem] font-medium py-[1.7rem] rounded-[1rem] outline outline-[#C4C4C4] outline-1"
                   placeholder={el.label}
-                  type="tel"
                   value={getValue(el.name)}
                   readOnly={el.name == "userName" ? true : false}
                   required
