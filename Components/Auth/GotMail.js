@@ -3,11 +3,11 @@ import Link from "next/link";
 
 const GotMail = ({ link, text = "We sent you a mail to verify your account and continue your registration.", action = () => {}, children }) => {
   return (
-    <div className="auth-container !mb-[10rem] !px-0 !py-0">
+    <div className="auth-container !mb-[10rem] !px-8 !py-0">
       <div className="auth-form grid place-items-center justify-center">
-        <img className="mb-[5.8rem] mt-[8rem] w-full h-auto" width={221} height={164} src="/3d-mail.svg" />
+        <img className="mb-[5.8rem] mt-[8rem] w-full h-auto max-w-[300px]" width={221} height={164} src="/3d-mail.svg" />
         <h3 className="!mb-[1.4rem]">You’ve Got Mail</h3>
-        <p onClick={() => action()} className="!text-center flex !mb-[5.8rem] w-[37.1rem]">
+        <p onClick={() => action()} className="!text-center flex !mb-[5.8rem] max-w-[37.1rem]">
           {children ? children : text}
         </p>
         {/* <Link href={`${link}`}> */}

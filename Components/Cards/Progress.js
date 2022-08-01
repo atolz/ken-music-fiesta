@@ -18,8 +18,9 @@ const Progress = () => {
           Hi, {user?.data?.firstName} {user?.data?.lastName}
         </h2>
       ) : (
-        <Skeleton sx={{ marginBottom: "1.2rem" }} variant="rectangular" width={300} height={40} />
+        <Skeleton sx={{ marginBottom: "1.2rem", maxWidth: "300px" }} variant="rectangular" height={40} />
       )}
+
       <p className=" font-medium leading-[2.6rem] text-[1.6rem] mb-[2.4rem] max-w-[39.5rem]">Hope your week is going well? take time out to check your progress</p>
       <div className="flex items-center">
         <div className="w-[87px] h-[87px]  mr-[2.4rem]">

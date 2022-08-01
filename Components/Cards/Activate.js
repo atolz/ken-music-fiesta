@@ -72,7 +72,7 @@ const Activate = ({ user }) => {
               "Your activation request has been received and your card will be activated soon."
             )
           ) : (
-            <Skeleton sx={{ marginBottom: "1.2rem" }} variant="rectangular" width={270} height={80} />
+            <Skeleton sx={{ marginBottom: "1.2rem", maxWidth: "270px" }} variant="rectangular" height={80} />
           )}
         </p>
         <div className="flex items-center">
