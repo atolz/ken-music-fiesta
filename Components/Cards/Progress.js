@@ -1,3 +1,4 @@
+import { Skeleton } from "@mui/material";
 import React, { useContext } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -12,9 +13,13 @@ const Progress = () => {
       style={{ background: "var(--color-primary-grad)" }}
       className="py-[2.9rem] mobile:py-[4rem] px-[3rem] mobile:px-[5rem]  rounded-[2rem] w-max min-w-[30rem] flex-1 min-h-[30rem]  mb-[3.2rem] text-white"
     >
-      <h2 className="text-[2.8rem] sm:text-[3.6rem] font-bold leading-[4.3rem] mb-[1.2rem]">
-        Hi, {user?.data?.firstName} {user?.data?.lastName}
-      </h2>
+      {user?.data?.firstName ? (
+        <h2 className="text-[2.8rem] sm:text-[3.6rem] font-bold leading-[4.3rem] mb-[1.2rem]">
+          Hi, {user?.data?.firstName} {user?.data?.lastName}
+        </h2>
+      ) : (
+        <Skeleton sx={{ marginBottom: "1.2rem" }} variant="rectangular" width={300} height={40} />
+      )}
       <p className=" font-medium leading-[2.6rem] text-[1.6rem] mb-[2.4rem] max-w-[39.5rem]">Hope your week is going well? take time out to check your progress</p>
       <div className="flex items-center">
         <div className="w-[87px] h-[87px]  mr-[2.4rem]">

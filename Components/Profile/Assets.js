@@ -52,7 +52,7 @@ const Assets = () => {
             <label>
               You have earned the Kennis<br></br> all access pass
             </label>
-            <span>Download this ticket for easy verification</span>
+            <span className="!text-[1.4rem]">Download this ticket for easy verification</span>
           </div>
 
           <div className="flex items-center ml-auto">

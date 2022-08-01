@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Container = ({ children }) => {
-  return <div className="max-w-[182rem] mx-auto w-full px-[4rem] landing_868:px-[10rem]">{children}</div>;
+  return <div className="max-w-[182rem] mx-auto w-full px-[3rem] landing_868:px-[10rem]">{children}</div>;
 };
 
 // const PopUpContainerWrapper = ({ children }) => {
@@ -86,14 +86,14 @@ const LandPageLayout = ({ children }) => {
               </div>
               {/* Burger Menu */}
               <button
-                className="block landing_868:hidden"
+                className="block landing_868:hidden -translate-y-[1px]"
                 onClick={() => {
                   setShowMenu(true);
                 }}
               >
-                <div className="h-[0.6px] w-[3rem] bg-white block mb-3"></div>
-                <div className="h-[0.6px] w-[3rem] bg-white block mb-3"></div>
-                <div className="h-[0.6px] w-[3rem] bg-white block"></div>
+                <div className="h-[1px] w-[3.5rem] bg-white block mb-3"></div>
+                <div className="h-[1px] w-[3.5rem] bg-white block mb-3"></div>
+                <div className="h-[1px] w-[3.5rem] bg-white block"></div>
               </button>
               {/* Mobile Nav... */}
               <div

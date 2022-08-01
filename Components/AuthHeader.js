@@ -4,7 +4,7 @@ import { popUpContext } from "../Context/PopUps";
 import { useRouter } from "next/router";
 
 const Container = ({ children }) => {
-  return <div className="max-w-[182rem] mx-auto w-full px-[2rem] sidebar:px-[10rem] flex items-center">{children}</div>;
+  return <div className="max-w-[182rem] mx-auto w-full px-[3rem] sidebar:px-[10rem] flex items-center">{children}</div>;
 };
 
 const AuthHeader = () => {
@@ -27,7 +27,7 @@ const AuthHeader = () => {
       <Container>
         {/* <img src="/kef-logo.svg" className="mr-auto w-[6.4rem]"></img> */}
         <Link href={"/"}>
-          <img className="mr-auto h-[66.5px] cursor-pointer " src="/new_logo.png"></img>
+          <img className="mr-auto h-[55px] mobile:h-[66.5px] cursor-pointer" src="/new_logo.png"></img>
         </Link>
         {/* Desktop Nav */}
         <div className="items-center hidden sidebar:flex ">
@@ -55,14 +55,14 @@ const AuthHeader = () => {
         </div>
         {/* Burger Menu */}
         <button
-          className="block sidebar:hidden"
+          className="block landing_868:hidden -translate-y-[1px]"
           onClick={() => {
             setShow(true);
           }}
         >
-          <span className="h-[.5rem] w-[3rem] bg-white flex mb-3"></span>
-          <span className="h-[.5rem] w-[3rem] bg-white flex mb-3"></span>
-          <span className="h-[.5rem] w-[3rem] bg-white flex"></span>
+          <div className="h-[1px] w-[3.5rem] bg-white block mb-3"></div>
+          <div className="h-[1px] w-[3.5rem] bg-white block mb-3"></div>
+          <div className="h-[1px] w-[3.5rem] bg-white block"></div>
         </button>
         {/* Mobile Nav... */}
         <div
@@ -81,9 +81,16 @@ const AuthHeader = () => {
             <span className="w-[2.5rem] bg-black h-[.5rem] flex -rotate-45 relative bottom-1/2"></span>
           </button>
 
-          <Link href={"/auth/sign-up"}>
-            <button className="btn btn--outlined-grad text-white !px-[6rem] mb-[2.4rem]">Sign Up</button>
-          </Link>
+          {(router.pathname.includes("sign-in") || router.pathname === "/") && !router.pathname.includes("artiste") && (
+            <Link href={"/auth/sign-up"}>
+              <button className="btn btn--outlined-grad text-white !px-[6rem] mb-[2.4rem]">Sign Up</button>
+            </Link>
+          )}
+          {router.pathname.includes("sign-up") && !router.pathname.includes("artiste") && (
+            <Link href={"/auth/sign-in"}>
+              <button className="btn btn--outlined-grad text-white !px-[6rem] mb-[2.4rem]">Sign In</button>
+            </Link>
+          )}
           <button
             onClick={() => {
               popUpFunctions.initBuyTicket();
