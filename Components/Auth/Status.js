@@ -18,7 +18,7 @@ const AuthStatus = ({
         <h3 className="text-[3.2rem] text-white leading-[3.9rem] font-bold mb-[1.4rem]">{title}</h3>
         {status == "success" && <p className="mb-[5.8rem] !text-center font-medium text-[1.6rem] leading-[2.6rem] max-w-[42.7rem]">{caption}</p>}
         {status == "failed" && (
-          <p className="mb-[5.8rem] !text-center font-medium text-[1.6rem] leading-[2.6rem] max-w-[42.7rem]">
+          <p className="mb-[5rem] !text-center font-medium text-[1.6rem] leading-[2.6rem] max-w-[42.7rem]">
             {" "}
             Your ticket numbers has been used. Please check the number and try again or contact merchant.
           </p>
