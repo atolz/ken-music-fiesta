@@ -484,8 +484,9 @@ export const PopUpContextProvider = ({ children }) => {
       setStatusTitle("Mint Kennis Music Ticket Successfully!");
       setText(
         <p>
-          Your payment of {isNigerian() ? <NairaSymbol></NairaSymbol> : "$"}
-          {router?.query?.amount} was successful. You have earned the Kennis all access pass.
+          Your payment was successful. You have earned the Kennis all access pass.
+          {/* Your payment of {isNigerian() ? <NairaSymbol></NairaSymbol> : "$"}
+          {router?.query?.amount} was successful. You have earned the Kennis all access pass. */}
         </p>
       );
       setActiveModal("Status");
