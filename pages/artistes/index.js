@@ -53,12 +53,13 @@ const Index = () => {
       <Container>
         <div className="text-center">
           <h3 className=" font-bold text-[3.5rem] leading-[4.2rem] text-[#FA6BFF] mb-[9rem] mt-[8rem]">Meet the Artistes</h3>
-          <main className={`flex flex-wrap  items-center ${data.length > 3 ? " justify-center sidebar:justify-between gap-[16rem]" : " justify-center gap-96"}   mb-40`}>
+          {/* <main className={`flex flex-wrap  items-center ${data.length > 3 ? " justify-center sidebar:justify-between gap-[16rem]" : " justify-center gap-96"}   mb-40`}> */}
+          <main className={`grid grid-cols-[repeat(auto-fit,minmax(20rem,_30rem))] justify-center sidebar:justify-between gap-[10rem]`}>
             {data.map((el, i) => {
               return (
                 <Link href={`/artistes/`} key={++i}>
-                  <a style={{ "--Id": i }} className={` last:mr-auto ${animations.slide_up}`}>
-                    <div className="flex flex-col">
+                  <a style={{ "--Id": i }} className={`  ${animations.slide_up}`}>
+                    <div className="flex flex-col items-center">
                       <div className="bg-[#1B1B1B] -skew-y-12 rounded-2xl h-[34.7rem] w-[23.4rem] hover:scale-105 transition-all yellow-shadow-hover overflow-hidden cursor-pointer grid place-items-center">
                         <div
                           style={{ backgroundImage: `url(partners/${el.img})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "top" }}

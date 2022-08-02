@@ -197,7 +197,7 @@ const SignUp = () => {
                 <input
                   className={`${emailError ? "!border-red-500 !border-[2px]" : ""}`}
                   onChange={(e) => {
-                    setUser({ ...user, email: e.target.value });
+                    setUser({ ...user, email: e.target.value.toLowerCase().trim() });
                     setEmailError("");
                   }}
                   type="email"
