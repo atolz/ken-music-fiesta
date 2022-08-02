@@ -125,7 +125,7 @@ const SignIn = () => {
               onChange={(e) => {
                 setPassError("");
                 toggleAlertBar();
-                setUser({ ...user, email: e.target.value });
+                setUser({ ...user, email: e.target.value.toLowerCase().trim() });
               }}
               placeholder="Ex. Jonathan"
             />
