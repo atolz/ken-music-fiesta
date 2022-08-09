@@ -33,10 +33,16 @@ const UserHeader = ({ title, setActivePage }) => {
     router.replace("/");
   }
 
+  function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  }
+
   return (
     <>
       <div className="flex items-center mb-[2.4rem] sidebar:mb-[4.5rem] hdr:mb-[8.4rem] w-full pt-[1.4rem] bg-[#FBFAFA]  sidebar:pt-[3.4rem] sticky top-0 sidebar:pb-[2rem] z-[1000]">
-        <h1 className="h1 transition-all">{title}</h1>
+        <h1 className="h1 transition-all">{toTitleCase(router.pathname.split("/")[1].replace("-", " "))}</h1>
         <div className="flex flex-wrap ml-auto">
           {/* Buttons */}
 
@@ -86,6 +92,7 @@ const UserHeader = ({ title, setActivePage }) => {
               <li
                 onClick={() => {
                   setActivePage("Profile");
+                  router.push("/profile");
                 }}
                 className="flex items-center  cursor-pointer hover:bg-slate-50 p-[2.2rem]"
               >

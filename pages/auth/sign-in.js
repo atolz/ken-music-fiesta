@@ -73,13 +73,13 @@ const SignIn = () => {
       router.replace(`/dashboard?signIn=${true}`);
     } catch (error) {
       toggleLoad();
-      if (!error.response) {
+      if (!error?.response) {
         console.log("No response from the servver");
         toggleAlertBar("No server response. Pls Check Your inernet connection", "fail", true);
         return;
         // setError("Network Error");
       }
-      if (error.response.data.message.includes("Unauthorized")) {
+      if (error.response?.data?.message?.includes("Unauthorized")) {
         console.log("response error", error.response);
         setPassError("Email or Password is incorrect");
       } else {

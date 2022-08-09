@@ -1,0 +1,148 @@
+import React, { useContext, useEffect, useState } from "react";
+import EventCard from "../Components/Cards/EventCard";
+import BaseLayout2 from "../Components/Layout/BaseLayout2";
+import ProgressiveToken from "../Components/Pages/ProgressiveToken";
+import SvgIconWrapper from "../Components/SvgIconWrapper";
+import EventTicketsTable from "../Components/Tables/EventsTickets";
+import { DataContext } from "../Context/fetchData";
+import { popUpContext } from "../Context/PopUps";
+import formatDate from "../Utils/formatDate";
+
+const Event = () => {
+  const [showDetails, setShowDetails] = useState(false);
+  const [joinLive, setJoinLive] = useState(false);
+  const popUpFunctions = useContext(popUpContext);
+  const AppData = useContext(DataContext);
+  const [activeEvent, setActiveEvent] = useState("");
+  // useEffect(() => {
+  //   AppData.fetchKudibarEvents();
+  // }, []);
+  useEffect(() => {
+    console.log("Events in evenst is", AppData.kudibarEvents);
+  }, [AppData.kudibarEvents]);
+
+  const EventTicketCard = ({ className }) => {
+    return (
+      <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#F0F0F0] bg-[#FCF9FC] border-2 border-[#FDE8FE]  relative  min-w-[30rem] overflow-hidden flex-1 ${className}`}>
+        <h3 className="h3 mb-[.4rem] mr-[11.0rem]">{AppData.kudibarEvents?.hash[activeEvent]?.my_tickets?.length ?? 0} Event Tickets</h3>
+        <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold">Total Number of Event Tickets</p>
+        {/* <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem] hand-card block" src={"/3d-ticket-1.png"}></img> */}
+        <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem] translate-x-6 event-ticket block" src={"/3d-ticket-1.png"}></img>
+      </div>
+    );
+  };
+  return (
+    <div>
+      {!showDetails && !joinLive && (
+        <div className="grid grid-cols-[repeat(auto-fill,_minmax(35rem,_1fr))] events_card:grid-cols-[repeat(auto-fill,_minmax(50rem,_1fr))] gap-5">
+          {AppData.kudibarEvents?.data?.map((el, i) => {
+            return (
+              <EventCard
+                name={el.name}
+                desc={el.description}
+                img={el.cover}
+                key={i}
+                action={() => {
+                  setShowDetails(true);
+                  setActiveEvent(el.name);
+                }}
+              />
+            );
+          })}
+          {/* {AppData.kudibarEvents?.data.length < 1 && <p>No events yet</p>} */}
+          {AppData.kudibarEvents?.data.length < 1 && (
+            <div className="grid flex-1 place-content-center place-items-center my-auto min-h-[50vh] w-full events_card:col-span-2">
+              <span className="f font-medium text-[2.5rem] text-[#E0E0E0]">No Event</span>
+            </div>
+          )}
+        </div>
+      )}
+
+      {showDetails && (
+        <section>
+          {/* Header */}
+          <div className="flex items-center mb-12">
+            <SvgIconWrapper
+              action={() => {
+                setShowDetails(false);
+              }}
+              className={"text-black mr-[2.8rem] h-[1.9rem] w-[1.9rem] cursor-pointer"}
+              iconName={"arr-left"}
+            ></SvgIconWrapper>{" "}
+            <h2 className=" font-semibold text-[2.8rem]"> {AppData.kudibarEvents?.hash[activeEvent]?.name || "Kennis Easter Fiesta"}</h2>
+          </div>
+
+          {/* Details */}
+          <div className="grid  event_detail:grid-cols-[1fr,1.5fr] grid-cols-1  gap-[6rem] max-w-[120rem] scroll_hide">
+            {/* <img  src="/event-img.jpg"></img> */}
+            <div
+              style={{ backgroundImage: `url(${AppData.kudibarEvents?.hash[activeEvent]?.cover})` }}
+              className="h-[61vh]  bg-cover bg-no-repeat rounded-[2rem] bg-slate-900 bg-center"
+              // src={AppData.kudibarEvents?.hash[activeEvent]?.cover}
+            ></div>
+
+            <div className="">
+              <EventTicketCard className={"mb-[1.6rem]"}></EventTicketCard>
+              <div className="px-[4rem] min-h-[47vh] py-[5rem] rounded-primary border border-[#FDE8FE] bg-[#FCF9FC] grid content-center justify-start mb-[3.1rem]">
+                <h4 className=" font-bold text-[2rem] leading-[2.4rem]">Description</h4>
+                <p className="max-w-[49.2rem] font-normal text-[1.4rem] text-[#717171] mb-[4rem] mt-[.8rem] leading-[2rem]">{AppData.kudibarEvents?.hash[activeEvent]?.description}</p>
+                <div className="flex gap-[3.2rem] mb-[5rem]">
+                  <div>
+                    <h3 className=" text-[1.4rem] font-bold mb-3">Event Date</h3>
+                    <p className=" font-semibold text-[1.6rem] text-[#717171]">{formatDate(AppData.kudibarEvents?.hash[activeEvent]?.eventDate) || "No Date yet"}</p>
+                  </div>
+                  <div>
+                    <h3 className=" text-[1.4rem] font-bold mb-3">Venue</h3>
+                    <p className=" font-semibold text-[1.6rem] text-[#717171]">
+                      {AppData.kudibarEvents?.hash[activeEvent]?.venue || "Eko Hotel & Suites, VI"}, {AppData.kudibarEvents?.hash[activeEvent]?.location}
+                    </p>
+                  </div>
+                </div>
+                <div className="grid gap-[1.6rem] grid-cols-2">
+                  <button
+                    title={` ${AppData.user.dashboardHistory?.total_event_ticket < 1 ? " You don't have any ticket" : "join"}`}
+                    onClick={() => {
+                      if (AppData.kudibarEvents?.hash[activeEvent]?.my_tickets?.length > 0) {
+                        setJoinLive(true);
+                        setShowDetails(false);
+                      }
+                    }}
+                    className={`btn ${AppData.kudibarEvents?.hash[activeEvent]?.my_tickets?.length < 1 ? " cursor-not-allowed" : "cursor-pointer"}`}
+                  >
+                    Join Livestream Event
+                  </button>
+                  {!AppData.kudibarEvents?.hash[activeEvent]?.isSoldOut && (
+                    <button
+                      onClick={() => {
+                        popUpFunctions.initBuyTicket(
+                          AppData.kudibarEvents?.hash[activeEvent]?.name,
+                          AppData.kudibarEvents?.hash[activeEvent]?.eventSlug,
+                          AppData.kudibarEvents?.hash[activeEvent]?.tickets
+                        );
+                      }}
+                      className="btn btn--outlined-grad !text-black"
+                    >
+                      Buy Event Ticket
+                    </button>
+                  )}
+                  {AppData.kudibarEvents?.hash[activeEvent]?.isSoldOut && <button className="btn !border-2 !border-[#C4C4C4] !bg-none !text-[#C4C4C4]">Sold out</button>}
+                </div>
+              </div>
+
+              {AppData.kudibarEvents?.hash[activeEvent]?.my_tickets?.length > 0 && (
+                <div className=" overflow-scroll scroll_hide">
+                  <EventTicketsTable data={AppData.kudibarEvents?.hash[activeEvent]?.my_tickets}></EventTicketsTable>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {joinLive && <ProgressiveToken setJoinLive={setJoinLive} setShowDetails={setShowDetails} date={AppData.kudibarEvents?.hash[activeEvent]?.eventDate}></ProgressiveToken>}
+      {/* {AppData.kudibarEvents?.loading && <p>loading...</p>} */}
+    </div>
+  );
+};
+Event.Layout = BaseLayout2;
+export default Event;

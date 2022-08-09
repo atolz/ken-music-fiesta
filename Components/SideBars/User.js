@@ -5,11 +5,22 @@ import { popUpContext } from "../../Context/PopUps";
 import { DataContext } from "../../Context/fetchData";
 
 const UserSideBar = ({ activePage, setActivePage }) => {
-  // const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Events", "Livestream Event", "Progressive Token"];
-  const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Events", "Payment"];
+  // const pages = ["Dashboard", "Raffle Tickets", "Rewards", "Events", "Payment"];
   const icons = ["Dashboard", "Raffle-Tickets", "Rewards", "Livestream-Event", "coin-dollar", "Livestream-Event"];
+  const pages = [
+    { name: "Dashboard", link: "/dashboard", icon: "Dashboard" },
+    { name: "Raffle Tickets", link: "/raffle-tickets", icon: "Raffle-Tickets" },
+    { name: "Rewards", link: "/rewards", icon: "Rewards" },
+    { name: "Events", link: "/events", icon: "Livestream-Event" },
+    { name: "Payment", link: "/payment", icon: "coin-dollar" },
+  ];
   const popUpFunctions = useContext(popUpContext);
   const AppData = useContext(DataContext);
+  const router = useRouter();
+
+  const isActivePage = (link) => {
+    return router.pathname.includes(link);
+  };
 
   useEffect(() => {
     if (!activePage) {
@@ -27,43 +38,36 @@ const UserSideBar = ({ activePage, setActivePage }) => {
           {/* Base Page Sidebar Items */}
           {pages.map((page, i) => {
             return (
-              <li
-                className="flex items-center mb-[4.2rem] cursor-pointer"
-                key={i}
-                onClick={() => {
-                  setActivePage(page);
-                }}
-              >
-                {/* Dot */}
-                <div
-                  // style={{ background: "var(--color-primary-grad)" }}
-                  className={`transition-all duration-200 w-[1rem] h-[1rem] rounded-full bg-[#D82025]  mr-[2.6rem]  ${page == activePage ? " opacity-100" : "opacity-0"} 
-                 ${page == "Dashboard" && activePage == "Profile" ? " opacity-100" : ""}`}
-                ></div>
-                {/* Icon */}
-                <i
-                  className={`icon icon-${icons[i]} mr-[1.7rem] text-[1.9rem] ${icons[i] == "Dashboard" ? " !text-[2.8rem]" : ""}  ${page == activePage ? "  text-grad" : ""}
-                  ${page == "Dashboard" && activePage == "Profile" ? " !text-grad" : ""}`}
-                ></i>
-                {/* Does Not work with linear graddient i.e clip text */}
-                {/* <SvgIconWrapper className={"text-grad"} iconName={icons[i]}></SvgIconWrapper> */}
+              <Link key={i} href={page.link}>
+                <li className="flex items-center mb-[4.2rem] cursor-pointer">
+                  {/* Dot */}
+                  <div
+                    className={`transition-all duration-200 w-[1rem] h-[1rem] rounded-full bg-[#D82025]  mr-[2.6rem]  ${isActivePage(page.link) ? " opacity-100" : "opacity-0"} 
+                 `}
+                  ></div>
+                  {/* Icon */}
+                  <i
+                    className={`icon icon-${page.icon} mr-[1.7rem] text-[1.9rem] ${page.icon == "Dashboard" ? " !text-[2.8rem]" : ""}  ${isActivePage(page.link) ? "  text-grad" : ""}
+                  `}
+                  ></i>
 
-                {/* Text */}
-                <span
-                  className={`transition-all duration-200 font-normal text-[1.6rem] text-ellipsis overflow-hidden w-[160px]  ${
-                    page == activePage ? " text-grad !font-bold text-[2rem]" : "text-white"
-                  }  
-                  ${page == "Dashboard" && activePage == "Profile" ? " !text-grad !font-bold text-[2rem]" : ""}`}
-                >
-                  {page}
-                </span>
+                  {/* Text */}
+                  <span
+                    className={`transition-all duration-200 font-normal text-[1.6rem] text-ellipsis overflow-hidden w-[160px]  ${
+                      isActivePage(page.link) ? " text-grad !font-bold text-[2rem]" : "text-white"
+                    }  
+                  `}
+                  >
+                    {page.name}
+                  </span>
 
-                {page == "Payment" && AppData.user.pendingPayments.length > 0 && (
-                  <div className="w-[2.5rem] h-[2.5rem] rounded-full bg-[#FFB6B8] text-[#D82025] grid place-items-center font-bold text-[1.2rem] -translate-x-[7rem]">
-                    {AppData.user?.pendingPayments.length}
-                  </div>
-                )}
-              </li>
+                  {page.name == "Payment" && AppData.user.pendingPayments.length > 0 && (
+                    <div className="w-[2.5rem] h-[2.5rem] rounded-full bg-[#FFB6B8] text-[#D82025] grid place-items-center font-bold text-[1.2rem] -translate-x-[7rem]">
+                      {AppData.user?.pendingPayments.length}
+                    </div>
+                  )}
+                </li>
+              </Link>
             );
           })}
         </ul>
@@ -83,16 +87,17 @@ const UserSideBar = ({ activePage, setActivePage }) => {
         <ul className="bg-r whitespace-nowrap flex justify-between w-full">
           {pages.map((page, i) => {
             return (
-              <li
-                className={`flex items-center transition-all ease-in mb-[4.2rem] cursor-pointer flex-col ${page == activePage ? "  text-grad" : "text-white"}`}
-                key={i}
-                onClick={() => {
-                  setActivePage(page);
-                }}
-              >
-                <i className={`icon icon-${icons[i]} text-[2rem] ${icons[i] == "Dashboard" ? "  text-[1.8rem]" : ""} ${page == activePage ? "  text-grad" : "text-white"} `}></i>
-                <span className={`mt-[1rem] text-[1.15rem] ${page == activePage ? "  text-grad" : "text-white"}`}>{page}</span>
-              </li>
+              <Link key={i} href={page.link}>
+                <li
+                  className={`flex items-center transition-all ease-in mb-[4.2rem] cursor-pointer flex-col ${isActivePage(page.link) ? "  text-grad" : "text-white"}`}
+                  onClick={() => {
+                    setActivePage(page.name);
+                  }}
+                >
+                  <i className={`icon icon-${icons[i]} text-[2rem] ${icons[i] == "Dashboard" ? "  text-[1.8rem]" : ""} ${isActivePage(page.link) ? "  text-grad" : "text-white"} `}></i>
+                  <span className={`mt-[1rem] text-[1.15rem] ${isActivePage(page.link) ? "  text-grad" : "text-white"}`}>{page.name}</span>
+                </li>
+              </Link>
             );
           })}
         </ul>

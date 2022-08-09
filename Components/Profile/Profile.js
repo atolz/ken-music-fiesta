@@ -1,5 +1,5 @@
 import { Avatar } from "@mui/material";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { baseInstanceAPI } from "../../axios";
 import { DataContext } from "../../Context/fetchData";
@@ -8,7 +8,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import useShowAlert from "../../hooks/useShowAlert";
 import { setUser } from "../../store/user";
 
-const Profile = ({ user }) => {
+const Profile = () => {
   const baseURL = process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
   const imageRef = useRef(null);
   const [detailsChanged, setUserDetailsChanged] = useState(false);
@@ -16,6 +16,7 @@ const Profile = ({ user }) => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState(null);
   const AppData = useContext(DataContext);
+  const user = AppData.user.data;
   const { toggleLoad } = useLoading();
   const [detailsChange, setDetailsChange] = useState(false);
   const [userDetails, setUserDetails] = useState({
@@ -36,6 +37,17 @@ const Profile = ({ user }) => {
   const [canSubmit, setCanSubmit] = useState(false);
   const toggleAlertBar = useShowAlert();
   const { getLocalStorage } = useLocalStorage();
+
+  useEffect(() => {
+    setUserDetails({
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      email: user?.email,
+      phone: user?.phone,
+      username: user?.username,
+      avatar: user?.avatar,
+    });
+  }, [AppData.user.data]);
 
   const getValue = (name) => {
     return userDetails[name];
@@ -76,6 +88,7 @@ const Profile = ({ user }) => {
       console.log("response is", resp.data);
       console.log("user details is ", userDetails);
       dispatch(setUser({ ...userDetails }));
+      AppData.setUser((val) => ({ ...val, data: { ...val.data, ...userDetails } }));
       toggleAlertBar("Profile Updated Successfully!", "success", true, 4000);
       setDetailsChange(false);
       toggleLoad();
