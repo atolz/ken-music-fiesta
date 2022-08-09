@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import Activate from "../Components/Cards/Activate";
 import EventsCarousel2 from "../Components/Cards/EventsCarousel2";
@@ -6,6 +7,7 @@ import Progress from "../Components/Cards/Progress";
 import ProgressDrawCard from "../Components/Cards/ProgressDraw";
 import BaseLayout2 from "../Components/Layout/BaseLayout2";
 import { DataContext } from "../Context/fetchData";
+import { popUpContext } from "../Context/PopUps";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const Dashboard = (props) => {
@@ -15,11 +17,28 @@ const Dashboard = (props) => {
   const user = AppData.user.data;
   const dashboardHistory = AppData.user.dashboardHistory;
   const { getLocalStorage, isLoggedIn } = useLocalStorage();
+  const popUpFunctions = useContext(popUpContext);
+  const router = useRouter();
   useEffect(() => {
     console.log("user is ...", user);
     console.log("token is ", getLocalStorage("token"));
     isLoggedIn();
   }, []);
+
+  useEffect(() => {
+    console.log("app data inside dahs board is", AppData);
+    router.prefetch("/auth/sign-in");
+    if (getLocalStorage("section") != "User" || !isLoggedIn()) {
+      return router.replace("/auth/sign-in");
+    }
+
+    if (AppData?.user?.data && !AppData?.user?.data?.hasMintedTicket && (router.query?.signIn || router.query?.signUp)) {
+      setTimeout(() => {
+        AppData.user?.data?.country == "Nigeria" ? popUpFunctions.openMintTicketPrompt() : popUpFunctions.initConfirmLocation();
+      }, 2500);
+      router.replace("/dashboard");
+    }
+  }, [AppData?.user?.data?.hasMintedTicket, AppData?.user?.data?.country]);
   return (
     <div {...props}>
       {/* First Section */}
