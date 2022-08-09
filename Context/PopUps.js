@@ -373,7 +373,11 @@ export const PopUpContextProvider = ({ children }) => {
       }
       console.log("AN error has occured pls try again laters", error);
       toggleLoad();
-      toggleAlertBar("An error occured. Pls try again later!", "error", true, 20000);
+      if ((purpose = "EventTicket")) {
+        toggleAlertBar(" An error occured. This event has ended or is sold out!. Or try again later.", "error", true, 20000);
+      } else {
+        toggleAlertBar("An error occured. Pls try again later!", "error", true, 20000);
+      }
       toggle();
     }
   }
@@ -423,6 +427,7 @@ export const PopUpContextProvider = ({ children }) => {
     } catch (error) {
       console.log("AN error has occured pls try again laters", error);
       toggleLoad();
+
       toggleAlertBar("An error occured. Pls try again later!", "error", true, 20000);
       toggle();
     }
@@ -493,16 +498,14 @@ export const PopUpContextProvider = ({ children }) => {
       setVendor(router?.query?.vendor);
       setTransactionId(router?.query?.transactionId);
       setCheckAmount(router?.query?.amount);
-      setLink("/dashboard?mint=true");
+      setLink("/profile?mint=true");
       setShowConfetti(true);
       setTimeout(() => {
         setRecyle(false);
       }, 2000);
       setStatusAction(() => {
         return () => {
-          setPage("Profile");
           setShowPopUp(false);
-          // router.push("/dashboard?mint=true");
         };
       });
       toggle();

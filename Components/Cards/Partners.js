@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Drawer } from "@mui/material";
 import Link from "next/link";
 
+
 const Container = ({ children, twStyles }) => {
   return <div className={`max-w-[182rem] mx-auto w-full px-[2.2rem] table:px-[10rem] ${twStyles}`}>{children}</div>;
 };
@@ -53,6 +54,7 @@ const PartnersCard = ({ title = "Food Partners", img = "/the-place.png", classNa
                   <a target="_blank" href="https://theplace.com.ng/" rel="noopener noreferrer">
                     <span className=" font-bold text-primary cursor-pointer">www.theplace.com.ng</span>
                   </a>
+
                 </p>
               </div>
               <p className=" text-[14px] font-light text-white leading-[22px] max-w-[645px]">
@@ -70,9 +72,11 @@ const PartnersCard = ({ title = "Food Partners", img = "/the-place.png", classNa
       {type != "artiste" && (
         <div
           onClick={() => {
+
             if (title == "The Place") {
               setShowDetails(true);
             }
+
           }}
         >
           <div

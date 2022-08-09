@@ -1,42 +1,29 @@
-import React, { useContext, useEffect, useState } from "react";
-
-import Head from "next/head";
 import { useRouter } from "next/router";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import SideBar from "../Components/SideBar";
-import Header from "../Components/Header";
-import Dashboard from "../Components/Pages/Dashboard";
-import RaffleTickets from "../Components/Pages/RaffleTickets";
-import Transactions from "../Components/Pages/Transactions";
-import Rewards from "../Components/Pages/Rewards";
-import LiveStream from "../Components/Pages/LiveStream";
-import Profile from "../Components/Pages/Profile";
-import BaseLayout from "../Components/Layout";
-
-import { useSelector } from "react-redux";
-
-import { getPage } from "../store/pages";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { useContext, useEffect } from "react";
+import Activate from "../Components/Cards/Activate";
+import EventsCarousel2 from "../Components/Cards/EventsCarousel2";
+import PoweredBy from "../Components/Cards/PoweredBy";
+import Progress from "../Components/Cards/Progress";
+import ProgressDrawCard from "../Components/Cards/ProgressDraw";
+import BaseLayout2 from "../Components/Layout/BaseLayout2";
 import { DataContext } from "../Context/fetchData";
-import ProgressiveToken from "../Components/Pages/ProgressiveToken";
-import useIsLoggedIn from "../hooks/useIsLoggedIn";
-import Event from "../Components/Pages/Event";
 import { popUpContext } from "../Context/PopUps";
-import RaffleTicketsNew from "../Components/Pages/RaffleTicketsNew";
-import Payment from "../Components/Pages/Payment";
-// import { setActivePage as setGlobalPage } from "../store/pages";
-// import UseIsLoggedIn from "../hooks/useIsLoggedIn";
+import useLocalStorage from "../hooks/useLocalStorage";
 
-export default function Home() {
-  const activePage = useSelector(getPage);
-  const { getLocalStorage, isLoggedIn } = useLocalStorage();
-  // const { isLoggedIn } = useIsLoggedIn();
-  const router = useRouter();
+const Dashboard = (props) => {
+  // const user = useSelector(getUser);
+  // const dashboardHistory = useSelector(getDashHistory);
   const AppData = useContext(DataContext);
+  const user = AppData.user.data;
+  const dashboardHistory = AppData.user.dashboardHistory;
+  const { getLocalStorage, isLoggedIn } = useLocalStorage();
   const popUpFunctions = useContext(popUpContext);
-  // const user = AppData.user.data;
-  // const dashboardHistory = AppData.user.dashboardHistory;
+  const router = useRouter();
+  useEffect(() => {
+    console.log("user is ...", user);
+    console.log("token is ", getLocalStorage("token"));
+    isLoggedIn();
+  }, []);
 
   useEffect(() => {
     console.log("app data inside dahs board is", AppData);
@@ -45,12 +32,6 @@ export default function Home() {
       return router.replace("/auth/sign-in");
     }
 
-    // if (AppData?.user?.data && !AppData?.user?.data?.hasMintedTicket && (router.query?.signIn || router.query?.signUp)) {
-    //   setTimeout(() => {
-    //     popUpFunctions.openRequestBvnPrompt();
-    //   }, 2500);
-    // }
-
     if (AppData?.user?.data && !AppData?.user?.data?.hasMintedTicket && (router.query?.signIn || router.query?.signUp)) {
       setTimeout(() => {
         AppData.user?.data?.country == "Nigeria" ? popUpFunctions.openMintTicketPrompt() : popUpFunctions.initConfirmLocation();
@@ -58,27 +39,58 @@ export default function Home() {
       router.replace("/dashboard");
     }
   }, [AppData?.user?.data?.hasMintedTicket, AppData?.user?.data?.country]);
-
   return (
-    <>
-      {/* <Dashboard className={` transition-all ease-in ${activePage == "Dashboard" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></Dashboard>
-      <RaffleTickets className={` transition-all ease-in ${activePage == "Raffle Tickets" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></RaffleTickets>
-      <Rewards className={` transition-all ease-in ${activePage == "Rewards" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></Rewards>
-      <LiveStream className={` transition-all ease-in ${activePage == "Livestream Event" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></LiveStream> */}
-      {/* <Profile className={` transition-all ease-in ${activePage == "Profile" ? "visible opacity-100" : " invisible opacity-0 h-0"}`}></Profile> */}
-      {/* {activePage == "Profile" && <Profile></Profile>} */}
-      {activePage == "Dashboard" && <Dashboard appData={AppData}></Dashboard>}
-      {activePage == "Raffle Tickets" && <RaffleTicketsNew appData={AppData}></RaffleTicketsNew>}
-      {activePage == "Rewards" && <Rewards appData={AppData}></Rewards>}
-      {activePage == "Events" && <Event AppData={AppData}></Event>}
-      {activePage == "Livestream Event" && <LiveStream AppData={AppData}></LiveStream>}
-      {activePage == "Progressive Token" && <ProgressiveToken AppData={AppData}></ProgressiveToken>}
-      {activePage == "Payment" && <Payment AppData={AppData}></Payment>}
-      {activePage == "Profile" && <Profile appData={AppData}></Profile>}
-      {/* {activePage == "Transactions" && <Transactions></Transactions>} */}
-      {/* {activePage == "Landing" && <LandingPage></LandingPage>} */}
-    </>
-  );
-}
+    <div {...props}>
+      {/* First Section */}
+      <div className="flex flex-wrap mobile:gap-5">
+        {" "}
+        <Progress user={user}></Progress>
+        <Activate user={user}></Activate>
+      </div>
 
-Home.Layout = BaseLayout;
+      {/* Second Section */}
+
+      <div className="flex flex-wrap gap-10  mb-[3.2rem]">
+        {/* <Stats title={"15 Raffle Tickets"} text={"Total Number of Raffle Tickets"} color="#F0F0F0" img={"/3d-ticket.png"} /> */}
+        <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#F0F0F0] relative overflow-hidden  min-w-[30rem] flex-1`}>
+          <h3 className="h3 !sm:text-[2rem] mb-[.4rem] mr-[11.0rem]">{dashboardHistory?.total_raffle ?? 0} Raffle Tickets</h3>
+          <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold">Total Number of Raffle Tickets</p>
+          <img className="absolute right-[2.6rem] bottom-0 w-[7.3rem] mobile:w-[9.3rem] translate-x-6 mr-5 raffle-ticket" src={"/3d-ticket.svg"}></img>
+        </div>
+        <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#F6EBF5] relative  min-w-[30rem] overflow-hidden flex-1`}>
+          <h3 className="h3 mb-[.4rem] mr-[11.0rem] !text-[#A307A8]">{dashboardHistory?.total_rewards ?? 0} Rewards</h3>
+          <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold">Total Number of Rewards</p>
+          {/* <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem]  hand-card" src={"/3d-trophy.svg"}></img> */}
+          <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem] translate-x-6 reward" src={"/3d-trophy.svg"}></img>
+        </div>
+        <div className={`px-[2.8rem] py-[3.6rem] rounded-[2rem] bg-[#F0F0F0] relative  min-w-[30rem] overflow-hidden flex-1`}>
+          <h3 className="h3 mb-[.4rem] mr-[11.0rem]">{dashboardHistory?.total_event_ticket ?? 0} Event Tickets</h3>
+          <p className="text-[1.2rem] text-[#717171] leading-[1.46rem] font-semibold">Total Number of Event Tickets</p>
+          {/* <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem] hand-card block" src={"/3d-ticket-1.png"}></img> */}
+          <img className="absolute right-[2.6rem] bottom-0 w-[12rem] mobile:w-[15.2rem] translate-x-6 event-ticket block" src={"/3d-ticket-1.png"}></img>
+        </div>
+        {/* <Stats title={"2 Rewards"} text={"Total Number of Rewards"} color="#FFF7E7" img={"/3d-ticket.svg"} /> */}
+        {/* <Stats title={"15 Raffle Tickets"} text={"Total Number of Raffle Tickets"} color="#F0F0F0" img={"/3d-ticket.png"} /> */}
+      </div>
+
+      {/* Third Section: Latest Winner Section */}
+      <section className="flex flex-wrap gap-10">
+        {/* div-1 */}
+        <div className=" flex-1">
+          {/* <TableV1></TableV1> */}
+          <ProgressDrawCard></ProgressDrawCard>
+        </div>
+
+        {/* div-2 */}
+        <div className=" flex-1 min-w-[30rem] rounded-primary overflow-hidden">
+          {/* <PoweredBy></PoweredBy> */}
+          {/* <EventsCarouselCard></EventsCarouselCard> */}
+          {/* <p></p> */}
+          {AppData.kudibarEvents.data.length < 1 ? <PoweredBy></PoweredBy> : <EventsCarousel2></EventsCarousel2>}
+        </div>
+      </section>
+    </div>
+  );
+};
+Dashboard.Layout = BaseLayout2;
+export default Dashboard;
